@@ -1,25 +1,33 @@
+import type {AppQuery} from './__generated__/AppQuery.graphql';
+
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 
-function App() {
+import {PreloadedQuery, usePreloadedQuery} from 'react-relay';
+import { graphql } from 'babel-plugin-relay/macro';
+
+type Props = {
+  data : PreloadedQuery<AppQuery>
+}
+
+function App(props: Props) {
+  const data = usePreloadedQuery<AppQuery>(
+    graphql`
+      query AppQuery($id: Int!) {
+        movies {
+          movie(id: $id) {
+            title
+          }
+        }
+      }
+    `,
+    props.data
+  );
+
+  const title = data.movies.movie.title;
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <h1>{title}</h1>
   );
 }
 
