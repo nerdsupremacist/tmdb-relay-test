@@ -10,12 +10,15 @@
     "@types/node": "^12.20.11",
     "@types/react": "^17.0.4",
     "@types/react-dom": "^17.0.3",
+    "grommet": "^2.17.2",
+    "polished": "^4.1.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-relay": "^11.0.2",
     "react-scripts": "4.0.3",
     "relay-config": "^11.0.2",
     "relay-runtime": "^11.0.2",
+    "styled-components": "^5.2.3",
     "typescript": "^4.2.4",
     "web-vitals": "^1.1.1"
   },
@@ -24,7 +27,7 @@
     "build": "npm run relay && react-scripts build",
     "test": "npm run relay && react-scripts test",
     "eject": "npm run relay && react-scripts eject",
-    "relay": "relay-compiler --src ./src --schema ./data/schema.graphql --extensions ts tsx --language typescript --watchman false $@"
+    "relay": "relay-compiler --src ./src --schema ./data/schema.graphql --extensions ts tsx --language typescript --customScalars.URL=string --watchman false $@"
   },
   "eslintConfig": {
     "extends": [

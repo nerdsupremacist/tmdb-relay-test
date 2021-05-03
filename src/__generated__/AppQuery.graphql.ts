@@ -10,6 +10,8 @@ export type AppQueryResponse = {
     readonly movies: {
         readonly movie: {
             readonly title: string;
+            readonly overview: string;
+            readonly poster: string | null;
         };
     };
 };
@@ -28,6 +30,8 @@ query AppQuery(
     movie(id: $id) {
       __typename
       title
+      overview
+      poster(size: W342)
     }
   }
 }
@@ -54,6 +58,26 @@ v2 = {
   "kind": "ScalarField",
   "name": "title",
   "storageKey": null
+},
+v3 = {
+  "alias": null,
+  "args": null,
+  "kind": "ScalarField",
+  "name": "overview",
+  "storageKey": null
+},
+v4 = {
+  "alias": null,
+  "args": [
+    {
+      "kind": "Literal",
+      "name": "size",
+      "value": "W342"
+    }
+  ],
+  "kind": "ScalarField",
+  "name": "poster",
+  "storageKey": "poster(size:\"W342\")"
 };
 return {
   "fragment": {
@@ -78,7 +102,9 @@ return {
             "name": "movie",
             "plural": false,
             "selections": [
-              (v2/*: any*/)
+              (v2/*: any*/),
+              (v3/*: any*/),
+              (v4/*: any*/)
             ],
             "storageKey": null
           }
@@ -118,7 +144,9 @@ return {
                 "name": "__typename",
                 "storageKey": null
               },
-              (v2/*: any*/)
+              (v2/*: any*/),
+              (v3/*: any*/),
+              (v4/*: any*/)
             ],
             "storageKey": null
           }
@@ -128,14 +156,14 @@ return {
     ]
   },
   "params": {
-    "cacheID": "82104a1da678b955d55dca8fb1bdad26",
+    "cacheID": "77b56d50dd866bca07e5c489567e6adc",
     "id": null,
     "metadata": {},
     "name": "AppQuery",
     "operationKind": "query",
-    "text": "query AppQuery(\n  $id: Int!\n) {\n  movies {\n    movie(id: $id) {\n      __typename\n      title\n    }\n  }\n}\n"
+    "text": "query AppQuery(\n  $id: Int!\n) {\n  movies {\n    movie(id: $id) {\n      __typename\n      title\n      overview\n      poster(size: W342)\n    }\n  }\n}\n"
   }
 };
 })();
-(node as any).hash = 'aa53552daf05ef9f4829bc27ce7ffe8a';
+(node as any).hash = '6d91bac7c78c1f04c9d2693bfe0f9533';
 export default node;
