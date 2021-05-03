@@ -5,8 +5,7 @@ import React from 'react';
 import {PreloadedQuery, usePreloadedQuery} from 'react-relay';
 import { graphql } from 'babel-plugin-relay/macro';
 
-
-import { Main, Box, Image } from 'grommet';
+import DetailedMovieView from './DetailedMovieView';
 
 type Props = {
   data : PreloadedQuery<AppQuery>
@@ -18,9 +17,7 @@ function App(props: Props) {
       query AppQuery($id: Int!) {
         movies {
           movie(id: $id) {
-            title
-            overview
-            poster(size: W342)
+            ...DetailedMovieView_Movie
           }
         }
       }
@@ -28,24 +25,8 @@ function App(props: Props) {
     props.data
   );
 
-  const movie = data.movies.movie;
-  const poster = movie.poster
-
   return (
-    <Main pad="large">
-      {poster != null && 
-        <Box height="small" width="small">
-          <Image
-            fit="contain"
-            src={poster}
-          />
-        </Box>
-      }
-      <Box>
-        <h1>{movie.title}</h1>
-        <p>{movie.overview}</p>
-      </Box>
-    </Main>
+    <DetailedMovieView data={data.movies.movie}/>
   );
 }
 
