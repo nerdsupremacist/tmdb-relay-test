@@ -8,6 +8,8 @@ import { Parallax } from 'react-parallax'
 
 import StreamingLink from './StreamingLink';
 
+import { BACKDROP_PLACEHOLDER, POSTER_PLACEHOLDER } from './constants';
+
 type Props = {
     data: DetailedMovieViewRoot_IMovie$key
 }
@@ -37,25 +39,23 @@ function DetailedMovieViewRoot({ data }: Props) {
         data
     );
 
-    const poster = movie.poster;
-    const backdrop = movie.backdrop ?? 'https://images.squarespace-cdn.com/content/v1/5654cc6fe4b0488d60d5dc01/1544716196527-OHO03UMM2AZU40NUWSCH/ke17ZwdGBToddI8pDm48kD1yN0uFJUyVk4ibNWq9ENR7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UaOzcJcQQrnGXSaWdGE3THqmx0EMHKq8QenG6Ku3AHaP-qQ4l0NiHD0R2mXKYnqdmA/Bergen+bokeh';
+    const poster = movie.poster ?? POSTER_PLACEHOLDER;
+    const backdrop = movie.backdrop ?? BACKDROP_PLACEHOLDER;
 
     return (
         <div>
             <Container paddingTop={8} paddingBottom={8}>
                 <VStack align="baseline" spacing="4">
                     <HStack align="flex-end" spacing="4">
-                        {poster != null &&
-                            <Image
-                                maxW="150"
-                                borderWidth="1px"
-                                borderRadius="lg"
-                                overflow="hidden"
-                                objectFit="cover"
-                                src={poster}
-                                shadow="lg"
-                            />
-                        }
+                        <Image
+                            maxW="150"
+                            borderWidth="1px"
+                            borderRadius="lg"
+                            overflow="hidden"
+                            objectFit="cover"
+                            src={poster}
+                            shadow="lg"
+                        />
                         <VStack align="baseline" spacing="0">
                             <Text fontSize="3xl">
                                 {movie.title}
@@ -75,7 +75,7 @@ function DetailedMovieViewRoot({ data }: Props) {
                     </HStack>
                     {movie.streamingOptions != null && movie.streamingOptions.length > 0 &&
                         <HStack align="start" spacing="4">
-                            {movie.streamingOptions.slice(0, 5).map((option, index) => <StreamingLink data={option} key={`streaming_link_${index}`}/>)}
+                            {movie.streamingOptions.slice(0, 5).map((option, index) => <StreamingLink data={option} key={`streaming_link_${index}`} />)}
                         </HStack>
                     }
                     <Text>{movie.overview}</Text>

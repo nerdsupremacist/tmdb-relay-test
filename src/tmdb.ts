@@ -8,11 +8,13 @@ import {
     Store,
 } from 'relay-runtime';
 
+import { GRAPHQL_URL } from './constants';
+
 const fetchQuery: FetchFunction = async (
     operation,
     variables
 ) => {
-    const response = await fetch('https://tmdb.apps.quintero.io', {
+    const response = await fetch(GRAPHQL_URL, {
         method: 'POST',
         mode: 'cors',
         headers: {
