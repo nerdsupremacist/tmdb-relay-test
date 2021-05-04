@@ -1,5 +1,4 @@
 
-import React from 'react';
 import { Center, Spinner } from '@chakra-ui/react';
 
 function Placeholder() {

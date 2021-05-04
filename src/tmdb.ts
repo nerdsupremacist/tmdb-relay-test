@@ -1,4 +1,5 @@
-import type {FetchFunction} from 'relay-runtime';
+
+import type { FetchFunction } from 'relay-runtime';
 
 import {
     Environment,

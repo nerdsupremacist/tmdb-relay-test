@@ -1,7 +1,5 @@
 import type { DetailedMovieViewRoot_IMovie$key } from './__generated__/DetailedMovieViewRoot_IMovie.graphql';
 
-import React from 'react';
-
 import { useFragment } from 'react-relay';
 import { graphql } from 'babel-plugin-relay/macro';
 

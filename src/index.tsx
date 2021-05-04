@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import theme from './theme';
 
-import {RelayEnvironmentProvider} from 'react-relay';
+import { RelayEnvironmentProvider } from 'react-relay';
 
 import Environment from './tmdb';
 import { ChakraProvider } from "@chakra-ui/react"
