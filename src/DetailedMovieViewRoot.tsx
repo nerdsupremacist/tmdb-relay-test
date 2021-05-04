@@ -6,6 +6,8 @@ import { graphql } from 'babel-plugin-relay/macro';
 import { Container, Box, HStack, VStack, Image, Text } from "@chakra-ui/react"
 import { Parallax } from 'react-parallax'
 
+import StreamingLink from './StreamingLink';
+
 type Props = {
     data: DetailedMovieViewRoot_IMovie$key
 }
@@ -24,6 +26,10 @@ function DetailedMovieViewRoot({ data }: Props) {
                     tagline
                 }
 
+                streamingOptions {
+                    ...StreamingLink_StreamingOption
+                }
+
                 poster(size: W185)
                 backdrop(size: W780)
             }
@@ -37,7 +43,7 @@ function DetailedMovieViewRoot({ data }: Props) {
     return (
         <div>
             <Container paddingTop={8} paddingBottom={8}>
-                <VStack align="baseline">
+                <VStack align="baseline" spacing="4">
                     <HStack align="flex-end" spacing="4">
                         {poster != null &&
                             <Image
@@ -50,7 +56,7 @@ function DetailedMovieViewRoot({ data }: Props) {
                                 shadow="lg"
                             />
                         }
-                        <VStack align="baseline">
+                        <VStack align="baseline" spacing="0">
                             <Text fontSize="3xl">
                                 {movie.title}
                             </Text>
@@ -58,16 +64,21 @@ function DetailedMovieViewRoot({ data }: Props) {
                                 {movie.details.tagline}
                             </Text>
                             <HStack>
-                                <Text fontSize="md">
+                                <Text fontSize="md" fontWeight="light">
                                     {movie.details.runtime} min
                                 </Text>
-                                <Text fontSize="md">
+                                <Text fontSize="md" fontWeight="light">
                                     {movie.rating}
                                 </Text>
                             </HStack>
                         </VStack>
                     </HStack>
-                    <p>{movie.overview}</p>
+                    {movie.streamingOptions != null && movie.streamingOptions.length > 0 &&
+                        <HStack align="start" spacing="4">
+                            {movie.streamingOptions.slice(0, 5).map((option, index) => <StreamingLink data={option} key={`streaming_link_${index}`}/>)}
+                        </HStack>
+                    }
+                    <Text>{movie.overview}</Text>
                 </VStack>
             </Container>
             <Parallax bgImage={backdrop} strength={200}>

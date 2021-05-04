@@ -14,6 +14,9 @@ export type DetailedMovieViewRoot_IMovie = {
         readonly runtime: number;
         readonly tagline: string;
     };
+    readonly streamingOptions: ReadonlyArray<{
+        readonly " $fragmentRefs": FragmentRefs<"StreamingLink_StreamingOption">;
+    }> | null;
     readonly poster: string | null;
     readonly backdrop: string | null;
     readonly " $refType": "DetailedMovieViewRoot_IMovie";
@@ -87,6 +90,22 @@ const node: ReaderFragment = {
     },
     {
       "alias": null,
+      "args": null,
+      "concreteType": "StreamingOption",
+      "kind": "LinkedField",
+      "name": "streamingOptions",
+      "plural": true,
+      "selections": [
+        {
+          "args": null,
+          "kind": "FragmentSpread",
+          "name": "StreamingLink_StreamingOption"
+        }
+      ],
+      "storageKey": null
+    },
+    {
+      "alias": null,
       "args": [
         {
           "kind": "Literal",
@@ -115,5 +134,5 @@ const node: ReaderFragment = {
   "type": "IMovie",
   "abstractKey": "__isIMovie"
 };
-(node as any).hash = '6209aa4c4ee6c47363cc7c08fc7ebba4';
+(node as any).hash = '700f0903d1705adaaf819420c6bd68d1';
 export default node;
