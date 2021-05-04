@@ -1,32 +1,31 @@
-import type {AppQuery} from './__generated__/AppQuery.graphql';
 
 import React from 'react';
-
-import {PreloadedQuery, usePreloadedQuery} from 'react-relay';
-import { graphql } from 'babel-plugin-relay/macro';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 
 import DetailedMovieView from './DetailedMovieView';
 
-type Props = {
-  data : PreloadedQuery<AppQuery>
-}
-
-function App(props: Props) {
-  const data = usePreloadedQuery<AppQuery>(
-    graphql`
-      query AppQuery($id: Int!) {
-        movies {
-          movie(id: $id) {
-            ...DetailedMovieView_Movie
-          }
-        }
-      }
-    `,
-    props.data
-  );
-
+function App() {
   return (
-    <DetailedMovieView data={data.movies.movie}/>
+    <Router>
+      <div>
+        <Switch>
+          <Route exact path="/">
+            <Link to="/movie/11">Star Wars</Link>
+          </Route>
+          <Route path="/movie/:id">
+            <DetailedMovieView />
+          </Route>
+          <Route path="*">
+            <h1>Not found!</h1>
+          </Route>
+        </Switch>
+      </div>
+    </Router>
   );
 }
 
