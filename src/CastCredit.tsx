@@ -31,8 +31,8 @@ function CastCredit(props: Props) {
         <VStack w="140px">
             <Avatar w="100px" h="100px" name={data.value.name} shadow="lg" {...rest}/>
             <VStack spacing={0}>
-                <Text textAlign="center" fontSize="sm" fontWeight="semibold">{data.value.name}</Text>
-                <Text textAlign="center" fontSize="sm" fontWeight="light">as {data.character}</Text>
+                <Text textAlign="center" fontSize="sm" fontWeight="semibold" noOfLines={2}>{data.value.name}</Text>
+                <Text textAlign="center" fontSize="sm" fontWeight="light" noOfLines={3}>as {data.character}</Text>
             </VStack>
         </VStack>
     );
