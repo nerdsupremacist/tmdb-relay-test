@@ -3,7 +3,7 @@ import { Center, Spinner } from '@chakra-ui/react';
 
 function Placeholder() {
     return (
-        <Center paddingTop={8}>
+        <Center paddingTop={8} paddingBottom={8}>
             <Spinner
                 thickness="4px"
                 speed="0.65s"
