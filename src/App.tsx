@@ -16,7 +16,13 @@ function App() {
         <Navbar />
         <Switch>
           <Route exact path="/">
-            <Container><Text textAlign="center" fontSize="4xl" padding={16}>Hi there ;)</Text></Container>
+            <Container>
+              <Text textAlign="center" fontSize="4xl" padding={16}>
+                Hi there!
+                <br />
+                Use the search bar to search for any movie ;)
+                </Text>
+            </Container>
           </Route>
           <Route path="/movie/:id">
             <DetailedMovieView />
