@@ -11,20 +11,37 @@ type Props = {
 
 function watchDescription(type: StreamingMonetizationType): string {
     switch (type) {
-        case 'Ads':
-            return 'Watch Now (includes ads)';
         case 'Buy':
             return 'Buy';
         case 'Cinema':
             return 'Theatre Tickets';
         case 'Rent':
             return 'Rent';
+        case 'Ads':
+            return 'Watch Now';
         case 'Flatrate':
             return 'Watch Now';
         case 'Free':
             return 'Watch Now';
         case '%future added value':
             return 'Watch Now';
+    }
+}
+
+type Price = { readonly amount: number, readonly currency: string }
+
+function priceDescription(price: Price | null, type: StreamingMonetizationType) {
+    if (price != null) {
+        return `${price.amount} ${price.currency}`
+    }
+
+    switch (type) {
+        case 'Ads':
+            return 'With Ads';
+        case 'Flatrate':
+            return 'Subscription';
+        default:
+            return 'Free';
     }
 }
 
@@ -66,12 +83,10 @@ function StreamingLink({ data }: Props) {
                 />
                 <Text paddingTop="2" fontWeight="semibold" fontSize="sm">
                 {watchDescription(option.bestOffering.type)}
+                </Text>    
+                <Text fontWeight="light" fontSize="sm">
+                    {priceDescription(option.bestOffering.price, option.bestOffering.type)}
                 </Text>
-                {option.bestOffering.price != null && 
-                    <Text fontWeight="light" fontSize="sm">
-                        {option.bestOffering.price.amount} {option.bestOffering.price.currency}
-                    </Text>
-                }
             </VStack>
         </Link>
     );

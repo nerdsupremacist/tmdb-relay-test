@@ -13,6 +13,14 @@ export type DetailedMovieViewRoot_IMovie = {
         readonly status: Status;
         readonly runtime: number;
         readonly tagline: string;
+        readonly genres: ReadonlyArray<{
+            readonly " $fragmentRefs": FragmentRefs<"GenreTag_Genre">;
+        }>;
+    };
+    readonly credits: {
+        readonly cast: ReadonlyArray<{
+            readonly " $fragmentRefs": FragmentRefs<"CastCredit_CastCreditBasicPerson">;
+        }>;
     };
     readonly streamingOptions: ReadonlyArray<{
         readonly " $fragmentRefs": FragmentRefs<"StreamingLink_StreamingOption">;
@@ -84,6 +92,49 @@ const node: ReaderFragment = {
           "kind": "ScalarField",
           "name": "tagline",
           "storageKey": null
+        },
+        {
+          "alias": null,
+          "args": null,
+          "concreteType": "Genre",
+          "kind": "LinkedField",
+          "name": "genres",
+          "plural": true,
+          "selections": [
+            {
+              "args": null,
+              "kind": "FragmentSpread",
+              "name": "GenreTag_Genre"
+            }
+          ],
+          "storageKey": null
+        }
+      ],
+      "storageKey": null
+    },
+    {
+      "alias": null,
+      "args": null,
+      "concreteType": null,
+      "kind": "LinkedField",
+      "name": "credits",
+      "plural": false,
+      "selections": [
+        {
+          "alias": null,
+          "args": null,
+          "concreteType": "CastCreditBasicPerson",
+          "kind": "LinkedField",
+          "name": "cast",
+          "plural": true,
+          "selections": [
+            {
+              "args": null,
+              "kind": "FragmentSpread",
+              "name": "CastCredit_CastCreditBasicPerson"
+            }
+          ],
+          "storageKey": null
         }
       ],
       "storageKey": null
@@ -123,16 +174,16 @@ const node: ReaderFragment = {
         {
           "kind": "Literal",
           "name": "size",
-          "value": "W780"
+          "value": "Original"
         }
       ],
       "kind": "ScalarField",
       "name": "backdrop",
-      "storageKey": "backdrop(size:\"W780\")"
+      "storageKey": "backdrop(size:\"Original\")"
     }
   ],
   "type": "IMovie",
   "abstractKey": "__isIMovie"
 };
-(node as any).hash = '700f0903d1705adaaf819420c6bd68d1';
+(node as any).hash = 'feb04b279ee65cd514168c89b5e2424b';
 export default node;
