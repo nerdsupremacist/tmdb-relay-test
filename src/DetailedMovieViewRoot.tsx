@@ -57,7 +57,7 @@ function DetailedMovieViewRoot({ data }: Props) {
                             shadow="lg"
                         />
                         <VStack align="baseline" spacing="0">
-                            <Text fontSize="3xl">
+                            <Text fontSize="3xl" fontWeight="bold">
                                 {movie.title}
                             </Text>
                             <Text fontSize="md">
@@ -68,7 +68,7 @@ function DetailedMovieViewRoot({ data }: Props) {
                                     {movie.details.runtime} min
                                 </Text>
                                 <Text fontSize="md" fontWeight="light">
-                                    {movie.rating}
+                                    {movie.rating} ★
                                 </Text>
                             </HStack>
                         </VStack>

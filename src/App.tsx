@@ -2,19 +2,21 @@
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link
+  Route
 } from "react-router-dom";
 
+import Navbar from './Navbar';
 import DetailedMovieView from './DetailedMovieView';
+import { Container, Text } from "@chakra-ui/react";
 
 function App() {
   return (
     <Router>
       <div>
+        <Navbar />
         <Switch>
           <Route exact path="/">
-            <Link to="/movie/11">Star Wars</Link>
+            <Container><Text textAlign="center" fontSize="4xl" padding={16}>Hi there ;)</Text></Container>
           </Route>
           <Route path="/movie/:id">
             <DetailedMovieView />
