@@ -2,7 +2,7 @@
 import {useRef, useState} from 'react';
 
 import { SearchIcon } from '@chakra-ui/icons';
-import { Kbd, InputGroup, Input, InputLeftElement, InputRightElement, Container, Text, Collapse } from '@chakra-ui/react';
+import { Kbd, InputGroup, Input, InputLeftElement, InputRightElement, Container, Collapse } from '@chakra-ui/react';
 import { useHotkeys } from 'react-hotkeys-hook';
 import { useDebounce } from 'use-debounce';
 
