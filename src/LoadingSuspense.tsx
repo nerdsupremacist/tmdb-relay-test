@@ -8,6 +8,7 @@ import { ErrorBoundary } from 'react-error-boundary';
 
 import Placeholder from './Placeholder';
 
+
 type Props = {
     children: ReactNode | Array<ReactNode>,
 }
