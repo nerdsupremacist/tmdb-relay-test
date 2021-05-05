@@ -8,7 +8,7 @@ import {
     Store,
 } from 'relay-runtime';
 
-import { GRAPHQL_URL } from './constants';
+import { GRAPHQL_URL } from 'utils/constants';
 
 const fetchQuery: FetchFunction = async (
     operation,

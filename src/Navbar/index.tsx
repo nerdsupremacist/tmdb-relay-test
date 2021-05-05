@@ -5,7 +5,7 @@ import { useHotkeys } from 'react-hotkeys-hook';
 import { Collapse, Container, Input, InputGroup, InputLeftElement, InputRightElement, Kbd } from '@chakra-ui/react';
 import { SearchIcon } from '@chakra-ui/icons';
 
-import SearchResultsList from 'SearchResultsList';
+import SearchResultsList from './SearchResultsList';
 
 import { useDebounce } from 'use-debounce';
 

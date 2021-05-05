@@ -7,7 +7,7 @@ import { Suspense } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import { Alert, AlertDescription, AlertIcon, AlertTitle } from '@chakra-ui/react';
 
-import Placeholder from 'Placeholder';
+import Placeholder from './Placeholder';
 
 type Props = {
     children: ReactNode | Array<ReactNode>,

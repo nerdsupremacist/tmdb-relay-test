@@ -1,5 +1,5 @@
 
-import type { MovieSearchResult_IMovie$key } from '__generated__/MovieSearchResult_IMovie.graphql';
+import type { MovieSearchResult_IMovie$key } from './__generated__/MovieSearchResult_IMovie.graphql';
 
 import React from 'react';
 import { useFragment } from 'react-relay';
@@ -8,7 +8,7 @@ import { HStack, Image, Text, VStack } from '@chakra-ui/react';
 
 import { graphql } from 'babel-plugin-relay/macro';
 
-import { POSTER_PLACEHOLDER } from './constants';
+import { POSTER_PLACEHOLDER } from '../utils/constants';
 
 type Props = {
     data: MovieSearchResult_IMovie$key

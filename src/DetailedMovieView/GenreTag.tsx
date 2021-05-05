@@ -1,5 +1,5 @@
 
-import type { GenreTag_Genre$key } from '__generated__/GenreTag_Genre.graphql';
+import type { GenreTag_Genre$key } from './__generated__/GenreTag_Genre.graphql';
 
 import React from 'react';
 import { useFragment } from 'react-relay';

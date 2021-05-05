@@ -1,5 +1,5 @@
 
-import type { DetailedMovieViewRoot_IMovie$key } from '__generated__/DetailedMovieViewRoot_IMovie.graphql';
+import type { DetailedMovieViewRoot_IMovie$key } from './__generated__/DetailedMovieViewRoot_IMovie.graphql';
 
 import React from 'react';
 import { Parallax } from 'react-parallax';
@@ -18,11 +18,11 @@ import {
 
 import { graphql } from 'babel-plugin-relay/macro';
 
-import CastCredit from 'CastCredit';
-import GenreTag from 'GenreTag';
-import StreamingLink from 'StreamingLink';
+import CastCredit from './CastCredit';
+import GenreTag from './GenreTag';
+import StreamingLink from './StreamingLink';
 
-import { BACKDROP_PLACEHOLDER, POSTER_PLACEHOLDER } from './constants';
+import { BACKDROP_PLACEHOLDER, POSTER_PLACEHOLDER } from 'utils/constants';
 
 type Props = {
     data: DetailedMovieViewRoot_IMovie$key

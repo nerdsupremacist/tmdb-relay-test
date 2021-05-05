@@ -1,5 +1,5 @@
 
-import type { CastCredit_CastCreditBasicPerson$key } from '__generated__/CastCredit_CastCreditBasicPerson.graphql';
+import type { CastCredit_CastCreditBasicPerson$key } from './__generated__/CastCredit_CastCreditBasicPerson.graphql';
 
 import React from 'react';
 import { useFragment } from 'react-relay';

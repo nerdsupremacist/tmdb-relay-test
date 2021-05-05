@@ -1,5 +1,5 @@
 
-import type { StreamingLink_StreamingOption$key, StreamingMonetizationType } from '__generated__/StreamingLink_StreamingOption.graphql';
+import type { StreamingLink_StreamingOption$key, StreamingMonetizationType } from './__generated__/StreamingLink_StreamingOption.graphql';
 
 import React from 'react';
 import { useFragment } from 'react-relay';

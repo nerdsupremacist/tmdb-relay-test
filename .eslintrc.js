@@ -18,11 +18,11 @@ module.exports = {
       {
         groups: [
           ['^.*\\u0000$'], // Type imports 
-          ['^__generated__/', '.graphql$'], // generated graphql stubs
+          ['^__generated__/', '^\\./__generated__/', '.graphql$'], // generated graphql stubs
           ['^react', 'react$', '^@', 'ui$'], // external react stuff
           ['^relay', 'relay$', '^babel'], // relay stuff
-          ['^[A-Z]'], // internal components
-          ['^use[A-Z]'], // hooks
+          ['^[A-Z]', '\\./[A-Z]'], // internal components
+          ['^use[A-Z]', '\\./use[A-Z]'], // hooks
           ['^\\./(?=.*/)(?!/?$)', '^\\.(?!/?$)', '^\\./?$'] // relative imports
         ]
       }
