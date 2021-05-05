@@ -34,7 +34,9 @@
     "build": "npm run relay && react-scripts build",
     "test": "npm run relay && react-scripts test",
     "eject": "npm run relay && react-scripts eject",
-    "relay": "relay-compiler --src ./src --schema ./data/schema.graphql --extensions ts tsx --language typescript --customScalars.URL=string --watchman false $@"
+    "relay": "relay-compiler --src ./src --schema ./data/schema.graphql --extensions ts tsx --language typescript --customScalars.URL=string --watchman false $@",
+    "lint": "eslint . --ignore-pattern node_modules/ --ext .js,.jsx,.ts,.tsx",
+    "autofix": "eslint . --ignore-pattern node_modules/ --ext .js,.jsx,.ts,.tsx --fix"
   },
   "eslintConfig": {
     "extends": [
