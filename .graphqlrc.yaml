@@ -1,0 +1,8 @@
+schema: "data/schema.graphql"
+documents: "src/**/*.{graphql, ts,tsx}"
+extensions:
+    endpoints:
+        default:
+            url: https://tmdb.apps.quintero.io
+    languageService:
+        useSchemaFileDefinitions: true

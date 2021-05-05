@@ -1,0 +1,7 @@
+{
+    "recommendations": [
+        "msjsdiag.debugger-for-chrome",
+        "graphql.vscode-graphql",
+        "dbaeumer.vscode-eslint"
+    ]
+}
