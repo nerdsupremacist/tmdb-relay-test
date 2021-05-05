@@ -1,0 +1,50 @@
+{
+	"Fragment Component" : {
+		"prefix": "frg",
+		"body": [
+			"import type { ${TM_FILENAME_BASE}_$1\\$key } from './__generated__/${TM_FILENAME_BASE}_$1.graphql';",
+			"",
+			"import { graphql } from 'babel-plugin-relay/macro';",
+			"import { useFragment } from 'react-relay';",
+			"",
+			"type Props = {",
+			"    ${2:$1}: ${TM_FILENAME_BASE}_$1\\$key,",
+			"}",
+			"",
+			"function ${TM_FILENAME_BASE}(props: Props) {",
+			"    const $2 = useFragment(",
+			"        graphql`",
+			"            fragment ${TM_FILENAME_BASE}_$1 on $1 {",
+			"                $0",
+			"            }",
+			"        `,",
+			"        props.$2",
+			"    );",
+			"",
+			"    return (",
+			"        <p>Hello World</p>",
+			"    );",
+			"}",
+			"",
+			"export default ${TM_FILENAME_BASE};"
+		],
+		"description": "Creates a React Component with a Fragment"
+	},
+	"Component" : {
+		"prefix": "comp",
+		"body": [
+			"type Props = {",
+			"    $1",
+			"}",
+			"",
+			"function ${TM_FILENAME_BASE}(props: Props) {",
+			"    return (",
+			"        $0",
+			"    );",
+			"}",
+			"",
+			"export default ${TM_FILENAME_BASE};"
+		],
+		"description": "Creates a Component"
+	}
+}
