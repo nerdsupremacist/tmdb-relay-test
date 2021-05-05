@@ -18,9 +18,9 @@ import {
 
 import { graphql } from 'babel-plugin-relay/macro';
 
+import StreamingLink from 'StreamingLink';
 import CastCredit from './CastCredit';
 import GenreTag from './GenreTag';
-import StreamingLink from './StreamingLink';
 
 import { BACKDROP_PLACEHOLDER, POSTER_PLACEHOLDER } from 'utils/constants';
 

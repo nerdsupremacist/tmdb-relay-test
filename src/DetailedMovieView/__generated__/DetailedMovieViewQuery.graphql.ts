@@ -79,12 +79,21 @@ fragment StreamingLink_StreamingOption on StreamingOption {
     links {
       web
     }
-    price {
-      amount
-      currency
-    }
-    type
+    ...useStreamingLinkTitle_StreamingOptionOffering
+    ...useStreamingLinkPriceDescription_StreamingOptionOffering
   }
+}
+
+fragment useStreamingLinkPriceDescription_StreamingOptionOffering on StreamingOptionOffering {
+  type
+  price {
+    amount
+    currency
+  }
+}
+
+fragment useStreamingLinkTitle_StreamingOptionOffering on StreamingOptionOffering {
+  type
 }
 */
 
@@ -352,6 +361,13 @@ return {
                       {
                         "alias": null,
                         "args": null,
+                        "kind": "ScalarField",
+                        "name": "type",
+                        "storageKey": null
+                      },
+                      {
+                        "alias": null,
+                        "args": null,
                         "concreteType": "Price",
                         "kind": "LinkedField",
                         "name": "price",
@@ -372,13 +388,6 @@ return {
                             "storageKey": null
                           }
                         ],
-                        "storageKey": null
-                      },
-                      {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "type",
                         "storageKey": null
                       }
                     ],
@@ -416,12 +425,12 @@ return {
     ]
   },
   "params": {
-    "cacheID": "22d8ebf322edbf29cfe7c315415842f0",
+    "cacheID": "a1ecfde10f7ac6b64b11753ca9fa305e",
     "id": null,
     "metadata": {},
     "name": "DetailedMovieViewQuery",
     "operationKind": "query",
-    "text": "query DetailedMovieViewQuery(\n  $id: Int!\n) {\n  movies {\n    movie(id: $id) {\n      __typename\n      ...DetailedMovieViewRoot_IMovie\n    }\n  }\n}\n\nfragment CastCredit_CastCreditBasicPerson on CastCreditBasicPerson {\n  value {\n    __typename\n    name\n    profilePicture(size: W185)\n  }\n  character\n}\n\nfragment DetailedMovieViewRoot_IMovie on IMovie {\n  __isIMovie: __typename\n  title\n  rating\n  overview\n  details {\n    runtime\n    tagline\n    genres {\n      ...GenreTag_Genre\n    }\n  }\n  credits {\n    __typename\n    cast {\n      ...CastCredit_CastCreditBasicPerson\n    }\n  }\n  streamingOptions {\n    ...StreamingLink_StreamingOption\n  }\n  poster(size: W185)\n  backdrop(size: Original)\n}\n\nfragment GenreTag_Genre on Genre {\n  name\n}\n\nfragment StreamingLink_StreamingOption on StreamingOption {\n  provider {\n    iconURL\n  }\n  bestOffering {\n    links {\n      web\n    }\n    price {\n      amount\n      currency\n    }\n    type\n  }\n}\n"
+    "text": "query DetailedMovieViewQuery(\n  $id: Int!\n) {\n  movies {\n    movie(id: $id) {\n      __typename\n      ...DetailedMovieViewRoot_IMovie\n    }\n  }\n}\n\nfragment CastCredit_CastCreditBasicPerson on CastCreditBasicPerson {\n  value {\n    __typename\n    name\n    profilePicture(size: W185)\n  }\n  character\n}\n\nfragment DetailedMovieViewRoot_IMovie on IMovie {\n  __isIMovie: __typename\n  title\n  rating\n  overview\n  details {\n    runtime\n    tagline\n    genres {\n      ...GenreTag_Genre\n    }\n  }\n  credits {\n    __typename\n    cast {\n      ...CastCredit_CastCreditBasicPerson\n    }\n  }\n  streamingOptions {\n    ...StreamingLink_StreamingOption\n  }\n  poster(size: W185)\n  backdrop(size: Original)\n}\n\nfragment GenreTag_Genre on Genre {\n  name\n}\n\nfragment StreamingLink_StreamingOption on StreamingOption {\n  provider {\n    iconURL\n  }\n  bestOffering {\n    links {\n      web\n    }\n    ...useStreamingLinkTitle_StreamingOptionOffering\n    ...useStreamingLinkPriceDescription_StreamingOptionOffering\n  }\n}\n\nfragment useStreamingLinkPriceDescription_StreamingOptionOffering on StreamingOptionOffering {\n  type\n  price {\n    amount\n    currency\n  }\n}\n\nfragment useStreamingLinkTitle_StreamingOptionOffering on StreamingOptionOffering {\n  type\n}\n"
   }
 };
 })();

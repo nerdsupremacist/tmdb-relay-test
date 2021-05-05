@@ -4,7 +4,6 @@
 
 import { ReaderFragment } from "relay-runtime";
 import { FragmentRefs } from "relay-runtime";
-export type StreamingMonetizationType = "Ads" | "Buy" | "Cinema" | "Flatrate" | "Free" | "Rent" | "%future added value";
 export type StreamingLink_StreamingOption = {
     readonly provider: {
         readonly iconURL: string;
@@ -13,11 +12,7 @@ export type StreamingLink_StreamingOption = {
         readonly links: {
             readonly web: string;
         };
-        readonly price: {
-            readonly amount: number;
-            readonly currency: string;
-        } | null;
-        readonly type: StreamingMonetizationType;
+        readonly " $fragmentRefs": FragmentRefs<"useStreamingLinkTitle_StreamingOptionOffering" | "useStreamingLinkPriceDescription_StreamingOptionOffering">;
     };
     readonly " $refType": "StreamingLink_StreamingOption";
 };
@@ -80,36 +75,14 @@ const node: ReaderFragment = {
           "storageKey": null
         },
         {
-          "alias": null,
           "args": null,
-          "concreteType": "Price",
-          "kind": "LinkedField",
-          "name": "price",
-          "plural": false,
-          "selections": [
-            {
-              "alias": null,
-              "args": null,
-              "kind": "ScalarField",
-              "name": "amount",
-              "storageKey": null
-            },
-            {
-              "alias": null,
-              "args": null,
-              "kind": "ScalarField",
-              "name": "currency",
-              "storageKey": null
-            }
-          ],
-          "storageKey": null
+          "kind": "FragmentSpread",
+          "name": "useStreamingLinkTitle_StreamingOptionOffering"
         },
         {
-          "alias": null,
           "args": null,
-          "kind": "ScalarField",
-          "name": "type",
-          "storageKey": null
+          "kind": "FragmentSpread",
+          "name": "useStreamingLinkPriceDescription_StreamingOptionOffering"
         }
       ],
       "storageKey": null
@@ -118,5 +91,5 @@ const node: ReaderFragment = {
   "type": "StreamingOption",
   "abstractKey": null
 };
-(node as any).hash = '0262c50eb303d3e1112b8de6d111c8ef';
+(node as any).hash = 'd3111a15722e378a4a5535957add8116';
 export default node;

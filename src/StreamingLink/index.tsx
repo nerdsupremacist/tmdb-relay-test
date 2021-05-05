@@ -1,5 +1,5 @@
 
-import type { StreamingLink_StreamingOption$key, StreamingMonetizationType } from './__generated__/StreamingLink_StreamingOption.graphql';
+import type { StreamingLink_StreamingOption$key } from './__generated__/StreamingLink_StreamingOption.graphql';
 
 import React from 'react';
 import { useFragment } from 'react-relay';
@@ -7,38 +7,11 @@ import { Image, Link, Text, VStack } from '@chakra-ui/react'
 
 import { graphql } from 'babel-plugin-relay/macro';
 
+import useStreamingLinkPriceDescription from './useStreamingLinkPriceDescription';
+import useStreamingLinkTitle from './useStreamingLinkTitle';
+
 type Props = {
     data: StreamingLink_StreamingOption$key
-}
-
-function watchDescription(type: StreamingMonetizationType): string {
-    switch (type) {
-        case 'Buy':
-            return 'Buy';
-        case 'Cinema':
-            return 'Theatre Tickets';
-        case 'Rent':
-            return 'Rent';
-        default:
-            return 'Watch Now';
-    }
-}
-
-type Price = { readonly amount: number, readonly currency: string }
-
-function priceDescription(price: Price | null, type: StreamingMonetizationType) {
-    if (price != null) {
-        return `${price.amount} ${price.currency}`
-    }
-
-    switch (type) {
-        case 'Ads':
-            return 'With Ads';
-        case 'Flatrate':
-            return 'Subscription';
-        default:
-            return 'Free';
-    }
 }
 
 function StreamingLink({ data }: Props) {
@@ -52,16 +25,16 @@ function StreamingLink({ data }: Props) {
                     links {
                         web
                     }
-                    price {
-                        amount
-                        currency
-                    }
-                    type
+                    ...useStreamingLinkTitle_StreamingOptionOffering
+                    ...useStreamingLinkPriceDescription_StreamingOptionOffering
                 }
             }
         `,
         data
     );
+
+    const title = useStreamingLinkTitle(option.bestOffering);
+    const priceDescription = useStreamingLinkPriceDescription(option.bestOffering);
 
     if (option.provider == null) {
         return null;
@@ -78,10 +51,10 @@ function StreamingLink({ data }: Props) {
                     src={option.provider.iconURL}
                 />
                 <Text fontSize="sm" fontWeight="semibold" paddingTop="2">
-                    {watchDescription(option.bestOffering.type)}
+                    {title}
                 </Text>
                 <Text fontSize="sm" fontWeight="light">
-                    {priceDescription(option.bestOffering.price, option.bestOffering.type)}
+                    {priceDescription}
                 </Text>
             </VStack>
         </Link>
