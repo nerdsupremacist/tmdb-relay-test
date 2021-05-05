@@ -4,13 +4,11 @@
 
 import { ReaderFragment } from "relay-runtime";
 import { FragmentRefs } from "relay-runtime";
-export type Status = "Cancelled" | "InProduction" | "Planned" | "PostProduction" | "Released" | "Rumored" | "%future added value";
 export type DetailedMovieViewRoot_IMovie = {
     readonly title: string;
     readonly rating: number;
     readonly overview: string;
     readonly details: {
-        readonly status: Status;
         readonly runtime: number;
         readonly tagline: string;
         readonly genres: ReadonlyArray<{
@@ -72,13 +70,6 @@ const node: ReaderFragment = {
       "name": "details",
       "plural": false,
       "selections": [
-        {
-          "alias": null,
-          "args": null,
-          "kind": "ScalarField",
-          "name": "status",
-          "storageKey": null
-        },
         {
           "alias": null,
           "args": null,
@@ -185,5 +176,5 @@ const node: ReaderFragment = {
   "type": "IMovie",
   "abstractKey": "__isIMovie"
 };
-(node as any).hash = 'feb04b279ee65cd514168c89b5e2424b';
+(node as any).hash = '259fa2c0c16aef3ddd43f0e428680258';
 export default node;

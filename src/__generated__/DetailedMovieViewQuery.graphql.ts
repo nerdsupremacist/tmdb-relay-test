@@ -48,7 +48,6 @@ fragment DetailedMovieViewRoot_IMovie on IMovie {
   rating
   overview
   details {
-    status
     runtime
     tagline
     genres {
@@ -219,13 +218,6 @@ return {
                 "name": "details",
                 "plural": false,
                 "selections": [
-                  {
-                    "alias": null,
-                    "args": null,
-                    "kind": "ScalarField",
-                    "name": "status",
-                    "storageKey": null
-                  },
                   {
                     "alias": null,
                     "args": null,
@@ -424,12 +416,12 @@ return {
     ]
   },
   "params": {
-    "cacheID": "dbf86bfa21671380235eec0111732758",
+    "cacheID": "22d8ebf322edbf29cfe7c315415842f0",
     "id": null,
     "metadata": {},
     "name": "DetailedMovieViewQuery",
     "operationKind": "query",
-    "text": "query DetailedMovieViewQuery(\n  $id: Int!\n) {\n  movies {\n    movie(id: $id) {\n      __typename\n      ...DetailedMovieViewRoot_IMovie\n    }\n  }\n}\n\nfragment CastCredit_CastCreditBasicPerson on CastCreditBasicPerson {\n  value {\n    __typename\n    name\n    profilePicture(size: W185)\n  }\n  character\n}\n\nfragment DetailedMovieViewRoot_IMovie on IMovie {\n  __isIMovie: __typename\n  title\n  rating\n  overview\n  details {\n    status\n    runtime\n    tagline\n    genres {\n      ...GenreTag_Genre\n    }\n  }\n  credits {\n    __typename\n    cast {\n      ...CastCredit_CastCreditBasicPerson\n    }\n  }\n  streamingOptions {\n    ...StreamingLink_StreamingOption\n  }\n  poster(size: W185)\n  backdrop(size: Original)\n}\n\nfragment GenreTag_Genre on Genre {\n  name\n}\n\nfragment StreamingLink_StreamingOption on StreamingOption {\n  provider {\n    iconURL\n  }\n  bestOffering {\n    links {\n      web\n    }\n    price {\n      amount\n      currency\n    }\n    type\n  }\n}\n"
+    "text": "query DetailedMovieViewQuery(\n  $id: Int!\n) {\n  movies {\n    movie(id: $id) {\n      __typename\n      ...DetailedMovieViewRoot_IMovie\n    }\n  }\n}\n\nfragment CastCredit_CastCreditBasicPerson on CastCreditBasicPerson {\n  value {\n    __typename\n    name\n    profilePicture(size: W185)\n  }\n  character\n}\n\nfragment DetailedMovieViewRoot_IMovie on IMovie {\n  __isIMovie: __typename\n  title\n  rating\n  overview\n  details {\n    runtime\n    tagline\n    genres {\n      ...GenreTag_Genre\n    }\n  }\n  credits {\n    __typename\n    cast {\n      ...CastCredit_CastCreditBasicPerson\n    }\n  }\n  streamingOptions {\n    ...StreamingLink_StreamingOption\n  }\n  poster(size: W185)\n  backdrop(size: Original)\n}\n\nfragment GenreTag_Genre on Genre {\n  name\n}\n\nfragment StreamingLink_StreamingOption on StreamingOption {\n  provider {\n    iconURL\n  }\n  bestOffering {\n    links {\n      web\n    }\n    price {\n      amount\n      currency\n    }\n    type\n  }\n}\n"
   }
 };
 })();
