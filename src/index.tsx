@@ -1,18 +1,17 @@
+import { ChakraProvider } from '@chakra-ui/react'
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
-import theme from './theme';
-
 import { RelayEnvironmentProvider } from 'react-relay';
 
+import App from './App';
+import theme from './theme';
 import Environment from './tmdb';
-import { ChakraProvider } from "@chakra-ui/react"
 
 ReactDOM.render(
   <React.StrictMode>
     <RelayEnvironmentProvider environment={Environment}>
       <ChakraProvider theme={theme}>
-        <App/>
+        <App />
       </ChakraProvider>
     </RelayEnvironmentProvider>
   </React.StrictMode>,

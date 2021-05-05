@@ -1,55 +1,51 @@
-import type { DetailedMovieViewQuery as DetailedMovieViewQueryType } from './__generated__/DetailedMovieViewQuery.graphql';
 
-import DetailedMovieViewQuery from './__generated__/DetailedMovieViewQuery.graphql';
-
-import { Suspense } from 'react';
-
-import { PreloadedQuery, usePreloadedQuery, loadQuery, useRelayEnvironment } from 'react-relay';
 import { graphql } from 'babel-plugin-relay/macro';
+import React from 'react';
+import { loadQuery, PreloadedQuery, usePreloadedQuery, useRelayEnvironment } from 'react-relay';
+import { useParams } from 'react-router';
 
-import { useParams } from 'react-router-dom';
-
+import type { DetailedMovieViewQuery as DetailedMovieViewQueryType } from './__generated__/DetailedMovieViewQuery.graphql';
+import DetailedMovieViewQuery from './__generated__/DetailedMovieViewQuery.graphql';
 import DetailedMovieViewRoot from './DetailedMovieViewRoot';
-import Placeholder from './Placeholder';
+import LoadingSuspense from './LoadingSuspense';
 
 type LoadedProps = {
-  data : PreloadedQuery<DetailedMovieViewQueryType>
+    data: PreloadedQuery<DetailedMovieViewQueryType>
 }
 
 type Params = {
     id: string
 }
 
-function DetailedMovieViewLoaded(props: LoadedProps) {
-  const data = usePreloadedQuery<DetailedMovieViewQueryType>(
-    graphql`
-      query DetailedMovieViewQuery($id: Int!) {
-        movies {
-          movie(id: $id) {
-            ...DetailedMovieViewRoot_IMovie
-          }
-        }
-      }
-    `,
-    props.data
-  );
-
-  return (
-    <DetailedMovieViewRoot data={data.movies.movie}/>
-  );
-}
-
-function DetailedMovieView() {
-    const { id } = useParams<Params>();
-    const environment = useRelayEnvironment();
-
-    const data = loadQuery<DetailedMovieViewQueryType>(environment, DetailedMovieViewQuery, { id : parseInt(id) })
+function DetailedMovieView(props: LoadedProps) {
+    const data = usePreloadedQuery(
+        graphql`
+            query DetailedMovieViewQuery($id: Int!) {
+                movies {
+                    movie(id: $id) {
+                        ...DetailedMovieViewRoot_IMovie
+                    }
+                }
+            }
+        `,
+        props.data
+    );
 
     return (
-        <Suspense fallback={<Placeholder />}>
-            <DetailedMovieViewLoaded data={data}/>
-        </Suspense>
+        <DetailedMovieViewRoot data={data.movies.movie} />
     );
-  }
+}
 
-export default DetailedMovieView;
+function DetailedMovieViewWrapper() {
+    const { id } = useParams<Params>();
+    const environment = useRelayEnvironment();
+    const data = loadQuery<DetailedMovieViewQueryType>(environment, DetailedMovieViewQuery, { id: parseInt(id) })
+
+    return (
+        <LoadingSuspense>
+            <DetailedMovieView data={data} />
+        </LoadingSuspense>
+    );
+}
+
+export default DetailedMovieViewWrapper;

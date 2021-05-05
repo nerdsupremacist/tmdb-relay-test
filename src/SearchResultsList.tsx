@@ -1,14 +1,12 @@
-import type { SearchResultsListQuery as SearchResultsListQueryType } from './__generated__/SearchResultsListQuery.graphql';
 
-import SearchResultsListQuery from './__generated__/SearchResultsListQuery.graphql';
-
-import { Suspense } from 'react';
-
-import { PreloadedQuery, usePreloadedQuery, loadQuery, useRelayEnvironment } from 'react-relay';
-import { graphql } from 'babel-plugin-relay/macro';
-
-import Placeholder from './Placeholder';
 import { VStack } from '@chakra-ui/react';
+import { graphql } from 'babel-plugin-relay/macro';
+import React from 'react';
+import { loadQuery, PreloadedQuery, usePreloadedQuery, useRelayEnvironment } from 'react-relay';
+
+import type { SearchResultsListQuery as SearchResultsListQueryType } from './__generated__/SearchResultsListQuery.graphql';
+import SearchResultsListQuery from './__generated__/SearchResultsListQuery.graphql';
+import LoadingSuspense from './LoadingSuspense';
 import MovieSearchResult from './MovieSearchResult';
 
 type LoadedProps = {
@@ -19,18 +17,18 @@ type Props = {
     term: string
 }
 
-function LoadedSearchResultsList(props: LoadedProps) {
-    const data = usePreloadedQuery<SearchResultsListQueryType>(
+function SearchResultsList(props: LoadedProps) {
+    const data = usePreloadedQuery(
         graphql`
             query SearchResultsListQuery($term: String!) {
                 movies {
-                search(term: $term, first: 5) {
-                    edges {
-                        node {
-                            ...MovieSearchResult_IMovie
+                    search(term: $term, first: 5) {
+                        edges {
+                            node {
+                                ...MovieSearchResult_IMovie
+                            }
                         }
                     }
-                }
                 }
             }
         `,
@@ -38,24 +36,23 @@ function LoadedSearchResultsList(props: LoadedProps) {
     );
 
     return (
-        <VStack spacing={4} align="start">
+        <VStack align="start" spacing={4}>
             {
-                data.movies?.search.edges?.map((edge, index) => edge?.node != null && <MovieSearchResult data={edge.node} key={`search_result_${index}`}/>)
+                data.movies?.search.edges?.map((edge, index) => edge?.node != null && <MovieSearchResult data={edge.node} key={`search_result_${index}`} />)
             }
         </VStack>
     );
 }
 
-function SearchResultsList({ term }: Props) {
+function SearchResultsListWrapper({ term }: Props) {
     const environment = useRelayEnvironment();
-
     const data = loadQuery<SearchResultsListQueryType>(environment, SearchResultsListQuery, { term })
 
     return (
-        <Suspense fallback={<Placeholder />}>
-            <LoadedSearchResultsList data={data} />
-        </Suspense>
+        <LoadingSuspense>
+            <SearchResultsList data={data} />
+        </LoadingSuspense>
     );
 }
 
-export default SearchResultsList;
+export default SearchResultsListWrapper;

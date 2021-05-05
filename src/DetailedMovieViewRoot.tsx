@@ -1,26 +1,25 @@
-import type { DetailedMovieViewRoot_IMovie$key } from './__generated__/DetailedMovieViewRoot_IMovie.graphql';
-
-import { useFragment } from 'react-relay';
-import { graphql } from 'babel-plugin-relay/macro';
 
 import {
     AspectRatio,
-    Container,
     Box,
+    Container,
     HStack,
-    VStack,
     Image,
     Text,
+    VStack,
     Wrap,
     WrapItem
-} from "@chakra-ui/react"
+} from '@chakra-ui/react'
+import { graphql } from 'babel-plugin-relay/macro';
+import React from 'react';
 import { Parallax } from 'react-parallax';
+import { useFragment } from 'react-relay';
 
-import StreamingLink from './StreamingLink';
-import GenreTag from './GenreTag';
+import type { DetailedMovieViewRoot_IMovie$key } from './__generated__/DetailedMovieViewRoot_IMovie.graphql';
 import CastCredit from './CastCredit';
-
 import { BACKDROP_PLACEHOLDER, POSTER_PLACEHOLDER } from './constants';
+import GenreTag from './GenreTag';
+import StreamingLink from './StreamingLink';
 
 type Props = {
     data: DetailedMovieViewRoot_IMovie$key
@@ -35,7 +34,6 @@ function DetailedMovieViewRoot({ data }: Props) {
                 overview
 
                 details {
-                    status
                     runtime
                     tagline
                     genres {
@@ -65,24 +63,24 @@ function DetailedMovieViewRoot({ data }: Props) {
 
     return (
         <div>
-            <Container paddingTop={8} paddingBottom={8}>
+            <Container paddingBottom={8} paddingTop={8}>
                 <VStack align="baseline" spacing={4}>
                     <HStack align="flex-end" spacing={4}>
                         <Image
-                            maxW="150"
-                            borderWidth="1px"
                             borderRadius="lg"
-                            overflow="hidden"
+                            borderWidth="1px"
+                            maxW="150"
                             objectFit="cover"
-                            src={poster}
+                            overflow="hidden"
                             shadow="lg"
+                            src={poster}
                         />
                         <VStack align="baseline" spacing={2}>
                             <Text fontSize="3xl" fontWeight="bold">
                                 {movie.title}
                             </Text>
                             <Wrap spacing={2}>
-                                {movie.details.genres.map((genre, index) => <WrapItem><GenreTag data={genre} key={`genre_${index}`} /></WrapItem>)}
+                                {movie.details.genres.map((genre, index) => <WrapItem key={`genre_${index}`}><GenreTag data={genre} /></WrapItem>)}
                             </Wrap>
                             <VStack align="baseline" spacing={0}>
                                 <Text fontSize="md">
@@ -105,8 +103,8 @@ function DetailedMovieViewRoot({ data }: Props) {
                         </HStack>
                     }
                     <Text>{movie.overview}</Text>
-                    <HStack maxW="100%" padding={2} overflowY="scroll" align="start">
-                        {movie.credits.cast.map((credit, index) => <CastCredit data={credit} key={`cast_credit_${index}`}/>)}
+                    <HStack align="start" maxW="100%" overflowY="scroll" padding={2}>
+                        {movie.credits.cast.map((credit, index) => <CastCredit data={credit} key={`cast_credit_${index}`} />)}
                     </HStack>
                 </VStack>
             </Container>
@@ -115,7 +113,7 @@ function DetailedMovieViewRoot({ data }: Props) {
                     <Box />
                 </AspectRatio>
             </Parallax>
-            <Container paddingTop={8} paddingBottom={8}>
+            <Container paddingBottom={8} paddingTop={8}>
                 <p>{movie.overview}</p>
                 <p>{movie.overview}</p>
                 <p>{movie.overview}</p>

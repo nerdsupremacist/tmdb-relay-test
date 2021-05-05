@@ -1,8 +1,8 @@
 
-import {useRef, useState} from 'react';
-
 import { SearchIcon } from '@chakra-ui/icons';
-import { Kbd, InputGroup, Input, InputLeftElement, InputRightElement, Container, Collapse } from '@chakra-ui/react';
+import { Collapse, Container, Input, InputGroup, InputLeftElement, InputRightElement, Kbd } from '@chakra-ui/react';
+import React from 'react';
+import { useRef, useState } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
 import { useDebounce } from 'use-debounce';
 
@@ -13,15 +13,15 @@ function Navbar() {
     const setFocus = () => { inputRef.current?.focus() };
 
     const [isFocused, setIsFocused] = useState(false);
-    const [searchTerm, setSearchTerm] = useState("");
+    const [searchTerm, setSearchTerm] = useState('');
 
     const [debounced] = useDebounce(searchTerm, 300);
     const [debouncedFocus] = useDebounce(isFocused, 300);
-    
+
     useHotkeys('/', (event) => {
         event.preventDefault();
         if (!isFocused) {
-            setSearchTerm("");
+            setSearchTerm('');
         }
         setFocus();
     }, {}, [isFocused]);
@@ -30,19 +30,18 @@ function Navbar() {
         <div>
             <Container maxW="container.sm" paddingTop={8}>
                 <InputGroup size="md">
-                    <InputLeftElement
-                        pointerEvents="none"
-                        children={<SearchIcon color="gray.300" />}
-                    />
+                    <InputLeftElement pointerEvents="none">
+                        <SearchIcon color="gray.300" />
+                    </InputLeftElement>
                     <Input
-                        pr="4.5rem"
-                        type="text"
-                        placeholder="Search"
-                        ref={inputRef}
-                        value={searchTerm}
+                        onBlur={() => setIsFocused(false)}
                         onChange={(event) => setSearchTerm(event.target.value)}
                         onFocus={() => setIsFocused(true)}
-                        onBlur={() => setIsFocused(false)}
+                        placeholder="Search"
+                        pr="4.5rem"
+                        ref={inputRef}
+                        type="text"
+                        value={searchTerm}
                     />
                     <InputRightElement
                         pointerEvents="none">
@@ -50,9 +49,9 @@ function Navbar() {
                     </InputRightElement>
                 </InputGroup>
             </Container>
-            <Collapse in={debouncedFocus && debounced.length > 1} animateOpacity unmountOnExit>
-                <Container maxW="container.sm" marginTop={4} bg="whiteAlpha.200" rounded="lg" padding={2}>
-                    <SearchResultsList term={debounced}/>
+            <Collapse animateOpacity in={debouncedFocus && debounced.length > 1} unmountOnExit>
+                <Container bg="whiteAlpha.200" marginTop={4} maxW="container.sm" padding={2} rounded="lg">
+                    <SearchResultsList term={debounced} />
                 </Container>
             </Collapse>
         </div>

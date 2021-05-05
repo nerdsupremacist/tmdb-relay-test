@@ -1,13 +1,14 @@
 
+import { Container, Text } from '@chakra-ui/react';
+import React from 'react';
 import {
   BrowserRouter as Router,
-  Switch,
-  Route
-} from "react-router-dom";
+  Route,
+  Switch
+} from 'react-router-dom';
 
-import Navbar from './Navbar';
 import DetailedMovieView from './DetailedMovieView';
-import { Container, Text } from "@chakra-ui/react";
+import Navbar from './Navbar';
 
 function App() {
   return (
@@ -17,7 +18,7 @@ function App() {
         <Switch>
           <Route exact path="/">
             <Container>
-              <Text textAlign="center" fontSize="4xl" padding={16}>
+              <Text fontSize="4xl" padding={16} textAlign="center">
                 Hi there!
                 <br />
                 Use the search bar to search for any movie ;)

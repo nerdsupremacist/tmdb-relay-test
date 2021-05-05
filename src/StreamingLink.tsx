@@ -1,9 +1,10 @@
-import type { StreamingLink_StreamingOption$key, StreamingMonetizationType } from './__generated__/StreamingLink_StreamingOption.graphql';
 
-import { useFragment } from 'react-relay';
+import { Image, Link, Text, VStack } from '@chakra-ui/react'
 import { graphql } from 'babel-plugin-relay/macro';
+import React from 'react';
+import { useFragment } from 'react-relay';
 
-import { Link, Image, Text, VStack } from "@chakra-ui/react"
+import type { StreamingLink_StreamingOption$key, StreamingMonetizationType } from './__generated__/StreamingLink_StreamingOption.graphql';
 
 type Props = {
     data: StreamingLink_StreamingOption$key
@@ -17,13 +18,7 @@ function watchDescription(type: StreamingMonetizationType): string {
             return 'Theatre Tickets';
         case 'Rent':
             return 'Rent';
-        case 'Ads':
-            return 'Watch Now';
-        case 'Flatrate':
-            return 'Watch Now';
-        case 'Free':
-            return 'Watch Now';
-        case '%future added value':
+        default:
             return 'Watch Now';
     }
 }
@@ -74,17 +69,17 @@ function StreamingLink({ data }: Props) {
     return (
         <Link href={option.bestOffering.links.web} textAlign="center">
             <VStack align="center" spacing="0">
-                <Image 
-                    src={option.provider.iconURL}
-                    shadow="lg"
-                    maxW="50"
+                <Image
                     borderRadius="xl"
                     borderWidth="1px"
+                    maxW="50"
+                    shadow="lg"
+                    src={option.provider.iconURL}
                 />
-                <Text paddingTop="2" fontWeight="semibold" fontSize="sm">
-                {watchDescription(option.bestOffering.type)}
-                </Text>    
-                <Text fontWeight="light" fontSize="sm">
+                <Text fontSize="sm" fontWeight="semibold" paddingTop="2">
+                    {watchDescription(option.bestOffering.type)}
+                </Text>
+                <Text fontSize="sm" fontWeight="light">
                     {priceDescription(option.bestOffering.price, option.bestOffering.type)}
                 </Text>
             </VStack>

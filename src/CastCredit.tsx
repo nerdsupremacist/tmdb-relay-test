@@ -1,10 +1,10 @@
 
-import type { CastCredit_CastCreditBasicPerson$key } from './__generated__/CastCredit_CastCreditBasicPerson.graphql';
-
+import { Avatar, Text, VStack } from '@chakra-ui/react';
 import { graphql } from 'babel-plugin-relay/macro'
+import React from 'react';
 import { useFragment } from 'react-relay';
 
-import { Avatar, Text, VStack } from '@chakra-ui/react'; 
+import type { CastCredit_CastCreditBasicPerson$key } from './__generated__/CastCredit_CastCreditBasicPerson.graphql';
 
 type Props = {
     data: CastCredit_CastCreditBasicPerson$key,
@@ -29,10 +29,10 @@ function CastCredit(props: Props) {
 
     return (
         <VStack w="140px">
-            <Avatar w="100px" h="100px" name={data.value.name} shadow="lg" {...rest}/>
+            <Avatar h="100px" name={data.value.name} shadow="lg" w="100px" {...rest} />
             <VStack spacing={0}>
-                <Text textAlign="center" fontSize="sm" fontWeight="semibold" noOfLines={2}>{data.value.name}</Text>
-                <Text textAlign="center" fontSize="sm" fontWeight="light" noOfLines={3}>as {data.character}</Text>
+                <Text fontSize="sm" fontWeight="semibold" noOfLines={2} textAlign="center">{data.value.name}</Text>
+                <Text fontSize="sm" fontWeight="light" noOfLines={3} textAlign="center">as {data.character}</Text>
             </VStack>
         </VStack>
     );

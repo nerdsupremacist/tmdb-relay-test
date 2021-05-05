@@ -1,6 +1,5 @@
 
 import type { FetchFunction } from 'relay-runtime';
-
 import {
     Environment,
     Network,
@@ -25,7 +24,7 @@ const fetchQuery: FetchFunction = async (
             variables,
         }),
     })
-    
+
     return response.json()
 }
 
