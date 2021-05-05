@@ -1,11 +1,13 @@
 
-import { HStack, Image, Text, VStack } from '@chakra-ui/react';
-import { graphql } from 'babel-plugin-relay/macro';
+import type { MovieSearchResult_IMovie$key } from '__generated__/MovieSearchResult_IMovie.graphql';
+
 import React from 'react';
 import { useFragment } from 'react-relay';
 import { Link } from 'react-router-dom';
+import { HStack, Image, Text, VStack } from '@chakra-ui/react';
 
-import type { MovieSearchResult_IMovie$key } from './__generated__/MovieSearchResult_IMovie.graphql';
+import { graphql } from 'babel-plugin-relay/macro';
+
 import { POSTER_PLACEHOLDER } from './constants';
 
 type Props = {

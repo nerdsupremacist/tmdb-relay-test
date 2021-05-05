@@ -1,10 +1,11 @@
 
-import { Avatar, Text, VStack } from '@chakra-ui/react';
-import { graphql } from 'babel-plugin-relay/macro'
+import type { CastCredit_CastCreditBasicPerson$key } from '__generated__/CastCredit_CastCreditBasicPerson.graphql';
+
 import React from 'react';
 import { useFragment } from 'react-relay';
+import { Avatar, Text, VStack } from '@chakra-ui/react';
 
-import type { CastCredit_CastCreditBasicPerson$key } from './__generated__/CastCredit_CastCreditBasicPerson.graphql';
+import { graphql } from 'babel-plugin-relay/macro'
 
 type Props = {
     data: CastCredit_CastCreditBasicPerson$key,

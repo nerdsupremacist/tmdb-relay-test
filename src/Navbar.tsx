@@ -1,12 +1,13 @@
 
-import { SearchIcon } from '@chakra-ui/icons';
-import { Collapse, Container, Input, InputGroup, InputLeftElement, InputRightElement, Kbd } from '@chakra-ui/react';
 import React from 'react';
 import { useRef, useState } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
-import { useDebounce } from 'use-debounce';
+import { Collapse, Container, Input, InputGroup, InputLeftElement, InputRightElement, Kbd } from '@chakra-ui/react';
+import { SearchIcon } from '@chakra-ui/icons';
 
-import SearchResultsList from './SearchResultsList';
+import SearchResultsList from 'SearchResultsList';
+
+import { useDebounce } from 'use-debounce';
 
 function Navbar() {
     const inputRef = useRef<HTMLInputElement>(null);

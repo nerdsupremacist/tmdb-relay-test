@@ -1,14 +1,14 @@
 
-import { Container, Text } from '@chakra-ui/react';
 import React from 'react';
 import {
   BrowserRouter as Router,
   Route,
   Switch
 } from 'react-router-dom';
+import { Container, Text } from '@chakra-ui/react';
 
-import DetailedMovieView from './DetailedMovieView';
-import Navbar from './Navbar';
+import DetailedMovieView from 'DetailedMovieView';
+import Navbar from 'Navbar';
 
 function App() {
   return (

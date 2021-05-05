@@ -1,4 +1,9 @@
 
+import type { DetailedMovieViewRoot_IMovie$key } from '__generated__/DetailedMovieViewRoot_IMovie.graphql';
+
+import React from 'react';
+import { Parallax } from 'react-parallax';
+import { useFragment } from 'react-relay';
 import {
     AspectRatio,
     Box,
@@ -10,16 +15,14 @@ import {
     Wrap,
     WrapItem
 } from '@chakra-ui/react'
-import { graphql } from 'babel-plugin-relay/macro';
-import React from 'react';
-import { Parallax } from 'react-parallax';
-import { useFragment } from 'react-relay';
 
-import type { DetailedMovieViewRoot_IMovie$key } from './__generated__/DetailedMovieViewRoot_IMovie.graphql';
-import CastCredit from './CastCredit';
+import { graphql } from 'babel-plugin-relay/macro';
+
+import CastCredit from 'CastCredit';
+import GenreTag from 'GenreTag';
+import StreamingLink from 'StreamingLink';
+
 import { BACKDROP_PLACEHOLDER, POSTER_PLACEHOLDER } from './constants';
-import GenreTag from './GenreTag';
-import StreamingLink from './StreamingLink';
 
 type Props = {
     data: DetailedMovieViewRoot_IMovie$key

@@ -13,7 +13,20 @@ module.exports = {
   rules: {
     quotes: [2, 'single', { avoidEscape: true }],
     'prefer-template': 'warn',
-    'simple-import-sort/imports': 'error',
+    'simple-import-sort/imports': [
+      'error',
+      {
+        groups: [
+          ['^.*\\u0000$'], // Type imports 
+          ['^__generated__/', '.graphql$'], // generated graphql stubs
+          ['^react', 'react$', '^@', 'ui$'], // external react stuff
+          ['^relay', 'relay$', '^babel'], // relay stuff
+          ['^[A-Z]'], // internal components
+          ['^use[A-Z]'], // hooks
+          ['^\\./(?=.*/)(?!/?$)', '^\\.(?!/?$)', '^\\./?$'] // relative imports
+        ]
+      }
+    ],
     'simple-import-sort/exports': 'error',
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'warn',

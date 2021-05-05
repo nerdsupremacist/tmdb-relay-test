@@ -1,13 +1,13 @@
 
-import { Alert, AlertDescription, AlertIcon, AlertTitle } from '@chakra-ui/react';
 import type { ReactNode } from 'react';
+import type { FallbackProps } from 'react-error-boundary';
+
 import React from 'react';
 import { Suspense } from 'react';
-import type { FallbackProps } from 'react-error-boundary';
 import { ErrorBoundary } from 'react-error-boundary';
+import { Alert, AlertDescription, AlertIcon, AlertTitle } from '@chakra-ui/react';
 
-import Placeholder from './Placeholder';
-
+import Placeholder from 'Placeholder';
 
 type Props = {
     children: ReactNode | Array<ReactNode>,

@@ -1,10 +1,11 @@
 
-import { Image, Link, Text, VStack } from '@chakra-ui/react'
-import { graphql } from 'babel-plugin-relay/macro';
+import type { StreamingLink_StreamingOption$key, StreamingMonetizationType } from '__generated__/StreamingLink_StreamingOption.graphql';
+
 import React from 'react';
 import { useFragment } from 'react-relay';
+import { Image, Link, Text, VStack } from '@chakra-ui/react'
 
-import type { StreamingLink_StreamingOption$key, StreamingMonetizationType } from './__generated__/StreamingLink_StreamingOption.graphql';
+import { graphql } from 'babel-plugin-relay/macro';
 
 type Props = {
     data: StreamingLink_StreamingOption$key

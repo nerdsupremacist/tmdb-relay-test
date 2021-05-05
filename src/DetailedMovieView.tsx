@@ -1,13 +1,16 @@
 
-import { graphql } from 'babel-plugin-relay/macro';
+import type { DetailedMovieViewQuery as DetailedMovieViewQueryType } from '__generated__/DetailedMovieViewQuery.graphql';
+
+import DetailedMovieViewQuery from '__generated__/DetailedMovieViewQuery.graphql';
+
 import React from 'react';
 import { loadQuery, PreloadedQuery, usePreloadedQuery, useRelayEnvironment } from 'react-relay';
 import { useParams } from 'react-router';
 
-import type { DetailedMovieViewQuery as DetailedMovieViewQueryType } from './__generated__/DetailedMovieViewQuery.graphql';
-import DetailedMovieViewQuery from './__generated__/DetailedMovieViewQuery.graphql';
-import DetailedMovieViewRoot from './DetailedMovieViewRoot';
-import LoadingSuspense from './LoadingSuspense';
+import { graphql } from 'babel-plugin-relay/macro';
+
+import DetailedMovieViewRoot from 'DetailedMovieViewRoot';
+import LoadingSuspense from 'LoadingSuspense';
 
 type LoadedProps = {
     data: PreloadedQuery<DetailedMovieViewQueryType>
