@@ -17,6 +17,7 @@
     "framer-motion": "^4.1.11",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-error-boundary": "^3.1.1",
     "react-hotkeys-hook": "^3.3.1",
     "react-parallax": "^3.3.0",
     "react-relay": "^11.0.2",
@@ -56,8 +57,15 @@
   "devDependencies": {
     "@types/react-relay": "^11.0.1",
     "@types/react-router-dom": "^5.1.7",
+    "@typescript-eslint/eslint-plugin": "^4.22.1",
+    "@typescript-eslint/parser": "^4.22.1",
     "babel-plugin-macros": "^2.8.0",
     "babel-plugin-relay": "^11.0.2",
+    "eslint-import-resolver-typescript": "^2.4.0",
+    "eslint-plugin-react": "^7.23.2",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "eslint-plugin-relay": "^1.8.2",
+    "eslint-plugin-simple-import-sort": "^7.0.0",
     "graphql": "^15.5.0",
     "relay-compiler": "^11.0.2",
     "relay-compiler-language-typescript": "^14.0.0"
