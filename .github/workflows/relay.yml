@@ -29,4 +29,4 @@ jobs:
          uses: UnicornGlobal/has-changes-action@v1.0.11
        - name: Process changes
          if: steps.changes.outputs.changed == 1
-         run: echo "Uncommitted changes from relay. Please run `npm run relay`"
+         run: echo "Uncommitted changes from relay. Please run `npm run relay`" && exit 1
