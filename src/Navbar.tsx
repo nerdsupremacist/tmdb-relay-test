@@ -24,14 +24,7 @@ function Navbar() {
             setSearchTerm("");
         }
         setFocus();
-    });
-
-    useHotkeys('Esc', (event) => {
-        if (isFocused) {
-            event.preventDefault();
-            setFocus();
-        }
-    });
+    }, {}, [isFocused]);
 
     return (
         <div>
