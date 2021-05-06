@@ -167,7 +167,7 @@ function DetailedMovieViewRoot({ data }: Props) {
                     <HStack align="start" maxW="100%" overflowY="scroll" padding={2}>
                         {
                             similar.map((movie, index) => {
-                                return <RelatedMovie key={`recommended_movie_${index}`} movie={movie} />;
+                                return <RelatedMovie key={`similar_movie_${index}`} movie={movie} />;
                             })
                         }
                     </HStack>
