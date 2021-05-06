@@ -24,7 +24,7 @@ function MovieSearchResult({ data }: Props) {
                 poster(size: W185)
             }
         `,
-        data
+        data,
     );
 
     const poster = movie.poster ?? POSTER_PLACEHOLDER;

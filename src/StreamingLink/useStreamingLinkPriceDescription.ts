@@ -14,7 +14,7 @@ function useStreamingLinkPriceDescription(offering: useStreamingLinkPriceDescrip
                 }
             }
         `,
-        offering
+        offering,
     );
 
     if (decoded.price != null) {

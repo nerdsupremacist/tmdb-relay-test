@@ -18,7 +18,7 @@ function GenreTag(props: Props) {
                 name
             }
         `,
-        props.data
+        props.data,
     );
 
     return (

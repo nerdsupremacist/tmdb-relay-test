@@ -17,5 +17,5 @@ ReactDOM.render(
       </ChakraProvider>
     </RelayEnvironmentProvider>
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById('root'),
 );

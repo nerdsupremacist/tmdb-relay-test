@@ -12,13 +12,13 @@ import { GRAPHQL_URL } from 'utils/constants';
 
 const fetchQuery: FetchFunction = async (
     operation,
-    variables
+    variables,
 ) => {
     const response = await fetch(GRAPHQL_URL, {
         method: 'POST',
         mode: 'cors',
         headers: {
-            'content-type': 'application/json'
+            'content-type': 'application/json',
         },
         body: JSON.stringify({
             query: operation.text,
@@ -34,7 +34,7 @@ const store = new Store(new RecordSource())
 
 const environment = new Environment({
     network,
-    store
+    store,
 });
 
 export default environment;

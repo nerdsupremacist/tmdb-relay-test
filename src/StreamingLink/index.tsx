@@ -30,7 +30,7 @@ function StreamingLink({ data }: Props) {
                 }
             }
         `,
-        data
+        data,
     );
 
     const title = useStreamingLinkTitle(option.bestOffering);

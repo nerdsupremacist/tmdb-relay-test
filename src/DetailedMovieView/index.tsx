@@ -31,7 +31,7 @@ function DetailedMovieView(props: LoadedProps) {
                 }
             }
         `,
-        props.data
+        props.data,
     );
 
     return (

@@ -10,7 +10,7 @@ function useStreamingLinkTitle(offering: useStreamingLinkTitle_StreamingOptionOf
                 type
             }
         `,
-        offering
+        offering,
     );
 
     switch (decoded.type) {

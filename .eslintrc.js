@@ -13,6 +13,13 @@ module.exports = {
   rules: {
     quotes: [2, 'single', { avoidEscape: true }],
     'prefer-template': 'warn',
+    'no-multiple-empty-lines': [
+      'error',
+      {
+        max: 1,
+      },
+    ],
+    'comma-dangle': ['error', 'always-multiline'],
     'simple-import-sort/imports': [
       'error',
       {
@@ -23,9 +30,9 @@ module.exports = {
           ['^relay', 'relay$', '^babel'], // relay stuff
           ['^[A-Z]', '\\./[A-Z]'], // internal components
           ['^use[A-Z]', '\\./use[A-Z]'], // hooks
-          ['^\\./(?=.*/)(?!/?$)', '^\\.(?!/?$)', '^\\./?$'] // relative imports
-        ]
-      }
+          ['^\\./(?=.*/)(?!/?$)', '^\\.(?!/?$)', '^\\./?$'], // relative imports
+        ],
+      },
     ],
     'simple-import-sort/exports': 'error',
     'react-hooks/rules-of-hooks': 'error',

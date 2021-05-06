@@ -12,7 +12,7 @@ import {
     Text,
     VStack,
     Wrap,
-    WrapItem
+    WrapItem,
 } from '@chakra-ui/react'
 
 import { useFragment } from 'react-relay';
@@ -58,7 +58,7 @@ function DetailedMovieViewRoot({ data }: Props) {
                 backdrop(size: Original)
             }
         `,
-        data
+        data,
     );
 
     const poster = movie.poster ?? POSTER_PLACEHOLDER;

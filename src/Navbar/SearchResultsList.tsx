@@ -35,7 +35,7 @@ function SearchResultsList(props: LoadedProps) {
                 }
             }
         `,
-        props.data
+        props.data,
     );
 
     return (

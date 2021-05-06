@@ -22,7 +22,7 @@ function CastCredit(props: Props) {
                 character
             }
         `,
-        props.data
+        props.data,
     );
 
     const profilePicture = data.value.profilePicture;

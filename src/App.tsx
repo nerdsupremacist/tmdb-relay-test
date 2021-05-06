@@ -3,7 +3,7 @@ import React from 'react';
 import {
   BrowserRouter as Router,
   Route,
-  Switch
+  Switch,
 } from 'react-router-dom';
 import { Container, Text } from '@chakra-ui/react';
 
