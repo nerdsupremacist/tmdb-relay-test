@@ -11,6 +11,7 @@ module.exports = {
     },
     plugins: ['relay', 'simple-import-sort', '@typescript-eslint', 'react-hooks', 'sort-keys-fix'],
     rules: {
+        // Allow for return type inference (I'm lazy)
         '@typescript-eslint/explicit-module-boundary-types': 'off',
         'array-bracket-spacing': ['error', 'never'],
         'arrow-parens': ['error', 'as-needed'],
@@ -73,13 +74,20 @@ module.exports = {
             'error',
             {
                 groups: [
-                    ['^.*\\u0000$'], // Type imports
-                    ['^__generated__/', '^\\./__generated__/', '.graphql$'], // generated graphql stubs
-                    ['^react(?!-relay)', 'react$', '^@', 'ui$'], // external react stuff
-                    ['^relay', 'relay$', '^babel'], // relay stuff
-                    ['^[A-Z]', '\\./[A-Z]'], // internal components
-                    ['^use[A-Z]', '\\./use[A-Z]'], // hooks
-                    ['^\\./(?=.*/)(?!/?$)', '^\\.(?!/?$)', '^\\./?$'], // relative imports
+                    // Type imports
+                    ['^.*\\u0000$'],
+                    // generated graphql stubs
+                    ['^__generated__/', '^\\./__generated__/', '.graphql$'],
+                    // external react stuff
+                    ['^react(?!-relay)', 'react$', '^@', 'ui$'],
+                    // relay stuff
+                    ['^relay', 'relay$', '^babel'],
+                    // internal components
+                    ['^[A-Z]', '\\./[A-Z]'],
+                    // hooks
+                    ['^use[A-Z]', '\\./use[A-Z]'],
+                    // relative imports
+                    ['^\\./(?=.*/)(?!/?$)', '^\\.(?!/?$)', '^\\./?$'],
                 ],
             },
         ],
