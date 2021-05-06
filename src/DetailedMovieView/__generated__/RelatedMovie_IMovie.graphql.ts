@@ -5,6 +5,7 @@
 import { ReaderFragment } from "relay-runtime";
 import { FragmentRefs } from "relay-runtime";
 export type RelatedMovie_IMovie = {
+    readonly movieId: number;
     readonly title: string;
     readonly poster: string | null;
     readonly " $refType": "RelatedMovie_IMovie";
@@ -23,6 +24,13 @@ const node: ReaderFragment = {
   "metadata": null,
   "name": "RelatedMovie_IMovie",
   "selections": [
+    {
+      "alias": "movieId",
+      "args": null,
+      "kind": "ScalarField",
+      "name": "id",
+      "storageKey": null
+    },
     {
       "alias": null,
       "args": null,
@@ -47,5 +55,5 @@ const node: ReaderFragment = {
   "type": "IMovie",
   "abstractKey": "__isIMovie"
 };
-(node as any).hash = 'd5899778e3c35ce81ce330a13a287f27';
+(node as any).hash = 'f2a0e6f66d34639082075f19b03e1b7d';
 export default node;
