@@ -17,7 +17,7 @@ type Props = {
 function StreamingLink({ data }: Props) {
     const option = useFragment(
         graphql`
-            fragment StreamingLink_StreamingOption on StreamingOption {    
+            fragment StreamingLink_StreamingOption on StreamingOption {
                 provider {
                     iconURL
                 }

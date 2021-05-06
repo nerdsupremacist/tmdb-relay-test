@@ -69,7 +69,7 @@
 			"import { PreloadedQuery, usePreloadedQuery, loadQuery, useRelayEnvironment } from 'react-relay';",
 			"import { graphql } from 'babel-plugin-relay/macro';",
 			"",
-			"import LoadingSuspense from './LoadingSuspense';",
+			"import LoadingSuspense from 'LoadingSuspense';",
 			"",
 			"type LoadedProps = {",
 			"    ${1:data}: PreloadedQuery<${TM_FILENAME_BASE}QueryType>",
