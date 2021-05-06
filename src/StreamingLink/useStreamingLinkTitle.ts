@@ -14,14 +14,14 @@ function useStreamingLinkTitle(offering: useStreamingLinkTitle_StreamingOptionOf
     );
 
     switch (decoded.type) {
-        case 'Buy':
-            return 'Buy';
-        case 'Cinema':
-            return 'Theatre Tickets';
-        case 'Rent':
-            return 'Rent';
-        default:
-            return 'Watch Now';
+    case 'Buy':
+        return 'Buy';
+    case 'Cinema':
+        return 'Theatre Tickets';
+    case 'Rent':
+        return 'Rent';
+    default:
+        return 'Watch Now';
     }
 }
 

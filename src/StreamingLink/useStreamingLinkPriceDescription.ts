@@ -22,12 +22,12 @@ function useStreamingLinkPriceDescription(offering: useStreamingLinkPriceDescrip
     }
 
     switch (decoded.type) {
-        case 'Ads':
-            return 'With Ads';
-        case 'Flatrate':
-            return 'Subscription';
-        default:
-            return 'Free';
+    case 'Ads':
+        return 'With Ads';
+    case 'Flatrate':
+        return 'Subscription';
+    default:
+        return 'Free';
     }
 }
 
