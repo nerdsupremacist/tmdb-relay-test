@@ -1,7 +1,6 @@
 import type { useStreamingLinkPriceDescription_StreamingOptionOffering$key } from './__generated__/useStreamingLinkPriceDescription_StreamingOptionOffering.graphql';
 
 import { useFragment } from 'react-relay';
-
 import { graphql } from 'babel-plugin-relay/macro';
 
 function useStreamingLinkPriceDescription(offering: useStreamingLinkPriceDescription_StreamingOptionOffering$key): string {

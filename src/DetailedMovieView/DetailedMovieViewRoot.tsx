@@ -3,7 +3,6 @@ import type { DetailedMovieViewRoot_IMovie$key } from './__generated__/DetailedM
 
 import React from 'react';
 import { Parallax } from 'react-parallax';
-import { useFragment } from 'react-relay';
 import {
     AspectRatio,
     Box,
@@ -16,6 +15,7 @@ import {
     WrapItem
 } from '@chakra-ui/react'
 
+import { useFragment } from 'react-relay';
 import { graphql } from 'babel-plugin-relay/macro';
 
 import StreamingLink from 'StreamingLink';

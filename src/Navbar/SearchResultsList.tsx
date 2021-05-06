@@ -4,9 +4,9 @@ import type { SearchResultsListQuery as SearchResultsListQueryType } from './__g
 import SearchResultsListQuery from './__generated__/SearchResultsListQuery.graphql';
 
 import React from 'react';
-import { loadQuery, PreloadedQuery, usePreloadedQuery, useRelayEnvironment } from 'react-relay';
 import { VStack } from '@chakra-ui/react';
 
+import { loadQuery, PreloadedQuery, usePreloadedQuery, useRelayEnvironment } from 'react-relay';
 import { graphql } from 'babel-plugin-relay/macro';
 
 import LoadingSuspense from 'LoadingSuspense';

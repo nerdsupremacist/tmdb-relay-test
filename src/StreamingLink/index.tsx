@@ -2,9 +2,9 @@
 import type { StreamingLink_StreamingOption$key } from './__generated__/StreamingLink_StreamingOption.graphql';
 
 import React from 'react';
-import { useFragment } from 'react-relay';
 import { Image, Link, Text, VStack } from '@chakra-ui/react'
 
+import { useFragment } from 'react-relay';
 import { graphql } from 'babel-plugin-relay/macro';
 
 import useStreamingLinkPriceDescription from './useStreamingLinkPriceDescription';

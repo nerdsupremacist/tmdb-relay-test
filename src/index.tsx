@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { RelayEnvironmentProvider } from 'react-relay';
 import { ChakraProvider } from '@chakra-ui/react'
+
+import { RelayEnvironmentProvider } from 'react-relay';
 
 import App from 'App';
 

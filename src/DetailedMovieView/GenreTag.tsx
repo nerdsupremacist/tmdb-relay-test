@@ -2,9 +2,9 @@
 import type { GenreTag_Genre$key } from './__generated__/GenreTag_Genre.graphql';
 
 import React from 'react';
-import { useFragment } from 'react-relay';
 import { Badge } from '@chakra-ui/react';
 
+import { useFragment } from 'react-relay';
 import { graphql } from 'babel-plugin-relay/macro'
 
 type Props = {

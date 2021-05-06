@@ -4,9 +4,9 @@ import type { DetailedMovieViewQuery as DetailedMovieViewQueryType } from './__g
 import DetailedMovieViewQuery from './__generated__/DetailedMovieViewQuery.graphql';
 
 import React from 'react';
-import { loadQuery, PreloadedQuery, usePreloadedQuery, useRelayEnvironment } from 'react-relay';
 import { useParams } from 'react-router';
 
+import { loadQuery, PreloadedQuery, usePreloadedQuery, useRelayEnvironment } from 'react-relay';
 import { graphql } from 'babel-plugin-relay/macro';
 
 import LoadingSuspense from 'LoadingSuspense';
