@@ -15,22 +15,22 @@ const fetchQuery: FetchFunction = async (
     variables,
 ) => {
     const response = await fetch(GRAPHQL_URL, {
-        method: 'POST',
-        mode: 'cors',
-        headers: {
-            'content-type': 'application/json',
-        },
         body: JSON.stringify({
             query: operation.text,
             variables,
         }),
-    })
+        headers: {
+            'content-type': 'application/json',
+        },
+        method: 'POST',
+        mode: 'cors',
+    });
 
-    return response.json()
-}
+    return response.json();
+};
 
 const network = Network.create(fetchQuery);
-const store = new Store(new RecordSource())
+const store = new Store(new RecordSource());
 
 const environment = new Environment({
     network,

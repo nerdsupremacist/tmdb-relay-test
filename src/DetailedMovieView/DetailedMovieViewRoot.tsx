@@ -13,7 +13,7 @@ import {
     VStack,
     Wrap,
     WrapItem,
-} from '@chakra-ui/react'
+} from '@chakra-ui/react';
 
 import { useFragment } from 'react-relay';
 import { graphql } from 'babel-plugin-relay/macro';
@@ -83,7 +83,11 @@ function DetailedMovieViewRoot({ data }: Props) {
                                 {movie.title}
                             </Text>
                             <Wrap spacing={2}>
-                                {movie.details.genres.map((genre, index) => <WrapItem key={`genre_${index}`}><GenreTag data={genre} /></WrapItem>)}
+                                {
+                                    movie.details.genres.map((genre, index) => {
+                                        return <WrapItem key={`genre_${index}`}><GenreTag data={genre} /></WrapItem>;
+                                    })
+                                }
                             </Wrap>
                             <VStack align="baseline" spacing={0}>
                                 <Text fontSize="md">
@@ -102,12 +106,20 @@ function DetailedMovieViewRoot({ data }: Props) {
                     </HStack>
                     {movie.streamingOptions != null && movie.streamingOptions.length > 0 &&
                         <HStack align="start" spacing={4}>
-                            {movie.streamingOptions.slice(0, 5).map((option, index) => <StreamingLink data={option} key={`streaming_link_${index}`} />)}
+                            {
+                                movie.streamingOptions.slice(0, 5).map((option, index) => {
+                                    return <StreamingLink data={option} key={`streaming_link_${index}`} />;
+                                })
+                            }
                         </HStack>
                     }
                     <Text>{movie.overview}</Text>
                     <HStack align="start" maxW="100%" overflowY="scroll" padding={2}>
-                        {movie.credits.cast.map((credit, index) => <CastCredit data={credit} key={`cast_credit_${index}`} />)}
+                        {
+                            movie.credits.cast.map((credit, index) => {
+                                return <CastCredit data={credit} key={`cast_credit_${index}`} />;
+                            })
+                        }
                     </HStack>
                 </VStack>
             </Container>

@@ -5,7 +5,7 @@ import React from 'react';
 import { Avatar, Text, VStack } from '@chakra-ui/react';
 
 import { useFragment } from 'react-relay';
-import { graphql } from 'babel-plugin-relay/macro'
+import { graphql } from 'babel-plugin-relay/macro';
 
 type Props = {
     data: CastCredit_CastCreditBasicPerson$key,
@@ -26,7 +26,7 @@ function CastCredit(props: Props) {
     );
 
     const profilePicture = data.value.profilePicture;
-    const rest = profilePicture != null ? { src: profilePicture } : {}
+    const rest = profilePicture != null ? { src: profilePicture } : {};
 
     return (
         <VStack w="140px">

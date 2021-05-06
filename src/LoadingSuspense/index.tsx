@@ -30,7 +30,7 @@ function ErrorFallback({ error }: FallbackProps) {
             <AlertTitle mr={2}>An Error Occurred</AlertTitle>
             <AlertDescription>{error.message}</AlertDescription>
         </Alert>
-    )
+    );
 }
 
 function LoadingSuspense({ children }: Props) {

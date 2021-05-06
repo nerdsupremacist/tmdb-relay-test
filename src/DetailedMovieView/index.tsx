@@ -1,5 +1,7 @@
 
-import type { DetailedMovieViewQuery as DetailedMovieViewQueryType } from './__generated__/DetailedMovieViewQuery.graphql';
+import type {
+    DetailedMovieViewQuery as DetailedMovieViewQueryType,
+} from './__generated__/DetailedMovieViewQuery.graphql';
 
 import DetailedMovieViewQuery from './__generated__/DetailedMovieViewQuery.graphql';
 
@@ -42,7 +44,7 @@ function DetailedMovieView(props: LoadedProps) {
 function DetailedMovieViewWrapper() {
     const { id } = useParams<Params>();
     const environment = useRelayEnvironment();
-    const data = loadQuery<DetailedMovieViewQueryType>(environment, DetailedMovieViewQuery, { id: parseInt(id) })
+    const data = loadQuery<DetailedMovieViewQueryType>(environment, DetailedMovieViewQuery, { id: parseInt(id) });
 
     return (
         <LoadingSuspense>

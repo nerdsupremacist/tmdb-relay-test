@@ -1,9 +1,13 @@
-import type { useStreamingLinkPriceDescription_StreamingOptionOffering$key } from './__generated__/useStreamingLinkPriceDescription_StreamingOptionOffering.graphql';
+import type {
+    useStreamingLinkPriceDescription_StreamingOptionOffering$key,
+} from './__generated__/useStreamingLinkPriceDescription_StreamingOptionOffering.graphql';
 
 import { useFragment } from 'react-relay';
 import { graphql } from 'babel-plugin-relay/macro';
 
-function useStreamingLinkPriceDescription(offering: useStreamingLinkPriceDescription_StreamingOptionOffering$key): string {
+function useStreamingLinkPriceDescription(
+    offering: useStreamingLinkPriceDescription_StreamingOptionOffering$key,
+): string {
     const decoded = useFragment(
         graphql`
             fragment useStreamingLinkPriceDescription_StreamingOptionOffering on StreamingOptionOffering {
@@ -18,7 +22,7 @@ function useStreamingLinkPriceDescription(offering: useStreamingLinkPriceDescrip
     );
 
     if (decoded.price != null) {
-        return `${decoded.price.amount} ${decoded.price.currency}`
+        return `${decoded.price.amount} ${decoded.price.currency}`;
     }
 
     switch (decoded.type) {

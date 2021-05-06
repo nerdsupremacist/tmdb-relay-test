@@ -5,7 +5,7 @@ import React from 'react';
 import { Badge } from '@chakra-ui/react';
 
 import { useFragment } from 'react-relay';
-import { graphql } from 'babel-plugin-relay/macro'
+import { graphql } from 'babel-plugin-relay/macro';
 
 type Props = {
     data: GenreTag_Genre$key,

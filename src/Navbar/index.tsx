@@ -11,7 +11,7 @@ import { useDebounce } from 'use-debounce';
 
 function Navbar() {
     const inputRef = useRef<HTMLInputElement>(null);
-    const setFocus = () => { inputRef.current?.focus() };
+    const setFocus = () => { inputRef.current?.focus(); };
 
     const [isFocused, setIsFocused] = useState(false);
     const [searchTerm, setSearchTerm] = useState('');
@@ -19,7 +19,7 @@ function Navbar() {
     const [debounced] = useDebounce(searchTerm, 300);
     const [debouncedFocus] = useDebounce(isFocused, 300);
 
-    useHotkeys('/', (event) => {
+    useHotkeys('/', event => {
         event.preventDefault();
         if (!isFocused) {
             setSearchTerm('');
@@ -36,7 +36,7 @@ function Navbar() {
                     </InputLeftElement>
                     <Input
                         onBlur={() => setIsFocused(false)}
-                        onChange={(event) => setSearchTerm(event.target.value)}
+                        onChange={event => setSearchTerm(event.target.value)}
                         onFocus={() => setIsFocused(true)}
                         placeholder="Search"
                         pr="4.5rem"

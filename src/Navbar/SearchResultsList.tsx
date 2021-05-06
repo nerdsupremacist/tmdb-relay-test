@@ -1,5 +1,7 @@
 
-import type { SearchResultsListQuery as SearchResultsListQueryType } from './__generated__/SearchResultsListQuery.graphql';
+import type {
+    SearchResultsListQuery as SearchResultsListQueryType,
+} from './__generated__/SearchResultsListQuery.graphql';
 
 import SearchResultsListQuery from './__generated__/SearchResultsListQuery.graphql';
 
@@ -41,7 +43,9 @@ function SearchResultsList(props: LoadedProps) {
     return (
         <VStack align="start" spacing={4}>
             {
-                data.movies?.search.edges?.map((edge, index) => edge?.node != null && <MovieSearchResult data={edge.node} key={`search_result_${index}`} />)
+                data.movies?.search.edges?.map((edge, index) => {
+                    return edge?.node != null && <MovieSearchResult data={edge.node} key={`search_result_${index}`} />;
+                })
             }
         </VStack>
     );
@@ -49,7 +53,7 @@ function SearchResultsList(props: LoadedProps) {
 
 function SearchResultsListWrapper({ term }: Props) {
     const environment = useRelayEnvironment();
-    const data = loadQuery<SearchResultsListQueryType>(environment, SearchResultsListQuery, { term })
+    const data = loadQuery<SearchResultsListQueryType>(environment, SearchResultsListQuery, { term });
 
     return (
         <LoadingSuspense>

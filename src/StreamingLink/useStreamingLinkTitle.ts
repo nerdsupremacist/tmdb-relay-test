@@ -1,4 +1,6 @@
-import type { useStreamingLinkTitle_StreamingOptionOffering$key } from './__generated__/useStreamingLinkTitle_StreamingOptionOffering.graphql';
+import type {
+    useStreamingLinkTitle_StreamingOptionOffering$key,
+} from './__generated__/useStreamingLinkTitle_StreamingOptionOffering.graphql';
 
 import { useFragment } from 'react-relay';
 import { graphql } from 'babel-plugin-relay/macro';

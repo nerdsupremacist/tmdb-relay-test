@@ -1,34 +1,79 @@
 module.exports = {
+    extends: [
+        'plugin:react/recommended',
+        'plugin:@typescript-eslint/recommended',
+        'plugin:relay/recommended',
+    ],
     parser: '@typescript-eslint/parser',
     parserOptions: {
         ecmaVersion: 2018,
         sourceType: 'module',
     },
-    settings: {
-        react: {
-            pragma: 'React',
-            version: 'detect',
-        },
-    },
+    plugins: ['relay', 'simple-import-sort', '@typescript-eslint', 'react-hooks', 'sort-keys-fix'],
     rules: {
-        quotes: [2, 'single', { avoidEscape: true }],
-        'prefer-template': 'warn',
+        '@typescript-eslint/explicit-module-boundary-types': 'off',
+        'array-bracket-spacing': ['error', 'never'],
+        'arrow-parens': ['error', 'as-needed'],
+        'arrow-spacing': 'error',
+        'comma-dangle': ['error', 'always-multiline'],
+        'comma-spacing': 'error',
+        'eol-last': 'error',
+        'indent': [
+            'error',
+            4,
+        ],
+        'max-len': [
+            'error',
+            {
+                code: 120,
+                ignoreUrls: true,
+            },
+        ],
+        'no-const-assign': 'error',
+        'no-extra-parens': ['error', 'functions'],
         'no-multiple-empty-lines': [
             'error',
             {
                 max: 1,
             },
         ],
-        'indent': [
+        'no-trailing-spaces' : [
             'error',
-            4,
+            {
+                'skipBlankLines': true,
+            },
         ],
-        'comma-dangle': ['error', 'always-multiline'],
+        'no-var': 'error',
+        'prefer-template': 'warn',
+        quotes: [
+            2,
+            'single',
+            {
+                allowTemplateLiterals: true,
+                avoidEscape: true,
+            },
+        ],
+        'react-hooks/exhaustive-deps': 'warn',
+        'react-hooks/rules-of-hooks': 'error',
+        'react/jsx-indent-props': 'warn',
+        'react/jsx-sort-props': 'warn',
+        'react/prop-types': 'off',
+        'relay/compat-uses-vars': 'warn',
+        'relay/function-required-argument': 'warn',
+        'relay/generated-flow-types': 'warn',
+        'relay/graphql-naming': 'error',
+        'relay/graphql-syntax': 'error',
+        'relay/hook-required-argument': 'warn',
+        'relay/must-colocate-fragment-spreads': 'warn',
+        'relay/no-future-added-value': 'warn',
+        'relay/unused-fields': 'warn',
+        semi: ['error', 'always'],
+        'simple-import-sort/exports': 'error',
         'simple-import-sort/imports': [
             'error',
             {
                 groups: [
-                    ['^.*\\u0000$'], // Type imports 
+                    ['^.*\\u0000$'], // Type imports
                     ['^__generated__/', '^\\./__generated__/', '.graphql$'], // generated graphql stubs
                     ['^react(?!-relay)', 'react$', '^@', 'ui$'], // external react stuff
                     ['^relay', 'relay$', '^babel'], // relay stuff
@@ -38,27 +83,22 @@ module.exports = {
                 ],
             },
         ],
-        'simple-import-sort/exports': 'error',
-        'react-hooks/rules-of-hooks': 'error',
-        'react-hooks/exhaustive-deps': 'warn',
-        'react/jsx-sort-props': 'warn',
-        'react/jsx-indent-props': 'warn',
-        'react/prop-types': 'off',
-        '@typescript-eslint/explicit-module-boundary-types': 'off',
-        'relay/graphql-syntax': 'error',
-        'relay/compat-uses-vars': 'warn',
-        'relay/graphql-naming': 'error',
-        'relay/generated-flow-types': 'warn',
-        'relay/must-colocate-fragment-spreads': 'warn',
-        'relay/no-future-added-value': 'warn',
-        'relay/unused-fields': 'warn',
-        'relay/function-required-argument': 'warn',
-        'relay/hook-required-argument': 'warn',
+        'sort-keys-fix/sort-keys-fix': 'error',
+        'space-before-blocks': 'error',
+        'space-before-function-paren': [
+            'error',
+            {
+                anonymous: 'never',
+                asyncArrow: 'always',
+                named: 'never',
+            },
+        ],
+        'space-in-parens': ['error', 'never'],
     },
-    plugins: ['simple-import-sort', 'relay', '@typescript-eslint', 'react-hooks'],
-    extends: [
-        'plugin:react/recommended',
-        'plugin:@typescript-eslint/recommended',
-        'plugin:relay/recommended',
-    ],
+    settings: {
+        react: {
+            pragma: 'React',
+            version: 'detect',
+        },
+    },
 };
