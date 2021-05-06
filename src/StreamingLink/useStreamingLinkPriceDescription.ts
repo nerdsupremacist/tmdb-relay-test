@@ -24,7 +24,7 @@ function useStreamingLinkPriceDescription(
     if (decoded.price != null) {
         return `${decoded.price.amount} ${decoded.price.currency}`;
     }
-
+    
     switch (decoded.type) {
     case 'Ads':
         return 'With Ads';
