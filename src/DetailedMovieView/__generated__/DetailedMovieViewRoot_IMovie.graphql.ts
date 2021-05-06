@@ -25,6 +25,20 @@ export type DetailedMovieViewRoot_IMovie = {
     }> | null;
     readonly poster: string | null;
     readonly backdrop: string | null;
+    readonly recommendations: {
+        readonly edges: ReadonlyArray<{
+            readonly node: {
+                readonly " $fragmentRefs": FragmentRefs<"RelatedMovie_IMovie">;
+            } | null;
+        } | null> | null;
+    };
+    readonly similar: {
+        readonly edges: ReadonlyArray<{
+            readonly node: {
+                readonly " $fragmentRefs": FragmentRefs<"RelatedMovie_IMovie">;
+            } | null;
+        } | null> | null;
+    };
     readonly " $refType": "DetailedMovieViewRoot_IMovie";
 };
 export type DetailedMovieViewRoot_IMovie$data = DetailedMovieViewRoot_IMovie;
@@ -35,7 +49,37 @@ export type DetailedMovieViewRoot_IMovie$key = {
 
 
 
-const node: ReaderFragment = {
+const node: ReaderFragment = (function(){
+var v0 = [
+  {
+    "alias": null,
+    "args": null,
+    "concreteType": "MovieEdge",
+    "kind": "LinkedField",
+    "name": "edges",
+    "plural": true,
+    "selections": [
+      {
+        "alias": null,
+        "args": null,
+        "concreteType": null,
+        "kind": "LinkedField",
+        "name": "node",
+        "plural": false,
+        "selections": [
+          {
+            "args": null,
+            "kind": "FragmentSpread",
+            "name": "RelatedMovie_IMovie"
+          }
+        ],
+        "storageKey": null
+      }
+    ],
+    "storageKey": null
+  }
+];
+return {
   "argumentDefinitions": [],
   "kind": "Fragment",
   "metadata": null,
@@ -171,10 +215,31 @@ const node: ReaderFragment = {
       "kind": "ScalarField",
       "name": "backdrop",
       "storageKey": "backdrop(size:\"Original\")"
+    },
+    {
+      "alias": null,
+      "args": null,
+      "concreteType": "MovieConnection",
+      "kind": "LinkedField",
+      "name": "recommendations",
+      "plural": false,
+      "selections": (v0/*: any*/),
+      "storageKey": null
+    },
+    {
+      "alias": null,
+      "args": null,
+      "concreteType": "MovieConnection",
+      "kind": "LinkedField",
+      "name": "similar",
+      "plural": false,
+      "selections": (v0/*: any*/),
+      "storageKey": null
     }
   ],
   "type": "IMovie",
   "abstractKey": "__isIMovie"
 };
-(node as any).hash = '259fa2c0c16aef3ddd43f0e428680258';
+})();
+(node as any).hash = 'fa0de1c8b9796c33db36cd21227c2349';
 export default node;

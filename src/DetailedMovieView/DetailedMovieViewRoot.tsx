@@ -21,7 +21,9 @@ import { graphql } from 'babel-plugin-relay/macro';
 import StreamingLink from 'StreamingLink';
 import CastCredit from './CastCredit';
 import GenreTag from './GenreTag';
+import RelatedMovie from './RelatedMovie';
 
+import 'utils/extensions';
 import { BACKDROP_PLACEHOLDER, POSTER_PLACEHOLDER } from 'utils/constants';
 
 type Props = {
@@ -56,6 +58,22 @@ function DetailedMovieViewRoot({ data }: Props) {
 
                 poster(size: W185)
                 backdrop(size: Original)
+
+                recommendations {
+                    edges {
+                        node {
+                            ...RelatedMovie_IMovie
+                        }
+                    }
+                }
+
+                similar {
+                    edges {
+                        node {
+                            ...RelatedMovie_IMovie
+                        }
+                    }
+                }
             }
         `,
         data,
@@ -63,6 +81,9 @@ function DetailedMovieViewRoot({ data }: Props) {
 
     const poster = movie.poster ?? POSTER_PLACEHOLDER;
     const backdrop = movie.backdrop ?? BACKDROP_PLACEHOLDER;
+
+    const recommendations = movie.recommendations.edges?.mapNotNull(edge => edge?.node) ?? [];
+    const similar = movie.similar.edges?.mapNotNull(edge => edge?.node) ?? [];
 
     return (
         <div>
@@ -129,22 +150,28 @@ function DetailedMovieViewRoot({ data }: Props) {
                 </AspectRatio>
             </Parallax>
             <Container paddingBottom={8} paddingTop={8}>
-                <p>{movie.overview}</p>
-                <p>{movie.overview}</p>
-                <p>{movie.overview}</p>
-                <p>{movie.overview}</p>
-                <p>{movie.overview}</p>
-                <p>{movie.overview}</p>
-                <p>{movie.overview}</p>
-                <p>{movie.overview}</p>
-                <p>{movie.overview}</p>
-                <p>{movie.overview}</p>
-                <p>{movie.overview}</p>
-                <p>{movie.overview}</p>
-                <p>{movie.overview}</p>
-                <p>{movie.overview}</p>
-                <p>{movie.overview}</p>
-                <p>{movie.overview}</p>
+                <VStack align="baseline" spacing={4}>
+                    <Text fontSize="xl" fontWeight="bold">
+                        Recommended
+                    </Text>
+                    <HStack align="start" maxW="100%" overflowY="scroll" padding={2}>
+                        {
+                            recommendations.map((movie, index) => {
+                                return <RelatedMovie key={`recommended_movie_${index}`} movie={movie} />;
+                            })
+                        }
+                    </HStack>
+                    <Text fontSize="xl" fontWeight="bold">
+                        Similar Movies
+                    </Text>
+                    <HStack align="start" maxW="100%" overflowY="scroll" padding={2}>
+                        {
+                            similar.map((movie, index) => {
+                                return <RelatedMovie key={`recommended_movie_${index}`} movie={movie} />;
+                            })
+                        }
+                    </HStack>
+                </VStack>
             </Container>
         </div>
     );

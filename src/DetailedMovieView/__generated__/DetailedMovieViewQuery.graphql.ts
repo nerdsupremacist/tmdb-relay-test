@@ -65,10 +65,32 @@ fragment DetailedMovieViewRoot_IMovie on IMovie {
   }
   poster(size: W185)
   backdrop(size: Original)
+  recommendations {
+    edges {
+      node {
+        __typename
+        ...RelatedMovie_IMovie
+      }
+    }
+  }
+  similar {
+    edges {
+      node {
+        __typename
+        ...RelatedMovie_IMovie
+      }
+    }
+  }
 }
 
 fragment GenreTag_Genre on Genre {
   name
+}
+
+fragment RelatedMovie_IMovie on IMovie {
+  __isIMovie: __typename
+  title
+  poster(size: W154)
 }
 
 fragment StreamingLink_StreamingOption on StreamingOption {
@@ -120,17 +142,68 @@ v2 = {
   "storageKey": null
 },
 v3 = {
+  "kind": "TypeDiscriminator",
+  "abstractKey": "__isIMovie"
+},
+v4 = {
+  "alias": null,
+  "args": null,
+  "kind": "ScalarField",
+  "name": "title",
+  "storageKey": null
+},
+v5 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
   "name": "name",
   "storageKey": null
 },
-v4 = [
+v6 = [
   {
     "kind": "Literal",
     "name": "size",
     "value": "W185"
+  }
+],
+v7 = [
+  {
+    "alias": null,
+    "args": null,
+    "concreteType": "MovieEdge",
+    "kind": "LinkedField",
+    "name": "edges",
+    "plural": true,
+    "selections": [
+      {
+        "alias": null,
+        "args": null,
+        "concreteType": null,
+        "kind": "LinkedField",
+        "name": "node",
+        "plural": false,
+        "selections": [
+          (v2/*: any*/),
+          (v3/*: any*/),
+          (v4/*: any*/),
+          {
+            "alias": null,
+            "args": [
+              {
+                "kind": "Literal",
+                "name": "size",
+                "value": "W154"
+              }
+            ],
+            "kind": "ScalarField",
+            "name": "poster",
+            "storageKey": "poster(size:\"W154\")"
+          }
+        ],
+        "storageKey": null
+      }
+    ],
+    "storageKey": null
   }
 ];
 return {
@@ -194,17 +267,8 @@ return {
             "plural": false,
             "selections": [
               (v2/*: any*/),
-              {
-                "kind": "TypeDiscriminator",
-                "abstractKey": "__isIMovie"
-              },
-              {
-                "alias": null,
-                "args": null,
-                "kind": "ScalarField",
-                "name": "title",
-                "storageKey": null
-              },
+              (v3/*: any*/),
+              (v4/*: any*/),
               {
                 "alias": null,
                 "args": null,
@@ -249,7 +313,7 @@ return {
                     "name": "genres",
                     "plural": true,
                     "selections": [
-                      (v3/*: any*/)
+                      (v5/*: any*/)
                     ],
                     "storageKey": null
                   }
@@ -282,10 +346,10 @@ return {
                         "plural": false,
                         "selections": [
                           (v2/*: any*/),
-                          (v3/*: any*/),
+                          (v5/*: any*/),
                           {
                             "alias": null,
-                            "args": (v4/*: any*/),
+                            "args": (v6/*: any*/),
                             "kind": "ScalarField",
                             "name": "profilePicture",
                             "storageKey": "profilePicture(size:\"W185\")"
@@ -398,7 +462,7 @@ return {
               },
               {
                 "alias": null,
-                "args": (v4/*: any*/),
+                "args": (v6/*: any*/),
                 "kind": "ScalarField",
                 "name": "poster",
                 "storageKey": "poster(size:\"W185\")"
@@ -415,6 +479,26 @@ return {
                 "kind": "ScalarField",
                 "name": "backdrop",
                 "storageKey": "backdrop(size:\"Original\")"
+              },
+              {
+                "alias": null,
+                "args": null,
+                "concreteType": "MovieConnection",
+                "kind": "LinkedField",
+                "name": "recommendations",
+                "plural": false,
+                "selections": (v7/*: any*/),
+                "storageKey": null
+              },
+              {
+                "alias": null,
+                "args": null,
+                "concreteType": "MovieConnection",
+                "kind": "LinkedField",
+                "name": "similar",
+                "plural": false,
+                "selections": (v7/*: any*/),
+                "storageKey": null
               }
             ],
             "storageKey": null
@@ -425,12 +509,12 @@ return {
     ]
   },
   "params": {
-    "cacheID": "a1ecfde10f7ac6b64b11753ca9fa305e",
+    "cacheID": "ec84bd35f12b356c49c29cbc335df4cb",
     "id": null,
     "metadata": {},
     "name": "DetailedMovieViewQuery",
     "operationKind": "query",
-    "text": "query DetailedMovieViewQuery(\n  $id: Int!\n) {\n  movies {\n    movie(id: $id) {\n      __typename\n      ...DetailedMovieViewRoot_IMovie\n    }\n  }\n}\n\nfragment CastCredit_CastCreditBasicPerson on CastCreditBasicPerson {\n  value {\n    __typename\n    name\n    profilePicture(size: W185)\n  }\n  character\n}\n\nfragment DetailedMovieViewRoot_IMovie on IMovie {\n  __isIMovie: __typename\n  title\n  rating\n  overview\n  details {\n    runtime\n    tagline\n    genres {\n      ...GenreTag_Genre\n    }\n  }\n  credits {\n    __typename\n    cast {\n      ...CastCredit_CastCreditBasicPerson\n    }\n  }\n  streamingOptions {\n    ...StreamingLink_StreamingOption\n  }\n  poster(size: W185)\n  backdrop(size: Original)\n}\n\nfragment GenreTag_Genre on Genre {\n  name\n}\n\nfragment StreamingLink_StreamingOption on StreamingOption {\n  provider {\n    iconURL\n  }\n  bestOffering {\n    links {\n      web\n    }\n    ...useStreamingLinkTitle_StreamingOptionOffering\n    ...useStreamingLinkPriceDescription_StreamingOptionOffering\n  }\n}\n\nfragment useStreamingLinkPriceDescription_StreamingOptionOffering on StreamingOptionOffering {\n  type\n  price {\n    amount\n    currency\n  }\n}\n\nfragment useStreamingLinkTitle_StreamingOptionOffering on StreamingOptionOffering {\n  type\n}\n"
+    "text": "query DetailedMovieViewQuery(\n  $id: Int!\n) {\n  movies {\n    movie(id: $id) {\n      __typename\n      ...DetailedMovieViewRoot_IMovie\n    }\n  }\n}\n\nfragment CastCredit_CastCreditBasicPerson on CastCreditBasicPerson {\n  value {\n    __typename\n    name\n    profilePicture(size: W185)\n  }\n  character\n}\n\nfragment DetailedMovieViewRoot_IMovie on IMovie {\n  __isIMovie: __typename\n  title\n  rating\n  overview\n  details {\n    runtime\n    tagline\n    genres {\n      ...GenreTag_Genre\n    }\n  }\n  credits {\n    __typename\n    cast {\n      ...CastCredit_CastCreditBasicPerson\n    }\n  }\n  streamingOptions {\n    ...StreamingLink_StreamingOption\n  }\n  poster(size: W185)\n  backdrop(size: Original)\n  recommendations {\n    edges {\n      node {\n        __typename\n        ...RelatedMovie_IMovie\n      }\n    }\n  }\n  similar {\n    edges {\n      node {\n        __typename\n        ...RelatedMovie_IMovie\n      }\n    }\n  }\n}\n\nfragment GenreTag_Genre on Genre {\n  name\n}\n\nfragment RelatedMovie_IMovie on IMovie {\n  __isIMovie: __typename\n  title\n  poster(size: W154)\n}\n\nfragment StreamingLink_StreamingOption on StreamingOption {\n  provider {\n    iconURL\n  }\n  bestOffering {\n    links {\n      web\n    }\n    ...useStreamingLinkTitle_StreamingOptionOffering\n    ...useStreamingLinkPriceDescription_StreamingOptionOffering\n  }\n}\n\nfragment useStreamingLinkPriceDescription_StreamingOptionOffering on StreamingOptionOffering {\n  type\n  price {\n    amount\n    currency\n  }\n}\n\nfragment useStreamingLinkTitle_StreamingOptionOffering on StreamingOptionOffering {\n  type\n}\n"
   }
 };
 })();
