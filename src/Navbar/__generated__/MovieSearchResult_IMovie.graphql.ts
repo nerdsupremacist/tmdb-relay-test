@@ -5,10 +5,10 @@
 import { ReaderFragment } from "relay-runtime";
 import { FragmentRefs } from "relay-runtime";
 export type MovieSearchResult_IMovie = {
-    readonly movieId: number;
     readonly title: string;
     readonly overview: string;
     readonly poster: string | null;
+    readonly " $fragmentRefs": FragmentRefs<"MovieLinkContainer_IMovie">;
     readonly " $refType": "MovieSearchResult_IMovie";
 };
 export type MovieSearchResult_IMovie$data = MovieSearchResult_IMovie;
@@ -25,13 +25,6 @@ const node: ReaderFragment = {
   "metadata": null,
   "name": "MovieSearchResult_IMovie",
   "selections": [
-    {
-      "alias": "movieId",
-      "args": null,
-      "kind": "ScalarField",
-      "name": "id",
-      "storageKey": null
-    },
     {
       "alias": null,
       "args": null,
@@ -58,10 +51,15 @@ const node: ReaderFragment = {
       "kind": "ScalarField",
       "name": "poster",
       "storageKey": "poster(size:\"W185\")"
+    },
+    {
+      "args": null,
+      "kind": "FragmentSpread",
+      "name": "MovieLinkContainer_IMovie"
     }
   ],
   "type": "IMovie",
   "abstractKey": "__isIMovie"
 };
-(node as any).hash = 'a24942821e903529b6e033391c06623e';
+(node as any).hash = '8386e5eba74f7100a7e12c256ac3187f';
 export default node;

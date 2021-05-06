@@ -2,11 +2,12 @@
 import type { MovieSearchResult_IMovie$key } from './__generated__/MovieSearchResult_IMovie.graphql';
 
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { HStack, Image, Text, VStack } from '@chakra-ui/react';
 
 import { useFragment } from 'react-relay';
 import { graphql } from 'babel-plugin-relay/macro';
+
+import MovieLinkContainer from 'MovieLinkContainer';
 
 import { POSTER_PLACEHOLDER } from '../utils/constants';
 
@@ -17,8 +18,8 @@ type Props = {
 function MovieSearchResult({ data }: Props) {
     const movie = useFragment(
         graphql`
-            fragment MovieSearchResult_IMovie on IMovie {    
-                movieId: id
+            fragment MovieSearchResult_IMovie on IMovie {
+                ...MovieLinkContainer_IMovie
                 title
                 overview
                 poster(size: W185)
@@ -30,7 +31,7 @@ function MovieSearchResult({ data }: Props) {
     const poster = movie.poster ?? POSTER_PLACEHOLDER;
 
     return (
-        <Link to={`/movie/${movie.movieId}`}>
+        <MovieLinkContainer movie={movie}>
             <HStack align="start" spacing="4">
                 <Image
                     borderRadius="lg"
@@ -53,7 +54,7 @@ function MovieSearchResult({ data }: Props) {
                     </Text>
                 </VStack>
             </HStack>
-        </Link>
+        </MovieLinkContainer>
     );
 }
 

@@ -87,9 +87,14 @@ fragment GenreTag_Genre on Genre {
   name
 }
 
-fragment RelatedMovie_IMovie on IMovie {
+fragment MovieLinkContainer_IMovie on IMovie {
   __isIMovie: __typename
   movieId: id
+}
+
+fragment RelatedMovie_IMovie on IMovie {
+  __isIMovie: __typename
+  ...MovieLinkContainer_IMovie
   title
   poster(size: W154)
 }
@@ -517,12 +522,12 @@ return {
     ]
   },
   "params": {
-    "cacheID": "5c24bf24cb55ebaac2854bce734c8374",
+    "cacheID": "dabdd5c1baef569159990fbe16219875",
     "id": null,
     "metadata": {},
     "name": "DetailedMovieViewQuery",
     "operationKind": "query",
-    "text": "query DetailedMovieViewQuery(\n  $id: Int!\n) {\n  movies {\n    movie(id: $id) {\n      __typename\n      ...DetailedMovieViewRoot_IMovie\n    }\n  }\n}\n\nfragment CastCredit_CastCreditBasicPerson on CastCreditBasicPerson {\n  value {\n    __typename\n    name\n    profilePicture(size: W185)\n  }\n  character\n}\n\nfragment DetailedMovieViewRoot_IMovie on IMovie {\n  __isIMovie: __typename\n  title\n  rating\n  overview\n  details {\n    runtime\n    tagline\n    genres {\n      ...GenreTag_Genre\n    }\n  }\n  credits {\n    __typename\n    cast {\n      ...CastCredit_CastCreditBasicPerson\n    }\n  }\n  streamingOptions {\n    ...StreamingLink_StreamingOption\n  }\n  poster(size: W185)\n  backdrop(size: Original)\n  recommendations {\n    edges {\n      node {\n        __typename\n        ...RelatedMovie_IMovie\n      }\n    }\n  }\n  similar {\n    edges {\n      node {\n        __typename\n        ...RelatedMovie_IMovie\n      }\n    }\n  }\n}\n\nfragment GenreTag_Genre on Genre {\n  name\n}\n\nfragment RelatedMovie_IMovie on IMovie {\n  __isIMovie: __typename\n  movieId: id\n  title\n  poster(size: W154)\n}\n\nfragment StreamingLink_StreamingOption on StreamingOption {\n  provider {\n    iconURL\n  }\n  bestOffering {\n    links {\n      web\n    }\n    ...useStreamingLinkTitle_StreamingOptionOffering\n    ...useStreamingLinkPriceDescription_StreamingOptionOffering\n  }\n}\n\nfragment useStreamingLinkPriceDescription_StreamingOptionOffering on StreamingOptionOffering {\n  type\n  price {\n    amount\n    currency\n  }\n}\n\nfragment useStreamingLinkTitle_StreamingOptionOffering on StreamingOptionOffering {\n  type\n}\n"
+    "text": "query DetailedMovieViewQuery(\n  $id: Int!\n) {\n  movies {\n    movie(id: $id) {\n      __typename\n      ...DetailedMovieViewRoot_IMovie\n    }\n  }\n}\n\nfragment CastCredit_CastCreditBasicPerson on CastCreditBasicPerson {\n  value {\n    __typename\n    name\n    profilePicture(size: W185)\n  }\n  character\n}\n\nfragment DetailedMovieViewRoot_IMovie on IMovie {\n  __isIMovie: __typename\n  title\n  rating\n  overview\n  details {\n    runtime\n    tagline\n    genres {\n      ...GenreTag_Genre\n    }\n  }\n  credits {\n    __typename\n    cast {\n      ...CastCredit_CastCreditBasicPerson\n    }\n  }\n  streamingOptions {\n    ...StreamingLink_StreamingOption\n  }\n  poster(size: W185)\n  backdrop(size: Original)\n  recommendations {\n    edges {\n      node {\n        __typename\n        ...RelatedMovie_IMovie\n      }\n    }\n  }\n  similar {\n    edges {\n      node {\n        __typename\n        ...RelatedMovie_IMovie\n      }\n    }\n  }\n}\n\nfragment GenreTag_Genre on Genre {\n  name\n}\n\nfragment MovieLinkContainer_IMovie on IMovie {\n  __isIMovie: __typename\n  movieId: id\n}\n\nfragment RelatedMovie_IMovie on IMovie {\n  __isIMovie: __typename\n  ...MovieLinkContainer_IMovie\n  title\n  poster(size: W154)\n}\n\nfragment StreamingLink_StreamingOption on StreamingOption {\n  provider {\n    iconURL\n  }\n  bestOffering {\n    links {\n      web\n    }\n    ...useStreamingLinkTitle_StreamingOptionOffering\n    ...useStreamingLinkPriceDescription_StreamingOptionOffering\n  }\n}\n\nfragment useStreamingLinkPriceDescription_StreamingOptionOffering on StreamingOptionOffering {\n  type\n  price {\n    amount\n    currency\n  }\n}\n\nfragment useStreamingLinkTitle_StreamingOptionOffering on StreamingOptionOffering {\n  type\n}\n"
   }
 };
 })();

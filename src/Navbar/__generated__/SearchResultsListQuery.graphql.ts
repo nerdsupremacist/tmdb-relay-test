@@ -41,9 +41,14 @@ query SearchResultsListQuery(
   }
 }
 
-fragment MovieSearchResult_IMovie on IMovie {
+fragment MovieLinkContainer_IMovie on IMovie {
   __isIMovie: __typename
   movieId: id
+}
+
+fragment MovieSearchResult_IMovie on IMovie {
+  __isIMovie: __typename
+  ...MovieLinkContainer_IMovie
   title
   overview
   poster(size: W185)
@@ -228,12 +233,12 @@ return {
     ]
   },
   "params": {
-    "cacheID": "017d243c1373b67bab278fb2254d2d07",
+    "cacheID": "248231afbfaadd789b25439f9971e164",
     "id": null,
     "metadata": {},
     "name": "SearchResultsListQuery",
     "operationKind": "query",
-    "text": "query SearchResultsListQuery(\n  $term: String!\n) {\n  movies {\n    search(term: $term, first: 5) {\n      edges {\n        node {\n          __typename\n          ...MovieSearchResult_IMovie\n        }\n      }\n    }\n  }\n}\n\nfragment MovieSearchResult_IMovie on IMovie {\n  __isIMovie: __typename\n  movieId: id\n  title\n  overview\n  poster(size: W185)\n}\n"
+    "text": "query SearchResultsListQuery(\n  $term: String!\n) {\n  movies {\n    search(term: $term, first: 5) {\n      edges {\n        node {\n          __typename\n          ...MovieSearchResult_IMovie\n        }\n      }\n    }\n  }\n}\n\nfragment MovieLinkContainer_IMovie on IMovie {\n  __isIMovie: __typename\n  movieId: id\n}\n\nfragment MovieSearchResult_IMovie on IMovie {\n  __isIMovie: __typename\n  ...MovieLinkContainer_IMovie\n  title\n  overview\n  poster(size: W185)\n}\n"
   }
 };
 })();
