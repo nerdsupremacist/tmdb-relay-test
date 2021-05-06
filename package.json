@@ -35,7 +35,7 @@
     "test": "npm run relay && react-scripts test",
     "eject": "npm run relay && react-scripts eject",
     "relay": "relay-compiler --src ./src --schema ./data/schema.graphql --extensions ts tsx --language typescript --customScalars.URL=string --watchman false $@",
-    "validate-relay" : "relay-compiler --validate  --src ./src --schema ./data/schema.graphql --extensions ts tsx --language typescript --customScalars.URL=string",
+    "validate-relay": "relay-compiler --validate  --src ./src --schema ./data/schema.graphql --extensions ts tsx --language typescript --customScalars.URL=string",
     "lint": "eslint . --ignore-pattern node_modules/ --ext .js,.jsx,.ts,.tsx",
     "autofix": "eslint . --ignore-pattern node_modules/ --ext .js,.jsx,.ts,.tsx --fix"
   },
@@ -69,6 +69,7 @@
     "eslint-plugin-react-hooks": "^4.2.0",
     "eslint-plugin-relay": "^1.8.2",
     "eslint-plugin-simple-import-sort": "^7.0.0",
+    "eslint-plugin-sort-keys-fix": "^1.1.1",
     "graphql": "^15.5.0",
     "relay-compiler": "^11.0.2",
     "relay-compiler-language-typescript": "^14.0.0"
