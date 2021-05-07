@@ -1,7 +1,7 @@
 import type { MovieStreamingLinks_IMovie$key } from './__generated__/MovieStreamingLinks_IMovie.graphql';
 
 import React from 'react';
-import {HStack} from '@chakra-ui/react';
+import { HStack } from '@chakra-ui/react';
 
 import { useFragment } from 'react-relay';
 import { graphql } from 'babel-plugin-relay/macro';

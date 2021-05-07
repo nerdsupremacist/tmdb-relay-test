@@ -45,6 +45,16 @@ module.exports = {
             },
         ],
         'no-var': 'error',
+        'object-curly-spacing': [
+            'error',
+            'always',
+            {
+                arraysInObjects: false,
+                arraysInObjects: false,
+                objectsInObjects: false,
+                objectsInObjects: false,
+            },
+        ],
         'prefer-template': 'warn',
         quotes: [
             2,
