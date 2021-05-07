@@ -1,5 +1,6 @@
 module.exports = {
     extends: [
+        'eslint:recommended',
         'plugin:react/recommended',
         'plugin:@typescript-eslint/recommended',
         'plugin:relay/recommended',
@@ -18,7 +19,16 @@ module.exports = {
         'arrow-spacing': 'error',
         'comma-dangle': ['error', 'always-multiline'],
         'comma-spacing': 'error',
+        'dot-location': 'error',
+        'dot-notation': 'error',
         'eol-last': 'error',
+        'eqeqeq': [
+            'error',
+            'always',
+            {
+                'null': 'never',
+            },
+        ],
         'indent': [
             'error',
             4,
@@ -30,8 +40,11 @@ module.exports = {
                 ignoreUrls: true,
             },
         ],
+        'no-console': 'warn',
         'no-const-assign': 'error',
+        'no-else-return': 'warn',
         'no-extra-parens': ['error', 'functions'],
+        'no-multi-spaces': 'error',
         'no-multiple-empty-lines': [
             'error',
             {
@@ -44,14 +57,13 @@ module.exports = {
                 'skipBlankLines': true,
             },
         ],
+        'no-useless-return': 'error',
         'no-var': 'error',
         'object-curly-spacing': [
             'error',
             'always',
             {
                 arraysInObjects: false,
-                arraysInObjects: false,
-                objectsInObjects: false,
                 objectsInObjects: false,
             },
         ],
@@ -112,6 +124,7 @@ module.exports = {
             },
         ],
         'space-in-parens': ['error', 'never'],
+        'yoda': ['warn', 'never'],
     },
     settings: {
         react: {
