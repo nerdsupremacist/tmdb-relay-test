@@ -1,6 +1,7 @@
 import type { StreamingLinkToolTip_option$key } from './__generated__/StreamingLinkToolTip_option.graphql';
+import type { ReactNode } from 'react';
 
-import React, { Children, ReactNode } from 'react';
+import React from 'react';
 import { Tooltip } from '@chakra-ui/tooltip';
 
 import { useFragment } from 'react-relay';
