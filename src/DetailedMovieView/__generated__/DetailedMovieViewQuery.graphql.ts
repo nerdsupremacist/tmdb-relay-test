@@ -42,29 +42,23 @@ fragment CastCredit_CastCreditBasicPerson on CastCreditBasicPerson {
   character
 }
 
+fragment Cast_ICreditsBasicPerson on ICreditsBasicPerson {
+  __isICreditsBasicPerson: __typename
+  cast {
+    ...CastCredit_CastCreditBasicPerson
+  }
+}
+
 fragment DetailedMovieViewRoot_IMovie on IMovie {
   __isIMovie: __typename
-  title
-  rating
+  ...MovieHeader_IMovie
+  ...MovieStreamingLinks_IMovie
   overview
-  details {
-    runtime
-    tagline
-    genres {
-      ...GenreTag_Genre
-    }
-  }
   credits {
     __typename
-    cast {
-      ...CastCredit_CastCreditBasicPerson
-    }
+    ...Cast_ICreditsBasicPerson
   }
-  streamingOptions {
-    ...StreamingLink_StreamingOption
-  }
-  poster(size: W185)
-  backdrop(size: Original)
+  ...MovieParallaxBackdrop_IMovie
   recommendations {
     edges {
       node {
@@ -87,9 +81,35 @@ fragment GenreTag_Genre on Genre {
   name
 }
 
+fragment MovieHeader_IMovie on IMovie {
+  __isIMovie: __typename
+  poster(size: W185)
+  title
+  rating
+  details {
+    runtime
+    tagline
+    genres {
+      ...GenreTag_Genre
+    }
+  }
+}
+
 fragment MovieLinkContainer_IMovie on IMovie {
   __isIMovie: __typename
   movieId: id
+}
+
+fragment MovieParallaxBackdrop_IMovie on IMovie {
+  __isIMovie: __typename
+  backdrop(size: Original)
+}
+
+fragment MovieStreamingLinks_IMovie on IMovie {
+  __isIMovie: __typename
+  streamingOptions {
+    ...StreamingLink_StreamingOption
+  }
 }
 
 fragment RelatedMovie_IMovie on IMovie {
@@ -151,27 +171,27 @@ v3 = {
   "kind": "TypeDiscriminator",
   "abstractKey": "__isIMovie"
 },
-v4 = {
-  "alias": null,
-  "args": null,
-  "kind": "ScalarField",
-  "name": "title",
-  "storageKey": null
-},
-v5 = {
-  "alias": null,
-  "args": null,
-  "kind": "ScalarField",
-  "name": "name",
-  "storageKey": null
-},
-v6 = [
+v4 = [
   {
     "kind": "Literal",
     "name": "size",
     "value": "W185"
   }
 ],
+v5 = {
+  "alias": null,
+  "args": null,
+  "kind": "ScalarField",
+  "name": "title",
+  "storageKey": null
+},
+v6 = {
+  "alias": null,
+  "args": null,
+  "kind": "ScalarField",
+  "name": "name",
+  "storageKey": null
+},
 v7 = [
   {
     "alias": null,
@@ -198,7 +218,7 @@ v7 = [
             "name": "id",
             "storageKey": null
           },
-          (v4/*: any*/),
+          (v5/*: any*/),
           {
             "alias": null,
             "args": [
@@ -281,19 +301,19 @@ return {
             "selections": [
               (v2/*: any*/),
               (v3/*: any*/),
-              (v4/*: any*/),
+              {
+                "alias": null,
+                "args": (v4/*: any*/),
+                "kind": "ScalarField",
+                "name": "poster",
+                "storageKey": "poster(size:\"W185\")"
+              },
+              (v5/*: any*/),
               {
                 "alias": null,
                 "args": null,
                 "kind": "ScalarField",
                 "name": "rating",
-                "storageKey": null
-              },
-              {
-                "alias": null,
-                "args": null,
-                "kind": "ScalarField",
-                "name": "overview",
                 "storageKey": null
               },
               {
@@ -326,57 +346,7 @@ return {
                     "name": "genres",
                     "plural": true,
                     "selections": [
-                      (v5/*: any*/)
-                    ],
-                    "storageKey": null
-                  }
-                ],
-                "storageKey": null
-              },
-              {
-                "alias": null,
-                "args": null,
-                "concreteType": null,
-                "kind": "LinkedField",
-                "name": "credits",
-                "plural": false,
-                "selections": [
-                  (v2/*: any*/),
-                  {
-                    "alias": null,
-                    "args": null,
-                    "concreteType": "CastCreditBasicPerson",
-                    "kind": "LinkedField",
-                    "name": "cast",
-                    "plural": true,
-                    "selections": [
-                      {
-                        "alias": null,
-                        "args": null,
-                        "concreteType": null,
-                        "kind": "LinkedField",
-                        "name": "value",
-                        "plural": false,
-                        "selections": [
-                          (v2/*: any*/),
-                          (v5/*: any*/),
-                          {
-                            "alias": null,
-                            "args": (v6/*: any*/),
-                            "kind": "ScalarField",
-                            "name": "profilePicture",
-                            "storageKey": "profilePicture(size:\"W185\")"
-                          }
-                        ],
-                        "storageKey": null
-                      },
-                      {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "character",
-                        "storageKey": null
-                      }
+                      (v6/*: any*/)
                     ],
                     "storageKey": null
                   }
@@ -475,10 +445,64 @@ return {
               },
               {
                 "alias": null,
-                "args": (v6/*: any*/),
+                "args": null,
                 "kind": "ScalarField",
-                "name": "poster",
-                "storageKey": "poster(size:\"W185\")"
+                "name": "overview",
+                "storageKey": null
+              },
+              {
+                "alias": null,
+                "args": null,
+                "concreteType": null,
+                "kind": "LinkedField",
+                "name": "credits",
+                "plural": false,
+                "selections": [
+                  (v2/*: any*/),
+                  {
+                    "kind": "TypeDiscriminator",
+                    "abstractKey": "__isICreditsBasicPerson"
+                  },
+                  {
+                    "alias": null,
+                    "args": null,
+                    "concreteType": "CastCreditBasicPerson",
+                    "kind": "LinkedField",
+                    "name": "cast",
+                    "plural": true,
+                    "selections": [
+                      {
+                        "alias": null,
+                        "args": null,
+                        "concreteType": null,
+                        "kind": "LinkedField",
+                        "name": "value",
+                        "plural": false,
+                        "selections": [
+                          (v2/*: any*/),
+                          (v6/*: any*/),
+                          {
+                            "alias": null,
+                            "args": (v4/*: any*/),
+                            "kind": "ScalarField",
+                            "name": "profilePicture",
+                            "storageKey": "profilePicture(size:\"W185\")"
+                          }
+                        ],
+                        "storageKey": null
+                      },
+                      {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "character",
+                        "storageKey": null
+                      }
+                    ],
+                    "storageKey": null
+                  }
+                ],
+                "storageKey": null
               },
               {
                 "alias": null,
@@ -522,12 +546,12 @@ return {
     ]
   },
   "params": {
-    "cacheID": "dabdd5c1baef569159990fbe16219875",
+    "cacheID": "46a4ff531f7e24df1635fa0cc5e46aa6",
     "id": null,
     "metadata": {},
     "name": "DetailedMovieViewQuery",
     "operationKind": "query",
-    "text": "query DetailedMovieViewQuery(\n  $id: Int!\n) {\n  movies {\n    movie(id: $id) {\n      __typename\n      ...DetailedMovieViewRoot_IMovie\n    }\n  }\n}\n\nfragment CastCredit_CastCreditBasicPerson on CastCreditBasicPerson {\n  value {\n    __typename\n    name\n    profilePicture(size: W185)\n  }\n  character\n}\n\nfragment DetailedMovieViewRoot_IMovie on IMovie {\n  __isIMovie: __typename\n  title\n  rating\n  overview\n  details {\n    runtime\n    tagline\n    genres {\n      ...GenreTag_Genre\n    }\n  }\n  credits {\n    __typename\n    cast {\n      ...CastCredit_CastCreditBasicPerson\n    }\n  }\n  streamingOptions {\n    ...StreamingLink_StreamingOption\n  }\n  poster(size: W185)\n  backdrop(size: Original)\n  recommendations {\n    edges {\n      node {\n        __typename\n        ...RelatedMovie_IMovie\n      }\n    }\n  }\n  similar {\n    edges {\n      node {\n        __typename\n        ...RelatedMovie_IMovie\n      }\n    }\n  }\n}\n\nfragment GenreTag_Genre on Genre {\n  name\n}\n\nfragment MovieLinkContainer_IMovie on IMovie {\n  __isIMovie: __typename\n  movieId: id\n}\n\nfragment RelatedMovie_IMovie on IMovie {\n  __isIMovie: __typename\n  ...MovieLinkContainer_IMovie\n  title\n  poster(size: W154)\n}\n\nfragment StreamingLink_StreamingOption on StreamingOption {\n  provider {\n    iconURL\n  }\n  bestOffering {\n    links {\n      web\n    }\n    ...useStreamingLinkTitle_StreamingOptionOffering\n    ...useStreamingLinkPriceDescription_StreamingOptionOffering\n  }\n}\n\nfragment useStreamingLinkPriceDescription_StreamingOptionOffering on StreamingOptionOffering {\n  type\n  price {\n    amount\n    currency\n  }\n}\n\nfragment useStreamingLinkTitle_StreamingOptionOffering on StreamingOptionOffering {\n  type\n}\n"
+    "text": "query DetailedMovieViewQuery(\n  $id: Int!\n) {\n  movies {\n    movie(id: $id) {\n      __typename\n      ...DetailedMovieViewRoot_IMovie\n    }\n  }\n}\n\nfragment CastCredit_CastCreditBasicPerson on CastCreditBasicPerson {\n  value {\n    __typename\n    name\n    profilePicture(size: W185)\n  }\n  character\n}\n\nfragment Cast_ICreditsBasicPerson on ICreditsBasicPerson {\n  __isICreditsBasicPerson: __typename\n  cast {\n    ...CastCredit_CastCreditBasicPerson\n  }\n}\n\nfragment DetailedMovieViewRoot_IMovie on IMovie {\n  __isIMovie: __typename\n  ...MovieHeader_IMovie\n  ...MovieStreamingLinks_IMovie\n  overview\n  credits {\n    __typename\n    ...Cast_ICreditsBasicPerson\n  }\n  ...MovieParallaxBackdrop_IMovie\n  recommendations {\n    edges {\n      node {\n        __typename\n        ...RelatedMovie_IMovie\n      }\n    }\n  }\n  similar {\n    edges {\n      node {\n        __typename\n        ...RelatedMovie_IMovie\n      }\n    }\n  }\n}\n\nfragment GenreTag_Genre on Genre {\n  name\n}\n\nfragment MovieHeader_IMovie on IMovie {\n  __isIMovie: __typename\n  poster(size: W185)\n  title\n  rating\n  details {\n    runtime\n    tagline\n    genres {\n      ...GenreTag_Genre\n    }\n  }\n}\n\nfragment MovieLinkContainer_IMovie on IMovie {\n  __isIMovie: __typename\n  movieId: id\n}\n\nfragment MovieParallaxBackdrop_IMovie on IMovie {\n  __isIMovie: __typename\n  backdrop(size: Original)\n}\n\nfragment MovieStreamingLinks_IMovie on IMovie {\n  __isIMovie: __typename\n  streamingOptions {\n    ...StreamingLink_StreamingOption\n  }\n}\n\nfragment RelatedMovie_IMovie on IMovie {\n  __isIMovie: __typename\n  ...MovieLinkContainer_IMovie\n  title\n  poster(size: W154)\n}\n\nfragment StreamingLink_StreamingOption on StreamingOption {\n  provider {\n    iconURL\n  }\n  bestOffering {\n    links {\n      web\n    }\n    ...useStreamingLinkTitle_StreamingOptionOffering\n    ...useStreamingLinkPriceDescription_StreamingOptionOffering\n  }\n}\n\nfragment useStreamingLinkPriceDescription_StreamingOptionOffering on StreamingOptionOffering {\n  type\n  price {\n    amount\n    currency\n  }\n}\n\nfragment useStreamingLinkTitle_StreamingOptionOffering on StreamingOptionOffering {\n  type\n}\n"
   }
 };
 })();
