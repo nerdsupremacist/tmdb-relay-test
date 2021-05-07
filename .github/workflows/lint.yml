@@ -15,7 +15,7 @@ jobs:
        - uses: actions/checkout@v2
        - uses: actions/cache@v2
          with:
-           path: .build
+           path: node_modules
            key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
            restore-keys: |
              ${{ runner.os }}-npm-
@@ -32,7 +32,7 @@ jobs:
        - uses: actions/checkout@v2
        - uses: actions/cache@v2
          with:
-           path: .build
+           path: node_modules
            key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
            restore-keys: |
              ${{ runner.os }}-npm-
