@@ -14,6 +14,7 @@ export type StreamingLink_option = {
         };
         readonly " $fragmentRefs": FragmentRefs<"useStreamingLinkTitle_offering" | "useStreamingLinkPriceDescription_offering">;
     };
+    readonly " $fragmentRefs": FragmentRefs<"StreamingLinkToolTip_option">;
     readonly " $refType": "StreamingLink_option";
 };
 export type StreamingLink_option$data = StreamingLink_option;
@@ -86,10 +87,15 @@ const node: ReaderFragment = {
         }
       ],
       "storageKey": null
+    },
+    {
+      "args": null,
+      "kind": "FragmentSpread",
+      "name": "StreamingLinkToolTip_option"
     }
   ],
   "type": "StreamingOption",
   "abstractKey": null
 };
-(node as any).hash = 'e0bd1a9fe97880342c9667349b8b8ec4';
+(node as any).hash = 'be9acea52e1ebbbf866762fa6a3fdb2c';
 export default node;

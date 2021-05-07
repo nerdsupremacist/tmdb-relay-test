@@ -118,7 +118,14 @@ fragment RelatedMovie_movie on IMovie {
   poster(size: W154)
 }
 
+fragment StreamingLinkToolTip_option on StreamingOption {
+  provider {
+    name
+  }
+}
+
 fragment StreamingLink_option on StreamingOption {
+  ...StreamingLinkToolTip_option
   provider {
     iconURL
   }
@@ -368,6 +375,7 @@ return {
                     "name": "provider",
                     "plural": false,
                     "selections": [
+                      (v6/*: any*/),
                       {
                         "alias": null,
                         "args": null,
@@ -545,12 +553,12 @@ return {
     ]
   },
   "params": {
-    "cacheID": "409543cf7730fbfbacddabd286aced33",
+    "cacheID": "4bafe3230aa20667b5d59d52e05883d7",
     "id": null,
     "metadata": {},
     "name": "DetailedMovieViewQuery",
     "operationKind": "query",
-    "text": "query DetailedMovieViewQuery(\n  $id: Int!\n) {\n  movies {\n    movie(id: $id) {\n      __typename\n      ...DetailedMovieViewRoot_movie\n    }\n  }\n}\n\nfragment CastCredit_credit on CastCreditBasicPerson {\n  actor: value {\n    __typename\n    name\n    profilePicture(size: W185)\n  }\n  character\n}\n\nfragment Cast_credits on ICreditsBasicPerson {\n  __isICreditsBasicPerson: __typename\n  cast {\n    ...CastCredit_credit\n  }\n}\n\nfragment DetailedMovieViewRoot_movie on IMovie {\n  __isIMovie: __typename\n  ...MovieHeader_movie\n  ...MovieStreamingLinks_movie\n  overview\n  credits {\n    __typename\n    ...Cast_credits\n  }\n  ...MovieParallaxBackdrop_movie\n  recommendations {\n    ...RelatedMovieList_connection\n  }\n  similar {\n    ...RelatedMovieList_connection\n  }\n}\n\nfragment GenreTag_genre on Genre {\n  name\n}\n\nfragment MovieHeader_movie on IMovie {\n  __isIMovie: __typename\n  poster(size: W185)\n  title\n  rating\n  details {\n    runtime\n    tagline\n    genres {\n      ...GenreTag_genre\n    }\n  }\n}\n\nfragment MovieLinkContainer_movie on IMovie {\n  __isIMovie: __typename\n  movieId: id\n}\n\nfragment MovieParallaxBackdrop_movie on IMovie {\n  __isIMovie: __typename\n  backdrop(size: Original)\n}\n\nfragment MovieStreamingLinks_movie on IMovie {\n  __isIMovie: __typename\n  streamingOptions {\n    ...StreamingLink_option\n  }\n}\n\nfragment RelatedMovieList_connection on MovieConnection {\n  edges {\n    node {\n      __typename\n      ...RelatedMovie_movie\n    }\n  }\n}\n\nfragment RelatedMovie_movie on IMovie {\n  __isIMovie: __typename\n  ...MovieLinkContainer_movie\n  title\n  poster(size: W154)\n}\n\nfragment StreamingLink_option on StreamingOption {\n  provider {\n    iconURL\n  }\n  bestOffering {\n    links {\n      web\n    }\n    ...useStreamingLinkTitle_offering\n    ...useStreamingLinkPriceDescription_offering\n  }\n}\n\nfragment useStreamingLinkPriceDescription_offering on StreamingOptionOffering {\n  type\n  price {\n    amount\n    currency\n  }\n}\n\nfragment useStreamingLinkTitle_offering on StreamingOptionOffering {\n  type\n}\n"
+    "text": "query DetailedMovieViewQuery(\n  $id: Int!\n) {\n  movies {\n    movie(id: $id) {\n      __typename\n      ...DetailedMovieViewRoot_movie\n    }\n  }\n}\n\nfragment CastCredit_credit on CastCreditBasicPerson {\n  actor: value {\n    __typename\n    name\n    profilePicture(size: W185)\n  }\n  character\n}\n\nfragment Cast_credits on ICreditsBasicPerson {\n  __isICreditsBasicPerson: __typename\n  cast {\n    ...CastCredit_credit\n  }\n}\n\nfragment DetailedMovieViewRoot_movie on IMovie {\n  __isIMovie: __typename\n  ...MovieHeader_movie\n  ...MovieStreamingLinks_movie\n  overview\n  credits {\n    __typename\n    ...Cast_credits\n  }\n  ...MovieParallaxBackdrop_movie\n  recommendations {\n    ...RelatedMovieList_connection\n  }\n  similar {\n    ...RelatedMovieList_connection\n  }\n}\n\nfragment GenreTag_genre on Genre {\n  name\n}\n\nfragment MovieHeader_movie on IMovie {\n  __isIMovie: __typename\n  poster(size: W185)\n  title\n  rating\n  details {\n    runtime\n    tagline\n    genres {\n      ...GenreTag_genre\n    }\n  }\n}\n\nfragment MovieLinkContainer_movie on IMovie {\n  __isIMovie: __typename\n  movieId: id\n}\n\nfragment MovieParallaxBackdrop_movie on IMovie {\n  __isIMovie: __typename\n  backdrop(size: Original)\n}\n\nfragment MovieStreamingLinks_movie on IMovie {\n  __isIMovie: __typename\n  streamingOptions {\n    ...StreamingLink_option\n  }\n}\n\nfragment RelatedMovieList_connection on MovieConnection {\n  edges {\n    node {\n      __typename\n      ...RelatedMovie_movie\n    }\n  }\n}\n\nfragment RelatedMovie_movie on IMovie {\n  __isIMovie: __typename\n  ...MovieLinkContainer_movie\n  title\n  poster(size: W154)\n}\n\nfragment StreamingLinkToolTip_option on StreamingOption {\n  provider {\n    name\n  }\n}\n\nfragment StreamingLink_option on StreamingOption {\n  ...StreamingLinkToolTip_option\n  provider {\n    iconURL\n  }\n  bestOffering {\n    links {\n      web\n    }\n    ...useStreamingLinkTitle_offering\n    ...useStreamingLinkPriceDescription_offering\n  }\n}\n\nfragment useStreamingLinkPriceDescription_offering on StreamingOptionOffering {\n  type\n  price {\n    amount\n    currency\n  }\n}\n\nfragment useStreamingLinkTitle_offering on StreamingOptionOffering {\n  type\n}\n"
   }
 };
 })();
