@@ -6,6 +6,7 @@ import { RelayEnvironmentProvider } from 'react-relay';
 
 import App from 'App';
 
+import 'utils/extensions';
 import theme from 'utils/theme';
 import tmdb from 'utils/tmdb';
 

@@ -1,4 +1,4 @@
-import type { RelatedMovie_IMovie$key } from './__generated__/RelatedMovie_IMovie.graphql';
+import type { RelatedMovie_movie$key } from './__generated__/RelatedMovie_movie.graphql';
 
 import React from 'react';
 import { Image, Text, VStack } from '@chakra-ui/react';
@@ -11,14 +11,14 @@ import MovieLinkContainer from 'MovieLinkContainer';
 import { POSTER_PLACEHOLDER } from 'utils/constants';
 
 type Props = {
-    movie: RelatedMovie_IMovie$key,
+    movie: RelatedMovie_movie$key,
 }
 
 function RelatedMovie(props: Props) {
     const movie = useFragment(
         graphql`
-            fragment RelatedMovie_IMovie on IMovie {
-                ...MovieLinkContainer_IMovie
+            fragment RelatedMovie_movie on IMovie {
+                ...MovieLinkContainer_movie
                 title
                 poster(size: W154)
             }

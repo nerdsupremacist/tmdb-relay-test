@@ -1,10 +1,9 @@
 
-import type { DetailedMovieViewRoot_IMovie$key } from './__generated__/DetailedMovieViewRoot_IMovie.graphql';
+import type { DetailedMovieViewRoot_movie$key } from './__generated__/DetailedMovieViewRoot_movie.graphql';
 
 import React from 'react';
 import {
     Container,
-    HStack,
     Text,
     VStack,
 } from '@chakra-ui/react';
@@ -16,51 +15,38 @@ import Cast from 'Cast';
 import MovieHeader from './MovieHeader';
 import MovieParallaxBackdrop from './MovieParallaxBackdrop';
 import MovieStreamingLinks from './MovieStreamingLinks';
-import RelatedMovie from './RelatedMovie';
-
-import 'utils/extensions';
+import RelatedMovieList from './RelatedMovieList';
 
 type Props = {
-    data: DetailedMovieViewRoot_IMovie$key
+    movie: DetailedMovieViewRoot_movie$key
 }
 
-function DetailedMovieViewRoot({ data }: Props) {
+function DetailedMovieViewRoot(props: Props) {
     const movie = useFragment(
         graphql`
-            fragment DetailedMovieViewRoot_IMovie on IMovie {    
-                ...MovieHeader_IMovie
-                ...MovieStreamingLinks_IMovie
+            fragment DetailedMovieViewRoot_movie on IMovie {    
+                ...MovieHeader_movie
+                ...MovieStreamingLinks_movie
 
                 overview
 
                 credits {
-                    ...Cast_ICreditsBasicPerson
+                    ...Cast_credits
                 }
 
-                ...MovieParallaxBackdrop_IMovie
+                ...MovieParallaxBackdrop_movie
 
                 recommendations {
-                    edges {
-                        node {
-                            ...RelatedMovie_IMovie
-                        }
-                    }
+                    ...RelatedMovieList_connection
                 }
 
                 similar {
-                    edges {
-                        node {
-                            ...RelatedMovie_IMovie
-                        }
-                    }
+                    ...RelatedMovieList_connection
                 }
             }
         `,
-        data,
+        props.movie,
     );
-
-    const recommendations = movie.recommendations.edges?.mapNotNull(edge => edge?.node) ?? [];
-    const similar = movie.similar.edges?.mapNotNull(edge => edge?.node) ?? [];
 
     return (
         <div>
@@ -78,23 +64,11 @@ function DetailedMovieViewRoot({ data }: Props) {
                     <Text fontSize="xl" fontWeight="bold">
                         Recommended
                     </Text>
-                    <HStack align="start" maxW="100%" overflowY="scroll" padding={2}>
-                        {
-                            recommendations.map((movie, index) => {
-                                return <RelatedMovie key={`recommended_movie_${index}`} movie={movie} />;
-                            })
-                        }
-                    </HStack>
+                    <RelatedMovieList connection={movie.recommendations} />
                     <Text fontSize="xl" fontWeight="bold">
                         Similar Movies
                     </Text>
-                    <HStack align="start" maxW="100%" overflowY="scroll" padding={2}>
-                        {
-                            similar.map((movie, index) => {
-                                return <RelatedMovie key={`similar_movie_${index}`} movie={movie} />;
-                            })
-                        }
-                    </HStack>
+                    <RelatedMovieList connection={movie.similar} />
                 </VStack>
             </Container>
         </div>

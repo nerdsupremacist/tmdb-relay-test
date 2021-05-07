@@ -5,18 +5,18 @@
 import { ReaderFragment } from "relay-runtime";
 import { FragmentRefs } from "relay-runtime";
 export type StreamingMonetizationType = "Ads" | "Buy" | "Cinema" | "Flatrate" | "Free" | "Rent" | "%future added value";
-export type useStreamingLinkPriceDescription_StreamingOptionOffering = {
+export type useStreamingLinkPriceDescription_offering = {
     readonly type: StreamingMonetizationType;
     readonly price: {
         readonly amount: number;
         readonly currency: string;
     } | null;
-    readonly " $refType": "useStreamingLinkPriceDescription_StreamingOptionOffering";
+    readonly " $refType": "useStreamingLinkPriceDescription_offering";
 };
-export type useStreamingLinkPriceDescription_StreamingOptionOffering$data = useStreamingLinkPriceDescription_StreamingOptionOffering;
-export type useStreamingLinkPriceDescription_StreamingOptionOffering$key = {
-    readonly " $data"?: useStreamingLinkPriceDescription_StreamingOptionOffering$data;
-    readonly " $fragmentRefs": FragmentRefs<"useStreamingLinkPriceDescription_StreamingOptionOffering">;
+export type useStreamingLinkPriceDescription_offering$data = useStreamingLinkPriceDescription_offering;
+export type useStreamingLinkPriceDescription_offering$key = {
+    readonly " $data"?: useStreamingLinkPriceDescription_offering$data;
+    readonly " $fragmentRefs": FragmentRefs<"useStreamingLinkPriceDescription_offering">;
 };
 
 
@@ -25,7 +25,7 @@ const node: ReaderFragment = {
   "argumentDefinitions": [],
   "kind": "Fragment",
   "metadata": null,
-  "name": "useStreamingLinkPriceDescription_StreamingOptionOffering",
+  "name": "useStreamingLinkPriceDescription_offering",
   "selections": [
     {
       "alias": null,
@@ -63,5 +63,5 @@ const node: ReaderFragment = {
   "type": "StreamingOptionOffering",
   "abstractKey": null
 };
-(node as any).hash = '8dd95f8a09fbeaf873b0f71477b7a755';
+(node as any).hash = 'dde7959719a311b78f864e3b48ea08b6';
 export default node;

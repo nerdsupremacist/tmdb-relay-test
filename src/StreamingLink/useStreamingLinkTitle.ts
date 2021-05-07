@@ -1,14 +1,14 @@
 import type {
-    useStreamingLinkTitle_StreamingOptionOffering$key,
-} from './__generated__/useStreamingLinkTitle_StreamingOptionOffering.graphql';
+    useStreamingLinkTitle_offering$key,
+} from './__generated__/useStreamingLinkTitle_offering.graphql';
 
 import { useFragment } from 'react-relay';
 import { graphql } from 'babel-plugin-relay/macro';
 
-function useStreamingLinkTitle(offering: useStreamingLinkTitle_StreamingOptionOffering$key): string {
+function useStreamingLinkTitle(offering: useStreamingLinkTitle_offering$key): string {
     const decoded = useFragment(
         graphql`
-            fragment useStreamingLinkTitle_StreamingOptionOffering on StreamingOptionOffering {
+            fragment useStreamingLinkTitle_offering on StreamingOptionOffering {
                 type
             }
         `,

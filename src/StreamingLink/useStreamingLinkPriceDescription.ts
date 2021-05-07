@@ -1,16 +1,16 @@
 import type {
-    useStreamingLinkPriceDescription_StreamingOptionOffering$key,
-} from './__generated__/useStreamingLinkPriceDescription_StreamingOptionOffering.graphql';
+    useStreamingLinkPriceDescription_offering$key,
+} from './__generated__/useStreamingLinkPriceDescription_offering.graphql';
 
 import { useFragment } from 'react-relay';
 import { graphql } from 'babel-plugin-relay/macro';
 
 function useStreamingLinkPriceDescription(
-    offering: useStreamingLinkPriceDescription_StreamingOptionOffering$key,
+    offering: useStreamingLinkPriceDescription_offering$key,
 ): string {
     const decoded = useFragment(
         graphql`
-            fragment useStreamingLinkPriceDescription_StreamingOptionOffering on StreamingOptionOffering {
+            fragment useStreamingLinkPriceDescription_offering on StreamingOptionOffering {
                 type
                 price {
                     amount

@@ -4,16 +4,16 @@
 
 import { ReaderFragment } from "relay-runtime";
 import { FragmentRefs } from "relay-runtime";
-export type Cast_ICreditsBasicPerson = {
+export type Cast_credits = {
     readonly cast: ReadonlyArray<{
-        readonly " $fragmentRefs": FragmentRefs<"CastCredit_CastCreditBasicPerson">;
+        readonly " $fragmentRefs": FragmentRefs<"CastCredit_credit">;
     }>;
-    readonly " $refType": "Cast_ICreditsBasicPerson";
+    readonly " $refType": "Cast_credits";
 };
-export type Cast_ICreditsBasicPerson$data = Cast_ICreditsBasicPerson;
-export type Cast_ICreditsBasicPerson$key = {
-    readonly " $data"?: Cast_ICreditsBasicPerson$data;
-    readonly " $fragmentRefs": FragmentRefs<"Cast_ICreditsBasicPerson">;
+export type Cast_credits$data = Cast_credits;
+export type Cast_credits$key = {
+    readonly " $data"?: Cast_credits$data;
+    readonly " $fragmentRefs": FragmentRefs<"Cast_credits">;
 };
 
 
@@ -22,7 +22,7 @@ const node: ReaderFragment = {
   "argumentDefinitions": [],
   "kind": "Fragment",
   "metadata": null,
-  "name": "Cast_ICreditsBasicPerson",
+  "name": "Cast_credits",
   "selections": [
     {
       "alias": null,
@@ -35,7 +35,7 @@ const node: ReaderFragment = {
         {
           "args": null,
           "kind": "FragmentSpread",
-          "name": "CastCredit_CastCreditBasicPerson"
+          "name": "CastCredit_credit"
         }
       ],
       "storageKey": null
@@ -44,5 +44,5 @@ const node: ReaderFragment = {
   "type": "ICreditsBasicPerson",
   "abstractKey": "__isICreditsBasicPerson"
 };
-(node as any).hash = '9c8bce7a6eef465f70acea15934eb82f';
+(node as any).hash = 'a75cec94a3c458a2e7e4c54b13ee68d9';
 export default node;

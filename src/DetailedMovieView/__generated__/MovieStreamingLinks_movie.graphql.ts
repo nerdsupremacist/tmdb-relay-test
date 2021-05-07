@@ -4,16 +4,16 @@
 
 import { ReaderFragment } from "relay-runtime";
 import { FragmentRefs } from "relay-runtime";
-export type MovieStreamingLinks_IMovie = {
+export type MovieStreamingLinks_movie = {
     readonly streamingOptions: ReadonlyArray<{
-        readonly " $fragmentRefs": FragmentRefs<"StreamingLink_StreamingOption">;
+        readonly " $fragmentRefs": FragmentRefs<"StreamingLink_option">;
     }> | null;
-    readonly " $refType": "MovieStreamingLinks_IMovie";
+    readonly " $refType": "MovieStreamingLinks_movie";
 };
-export type MovieStreamingLinks_IMovie$data = MovieStreamingLinks_IMovie;
-export type MovieStreamingLinks_IMovie$key = {
-    readonly " $data"?: MovieStreamingLinks_IMovie$data;
-    readonly " $fragmentRefs": FragmentRefs<"MovieStreamingLinks_IMovie">;
+export type MovieStreamingLinks_movie$data = MovieStreamingLinks_movie;
+export type MovieStreamingLinks_movie$key = {
+    readonly " $data"?: MovieStreamingLinks_movie$data;
+    readonly " $fragmentRefs": FragmentRefs<"MovieStreamingLinks_movie">;
 };
 
 
@@ -22,7 +22,7 @@ const node: ReaderFragment = {
   "argumentDefinitions": [],
   "kind": "Fragment",
   "metadata": null,
-  "name": "MovieStreamingLinks_IMovie",
+  "name": "MovieStreamingLinks_movie",
   "selections": [
     {
       "alias": null,
@@ -35,7 +35,7 @@ const node: ReaderFragment = {
         {
           "args": null,
           "kind": "FragmentSpread",
-          "name": "StreamingLink_StreamingOption"
+          "name": "StreamingLink_option"
         }
       ],
       "storageKey": null
@@ -44,5 +44,5 @@ const node: ReaderFragment = {
   "type": "IMovie",
   "abstractKey": "__isIMovie"
 };
-(node as any).hash = 'e7ab018b89e7f0e8cac0c71d652e6b8f';
+(node as any).hash = '22a8dd19ae8d27869b01a03c25f8f5ce';
 export default node;

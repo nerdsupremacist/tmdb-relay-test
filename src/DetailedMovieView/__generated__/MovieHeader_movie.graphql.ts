@@ -4,7 +4,7 @@
 
 import { ReaderFragment } from "relay-runtime";
 import { FragmentRefs } from "relay-runtime";
-export type MovieHeader_IMovie = {
+export type MovieHeader_movie = {
     readonly poster: string | null;
     readonly title: string;
     readonly rating: number;
@@ -12,15 +12,15 @@ export type MovieHeader_IMovie = {
         readonly runtime: number;
         readonly tagline: string;
         readonly genres: ReadonlyArray<{
-            readonly " $fragmentRefs": FragmentRefs<"GenreTag_Genre">;
+            readonly " $fragmentRefs": FragmentRefs<"GenreTag_genre">;
         }>;
     };
-    readonly " $refType": "MovieHeader_IMovie";
+    readonly " $refType": "MovieHeader_movie";
 };
-export type MovieHeader_IMovie$data = MovieHeader_IMovie;
-export type MovieHeader_IMovie$key = {
-    readonly " $data"?: MovieHeader_IMovie$data;
-    readonly " $fragmentRefs": FragmentRefs<"MovieHeader_IMovie">;
+export type MovieHeader_movie$data = MovieHeader_movie;
+export type MovieHeader_movie$key = {
+    readonly " $data"?: MovieHeader_movie$data;
+    readonly " $fragmentRefs": FragmentRefs<"MovieHeader_movie">;
 };
 
 
@@ -29,7 +29,7 @@ const node: ReaderFragment = {
   "argumentDefinitions": [],
   "kind": "Fragment",
   "metadata": null,
-  "name": "MovieHeader_IMovie",
+  "name": "MovieHeader_movie",
   "selections": [
     {
       "alias": null,
@@ -91,7 +91,7 @@ const node: ReaderFragment = {
             {
               "args": null,
               "kind": "FragmentSpread",
-              "name": "GenreTag_Genre"
+              "name": "GenreTag_genre"
             }
           ],
           "storageKey": null
@@ -103,5 +103,5 @@ const node: ReaderFragment = {
   "type": "IMovie",
   "abstractKey": "__isIMovie"
 };
-(node as any).hash = 'be6c21910d96d40cd3168b255e6ffcc9';
+(node as any).hash = '1857fbd8b23bf79eeb56794a56223294';
 export default node;

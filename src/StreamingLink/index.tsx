@@ -1,5 +1,5 @@
 
-import type { StreamingLink_StreamingOption$key } from './__generated__/StreamingLink_StreamingOption.graphql';
+import type { StreamingLink_option$key } from './__generated__/StreamingLink_option.graphql';
 
 import React from 'react';
 import { Image, Link, Text, VStack } from '@chakra-ui/react';
@@ -11,13 +11,13 @@ import useStreamingLinkPriceDescription from './useStreamingLinkPriceDescription
 import useStreamingLinkTitle from './useStreamingLinkTitle';
 
 type Props = {
-    data: StreamingLink_StreamingOption$key
+    option: StreamingLink_option$key
 }
 
-function StreamingLink({ data }: Props) {
+function StreamingLink(props: Props) {
     const option = useFragment(
         graphql`
-            fragment StreamingLink_StreamingOption on StreamingOption {
+            fragment StreamingLink_option on StreamingOption {
                 provider {
                     iconURL
                 }
@@ -25,12 +25,12 @@ function StreamingLink({ data }: Props) {
                     links {
                         web
                     }
-                    ...useStreamingLinkTitle_StreamingOptionOffering
-                    ...useStreamingLinkPriceDescription_StreamingOptionOffering
+                    ...useStreamingLinkTitle_offering
+                    ...useStreamingLinkPriceDescription_offering
                 }
             }
         `,
-        data,
+        props.option,
     );
 
     const title = useStreamingLinkTitle(option.bestOffering);

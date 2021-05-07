@@ -1,4 +1,4 @@
-import type { MovieStreamingLinks_IMovie$key } from './__generated__/MovieStreamingLinks_IMovie.graphql';
+import type { MovieStreamingLinks_movie$key } from './__generated__/MovieStreamingLinks_movie.graphql';
 
 import React from 'react';
 import { HStack } from '@chakra-ui/react';
@@ -9,15 +9,15 @@ import { graphql } from 'babel-plugin-relay/macro';
 import StreamingLink from 'StreamingLink';
 
 type Props = {
-    movie: MovieStreamingLinks_IMovie$key,
+    movie: MovieStreamingLinks_movie$key,
 }
 
 function MovieStreamingLinks(props: Props) {
     const movie = useFragment(
         graphql`
-            fragment MovieStreamingLinks_IMovie on IMovie {
+            fragment MovieStreamingLinks_movie on IMovie {
                 streamingOptions {
-                    ...StreamingLink_StreamingOption
+                    ...StreamingLink_option
                 }
             }
         `,
@@ -29,7 +29,7 @@ function MovieStreamingLinks(props: Props) {
             <HStack align="start" spacing={4}>
                 {
                     movie.streamingOptions.slice(0, 5).map((option, index) => {
-                        return <StreamingLink data={option} key={`streaming_link_${index}`} />;
+                        return <StreamingLink key={`streaming_link_${index}`} option={option} />;
                     })
                 }
             </HStack>

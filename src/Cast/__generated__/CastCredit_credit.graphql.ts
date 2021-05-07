@@ -4,18 +4,18 @@
 
 import { ReaderFragment } from "relay-runtime";
 import { FragmentRefs } from "relay-runtime";
-export type CastCredit_CastCreditBasicPerson = {
-    readonly value: {
+export type CastCredit_credit = {
+    readonly actor: {
         readonly name: string;
         readonly profilePicture: string | null;
     };
     readonly character: string;
-    readonly " $refType": "CastCredit_CastCreditBasicPerson";
+    readonly " $refType": "CastCredit_credit";
 };
-export type CastCredit_CastCreditBasicPerson$data = CastCredit_CastCreditBasicPerson;
-export type CastCredit_CastCreditBasicPerson$key = {
-    readonly " $data"?: CastCredit_CastCreditBasicPerson$data;
-    readonly " $fragmentRefs": FragmentRefs<"CastCredit_CastCreditBasicPerson">;
+export type CastCredit_credit$data = CastCredit_credit;
+export type CastCredit_credit$key = {
+    readonly " $data"?: CastCredit_credit$data;
+    readonly " $fragmentRefs": FragmentRefs<"CastCredit_credit">;
 };
 
 
@@ -24,10 +24,10 @@ const node: ReaderFragment = {
   "argumentDefinitions": [],
   "kind": "Fragment",
   "metadata": null,
-  "name": "CastCredit_CastCreditBasicPerson",
+  "name": "CastCredit_credit",
   "selections": [
     {
-      "alias": null,
+      "alias": "actor",
       "args": null,
       "concreteType": null,
       "kind": "LinkedField",
@@ -68,5 +68,5 @@ const node: ReaderFragment = {
   "type": "CastCreditBasicPerson",
   "abstractKey": null
 };
-(node as any).hash = '9210a46700959b4a6e4d2cff2cd6bdbf';
+(node as any).hash = '04ddb9336d998a3686212d6791f27e86';
 export default node;

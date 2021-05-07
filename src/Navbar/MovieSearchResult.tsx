@@ -1,5 +1,5 @@
 
-import type { MovieSearchResult_IMovie$key } from './__generated__/MovieSearchResult_IMovie.graphql';
+import type { MovieSearchResult_movie$key } from './__generated__/MovieSearchResult_movie.graphql';
 
 import React from 'react';
 import { HStack, Image, Text, VStack } from '@chakra-ui/react';
@@ -12,20 +12,20 @@ import MovieLinkContainer from 'MovieLinkContainer';
 import { POSTER_PLACEHOLDER } from '../utils/constants';
 
 type Props = {
-    data: MovieSearchResult_IMovie$key
+    movie: MovieSearchResult_movie$key
 }
 
-function MovieSearchResult({ data }: Props) {
+function MovieSearchResult(props: Props) {
     const movie = useFragment(
         graphql`
-            fragment MovieSearchResult_IMovie on IMovie {
-                ...MovieLinkContainer_IMovie
+            fragment MovieSearchResult_movie on IMovie {
+                ...MovieLinkContainer_movie
                 title
                 overview
                 poster(size: W185)
             }
         `,
-        data,
+        props.movie,
     );
 
     const poster = movie.poster ?? POSTER_PLACEHOLDER;

@@ -1,4 +1,4 @@
-import type { MovieHeader_IMovie$key } from './__generated__/MovieHeader_IMovie.graphql';
+import type { MovieHeader_movie$key } from './__generated__/MovieHeader_movie.graphql';
 
 import React from 'react';
 import {
@@ -18,13 +18,13 @@ import GenreTag from './GenreTag';
 import { POSTER_PLACEHOLDER } from 'utils/constants';
 
 type Props = {
-    movie: MovieHeader_IMovie$key,
+    movie: MovieHeader_movie$key,
 }
 
 function MovieHeader(props: Props) {
     const movie = useFragment(
         graphql`
-            fragment MovieHeader_IMovie on IMovie {
+            fragment MovieHeader_movie on IMovie {
                 poster(size: W185)
                 title
                 rating
@@ -33,7 +33,7 @@ function MovieHeader(props: Props) {
                     runtime
                     tagline
                     genres {
-                        ...GenreTag_Genre
+                        ...GenreTag_genre
                     }
                 }
             }

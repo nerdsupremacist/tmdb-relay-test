@@ -12,7 +12,7 @@ export type SearchResultsListQueryResponse = {
         readonly search: {
             readonly edges: ReadonlyArray<{
                 readonly node: {
-                    readonly " $fragmentRefs": FragmentRefs<"MovieSearchResult_IMovie">;
+                    readonly " $fragmentRefs": FragmentRefs<"MovieSearchResult_movie">;
                 } | null;
             } | null> | null;
         };
@@ -34,21 +34,21 @@ query SearchResultsListQuery(
       edges {
         node {
           __typename
-          ...MovieSearchResult_IMovie
+          ...MovieSearchResult_movie
         }
       }
     }
   }
 }
 
-fragment MovieLinkContainer_IMovie on IMovie {
+fragment MovieLinkContainer_movie on IMovie {
   __isIMovie: __typename
   movieId: id
 }
 
-fragment MovieSearchResult_IMovie on IMovie {
+fragment MovieSearchResult_movie on IMovie {
   __isIMovie: __typename
-  ...MovieLinkContainer_IMovie
+  ...MovieLinkContainer_movie
   title
   overview
   poster(size: W185)
@@ -117,7 +117,7 @@ return {
                       {
                         "args": null,
                         "kind": "FragmentSpread",
-                        "name": "MovieSearchResult_IMovie"
+                        "name": "MovieSearchResult_movie"
                       }
                     ],
                     "storageKey": null
@@ -233,14 +233,14 @@ return {
     ]
   },
   "params": {
-    "cacheID": "248231afbfaadd789b25439f9971e164",
+    "cacheID": "032b3e8082c7b5dff3a64bafeb81639a",
     "id": null,
     "metadata": {},
     "name": "SearchResultsListQuery",
     "operationKind": "query",
-    "text": "query SearchResultsListQuery(\n  $term: String!\n) {\n  movies {\n    search(term: $term, first: 5) {\n      edges {\n        node {\n          __typename\n          ...MovieSearchResult_IMovie\n        }\n      }\n    }\n  }\n}\n\nfragment MovieLinkContainer_IMovie on IMovie {\n  __isIMovie: __typename\n  movieId: id\n}\n\nfragment MovieSearchResult_IMovie on IMovie {\n  __isIMovie: __typename\n  ...MovieLinkContainer_IMovie\n  title\n  overview\n  poster(size: W185)\n}\n"
+    "text": "query SearchResultsListQuery(\n  $term: String!\n) {\n  movies {\n    search(term: $term, first: 5) {\n      edges {\n        node {\n          __typename\n          ...MovieSearchResult_movie\n        }\n      }\n    }\n  }\n}\n\nfragment MovieLinkContainer_movie on IMovie {\n  __isIMovie: __typename\n  movieId: id\n}\n\nfragment MovieSearchResult_movie on IMovie {\n  __isIMovie: __typename\n  ...MovieLinkContainer_movie\n  title\n  overview\n  poster(size: W185)\n}\n"
   }
 };
 })();
-(node as any).hash = 'f67c01310993f21631045abf775ea7e4';
+(node as any).hash = '3486d8e9e5dc03fe87602be98cf88ea1';
 export default node;

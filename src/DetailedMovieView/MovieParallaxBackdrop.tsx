@@ -1,4 +1,4 @@
-import type { MovieParallaxBackdrop_IMovie$key } from './__generated__/MovieParallaxBackdrop_IMovie.graphql';
+import type { MovieParallaxBackdrop_movie$key } from './__generated__/MovieParallaxBackdrop_movie.graphql';
 
 import React from 'react';
 import { Parallax } from 'react-parallax';
@@ -10,13 +10,13 @@ import { graphql } from 'babel-plugin-relay/macro';
 import { BACKDROP_PLACEHOLDER } from 'utils/constants';
 
 type Props = {
-    movie: MovieParallaxBackdrop_IMovie$key,
+    movie: MovieParallaxBackdrop_movie$key,
 }
 
 function MovieParallaxBackdrop(props: Props) {
     const movie = useFragment(
         graphql`
-            fragment MovieParallaxBackdrop_IMovie on IMovie {   
+            fragment MovieParallaxBackdrop_movie on IMovie {   
                 backdrop(size: Original)
             }
         `,

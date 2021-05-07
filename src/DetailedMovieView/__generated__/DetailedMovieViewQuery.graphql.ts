@@ -10,7 +10,7 @@ export type DetailedMovieViewQueryVariables = {
 export type DetailedMovieViewQueryResponse = {
     readonly movies: {
         readonly movie: {
-            readonly " $fragmentRefs": FragmentRefs<"DetailedMovieViewRoot_IMovie">;
+            readonly " $fragmentRefs": FragmentRefs<"DetailedMovieViewRoot_movie">;
         };
     };
 };
@@ -28,13 +28,13 @@ query DetailedMovieViewQuery(
   movies {
     movie(id: $id) {
       __typename
-      ...DetailedMovieViewRoot_IMovie
+      ...DetailedMovieViewRoot_movie
     }
   }
 }
 
-fragment CastCredit_CastCreditBasicPerson on CastCreditBasicPerson {
-  value {
+fragment CastCredit_credit on CastCreditBasicPerson {
+  actor: value {
     __typename
     name
     profilePicture(size: W185)
@@ -42,46 +42,36 @@ fragment CastCredit_CastCreditBasicPerson on CastCreditBasicPerson {
   character
 }
 
-fragment Cast_ICreditsBasicPerson on ICreditsBasicPerson {
+fragment Cast_credits on ICreditsBasicPerson {
   __isICreditsBasicPerson: __typename
   cast {
-    ...CastCredit_CastCreditBasicPerson
+    ...CastCredit_credit
   }
 }
 
-fragment DetailedMovieViewRoot_IMovie on IMovie {
+fragment DetailedMovieViewRoot_movie on IMovie {
   __isIMovie: __typename
-  ...MovieHeader_IMovie
-  ...MovieStreamingLinks_IMovie
+  ...MovieHeader_movie
+  ...MovieStreamingLinks_movie
   overview
   credits {
     __typename
-    ...Cast_ICreditsBasicPerson
+    ...Cast_credits
   }
-  ...MovieParallaxBackdrop_IMovie
+  ...MovieParallaxBackdrop_movie
   recommendations {
-    edges {
-      node {
-        __typename
-        ...RelatedMovie_IMovie
-      }
-    }
+    ...RelatedMovieList_connection
   }
   similar {
-    edges {
-      node {
-        __typename
-        ...RelatedMovie_IMovie
-      }
-    }
+    ...RelatedMovieList_connection
   }
 }
 
-fragment GenreTag_Genre on Genre {
+fragment GenreTag_genre on Genre {
   name
 }
 
-fragment MovieHeader_IMovie on IMovie {
+fragment MovieHeader_movie on IMovie {
   __isIMovie: __typename
   poster(size: W185)
   title
@@ -90,36 +80,45 @@ fragment MovieHeader_IMovie on IMovie {
     runtime
     tagline
     genres {
-      ...GenreTag_Genre
+      ...GenreTag_genre
     }
   }
 }
 
-fragment MovieLinkContainer_IMovie on IMovie {
+fragment MovieLinkContainer_movie on IMovie {
   __isIMovie: __typename
   movieId: id
 }
 
-fragment MovieParallaxBackdrop_IMovie on IMovie {
+fragment MovieParallaxBackdrop_movie on IMovie {
   __isIMovie: __typename
   backdrop(size: Original)
 }
 
-fragment MovieStreamingLinks_IMovie on IMovie {
+fragment MovieStreamingLinks_movie on IMovie {
   __isIMovie: __typename
   streamingOptions {
-    ...StreamingLink_StreamingOption
+    ...StreamingLink_option
   }
 }
 
-fragment RelatedMovie_IMovie on IMovie {
+fragment RelatedMovieList_connection on MovieConnection {
+  edges {
+    node {
+      __typename
+      ...RelatedMovie_movie
+    }
+  }
+}
+
+fragment RelatedMovie_movie on IMovie {
   __isIMovie: __typename
-  ...MovieLinkContainer_IMovie
+  ...MovieLinkContainer_movie
   title
   poster(size: W154)
 }
 
-fragment StreamingLink_StreamingOption on StreamingOption {
+fragment StreamingLink_option on StreamingOption {
   provider {
     iconURL
   }
@@ -127,12 +126,12 @@ fragment StreamingLink_StreamingOption on StreamingOption {
     links {
       web
     }
-    ...useStreamingLinkTitle_StreamingOptionOffering
-    ...useStreamingLinkPriceDescription_StreamingOptionOffering
+    ...useStreamingLinkTitle_offering
+    ...useStreamingLinkPriceDescription_offering
   }
 }
 
-fragment useStreamingLinkPriceDescription_StreamingOptionOffering on StreamingOptionOffering {
+fragment useStreamingLinkPriceDescription_offering on StreamingOptionOffering {
   type
   price {
     amount
@@ -140,7 +139,7 @@ fragment useStreamingLinkPriceDescription_StreamingOptionOffering on StreamingOp
   }
 }
 
-fragment useStreamingLinkTitle_StreamingOptionOffering on StreamingOptionOffering {
+fragment useStreamingLinkTitle_offering on StreamingOptionOffering {
   type
 }
 */
@@ -265,7 +264,7 @@ return {
               {
                 "args": null,
                 "kind": "FragmentSpread",
-                "name": "DetailedMovieViewRoot_IMovie"
+                "name": "DetailedMovieViewRoot_movie"
               }
             ],
             "storageKey": null
@@ -472,7 +471,7 @@ return {
                     "plural": true,
                     "selections": [
                       {
-                        "alias": null,
+                        "alias": "actor",
                         "args": null,
                         "concreteType": null,
                         "kind": "LinkedField",
@@ -546,14 +545,14 @@ return {
     ]
   },
   "params": {
-    "cacheID": "46a4ff531f7e24df1635fa0cc5e46aa6",
+    "cacheID": "409543cf7730fbfbacddabd286aced33",
     "id": null,
     "metadata": {},
     "name": "DetailedMovieViewQuery",
     "operationKind": "query",
-    "text": "query DetailedMovieViewQuery(\n  $id: Int!\n) {\n  movies {\n    movie(id: $id) {\n      __typename\n      ...DetailedMovieViewRoot_IMovie\n    }\n  }\n}\n\nfragment CastCredit_CastCreditBasicPerson on CastCreditBasicPerson {\n  value {\n    __typename\n    name\n    profilePicture(size: W185)\n  }\n  character\n}\n\nfragment Cast_ICreditsBasicPerson on ICreditsBasicPerson {\n  __isICreditsBasicPerson: __typename\n  cast {\n    ...CastCredit_CastCreditBasicPerson\n  }\n}\n\nfragment DetailedMovieViewRoot_IMovie on IMovie {\n  __isIMovie: __typename\n  ...MovieHeader_IMovie\n  ...MovieStreamingLinks_IMovie\n  overview\n  credits {\n    __typename\n    ...Cast_ICreditsBasicPerson\n  }\n  ...MovieParallaxBackdrop_IMovie\n  recommendations {\n    edges {\n      node {\n        __typename\n        ...RelatedMovie_IMovie\n      }\n    }\n  }\n  similar {\n    edges {\n      node {\n        __typename\n        ...RelatedMovie_IMovie\n      }\n    }\n  }\n}\n\nfragment GenreTag_Genre on Genre {\n  name\n}\n\nfragment MovieHeader_IMovie on IMovie {\n  __isIMovie: __typename\n  poster(size: W185)\n  title\n  rating\n  details {\n    runtime\n    tagline\n    genres {\n      ...GenreTag_Genre\n    }\n  }\n}\n\nfragment MovieLinkContainer_IMovie on IMovie {\n  __isIMovie: __typename\n  movieId: id\n}\n\nfragment MovieParallaxBackdrop_IMovie on IMovie {\n  __isIMovie: __typename\n  backdrop(size: Original)\n}\n\nfragment MovieStreamingLinks_IMovie on IMovie {\n  __isIMovie: __typename\n  streamingOptions {\n    ...StreamingLink_StreamingOption\n  }\n}\n\nfragment RelatedMovie_IMovie on IMovie {\n  __isIMovie: __typename\n  ...MovieLinkContainer_IMovie\n  title\n  poster(size: W154)\n}\n\nfragment StreamingLink_StreamingOption on StreamingOption {\n  provider {\n    iconURL\n  }\n  bestOffering {\n    links {\n      web\n    }\n    ...useStreamingLinkTitle_StreamingOptionOffering\n    ...useStreamingLinkPriceDescription_StreamingOptionOffering\n  }\n}\n\nfragment useStreamingLinkPriceDescription_StreamingOptionOffering on StreamingOptionOffering {\n  type\n  price {\n    amount\n    currency\n  }\n}\n\nfragment useStreamingLinkTitle_StreamingOptionOffering on StreamingOptionOffering {\n  type\n}\n"
+    "text": "query DetailedMovieViewQuery(\n  $id: Int!\n) {\n  movies {\n    movie(id: $id) {\n      __typename\n      ...DetailedMovieViewRoot_movie\n    }\n  }\n}\n\nfragment CastCredit_credit on CastCreditBasicPerson {\n  actor: value {\n    __typename\n    name\n    profilePicture(size: W185)\n  }\n  character\n}\n\nfragment Cast_credits on ICreditsBasicPerson {\n  __isICreditsBasicPerson: __typename\n  cast {\n    ...CastCredit_credit\n  }\n}\n\nfragment DetailedMovieViewRoot_movie on IMovie {\n  __isIMovie: __typename\n  ...MovieHeader_movie\n  ...MovieStreamingLinks_movie\n  overview\n  credits {\n    __typename\n    ...Cast_credits\n  }\n  ...MovieParallaxBackdrop_movie\n  recommendations {\n    ...RelatedMovieList_connection\n  }\n  similar {\n    ...RelatedMovieList_connection\n  }\n}\n\nfragment GenreTag_genre on Genre {\n  name\n}\n\nfragment MovieHeader_movie on IMovie {\n  __isIMovie: __typename\n  poster(size: W185)\n  title\n  rating\n  details {\n    runtime\n    tagline\n    genres {\n      ...GenreTag_genre\n    }\n  }\n}\n\nfragment MovieLinkContainer_movie on IMovie {\n  __isIMovie: __typename\n  movieId: id\n}\n\nfragment MovieParallaxBackdrop_movie on IMovie {\n  __isIMovie: __typename\n  backdrop(size: Original)\n}\n\nfragment MovieStreamingLinks_movie on IMovie {\n  __isIMovie: __typename\n  streamingOptions {\n    ...StreamingLink_option\n  }\n}\n\nfragment RelatedMovieList_connection on MovieConnection {\n  edges {\n    node {\n      __typename\n      ...RelatedMovie_movie\n    }\n  }\n}\n\nfragment RelatedMovie_movie on IMovie {\n  __isIMovie: __typename\n  ...MovieLinkContainer_movie\n  title\n  poster(size: W154)\n}\n\nfragment StreamingLink_option on StreamingOption {\n  provider {\n    iconURL\n  }\n  bestOffering {\n    links {\n      web\n    }\n    ...useStreamingLinkTitle_offering\n    ...useStreamingLinkPriceDescription_offering\n  }\n}\n\nfragment useStreamingLinkPriceDescription_offering on StreamingOptionOffering {\n  type\n  price {\n    amount\n    currency\n  }\n}\n\nfragment useStreamingLinkTitle_offering on StreamingOptionOffering {\n  type\n}\n"
   }
 };
 })();
-(node as any).hash = '19545ad8e8ef89faadb34069858998b0';
+(node as any).hash = 'c3e875e35beb07de05a6fd14ac2633fc';
 export default node;

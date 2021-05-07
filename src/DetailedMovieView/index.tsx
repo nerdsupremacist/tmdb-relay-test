@@ -28,7 +28,7 @@ function DetailedMovieView(props: LoadedProps) {
             query DetailedMovieViewQuery($id: Int!) {
                 movies {
                     movie(id: $id) {
-                        ...DetailedMovieViewRoot_IMovie
+                        ...DetailedMovieViewRoot_movie
                     }
                 }
             }
@@ -37,7 +37,7 @@ function DetailedMovieView(props: LoadedProps) {
     );
 
     return (
-        <DetailedMovieViewRoot data={data.movies.movie} />
+        <DetailedMovieViewRoot movie={data.movies.movie} />
     );
 }
 

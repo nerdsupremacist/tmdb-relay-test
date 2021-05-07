@@ -1,5 +1,5 @@
 
-import type { GenreTag_Genre$key } from './__generated__/GenreTag_Genre.graphql';
+import type { GenreTag_genre$key } from './__generated__/GenreTag_genre.graphql';
 
 import React from 'react';
 import { Badge } from '@chakra-ui/react';
@@ -8,13 +8,13 @@ import { useFragment } from 'react-relay';
 import { graphql } from 'babel-plugin-relay/macro';
 
 type Props = {
-    data: GenreTag_Genre$key,
+    data: GenreTag_genre$key,
 }
 
 function GenreTag(props: Props) {
     const data = useFragment(
         graphql`
-            fragment GenreTag_Genre on Genre {
+            fragment GenreTag_genre on Genre {
                 name
             }
         `,

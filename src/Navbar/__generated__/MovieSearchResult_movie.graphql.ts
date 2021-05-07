@@ -4,16 +4,17 @@
 
 import { ReaderFragment } from "relay-runtime";
 import { FragmentRefs } from "relay-runtime";
-export type RelatedMovie_IMovie = {
+export type MovieSearchResult_movie = {
     readonly title: string;
+    readonly overview: string;
     readonly poster: string | null;
-    readonly " $fragmentRefs": FragmentRefs<"MovieLinkContainer_IMovie">;
-    readonly " $refType": "RelatedMovie_IMovie";
+    readonly " $fragmentRefs": FragmentRefs<"MovieLinkContainer_movie">;
+    readonly " $refType": "MovieSearchResult_movie";
 };
-export type RelatedMovie_IMovie$data = RelatedMovie_IMovie;
-export type RelatedMovie_IMovie$key = {
-    readonly " $data"?: RelatedMovie_IMovie$data;
-    readonly " $fragmentRefs": FragmentRefs<"RelatedMovie_IMovie">;
+export type MovieSearchResult_movie$data = MovieSearchResult_movie;
+export type MovieSearchResult_movie$key = {
+    readonly " $data"?: MovieSearchResult_movie$data;
+    readonly " $fragmentRefs": FragmentRefs<"MovieSearchResult_movie">;
 };
 
 
@@ -22,7 +23,7 @@ const node: ReaderFragment = {
   "argumentDefinitions": [],
   "kind": "Fragment",
   "metadata": null,
-  "name": "RelatedMovie_IMovie",
+  "name": "MovieSearchResult_movie",
   "selections": [
     {
       "alias": null,
@@ -33,25 +34,32 @@ const node: ReaderFragment = {
     },
     {
       "alias": null,
+      "args": null,
+      "kind": "ScalarField",
+      "name": "overview",
+      "storageKey": null
+    },
+    {
+      "alias": null,
       "args": [
         {
           "kind": "Literal",
           "name": "size",
-          "value": "W154"
+          "value": "W185"
         }
       ],
       "kind": "ScalarField",
       "name": "poster",
-      "storageKey": "poster(size:\"W154\")"
+      "storageKey": "poster(size:\"W185\")"
     },
     {
       "args": null,
       "kind": "FragmentSpread",
-      "name": "MovieLinkContainer_IMovie"
+      "name": "MovieLinkContainer_movie"
     }
   ],
   "type": "IMovie",
   "abstractKey": "__isIMovie"
 };
-(node as any).hash = '9b7be02dd723ba44381f4713d5236174';
+(node as any).hash = 'a82aed51aa4750a69cc17b981d234d2b';
 export default node;

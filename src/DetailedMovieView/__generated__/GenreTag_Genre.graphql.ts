@@ -4,14 +4,14 @@
 
 import { ReaderFragment } from "relay-runtime";
 import { FragmentRefs } from "relay-runtime";
-export type GenreTag_Genre = {
+export type GenreTag_genre = {
     readonly name: string;
-    readonly " $refType": "GenreTag_Genre";
+    readonly " $refType": "GenreTag_genre";
 };
-export type GenreTag_Genre$data = GenreTag_Genre;
-export type GenreTag_Genre$key = {
-    readonly " $data"?: GenreTag_Genre$data;
-    readonly " $fragmentRefs": FragmentRefs<"GenreTag_Genre">;
+export type GenreTag_genre$data = GenreTag_genre;
+export type GenreTag_genre$key = {
+    readonly " $data"?: GenreTag_genre$data;
+    readonly " $fragmentRefs": FragmentRefs<"GenreTag_genre">;
 };
 
 
@@ -20,7 +20,7 @@ const node: ReaderFragment = {
   "argumentDefinitions": [],
   "kind": "Fragment",
   "metadata": null,
-  "name": "GenreTag_Genre",
+  "name": "GenreTag_genre",
   "selections": [
     {
       "alias": null,
@@ -33,5 +33,5 @@ const node: ReaderFragment = {
   "type": "Genre",
   "abstractKey": null
 };
-(node as any).hash = '3cb84bdcc8e0a1e215e77042cba38419';
+(node as any).hash = '775abfdb432ce946c9690764baa2e0b3';
 export default node;

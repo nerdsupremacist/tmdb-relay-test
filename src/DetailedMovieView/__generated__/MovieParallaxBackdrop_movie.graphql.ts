@@ -4,14 +4,14 @@
 
 import { ReaderFragment } from "relay-runtime";
 import { FragmentRefs } from "relay-runtime";
-export type MovieParallaxBackdrop_IMovie = {
+export type MovieParallaxBackdrop_movie = {
     readonly backdrop: string | null;
-    readonly " $refType": "MovieParallaxBackdrop_IMovie";
+    readonly " $refType": "MovieParallaxBackdrop_movie";
 };
-export type MovieParallaxBackdrop_IMovie$data = MovieParallaxBackdrop_IMovie;
-export type MovieParallaxBackdrop_IMovie$key = {
-    readonly " $data"?: MovieParallaxBackdrop_IMovie$data;
-    readonly " $fragmentRefs": FragmentRefs<"MovieParallaxBackdrop_IMovie">;
+export type MovieParallaxBackdrop_movie$data = MovieParallaxBackdrop_movie;
+export type MovieParallaxBackdrop_movie$key = {
+    readonly " $data"?: MovieParallaxBackdrop_movie$data;
+    readonly " $fragmentRefs": FragmentRefs<"MovieParallaxBackdrop_movie">;
 };
 
 
@@ -20,7 +20,7 @@ const node: ReaderFragment = {
   "argumentDefinitions": [],
   "kind": "Fragment",
   "metadata": null,
-  "name": "MovieParallaxBackdrop_IMovie",
+  "name": "MovieParallaxBackdrop_movie",
   "selections": [
     {
       "alias": null,
@@ -39,5 +39,5 @@ const node: ReaderFragment = {
   "type": "IMovie",
   "abstractKey": "__isIMovie"
 };
-(node as any).hash = 'ed943291329ca4d5bbc73ac0d8b484b6';
+(node as any).hash = '1eaa44496229fe65a5d074e8baf52ad8';
 export default node;

@@ -30,7 +30,7 @@ function SearchResultsList(props: LoadedProps) {
                     search(term: $term, first: 5) {
                         edges {
                             node {
-                                ...MovieSearchResult_IMovie
+                                ...MovieSearchResult_movie
                             }
                         }
                     }
@@ -40,11 +40,13 @@ function SearchResultsList(props: LoadedProps) {
         props.data,
     );
 
+    const results = data.movies.search.edges?.mapNotNull(edge => edge?.node) ?? [];
+
     return (
         <VStack align="start" spacing={4}>
             {
-                data.movies?.search.edges?.map((edge, index) => {
-                    return edge?.node != null && <MovieSearchResult data={edge.node} key={`search_result_${index}`} />;
+                results.map((movie, index) => {
+                    return <MovieSearchResult key={`search_result_${index}`} movie={movie} />;
                 })
             }
         </VStack>
