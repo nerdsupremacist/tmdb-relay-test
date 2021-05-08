@@ -2,7 +2,7 @@
 	"Fragment Hook": {
 		"prefix": "frghk",
 		"body": [
-			"import type { ${TM_FILENAME_BASE}_${2:$1\\$key } from './__generated__/${TM_FILENAME_BASE}_$2.graphql';",
+			"import type { ${TM_FILENAME_BASE}_${2:$1}\\$key } from './__generated__/${TM_FILENAME_BASE}_$2.graphql';",
 			"",
 			"import { useFragment } from 'react-relay';",
 			"import { graphql } from 'babel-plugin-relay/macro';",
