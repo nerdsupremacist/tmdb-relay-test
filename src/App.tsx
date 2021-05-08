@@ -8,6 +8,7 @@ import {
 import { Container, Text } from '@chakra-ui/react';
 
 import DetailedMovieView from 'DetailedMovieView';
+import DetailedPersonView from 'DetailedPersonView';
 import Navbar from 'Navbar';
 
 function App() {
@@ -27,6 +28,9 @@ function App() {
                     </Route>
                     <Route path="/movie/:id">
                         <DetailedMovieView />
+                    </Route>
+                    <Route path="/person/:id">
+                        <DetailedPersonView />
                     </Route>
                     <Route path="*">
                         <h1>Not found!</h1>

@@ -7,6 +7,8 @@ import { Avatar, Text, VStack } from '@chakra-ui/react';
 import { useFragment } from 'react-relay';
 import { graphql } from 'babel-plugin-relay/macro';
 
+import PersonLinkContainer from 'PersonLinkContainer';
+
 type Props = {
     credit: CastCredit_credit$key,
 }
@@ -16,6 +18,7 @@ function CastCredit(props: Props) {
         graphql`
             fragment CastCredit_credit on CastCreditBasicPerson {
                 actor: value {
+                    ...PersonLinkContainer_person
                     name
                     profilePicture(size: W185)
                 }
@@ -29,13 +32,21 @@ function CastCredit(props: Props) {
     const rest = profilePicture != null ? { src: profilePicture } : {};
 
     return (
-        <VStack w="140px">
-            <Avatar h="100px" name={credit.actor.name} shadow="lg" w="100px" {...rest} />
-            <VStack spacing={0}>
-                <Text fontSize="sm" fontWeight="semibold" noOfLines={2} textAlign="center">{credit.actor.name}</Text>
-                <Text fontSize="sm" fontWeight="light" noOfLines={3} textAlign="center">as {credit.character}</Text>
+        <PersonLinkContainer person={credit.actor}>
+            <VStack w="140px">
+                <Avatar h="100px" name={credit.actor.name} shadow="lg" w="100px" {...rest} />
+                <VStack spacing={0}>
+                    <Text fontSize="sm"
+                        fontWeight="semibold"
+                        noOfLines={2}
+                        textAlign="center">
+                            
+                        {credit.actor.name}
+                    </Text>
+                    <Text fontSize="sm" fontWeight="light" noOfLines={3} textAlign="center">as {credit.character}</Text>
+                </VStack>
             </VStack>
-        </VStack>
+        </PersonLinkContainer>
     );
 }
 
