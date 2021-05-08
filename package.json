@@ -34,10 +34,11 @@
     "build": "npm run relay && react-scripts build",
     "test": "npm run relay && react-scripts test",
     "eject": "npm run relay && react-scripts eject",
-    "relay": "relay-compiler --src ./src --schema ./data/schema.graphql --extensions ts tsx --language typescript --customScalars.URL=string --customScalars.Date=string --watchman false $@",
+    "relay": "relay-compiler --src ./src --schema ./data/schema.graphql --extensions ts tsx --language typescript --customScalars.URL=string --customScalars.Date=string $@",
     "validate-relay": "relay-compiler --validate  --src ./src --schema ./data/schema.graphql --extensions ts tsx --language typescript --customScalars.URL=string --customScalars.Date=string",
     "lint": "eslint . --ignore-pattern node_modules/ --ext .js,.jsx,.ts,.tsx",
-    "autofix": "eslint . --ignore-pattern node_modules/ --ext .js,.jsx,.ts,.tsx --fix"
+    "autofix": "eslint . --ignore-pattern node_modules/ --ext .js,.jsx,.ts,.tsx --fix",
+    "relay-watch": "relay-compiler --src ./src --schema ./data/schema.graphql --extensions ts tsx --language typescript --customScalars.URL=string --customScalars.Date=string --watch"
   },
   "eslintConfig": {
     "extends": [
