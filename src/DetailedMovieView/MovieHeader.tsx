@@ -2,6 +2,7 @@ import type { MovieHeader_movie$key } from './__generated__/MovieHeader_movie.gr
 
 import React from 'react';
 import {
+    Box,
     HStack,
     Image,
     Text,
@@ -14,6 +15,8 @@ import { useFragment } from 'react-relay';
 import { graphql } from 'babel-plugin-relay/macro';
 
 import GenreTag from './GenreTag';
+
+import useMovieReleaseDate from 'useMovieReleaseDate';
 
 import { POSTER_PLACEHOLDER } from 'utils/constants';
 
@@ -29,6 +32,8 @@ function MovieHeader(props: Props) {
                 title
                 rating
 
+                ...useMovieReleaseDate_movie
+
                 details {
                     runtime
                     tagline
@@ -42,6 +47,8 @@ function MovieHeader(props: Props) {
     );
 
     const poster = movie.poster ?? POSTER_PLACEHOLDER;
+    const releaseDate = useMovieReleaseDate(movie);
+    const releaseYear = releaseDate?.getFullYear();
 
     return (
         <HStack align="flex-end" spacing={4}>
@@ -55,9 +62,24 @@ function MovieHeader(props: Props) {
                 src={poster}
             />
             <VStack align="baseline" spacing={2}>
-                <Text fontSize="3xl" fontWeight="bold">
-                    {movie.title}
-                </Text>
+                <VStack align="baseline" spacing={0}>
+                    <Text fontSize="3xl" fontWeight="bold">
+                        {movie.title}
+                    </Text>
+                    <HStack divider={<Text fontSize="xl" fontWeight="light" padding={1}>·</Text>}>
+                        {
+                            releaseYear != null && <Text fontSize="md">
+                                {releaseYear}
+                            </Text>
+                        }
+                        <Text fontSize="md" fontWeight="light">
+                            {movie.details.runtime} min
+                        </Text>
+                        <Text fontSize="md" fontWeight="light">
+                            ★ {movie.rating}
+                        </Text>
+                    </HStack>
+                </VStack>
                 <Wrap spacing={2}>
                     {
                         movie.details.genres.map((genre, index) => {
@@ -65,19 +87,9 @@ function MovieHeader(props: Props) {
                         })
                     }
                 </Wrap>
-                <VStack align="baseline" spacing={0}>
-                    <Text fontSize="md">
-                        {movie.details.tagline}
-                    </Text>
-                    <HStack>
-                        <Text fontSize="md" fontWeight="light">
-                            {movie.details.runtime} min
-                        </Text>
-                        <Text fontSize="md" fontWeight="light">
-                            {movie.rating} ★
-                        </Text>
-                    </HStack>
-                </VStack>
+                <Text fontSize="md">
+                    {movie.details.tagline}
+                </Text>
             </VStack>
         </HStack>
     );

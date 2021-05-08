@@ -15,6 +15,7 @@ export type MovieHeader_movie = {
             readonly " $fragmentRefs": FragmentRefs<"GenreTag_genre">;
         }>;
     };
+    readonly " $fragmentRefs": FragmentRefs<"useMovieReleaseDate_movie">;
     readonly " $refType": "MovieHeader_movie";
 };
 export type MovieHeader_movie$data = MovieHeader_movie;
@@ -98,10 +99,15 @@ const node: ReaderFragment = {
         }
       ],
       "storageKey": null
+    },
+    {
+      "args": null,
+      "kind": "FragmentSpread",
+      "name": "useMovieReleaseDate_movie"
     }
   ],
   "type": "IMovie",
   "abstractKey": "__isIMovie"
 };
-(node as any).hash = '1857fbd8b23bf79eeb56794a56223294';
+(node as any).hash = '9b67b48b06535f5bd75ca43c345b5a2c';
 export default node;
