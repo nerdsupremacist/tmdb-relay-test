@@ -8,14 +8,12 @@ export type SearchResultsListQueryVariables = {
     term: string;
 };
 export type SearchResultsListQueryResponse = {
-    readonly movies: {
-        readonly search: {
-            readonly edges: ReadonlyArray<{
-                readonly node: {
-                    readonly " $fragmentRefs": FragmentRefs<"MovieSearchResult_movie">;
-                } | null;
-            } | null> | null;
-        };
+    readonly search: {
+        readonly edges: ReadonlyArray<{
+            readonly node: {
+                readonly " $fragmentRefs": FragmentRefs<"SearchResult_result">;
+            } | null;
+        } | null> | null;
     };
 };
 export type SearchResultsListQuery = {
@@ -29,13 +27,11 @@ export type SearchResultsListQuery = {
 query SearchResultsListQuery(
   $term: String!
 ) {
-  movies {
-    search(term: $term, first: 5) {
-      edges {
-        node {
-          __typename
-          ...MovieSearchResult_movie
-        }
+  search(term: $term, first: 5) {
+    edges {
+      node {
+        __typename
+        ...SearchResult_result
       }
     }
   }
@@ -52,6 +48,42 @@ fragment MovieSearchResult_movie on IMovie {
   title
   overview
   poster(size: W185)
+}
+
+fragment PersonLinkContainer_person on IBasicPerson {
+  __isIBasicPerson: __typename
+  personId: id
+}
+
+fragment PersonSearchResult_person on IPerson {
+  __isIPerson: __typename
+  ...PersonLinkContainer_person
+  name
+  profilePicture(size: W185)
+  ...useKnownForDescription_person
+}
+
+fragment SearchResult_result on MovieOrTVOrPeople {
+  __isMovieOrTVOrPeople: __typename
+  __typename
+  ... on MovieResult {
+    ...MovieSearchResult_movie
+  }
+  ... on PersonListResult {
+    ...PersonSearchResult_person
+  }
+}
+
+fragment useKnownForDescription_person on PersonListResult {
+  knownFor {
+    __typename
+    ... on MovieResult {
+      title
+    }
+    ... on TVShowResult {
+      name
+    }
+  }
 }
 */
 
@@ -74,7 +106,35 @@ v1 = [
     "name": "term",
     "variableName": "term"
   }
-];
+],
+v2 = {
+  "alias": null,
+  "args": null,
+  "kind": "ScalarField",
+  "name": "__typename",
+  "storageKey": null
+},
+v3 = {
+  "alias": null,
+  "args": null,
+  "kind": "ScalarField",
+  "name": "title",
+  "storageKey": null
+},
+v4 = [
+  {
+    "kind": "Literal",
+    "name": "size",
+    "value": "W185"
+  }
+],
+v5 = {
+  "alias": null,
+  "args": null,
+  "kind": "ScalarField",
+  "name": "name",
+  "storageKey": null
+};
 return {
   "fragment": {
     "argumentDefinitions": (v0/*: any*/),
@@ -84,43 +144,32 @@ return {
     "selections": [
       {
         "alias": null,
-        "args": null,
-        "concreteType": "Movies",
+        "args": (v1/*: any*/),
+        "concreteType": "MovieOrTVOrPeopleConnection",
         "kind": "LinkedField",
-        "name": "movies",
+        "name": "search",
         "plural": false,
         "selections": [
           {
             "alias": null,
-            "args": (v1/*: any*/),
-            "concreteType": "MovieConnection",
+            "args": null,
+            "concreteType": "MovieOrTVOrPeopleEdge",
             "kind": "LinkedField",
-            "name": "search",
-            "plural": false,
+            "name": "edges",
+            "plural": true,
             "selections": [
               {
                 "alias": null,
                 "args": null,
-                "concreteType": "MovieEdge",
+                "concreteType": null,
                 "kind": "LinkedField",
-                "name": "edges",
-                "plural": true,
+                "name": "node",
+                "plural": false,
                 "selections": [
                   {
-                    "alias": null,
                     "args": null,
-                    "concreteType": null,
-                    "kind": "LinkedField",
-                    "name": "node",
-                    "plural": false,
-                    "selections": [
-                      {
-                        "args": null,
-                        "kind": "FragmentSpread",
-                        "name": "MovieSearchResult_movie"
-                      }
-                    ],
-                    "storageKey": null
+                    "kind": "FragmentSpread",
+                    "name": "SearchResult_result"
                   }
                 ],
                 "storageKey": null
@@ -143,83 +192,139 @@ return {
     "selections": [
       {
         "alias": null,
-        "args": null,
-        "concreteType": "Movies",
+        "args": (v1/*: any*/),
+        "concreteType": "MovieOrTVOrPeopleConnection",
         "kind": "LinkedField",
-        "name": "movies",
+        "name": "search",
         "plural": false,
         "selections": [
           {
             "alias": null,
-            "args": (v1/*: any*/),
-            "concreteType": "MovieConnection",
+            "args": null,
+            "concreteType": "MovieOrTVOrPeopleEdge",
             "kind": "LinkedField",
-            "name": "search",
-            "plural": false,
+            "name": "edges",
+            "plural": true,
             "selections": [
               {
                 "alias": null,
                 "args": null,
-                "concreteType": "MovieEdge",
+                "concreteType": null,
                 "kind": "LinkedField",
-                "name": "edges",
-                "plural": true,
+                "name": "node",
+                "plural": false,
                 "selections": [
+                  (v2/*: any*/),
                   {
-                    "alias": null,
-                    "args": null,
-                    "concreteType": null,
-                    "kind": "LinkedField",
-                    "name": "node",
-                    "plural": false,
+                    "kind": "TypeDiscriminator",
+                    "abstractKey": "__isMovieOrTVOrPeople"
+                  },
+                  {
+                    "kind": "InlineFragment",
                     "selections": [
                       {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "__typename",
-                        "storageKey": null
-                      },
-                      {
-                        "kind": "TypeDiscriminator",
-                        "abstractKey": "__isIMovie"
-                      },
-                      {
-                        "alias": "movieId",
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "id",
-                        "storageKey": null
-                      },
-                      {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "title",
-                        "storageKey": null
-                      },
-                      {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "overview",
-                        "storageKey": null
-                      },
-                      {
-                        "alias": null,
-                        "args": [
+                        "kind": "InlineFragment",
+                        "selections": [
                           {
-                            "kind": "Literal",
-                            "name": "size",
-                            "value": "W185"
+                            "alias": "movieId",
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "id",
+                            "storageKey": null
+                          },
+                          (v3/*: any*/),
+                          {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "overview",
+                            "storageKey": null
+                          },
+                          {
+                            "alias": null,
+                            "args": (v4/*: any*/),
+                            "kind": "ScalarField",
+                            "name": "poster",
+                            "storageKey": "poster(size:\"W185\")"
                           }
                         ],
-                        "kind": "ScalarField",
-                        "name": "poster",
-                        "storageKey": "poster(size:\"W185\")"
+                        "type": "IMovie",
+                        "abstractKey": "__isIMovie"
                       }
                     ],
-                    "storageKey": null
+                    "type": "MovieResult",
+                    "abstractKey": null
+                  },
+                  {
+                    "kind": "InlineFragment",
+                    "selections": [
+                      {
+                        "kind": "InlineFragment",
+                        "selections": [
+                          (v5/*: any*/),
+                          {
+                            "alias": null,
+                            "args": (v4/*: any*/),
+                            "kind": "ScalarField",
+                            "name": "profilePicture",
+                            "storageKey": "profilePicture(size:\"W185\")"
+                          },
+                          {
+                            "kind": "InlineFragment",
+                            "selections": [
+                              {
+                                "alias": "personId",
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "id",
+                                "storageKey": null
+                              }
+                            ],
+                            "type": "IBasicPerson",
+                            "abstractKey": "__isIBasicPerson"
+                          },
+                          {
+                            "kind": "InlineFragment",
+                            "selections": [
+                              {
+                                "alias": null,
+                                "args": null,
+                                "concreteType": null,
+                                "kind": "LinkedField",
+                                "name": "knownFor",
+                                "plural": true,
+                                "selections": [
+                                  (v2/*: any*/),
+                                  {
+                                    "kind": "InlineFragment",
+                                    "selections": [
+                                      (v3/*: any*/)
+                                    ],
+                                    "type": "MovieResult",
+                                    "abstractKey": null
+                                  },
+                                  {
+                                    "kind": "InlineFragment",
+                                    "selections": [
+                                      (v5/*: any*/)
+                                    ],
+                                    "type": "TVShowResult",
+                                    "abstractKey": null
+                                  }
+                                ],
+                                "storageKey": null
+                              }
+                            ],
+                            "type": "PersonListResult",
+                            "abstractKey": null
+                          }
+                        ],
+                        "type": "IPerson",
+                        "abstractKey": "__isIPerson"
+                      }
+                    ],
+                    "type": "PersonListResult",
+                    "abstractKey": null
                   }
                 ],
                 "storageKey": null
@@ -233,14 +338,14 @@ return {
     ]
   },
   "params": {
-    "cacheID": "032b3e8082c7b5dff3a64bafeb81639a",
+    "cacheID": "442b32cd1cb2679c42b27df8029df716",
     "id": null,
     "metadata": {},
     "name": "SearchResultsListQuery",
     "operationKind": "query",
-    "text": "query SearchResultsListQuery(\n  $term: String!\n) {\n  movies {\n    search(term: $term, first: 5) {\n      edges {\n        node {\n          __typename\n          ...MovieSearchResult_movie\n        }\n      }\n    }\n  }\n}\n\nfragment MovieLinkContainer_movie on IMovie {\n  __isIMovie: __typename\n  movieId: id\n}\n\nfragment MovieSearchResult_movie on IMovie {\n  __isIMovie: __typename\n  ...MovieLinkContainer_movie\n  title\n  overview\n  poster(size: W185)\n}\n"
+    "text": "query SearchResultsListQuery(\n  $term: String!\n) {\n  search(term: $term, first: 5) {\n    edges {\n      node {\n        __typename\n        ...SearchResult_result\n      }\n    }\n  }\n}\n\nfragment MovieLinkContainer_movie on IMovie {\n  __isIMovie: __typename\n  movieId: id\n}\n\nfragment MovieSearchResult_movie on IMovie {\n  __isIMovie: __typename\n  ...MovieLinkContainer_movie\n  title\n  overview\n  poster(size: W185)\n}\n\nfragment PersonLinkContainer_person on IBasicPerson {\n  __isIBasicPerson: __typename\n  personId: id\n}\n\nfragment PersonSearchResult_person on IPerson {\n  __isIPerson: __typename\n  ...PersonLinkContainer_person\n  name\n  profilePicture(size: W185)\n  ...useKnownForDescription_person\n}\n\nfragment SearchResult_result on MovieOrTVOrPeople {\n  __isMovieOrTVOrPeople: __typename\n  __typename\n  ... on MovieResult {\n    ...MovieSearchResult_movie\n  }\n  ... on PersonListResult {\n    ...PersonSearchResult_person\n  }\n}\n\nfragment useKnownForDescription_person on PersonListResult {\n  knownFor {\n    __typename\n    ... on MovieResult {\n      title\n    }\n    ... on TVShowResult {\n      name\n    }\n  }\n}\n"
   }
 };
 })();
-(node as any).hash = '3486d8e9e5dc03fe87602be98cf88ea1';
+(node as any).hash = '7472b51ac2cd673794c6c19c1d32f7a4';
 export default node;
