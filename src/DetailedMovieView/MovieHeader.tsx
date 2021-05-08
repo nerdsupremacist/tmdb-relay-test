@@ -2,7 +2,6 @@ import type { MovieHeader_movie$key } from './__generated__/MovieHeader_movie.gr
 
 import React from 'react';
 import {
-    Box,
     HStack,
     Image,
     Text,
