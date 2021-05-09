@@ -1,13 +1,14 @@
 import type {
     DetailedPersonViewQuery as DetailedPersonViewQueryType,
 } from './__generated__/DetailedPersonViewQuery.graphql';
+import type { ErrorBoundary } from 'react-error-boundary';
 
 import DetailedPersonViewQuery from './__generated__/DetailedPersonViewQuery.graphql';
 
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useParams } from 'react-router';
 
-import { loadQuery, PreloadedQuery, usePreloadedQuery, useRelayEnvironment } from 'react-relay';
+import { PreloadedQuery, usePreloadedQuery, useQueryLoader } from 'react-relay';
 import { graphql } from 'babel-plugin-relay/macro';
 
 import LoadingSuspense from 'LoadingSuspense';
@@ -42,12 +43,24 @@ function DetailedPersonView(props: LoadedProps) {
 
 function DetailedPersonViewWrapper() {
     const { id } = useParams<Params>();
-    const environment = useRelayEnvironment();
-    const data = loadQuery<DetailedPersonViewQueryType>(environment, DetailedPersonViewQuery, { id: parseInt(id) });
+    const [
+        data,
+        loadQuery,
+        dispose,
+    ] = useQueryLoader<DetailedPersonViewQueryType>(DetailedPersonViewQuery);
+
+    const error = useRef<ErrorBoundary>(null);
+    useEffect(() => {
+        error.current?.reset();
+        loadQuery({ id: parseInt(id) });
+        return () => {
+            dispose();
+        };
+    }, [id, dispose, loadQuery]);
 
     return (
-        <LoadingSuspense>
-            <DetailedPersonView data={data}/>
+        <LoadingSuspense boundaryRef={error}>
+            {data != null && <DetailedPersonView data={data}/>}
         </LoadingSuspense>
     );
 }

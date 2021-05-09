@@ -49,7 +49,7 @@ function MovieSearchResult(props: Props) {
                     <Text fontSize="md" fontWeight="bold">
                         {movie.title}
                     </Text>
-                    <Text fontSize="xs" fontWeight="light">
+                    <Text fontSize="xs" fontWeight="light" noOfLines={4}>
                         {movie.overview}
                     </Text>
                 </VStack>

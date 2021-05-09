@@ -2,13 +2,14 @@
 import type {
     SearchResultsListQuery as SearchResultsListQueryType,
 } from './__generated__/SearchResultsListQuery.graphql';
+import type { ErrorBoundary } from 'react-error-boundary';
 
 import SearchResultsListQuery from './__generated__/SearchResultsListQuery.graphql';
 
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { VStack } from '@chakra-ui/react';
 
-import { loadQuery, PreloadedQuery, usePreloadedQuery, useRelayEnvironment } from 'react-relay';
+import { PreloadedQuery, usePreloadedQuery, useQueryLoader } from 'react-relay';
 import { graphql } from 'babel-plugin-relay/macro';
 
 import LoadingSuspense from 'LoadingSuspense';
@@ -52,12 +53,25 @@ function SearchResultsList(props: LoadedProps) {
 }
 
 function SearchResultsListWrapper({ term }: Props) {
-    const environment = useRelayEnvironment();
-    const data = loadQuery<SearchResultsListQueryType>(environment, SearchResultsListQuery, { term });
+    const [
+        data,
+        loadQuery,
+        dispose,
+    ] = useQueryLoader<SearchResultsListQueryType>(SearchResultsListQuery);
+
+    const error = useRef<ErrorBoundary>(null);
+
+    useEffect(() => {
+        error.current?.reset();
+        loadQuery({ term });
+        return () => {
+            dispose();
+        };
+    }, [term, dispose, loadQuery]);
 
     return (
-        <LoadingSuspense>
-            <SearchResultsList data={data} />
+        <LoadingSuspense boundaryRef={error}>
+            {data != null && <SearchResultsList data={data} />}
         </LoadingSuspense>
     );
 }

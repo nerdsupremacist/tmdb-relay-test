@@ -2,13 +2,14 @@
 import type {
     DetailedMovieViewQuery as DetailedMovieViewQueryType,
 } from './__generated__/DetailedMovieViewQuery.graphql';
+import type { ErrorBoundary } from 'react-error-boundary';
 
 import DetailedMovieViewQuery from './__generated__/DetailedMovieViewQuery.graphql';
 
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useParams } from 'react-router';
 
-import { loadQuery, PreloadedQuery, usePreloadedQuery, useRelayEnvironment } from 'react-relay';
+import { PreloadedQuery, usePreloadedQuery, useQueryLoader } from 'react-relay';
 import { graphql } from 'babel-plugin-relay/macro';
 
 import LoadingSuspense from 'LoadingSuspense';
@@ -43,12 +44,24 @@ function DetailedMovieView(props: LoadedProps) {
 
 function DetailedMovieViewWrapper() {
     const { id } = useParams<Params>();
-    const environment = useRelayEnvironment();
-    const data = loadQuery<DetailedMovieViewQueryType>(environment, DetailedMovieViewQuery, { id: parseInt(id) });
+    const [
+        data,
+        loadQuery,
+        dispose,
+    ] = useQueryLoader<DetailedMovieViewQueryType>(DetailedMovieViewQuery);
+
+    const error = useRef<ErrorBoundary>(null);
+    useEffect(() => {
+        error.current?.reset();
+        loadQuery({ id: parseInt(id) });
+        return () => {
+            dispose();
+        };
+    }, [id, dispose, loadQuery]);
 
     return (
-        <LoadingSuspense>
-            <DetailedMovieView data={data} />
+        <LoadingSuspense boundaryRef={error}>
+            {data != null && <DetailedMovieView data={data}/>}
         </LoadingSuspense>
     );
 }

@@ -1,5 +1,5 @@
 
-import type { ReactNode } from 'react';
+import type { ReactNode, RefObject } from 'react';
 import type { FallbackProps } from 'react-error-boundary';
 
 import React from 'react';
@@ -11,6 +11,7 @@ import Placeholder from './Placeholder';
 
 type Props = {
     children: ReactNode | Array<ReactNode>,
+    boundaryRef?: RefObject<ErrorBoundary>
 }
 
 function ErrorFallback({ error }: FallbackProps) {
@@ -33,13 +34,14 @@ function ErrorFallback({ error }: FallbackProps) {
     );
 }
 
-function LoadingSuspense({ children }: Props) {
+function LoadingSuspense({ children, boundaryRef }: Props) {
     return (
         <ErrorBoundary
             FallbackComponent={ErrorFallback}
+            ref={boundaryRef}
         >
             <Suspense fallback={<Placeholder />}>
-                {children}
+                {children !== [] ? children : <Placeholder />}
             </Suspense>
         </ErrorBoundary>
     );
