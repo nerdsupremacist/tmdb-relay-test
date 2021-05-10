@@ -5,7 +5,7 @@
 import { ReaderFragment } from "relay-runtime";
 import { FragmentRefs } from "relay-runtime";
 export type MovieLinkContainer_movie = {
-    readonly movieId: number;
+    readonly movieId: string;
     readonly " $refType": "MovieLinkContainer_movie";
 };
 export type MovieLinkContainer_movie$data = MovieLinkContainer_movie;
@@ -30,8 +30,8 @@ const node: ReaderFragment = {
       "storageKey": null
     }
   ],
-  "type": "IMovie",
-  "abstractKey": "__isIMovie"
+  "type": "Movie",
+  "abstractKey": null
 };
-(node as any).hash = 'e6916ed1092755f1c13d5645a467bcb2';
+(node as any).hash = '128477e3620a3242008fe0647ca057e4';
 export default node;

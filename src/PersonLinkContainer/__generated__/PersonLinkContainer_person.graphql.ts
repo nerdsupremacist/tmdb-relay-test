@@ -5,7 +5,7 @@
 import { ReaderFragment } from "relay-runtime";
 import { FragmentRefs } from "relay-runtime";
 export type PersonLinkContainer_person = {
-    readonly personId: number;
+    readonly personId: string;
     readonly " $refType": "PersonLinkContainer_person";
 };
 export type PersonLinkContainer_person$data = PersonLinkContainer_person;
@@ -30,8 +30,8 @@ const node: ReaderFragment = {
       "storageKey": null
     }
   ],
-  "type": "IBasicPerson",
-  "abstractKey": "__isIBasicPerson"
+  "type": "Person",
+  "abstractKey": null
 };
-(node as any).hash = '738725c44a3b2c4583d24f0e646968f7';
+(node as any).hash = '6ece282f86e35335b85f5bdfa35cd2bf';
 export default node;

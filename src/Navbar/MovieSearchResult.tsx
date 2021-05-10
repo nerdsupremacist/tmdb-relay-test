@@ -18,7 +18,7 @@ type Props = {
 function MovieSearchResult(props: Props) {
     const movie = useFragment(
         graphql`
-            fragment MovieSearchResult_movie on IMovie {
+            fragment MovieSearchResult_movie on Movie {
                 ...MovieLinkContainer_movie
                 title
                 overview

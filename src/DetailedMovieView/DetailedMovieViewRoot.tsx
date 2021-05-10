@@ -15,7 +15,7 @@ import Cast from 'Cast';
 import MovieHeader from './MovieHeader';
 import MovieParallaxBackdrop from './MovieParallaxBackdrop';
 import MovieStreamingLinks from './MovieStreamingLinks';
-import RelatedMovieList from './RelatedMovieList';
+import SimilarMovieList from './SimilarMovieList';
 
 type Props = {
     movie: DetailedMovieViewRoot_movie$key
@@ -24,7 +24,7 @@ type Props = {
 function DetailedMovieViewRoot(props: Props) {
     const movie = useFragment(
         graphql`
-            fragment DetailedMovieViewRoot_movie on IMovie {    
+            fragment DetailedMovieViewRoot_movie on Movie {    
                 ...MovieHeader_movie
                 ...MovieStreamingLinks_movie
 
@@ -35,14 +35,7 @@ function DetailedMovieViewRoot(props: Props) {
                 }
 
                 ...MovieParallaxBackdrop_movie
-
-                recommendations {
-                    ...RelatedMovieList_connection
-                }
-
-                similar {
-                    ...RelatedMovieList_connection
-                }
+                ...SimilarMovieList_movie @arguments(count: 20, cursor: null)
             }
         `,
         props.movie,
@@ -62,13 +55,9 @@ function DetailedMovieViewRoot(props: Props) {
             <Container paddingBottom={8} paddingTop={8}>
                 <VStack align="baseline" spacing={4}>
                     <Text fontSize="xl" fontWeight="bold">
-                        Recommended
-                    </Text>
-                    <RelatedMovieList connection={movie.recommendations} />
-                    <Text fontSize="xl" fontWeight="bold">
                         Similar Movies
                     </Text>
-                    <RelatedMovieList connection={movie.similar} />
+                    <SimilarMovieList movie={movie} />
                 </VStack>
             </Container>
         </div>

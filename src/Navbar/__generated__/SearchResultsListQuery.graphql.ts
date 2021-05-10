@@ -32,31 +32,31 @@ query SearchResultsListQuery(
       node {
         __typename
         ...SearchResult_result
+        ... on Node {
+          __isNode: __typename
+          id
+        }
       }
     }
   }
 }
 
-fragment MovieLinkContainer_movie on IMovie {
-  __isIMovie: __typename
+fragment MovieLinkContainer_movie on Movie {
   movieId: id
 }
 
-fragment MovieSearchResult_movie on IMovie {
-  __isIMovie: __typename
+fragment MovieSearchResult_movie on Movie {
   ...MovieLinkContainer_movie
   title
   overview
   poster(size: W185)
 }
 
-fragment PersonLinkContainer_person on IBasicPerson {
-  __isIBasicPerson: __typename
+fragment PersonLinkContainer_person on Person {
   personId: id
 }
 
-fragment PersonSearchResult_person on IPerson {
-  __isIPerson: __typename
+fragment PersonSearchResult_person on Person {
   ...PersonLinkContainer_person
   name
   profilePicture(size: W185)
@@ -66,22 +66,26 @@ fragment PersonSearchResult_person on IPerson {
 fragment SearchResult_result on MovieOrTVOrPeople {
   __isMovieOrTVOrPeople: __typename
   __typename
-  ... on MovieResult {
+  ... on Movie {
     ...MovieSearchResult_movie
   }
-  ... on PersonListResult {
+  ... on Person {
     ...PersonSearchResult_person
   }
 }
 
-fragment useKnownForDescription_person on PersonListResult {
+fragment useKnownForDescription_person on Person {
   knownFor {
     __typename
-    ... on MovieResult {
+    ... on Movie {
       title
     }
-    ... on TVShowResult {
+    ... on TVShow {
       name
+    }
+    ... on Node {
+      __isNode: __typename
+      id
     }
   }
 }
@@ -134,6 +138,20 @@ v5 = {
   "kind": "ScalarField",
   "name": "name",
   "storageKey": null
+},
+v6 = {
+  "kind": "InlineFragment",
+  "selections": [
+    {
+      "alias": null,
+      "args": null,
+      "kind": "ScalarField",
+      "name": "id",
+      "storageKey": null
+    }
+  ],
+  "type": "Node",
+  "abstractKey": "__isNode"
 };
 return {
   "fragment": {
@@ -223,109 +241,83 @@ return {
                     "kind": "InlineFragment",
                     "selections": [
                       {
-                        "kind": "InlineFragment",
-                        "selections": [
-                          {
-                            "alias": "movieId",
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "id",
-                            "storageKey": null
-                          },
-                          (v3/*: any*/),
-                          {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "overview",
-                            "storageKey": null
-                          },
-                          {
-                            "alias": null,
-                            "args": (v4/*: any*/),
-                            "kind": "ScalarField",
-                            "name": "poster",
-                            "storageKey": "poster(size:\"W185\")"
-                          }
-                        ],
-                        "type": "IMovie",
-                        "abstractKey": "__isIMovie"
+                        "alias": "movieId",
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "id",
+                        "storageKey": null
+                      },
+                      (v3/*: any*/),
+                      {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "overview",
+                        "storageKey": null
+                      },
+                      {
+                        "alias": null,
+                        "args": (v4/*: any*/),
+                        "kind": "ScalarField",
+                        "name": "poster",
+                        "storageKey": "poster(size:\"W185\")"
                       }
                     ],
-                    "type": "MovieResult",
+                    "type": "Movie",
                     "abstractKey": null
                   },
                   {
                     "kind": "InlineFragment",
                     "selections": [
                       {
-                        "kind": "InlineFragment",
+                        "alias": "personId",
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "id",
+                        "storageKey": null
+                      },
+                      (v5/*: any*/),
+                      {
+                        "alias": null,
+                        "args": (v4/*: any*/),
+                        "kind": "ScalarField",
+                        "name": "profilePicture",
+                        "storageKey": "profilePicture(size:\"W185\")"
+                      },
+                      {
+                        "alias": null,
+                        "args": null,
+                        "concreteType": null,
+                        "kind": "LinkedField",
+                        "name": "knownFor",
+                        "plural": true,
                         "selections": [
-                          (v5/*: any*/),
-                          {
-                            "alias": null,
-                            "args": (v4/*: any*/),
-                            "kind": "ScalarField",
-                            "name": "profilePicture",
-                            "storageKey": "profilePicture(size:\"W185\")"
-                          },
+                          (v2/*: any*/),
                           {
                             "kind": "InlineFragment",
                             "selections": [
-                              {
-                                "alias": "personId",
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "id",
-                                "storageKey": null
-                              }
+                              (v3/*: any*/)
                             ],
-                            "type": "IBasicPerson",
-                            "abstractKey": "__isIBasicPerson"
-                          },
-                          {
-                            "kind": "InlineFragment",
-                            "selections": [
-                              {
-                                "alias": null,
-                                "args": null,
-                                "concreteType": null,
-                                "kind": "LinkedField",
-                                "name": "knownFor",
-                                "plural": true,
-                                "selections": [
-                                  (v2/*: any*/),
-                                  {
-                                    "kind": "InlineFragment",
-                                    "selections": [
-                                      (v3/*: any*/)
-                                    ],
-                                    "type": "MovieResult",
-                                    "abstractKey": null
-                                  },
-                                  {
-                                    "kind": "InlineFragment",
-                                    "selections": [
-                                      (v5/*: any*/)
-                                    ],
-                                    "type": "TVShowResult",
-                                    "abstractKey": null
-                                  }
-                                ],
-                                "storageKey": null
-                              }
-                            ],
-                            "type": "PersonListResult",
+                            "type": "Movie",
                             "abstractKey": null
-                          }
+                          },
+                          {
+                            "kind": "InlineFragment",
+                            "selections": [
+                              (v5/*: any*/)
+                            ],
+                            "type": "TVShow",
+                            "abstractKey": null
+                          },
+                          (v6/*: any*/)
                         ],
-                        "type": "IPerson",
-                        "abstractKey": "__isIPerson"
+                        "storageKey": null
                       }
                     ],
-                    "type": "PersonListResult",
+                    "type": "Person",
                     "abstractKey": null
-                  }
+                  },
+                  (v6/*: any*/)
                 ],
                 "storageKey": null
               }
@@ -338,12 +330,12 @@ return {
     ]
   },
   "params": {
-    "cacheID": "442b32cd1cb2679c42b27df8029df716",
+    "cacheID": "44f2caa07e32587401b4ac1ead4439c4",
     "id": null,
     "metadata": {},
     "name": "SearchResultsListQuery",
     "operationKind": "query",
-    "text": "query SearchResultsListQuery(\n  $term: String!\n) {\n  search(term: $term, first: 5) {\n    edges {\n      node {\n        __typename\n        ...SearchResult_result\n      }\n    }\n  }\n}\n\nfragment MovieLinkContainer_movie on IMovie {\n  __isIMovie: __typename\n  movieId: id\n}\n\nfragment MovieSearchResult_movie on IMovie {\n  __isIMovie: __typename\n  ...MovieLinkContainer_movie\n  title\n  overview\n  poster(size: W185)\n}\n\nfragment PersonLinkContainer_person on IBasicPerson {\n  __isIBasicPerson: __typename\n  personId: id\n}\n\nfragment PersonSearchResult_person on IPerson {\n  __isIPerson: __typename\n  ...PersonLinkContainer_person\n  name\n  profilePicture(size: W185)\n  ...useKnownForDescription_person\n}\n\nfragment SearchResult_result on MovieOrTVOrPeople {\n  __isMovieOrTVOrPeople: __typename\n  __typename\n  ... on MovieResult {\n    ...MovieSearchResult_movie\n  }\n  ... on PersonListResult {\n    ...PersonSearchResult_person\n  }\n}\n\nfragment useKnownForDescription_person on PersonListResult {\n  knownFor {\n    __typename\n    ... on MovieResult {\n      title\n    }\n    ... on TVShowResult {\n      name\n    }\n  }\n}\n"
+    "text": "query SearchResultsListQuery(\n  $term: String!\n) {\n  search(term: $term, first: 5) {\n    edges {\n      node {\n        __typename\n        ...SearchResult_result\n        ... on Node {\n          __isNode: __typename\n          id\n        }\n      }\n    }\n  }\n}\n\nfragment MovieLinkContainer_movie on Movie {\n  movieId: id\n}\n\nfragment MovieSearchResult_movie on Movie {\n  ...MovieLinkContainer_movie\n  title\n  overview\n  poster(size: W185)\n}\n\nfragment PersonLinkContainer_person on Person {\n  personId: id\n}\n\nfragment PersonSearchResult_person on Person {\n  ...PersonLinkContainer_person\n  name\n  profilePicture(size: W185)\n  ...useKnownForDescription_person\n}\n\nfragment SearchResult_result on MovieOrTVOrPeople {\n  __isMovieOrTVOrPeople: __typename\n  __typename\n  ... on Movie {\n    ...MovieSearchResult_movie\n  }\n  ... on Person {\n    ...PersonSearchResult_person\n  }\n}\n\nfragment useKnownForDescription_person on Person {\n  knownFor {\n    __typename\n    ... on Movie {\n      title\n    }\n    ... on TVShow {\n      name\n    }\n    ... on Node {\n      __isNode: __typename\n      id\n    }\n  }\n}\n"
   }
 };
 })();

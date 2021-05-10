@@ -15,7 +15,7 @@ type Props = {
 function PersonLinkContainer(props: Props) {
     const person = useFragment(
         graphql`
-            fragment PersonLinkContainer_person on IBasicPerson {
+            fragment PersonLinkContainer_person on Person {
                 personId: id
             }
         `,

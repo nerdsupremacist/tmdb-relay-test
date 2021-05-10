@@ -25,7 +25,7 @@ type Params = {
 function DetailedPersonView(props: LoadedProps) {
     const data = usePreloadedQuery(
         graphql`
-            query DetailedPersonViewQuery($id: Int!) {
+            query DetailedPersonViewQuery($id: ID!) {
                 people {
                     person(id: $id) {
                         ...DetailedPersonViewRoot_person
@@ -52,7 +52,7 @@ function DetailedPersonViewWrapper() {
     const error = useRef<ErrorBoundary>(null);
     useEffect(() => {
         error.current?.reset();
-        loadQuery({ id: parseInt(id) });
+        loadQuery({ id });
         return () => {
             dispose();
         };

@@ -5,7 +5,7 @@
 import { ConcreteRequest } from "relay-runtime";
 import { FragmentRefs } from "relay-runtime";
 export type DetailedPersonViewQueryVariables = {
-    id: number;
+    id: string;
 };
 export type DetailedPersonViewQueryResponse = {
     readonly people: {
@@ -23,16 +23,17 @@ export type DetailedPersonViewQuery = {
 
 /*
 query DetailedPersonViewQuery(
-  $id: Int!
+  $id: ID!
 ) {
   people {
     person(id: $id) {
       ...DetailedPersonViewRoot_person
+      id
     }
   }
 }
 
-fragment DetailedPersonViewRoot_person on DetailedPerson {
+fragment DetailedPersonViewRoot_person on Person {
   name
 }
 */
@@ -70,7 +71,7 @@ return {
           {
             "alias": null,
             "args": (v1/*: any*/),
-            "concreteType": "DetailedPerson",
+            "concreteType": "Person",
             "kind": "LinkedField",
             "name": "person",
             "plural": false,
@@ -107,7 +108,7 @@ return {
           {
             "alias": null,
             "args": (v1/*: any*/),
-            "concreteType": "DetailedPerson",
+            "concreteType": "Person",
             "kind": "LinkedField",
             "name": "person",
             "plural": false,
@@ -117,6 +118,13 @@ return {
                 "args": null,
                 "kind": "ScalarField",
                 "name": "name",
+                "storageKey": null
+              },
+              {
+                "alias": null,
+                "args": null,
+                "kind": "ScalarField",
+                "name": "id",
                 "storageKey": null
               }
             ],
@@ -128,14 +136,14 @@ return {
     ]
   },
   "params": {
-    "cacheID": "60919112a309814b73e6c97565564362",
+    "cacheID": "fac7858f0b5099c662bbd695ceb339df",
     "id": null,
     "metadata": {},
     "name": "DetailedPersonViewQuery",
     "operationKind": "query",
-    "text": "query DetailedPersonViewQuery(\n  $id: Int!\n) {\n  people {\n    person(id: $id) {\n      ...DetailedPersonViewRoot_person\n    }\n  }\n}\n\nfragment DetailedPersonViewRoot_person on DetailedPerson {\n  name\n}\n"
+    "text": "query DetailedPersonViewQuery(\n  $id: ID!\n) {\n  people {\n    person(id: $id) {\n      ...DetailedPersonViewRoot_person\n      id\n    }\n  }\n}\n\nfragment DetailedPersonViewRoot_person on Person {\n  name\n}\n"
   }
 };
 })();
-(node as any).hash = '1df6950893419d7f580b2427dd9e2454';
+(node as any).hash = 'd8fbdbb02d00be8c295d60b649211271';
 export default node;

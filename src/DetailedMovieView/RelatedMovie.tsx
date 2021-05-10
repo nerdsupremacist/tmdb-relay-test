@@ -17,7 +17,7 @@ type Props = {
 function RelatedMovie(props: Props) {
     const movie = useFragment(
         graphql`
-            fragment RelatedMovie_movie on IMovie {
+            fragment RelatedMovie_movie on Movie {
                 ...MovieLinkContainer_movie
                 title
                 poster(size: W154)

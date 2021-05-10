@@ -5,11 +5,11 @@
 import { ReaderFragment } from "relay-runtime";
 import { FragmentRefs } from "relay-runtime";
 export type SearchResult_result = {
-    readonly __typename: "MovieResult";
+    readonly __typename: "Movie";
     readonly " $fragmentRefs": FragmentRefs<"MovieSearchResult_movie">;
     readonly " $refType": "SearchResult_result";
 } | {
-    readonly __typename: "PersonListResult";
+    readonly __typename: "Person";
     readonly " $fragmentRefs": FragmentRefs<"PersonSearchResult_person">;
     readonly " $refType": "SearchResult_result";
 } | {
@@ -48,7 +48,7 @@ const node: ReaderFragment = {
           "name": "MovieSearchResult_movie"
         }
       ],
-      "type": "MovieResult",
+      "type": "Movie",
       "abstractKey": null
     },
     {
@@ -60,12 +60,12 @@ const node: ReaderFragment = {
           "name": "PersonSearchResult_person"
         }
       ],
-      "type": "PersonListResult",
+      "type": "Person",
       "abstractKey": null
     }
   ],
   "type": "MovieOrTVOrPeople",
   "abstractKey": "__isMovieOrTVOrPeople"
 };
-(node as any).hash = 'ddfc2d0377302fc4e3a7d6b0a3cd3793';
+(node as any).hash = 'a1c2b5d01629af14e5645688f3403600';
 export default node;

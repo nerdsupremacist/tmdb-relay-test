@@ -1,40 +1,44 @@
-import type { RelatedMovieList_connection$key } from './__generated__/RelatedMovieList_connection.graphql';
+import type { RelatedMovie_movie$key } from './__generated__/RelatedMovie_movie.graphql';
+import type { Disposable } from 'relay-runtime';
 
 import React from 'react';
+import useInfiniteScroll from 'react-infinite-scroll-hook';
 import { HStack } from '@chakra-ui/layout';
 
-import { useFragment } from 'react-relay';
-import { graphql } from 'babel-plugin-relay/macro';
-
+import Placeholder from 'LoadingSuspense/Placeholder';
 import RelatedMovie from './RelatedMovie';
 
 type Props = {
-    connection: RelatedMovieList_connection$key,
+    movies: RelatedMovie_movie$key[],
+    error: Error | null,
+    hasMore: boolean,
+    isLoading: boolean,
+    loadMore: () => Disposable,
 }
 
-function RelatedMovieList(props: Props) {
-    const connection = useFragment(
-        graphql`
-            fragment RelatedMovieList_connection on MovieConnection {
-                edges {
-                    node {
-                        ...RelatedMovie_movie
-                    }
-                }
-            }
-        `,
-        props.connection,
-    );
+function RelatedMovieList({ movies, error, hasMore, isLoading, loadMore }: Props) {
+    const [lastItemRef] = useInfiniteScroll({
+        disabled: error != null,
 
-    const movies = connection.edges?.mapNotNull(edge => edge?.node) ?? [];
+        hasNextPage: hasMore,
+
+        loading: isLoading,
+        
+        onLoadMore: loadMore,
+    });
 
     return (
         <HStack align="start" maxW="100%" overflowY="scroll" padding={2}>
             {
                 movies.map((movie, index) => {
-                    return <RelatedMovie key={`recommended_movie_${index}`} movie={movie} />;
+                    return <RelatedMovie key={`related_movie_${index}`} movie={movie} />;
                 })
             }
+            {(isLoading || hasMore) && (
+                <div ref={lastItemRef}>
+                    <Placeholder />
+                </div>
+            )}
         </HStack>
     );
 }

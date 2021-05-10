@@ -17,7 +17,7 @@ type Props = {
 function PersonSearchResult(props: Props) {
     const person = useFragment(
         graphql`
-            fragment PersonSearchResult_person on IPerson {
+            fragment PersonSearchResult_person on Person {
                 ...PersonLinkContainer_person
 
                 name

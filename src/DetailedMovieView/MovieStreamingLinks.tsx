@@ -15,7 +15,7 @@ type Props = {
 function MovieStreamingLinks(props: Props) {
     const movie = useFragment(
         graphql`
-            fragment MovieStreamingLinks_movie on IMovie {
+            fragment MovieStreamingLinks_movie on Movie {
                 streamingOptions {
                     ...StreamingLink_option
                 }

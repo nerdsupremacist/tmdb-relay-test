@@ -50,8 +50,8 @@ const node: ReaderFragment = {
       "name": "MovieLinkContainer_movie"
     }
   ],
-  "type": "IMovie",
-  "abstractKey": "__isIMovie"
+  "type": "Movie",
+  "abstractKey": null
 };
-(node as any).hash = '970a7212279d79a30a0493c4033fcd64';
+(node as any).hash = 'c1832b5d053dd2750cc780fbb59f423f';
 export default node;

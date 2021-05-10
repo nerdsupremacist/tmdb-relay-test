@@ -16,7 +16,7 @@ type Props = {
 function CastCredit(props: Props) {
     const credit = useFragment(
         graphql`
-            fragment CastCredit_credit on CastCreditBasicPerson {
+            fragment CastCredit_credit on CastCreditWithPerson {
                 actor: value {
                     ...PersonLinkContainer_person
                     name

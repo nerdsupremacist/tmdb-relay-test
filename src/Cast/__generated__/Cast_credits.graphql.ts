@@ -27,7 +27,7 @@ const node: ReaderFragment = {
     {
       "alias": null,
       "args": null,
-      "concreteType": "CastCreditBasicPerson",
+      "concreteType": "CastCreditWithPerson",
       "kind": "LinkedField",
       "name": "cast",
       "plural": true,
@@ -41,8 +41,8 @@ const node: ReaderFragment = {
       "storageKey": null
     }
   ],
-  "type": "ICreditsBasicPerson",
-  "abstractKey": "__isICreditsBasicPerson"
+  "type": "CreditsWithPerson",
+  "abstractKey": null
 };
-(node as any).hash = 'a75cec94a3c458a2e7e4c54b13ee68d9';
+(node as any).hash = '88adbfedf3be79a7ce97677f9f8538be';
 export default node;

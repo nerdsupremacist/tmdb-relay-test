@@ -16,7 +16,7 @@ type Props = {
 function MovieParallaxBackdrop(props: Props) {
     const movie = useFragment(
         graphql`
-            fragment MovieParallaxBackdrop_movie on IMovie {   
+            fragment MovieParallaxBackdrop_movie on Movie {   
                 backdrop(size: Original)
             }
         `,

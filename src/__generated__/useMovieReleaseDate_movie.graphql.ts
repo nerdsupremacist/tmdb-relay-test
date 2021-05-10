@@ -30,8 +30,8 @@ const node: ReaderFragment = {
       "storageKey": null
     }
   ],
-  "type": "IMovie",
-  "abstractKey": "__isIMovie"
+  "type": "Movie",
+  "abstractKey": null
 };
-(node as any).hash = '52fe27922e2d7b5c0258f574df721acc';
+(node as any).hash = '68154bcefab8cb742afa2b0372addffb';
 export default node;

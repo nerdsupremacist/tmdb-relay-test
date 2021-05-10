@@ -1,4 +1,6 @@
-schema: "data/schema.graphql"
+schema: 
+    - "data/schema.graphql"
+    - "data/relay.graphql"
 documents: "src/**/*.{graphql, ts,tsx}"
 extensions:
     endpoints:

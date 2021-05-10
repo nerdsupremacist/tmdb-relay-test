@@ -26,19 +26,17 @@ type Props = {
 function MovieHeader(props: Props) {
     const movie = useFragment(
         graphql`
-            fragment MovieHeader_movie on IMovie {
+            fragment MovieHeader_movie on Movie {
                 poster(size: W185)
                 title
                 rating
 
                 ...useMovieReleaseDate_movie
 
-                details {
-                    runtime
-                    tagline
-                    genres {
-                        ...GenreTag_genre
-                    }
+                runtime
+                tagline
+                genres {
+                    ...GenreTag_genre
                 }
             }
         `,
@@ -72,7 +70,7 @@ function MovieHeader(props: Props) {
                             </Text>
                         }
                         <Text fontSize="md" fontWeight="light">
-                            {movie.details.runtime} min
+                            {movie.runtime} min
                         </Text>
                         <Text fontSize="md" fontWeight="light">
                             ★ {movie.rating}
@@ -81,13 +79,13 @@ function MovieHeader(props: Props) {
                 </VStack>
                 <Wrap spacing={2}>
                     {
-                        movie.details.genres.map((genre, index) => {
+                        movie.genres.map((genre, index) => {
                             return <WrapItem key={`genre_${index}`}><GenreTag data={genre} /></WrapItem>;
                         })
                     }
                 </Wrap>
                 <Text fontSize="md">
-                    {movie.details.tagline}
+                    {movie.tagline}
                 </Text>
             </VStack>
         </HStack>

@@ -17,10 +17,10 @@ function SearchResult(props: Props) {
         graphql`
             fragment SearchResult_result on MovieOrTVOrPeople {
                 __typename
-                ... on MovieResult {
+                ... on Movie {
                     ...MovieSearchResult_movie
                 }
-                ... on PersonListResult {
+                ... on Person {
                     ...PersonSearchResult_person
                 }
             }
@@ -29,9 +29,9 @@ function SearchResult(props: Props) {
     );
 
     switch (result.__typename) {
-    case 'MovieResult':
+    case 'Movie':
         return <MovieSearchResult movie={result} />;
-    case 'PersonListResult':
+    case 'Person':
         return <PersonSearchResult person={result} />;
     default:
         return null;

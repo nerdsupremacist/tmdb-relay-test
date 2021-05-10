@@ -1,0 +1,7 @@
+query DemoQuery {
+    movies {
+        movie(id: "MDoxMQ==") {
+            title
+        }
+    }
+}

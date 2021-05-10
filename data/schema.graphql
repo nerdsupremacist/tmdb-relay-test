@@ -12,10 +12,10 @@ union AnyImage =
   | LogoSizeDetailImage
 
 enum BackdropSize {
-  Original
-  W1280
-  W300
   W780
+  W1280
+  Original
+  W300
 }
 
 type BackdropSizeDetailImage {
@@ -28,135 +28,121 @@ type BackdropSizeDetailImage {
   width: Int!
 }
 
-type BaseCreditBasicPerson implements IBaseCreditBasicPerson {
-  id: String!
-  value: IBasicPerson!
-}
-
-type BaseCreditMovie implements IBaseCreditMovie {
-  id: String!
-  value: IMovie!
-}
-
-type BaseCreditMovieOrTV implements IBaseCreditMovieOrTV {
-  id: String!
-  value: MovieOrTV!
-}
-
-type BaseCreditTVShow implements IBaseCreditTVShow {
-  id: String!
-  value: ITVShow!
-}
-
-type BasicPerson implements IBasicPerson {
-  credits: PersonCredits!
-  details: DetailedPerson!
-  externalIds: ExternalIDS!
-  id: Int!
-  images: [ProfileSizeDetailImage!]!
-  name: String!
-  profilePicture(size: ProfileSize!): URL
-  taggedImages(
-    last: Int
-    after: String
-    first: Int
-    before: String
-  ): TaggedImageConnection!
-  translations: [TranslationWithTranslatedPersonInfo!]!
-}
-
-type CastCreditBasicPerson implements IBaseCreditBasicPerson {
+type CastCreditWithMovie implements ICreditWithMovie {
   character: String!
   id: String!
-  value: IBasicPerson!
+  value: Movie!
 }
 
-type CastCreditMovie implements IBaseCreditMovie {
-  character: String!
-  id: String!
-  value: IMovie!
-}
-
-type CastCreditMovieOrTV implements IBaseCreditMovieOrTV {
+type CastCreditWithMovieOrTV implements ICreditWithMovieOrTV {
   character: String!
   id: String!
   value: MovieOrTV!
 }
 
-type CastCreditTVShow implements IBaseCreditTVShow {
+type CastCreditWithPerson implements ICreditWithPerson {
   character: String!
   id: String!
-  value: ITVShow!
+  value: Person!
 }
 
-type CreditsBasicPerson implements ICreditsBasicPerson {
-  cast: [CastCreditBasicPerson!]!
-  crew: [CrewCreditBasicPerson!]!
+type CastCreditWithTVShow implements ICreditWithTVShow {
+  character: String!
+  id: String!
+  value: TVShow!
+}
+
+type CreditWithMovie implements ICreditWithMovie {
+  id: String!
+  value: Movie!
+}
+
+type CreditWithMovieOrTV implements ICreditWithMovieOrTV {
+  id: String!
+  value: MovieOrTV!
+}
+
+type CreditWithPerson implements ICreditWithPerson {
+  id: String!
+  value: Person!
+}
+
+type CreditWithTVShow implements ICreditWithTVShow {
+  id: String!
+  value: TVShow!
+}
+
+type CreditsWithMovie {
+  cast: [CastCreditWithMovie!]!
+  crew: [CrewCreditWithMovie!]!
   id: Int!
 }
 
-type CreditsMovie {
-  cast: [CastCreditMovie!]!
-  crew: [CrewCreditMovie!]!
+type CreditsWithMovieOrTV {
+  cast: [CastCreditWithMovieOrTV!]!
+  crew: [CrewCreditWithMovieOrTV!]!
   id: Int!
 }
 
-type CreditsMovieOrTV {
-  cast: [CastCreditMovieOrTV!]!
-  crew: [CrewCreditMovieOrTV!]!
+type CreditsWithPerson implements ICreditsWithPerson {
+  cast: [CastCreditWithPerson!]!
+  crew: [CrewCreditWithPerson!]!
   id: Int!
 }
 
-type CreditsTVShow {
-  cast: [CastCreditTVShow!]!
-  crew: [CrewCreditTVShow!]!
+type CreditsWithTVShow {
+  cast: [CastCreditWithTVShow!]!
+  crew: [CrewCreditWithTVShow!]!
   id: Int!
 }
 
-type CrewCreditBasicPerson implements IBaseCreditBasicPerson {
+type CrewCreditWithMovie implements ICreditWithMovie {
   department: String!
   id: String!
   job: String!
-  value: IBasicPerson!
+  value: Movie!
 }
 
-type CrewCreditMovie implements IBaseCreditMovie {
-  department: String!
-  id: String!
-  job: String!
-  value: IMovie!
-}
-
-type CrewCreditMovieOrTV implements IBaseCreditMovieOrTV {
+type CrewCreditWithMovieOrTV implements ICreditWithMovieOrTV {
   department: String!
   id: String!
   job: String!
   value: MovieOrTV!
 }
 
-type CrewCreditTVShow implements IBaseCreditTVShow {
+type CrewCreditWithPerson implements ICreditWithPerson {
   department: String!
   id: String!
   job: String!
-  value: ITVShow!
+  value: Person!
+}
+
+type CrewCreditWithTVShow implements ICreditWithTVShow {
+  department: String!
+  id: String!
+  job: String!
+  value: TVShow!
 }
 
 scalar Date
 
-type DetailedEpisode implements IEpisode & IEpisodeData & IDetailedEpisodeData {
+type Episode implements Node {
   airDate: Date!
-  credits: EpisodeCreditsBasicPerson!
-  crew: [CrewCreditBasicPerson!]!
-  details: DetailedEpisode!
+  credits: EpisodeCreditsWithPerson!
+  crew: [CrewCreditWithPerson!]!
   episodeNumber: Int!
   externalIds: ExternalIDS!
-  guestStars: [CastCreditBasicPerson!]!
-  id: Int!
+  guestStars: [CastCreditWithPerson!]!
+
+  # The id of the object
+  id: ID!
   images: EpisodeImages!
   name: String!
   overview: String!
   productionCode: String!
+  season: Season!
   seasonNumber: Int!
+  show: TVShow!
   still(size: StillSize!): URL
   streamingOptions: [StreamingOption!]
   translations: [TranslationWithTranslatedMovieInfo!]!
@@ -165,217 +151,11 @@ type DetailedEpisode implements IEpisode & IEpisodeData & IDetailedEpisodeData {
   voteCount: Int!
 }
 
-type DetailedEpisodeData implements IEpisodeData & IDetailedEpisodeData {
-  airDate: Date!
-  crew: [CrewCreditBasicPerson!]!
-  episodeNumber: Int!
-  guestStars: [CastCreditBasicPerson!]!
+type EpisodeCreditsWithPerson implements ICreditsWithPerson {
+  cast: [CastCreditWithPerson!]!
+  crew: [CrewCreditWithPerson!]!
+  guestStars: [CastCreditWithPerson!]!
   id: Int!
-  name: String!
-  overview: String!
-  productionCode: String!
-  seasonNumber: Int!
-  still(size: StillSize!): URL
-  voteAverage: Float!
-  voteCount: Int!
-}
-
-type DetailedMovie implements IMovie {
-  alternativeTitles: [AlternativeTitle!]!
-  backdrop(size: BackdropSize!): URL
-  budget: Int
-  credits: ICreditsBasicPerson!
-  details: DetailedMovie!
-  externalIds: ExternalIDS!
-  genres: [Genre!]!
-  homepage: URL
-  id: Int!
-  images: MediaImages!
-  imdbID: String!
-  isAdult: Boolean!
-  isVideo: Boolean!
-  keywords: [Keyword!]!
-  numberOfRatings: Int!
-  originalLanguage: String!
-  originalTitle: String!
-  overview: String!
-  popularityIndex: Float
-  poster(size: PosterSize!): URL
-  productionCompanies: [ProductionCompany!]!
-  productionCountries: [ProductionCountry!]!
-  rating: Float!
-  recommendations(
-    first: Int
-    before: String
-    last: Int
-    after: String
-  ): MovieConnection!
-  releaseDate: Date
-  revenue: Int
-  reviews(
-    first: Int
-    before: String
-    last: Int
-    after: String
-  ): ReviewConnection!
-  runtime: Int!
-  similar(
-    first: Int
-    before: String
-    last: Int
-    after: String
-  ): MovieConnection!
-  spokenLanguages: [SpokenLanguage!]!
-  status: Status!
-  streamingOptions: [StreamingOption!]
-  tagline: String!
-  title: String!
-  translations: [TranslationWithTranslatedMovieInfo!]!
-  videos: [Video!]!
-}
-
-type DetailedPerson implements IPerson & IBasicPerson {
-  alsoKnownAs: [String!]!
-  biography: String!
-  birthday: Date
-  credits: PersonCredits!
-  deathday: Date
-  details: DetailedPerson!
-  externalIds: ExternalIDS!
-  gender: Gender!
-  homepage: URL
-  id: Int!
-  images: [ProfileSizeDetailImage!]!
-  imdbID: String
-  isAdult: Boolean!
-  knownForDepartment: String!
-  name: String!
-  placeOfBirth: String
-  popularityIndex: Float!
-  profilePicture(size: ProfileSize!): URL
-  taggedImages(
-    first: Int
-    before: String
-    last: Int
-    after: String
-  ): TaggedImageConnection!
-  translations: [TranslationWithTranslatedPersonInfo!]!
-}
-
-type DetailedSeason implements ISeason & ISeasonData {
-  airDate: Date
-  credits: ICreditsBasicPerson!
-  details: DetailedSeason!
-  episode(number: Int!): DetailedEpisode!
-  episodes: [IEpisode!]!
-  externalIds: ExternalIDS!
-  id: Int!
-  images: MediaImages!
-  name: String!
-  overview: String
-  poster(size: PosterSize!): URL
-  seasonNumber: Int!
-  streamingOptions: [StreamingOption!]
-  videos: [Video!]!
-}
-
-type DetailedTVShow implements ITVShow {
-  alternativeTitles: [AlternativeTitle!]!
-  backdrop(size: BackdropSize!): URL
-  createdBy: [IBaseCreditBasicPerson!]!
-  credits: ICreditsBasicPerson!
-  details: DetailedTVShow!
-  episodeRunTime: [Int!]!
-  externalIds: ExternalIDS!
-  firstAirDate: Date
-  genres: [Genre!]!
-  homepage: URL
-  id: Int!
-  images: MediaImages!
-  inProduction: Boolean!
-  keywords: [Keyword!]!
-  languages: [String!]!
-  lastAirDate: Date
-  lastEpisodeToAir: IEpisode
-  name: String!
-  networks: [Network!]!
-  nextEpisodeToAir: IEpisode
-  numberOfEpisodes: Int!
-  numberOfRatings: Int!
-  numberOfSeasons: Int!
-  originCountry: [String!]!
-  originalLanguage: String!
-  originalName: String!
-  overview: String!
-  popularityIndex: Float
-  poster(size: PosterSize!): URL
-  productionCompanies: [Network!]!
-  rating: Float!
-  recommendations(
-    first: Int
-    before: String
-    last: Int
-    after: String
-  ): TVShowConnection!
-  reviews(
-    first: Int
-    before: String
-    last: Int
-    after: String
-  ): ReviewConnection!
-  season(number: Int!): DetailedSeason!
-  seasons: [SeasonResult!]!
-  similar(
-    first: Int
-    before: String
-    last: Int
-    after: String
-  ): TVShowConnection!
-  status: String!
-  streamingOptions: [StreamingOption!]
-  translations: [TranslationWithTranslatedMovieInfo!]!
-  type: String!
-  videos: [Video!]!
-}
-
-type Episode implements IEpisodeData & IEpisode {
-  airDate: Date!
-  credits: EpisodeCreditsBasicPerson!
-  details: DetailedEpisode!
-  episodeNumber: Int!
-  externalIds: ExternalIDS!
-  id: Int!
-  images: EpisodeImages!
-  name: String!
-  overview: String!
-  productionCode: String!
-  seasonNumber: Int!
-  still(size: StillSize!): URL
-  streamingOptions: [StreamingOption!]
-  translations: [TranslationWithTranslatedMovieInfo!]!
-  videos: [Video!]!
-  voteAverage: Float!
-  voteCount: Int!
-}
-
-type EpisodeCreditsBasicPerson implements ICreditsBasicPerson {
-  cast: [CastCreditBasicPerson!]!
-  crew: [CrewCreditBasicPerson!]!
-  guestStars: [CastCreditBasicPerson!]!
-  id: Int!
-}
-
-type EpisodeData implements IEpisodeData {
-  airDate: Date!
-  episodeNumber: Int!
-  id: Int!
-  name: String!
-  overview: String!
-  productionCode: String!
-  seasonNumber: Int!
-  still(size: StillSize!): URL
-  voteAverage: Float!
-  voteCount: Int!
 }
 
 type EpisodeImages {
@@ -391,23 +171,23 @@ type ExternalIDS {
 
 enum ExternalSource {
   Tvrage
-  Tvdb
   Facebook
-  Twitter
-  Instagram
+  Tvdb
   Freebase
   Imdb
+  Twitter
+  Instagram
 }
 
 type FromExternalIds {
-  movies: [IMovie!]!
-  people: [PersonListResult!]!
-  tv: [ITVShow!]!
+  movies: [Movie!]!
+  people: [Person!]!
+  tv: [TVShow!]!
 }
 
 enum Gender {
-  UnknownOrNonBinary
   Female
+  UnknownOrNonBinary
   Male
 }
 
@@ -416,251 +196,46 @@ type Genre {
   name: String!
 }
 
-interface IBaseCreditBasicPerson {
+interface ICreditWithMovie {
   id: String!
-  value: IBasicPerson!
+  value: Movie!
 }
 
-interface IBaseCreditMovie {
-  id: String!
-  value: IMovie!
-}
-
-interface IBaseCreditMovieOrTV {
+interface ICreditWithMovieOrTV {
   id: String!
   value: MovieOrTV!
 }
 
-interface IBaseCreditTVShow {
+interface ICreditWithPerson {
   id: String!
-  value: ITVShow!
+  value: Person!
 }
 
-interface IBasicPerson {
-  credits: PersonCredits!
-  details: DetailedPerson!
-  externalIds: ExternalIDS!
-  id: Int!
-  images: [ProfileSizeDetailImage!]!
-  name: String!
-  profilePicture(size: ProfileSize!): URL
-  taggedImages(
-    last: Int
-    after: String
-    first: Int
-    before: String
-  ): TaggedImageConnection!
-  translations: [TranslationWithTranslatedPersonInfo!]!
+interface ICreditWithTVShow {
+  id: String!
+  value: TVShow!
 }
 
-interface ICreditsBasicPerson {
-  cast: [CastCreditBasicPerson!]!
-  crew: [CrewCreditBasicPerson!]!
+interface ICreditsWithPerson {
+  cast: [CastCreditWithPerson!]!
+  crew: [CrewCreditWithPerson!]!
   id: Int!
-}
-
-interface IDetailedEpisodeData {
-  airDate: Date!
-  crew: [CrewCreditBasicPerson!]!
-  episodeNumber: Int!
-  guestStars: [CastCreditBasicPerson!]!
-  id: Int!
-  name: String!
-  overview: String!
-  productionCode: String!
-  seasonNumber: Int!
-  still(size: StillSize!): URL
-  voteAverage: Float!
-  voteCount: Int!
-}
-
-interface IEpisode {
-  airDate: Date!
-  credits: EpisodeCreditsBasicPerson!
-  details: DetailedEpisode!
-  episodeNumber: Int!
-  externalIds: ExternalIDS!
-  id: Int!
-  images: EpisodeImages!
-  name: String!
-  overview: String!
-  productionCode: String!
-  seasonNumber: Int!
-  still(size: StillSize!): URL
-  streamingOptions: [StreamingOption!]
-  translations: [TranslationWithTranslatedMovieInfo!]!
-  videos: [Video!]!
-  voteAverage: Float!
-  voteCount: Int!
-}
-
-interface IEpisodeData {
-  airDate: Date!
-  episodeNumber: Int!
-  id: Int!
-  name: String!
-  overview: String!
-  productionCode: String!
-  seasonNumber: Int!
-  still(size: StillSize!): URL
-  voteAverage: Float!
-  voteCount: Int!
-}
-
-interface IMovie {
-  alternativeTitles: [AlternativeTitle!]!
-  backdrop(size: BackdropSize!): URL
-  credits: ICreditsBasicPerson!
-  details: DetailedMovie!
-  externalIds: ExternalIDS!
-  id: Int!
-  images: MediaImages!
-  isAdult: Boolean!
-  isVideo: Boolean!
-  keywords: [Keyword!]!
-  numberOfRatings: Int!
-  originalLanguage: String!
-  originalTitle: String!
-  overview: String!
-  popularityIndex: Float
-  poster(size: PosterSize!): URL
-  rating: Float!
-  recommendations(
-    last: Int
-    after: String
-    first: Int
-    before: String
-  ): MovieConnection!
-  releaseDate: Date
-  reviews(
-    last: Int
-    after: String
-    first: Int
-    before: String
-  ): ReviewConnection!
-  similar(
-    last: Int
-    after: String
-    first: Int
-    before: String
-  ): MovieConnection!
-  streamingOptions: [StreamingOption!]
-  title: String!
-  translations: [TranslationWithTranslatedMovieInfo!]!
-  videos: [Video!]!
-}
-
-interface IPerson {
-  credits: PersonCredits!
-  details: DetailedPerson!
-  externalIds: ExternalIDS!
-  id: Int!
-  images: [ProfileSizeDetailImage!]!
-  isAdult: Boolean!
-  name: String!
-  popularityIndex: Float!
-  profilePicture(size: ProfileSize!): URL
-  taggedImages(
-    last: Int
-    after: String
-    first: Int
-    before: String
-  ): TaggedImageConnection!
-  translations: [TranslationWithTranslatedPersonInfo!]!
-}
-
-interface ISeason {
-  airDate: Date
-  credits: ICreditsBasicPerson!
-  details: DetailedSeason!
-  episode(number: Int!): DetailedEpisode!
-  externalIds: ExternalIDS!
-  id: Int!
-  images: MediaImages!
-  name: String!
-  overview: String
-  poster(size: PosterSize!): URL
-  seasonNumber: Int!
-  streamingOptions: [StreamingOption!]
-  videos: [Video!]!
-}
-
-interface ISeasonData {
-  airDate: Date
-  id: Int!
-  name: String!
-  overview: String
-  poster(size: PosterSize!): URL
-  seasonNumber: Int!
-}
-
-interface ISeasonResultData {
-  airDate: Date
-  episodeCount: Int!
-  id: Int!
-  name: String!
-  overview: String
-  poster(size: PosterSize!): URL
-  seasonNumber: Int!
-}
-
-interface ITVShow {
-  alternativeTitles: [AlternativeTitle!]!
-  backdrop(size: BackdropSize!): URL
-  credits: ICreditsBasicPerson!
-  details: DetailedTVShow!
-  externalIds: ExternalIDS!
-  firstAirDate: Date
-  id: Int!
-  images: MediaImages!
-  keywords: [Keyword!]!
-  name: String!
-  numberOfRatings: Int!
-  originCountry: [String!]!
-  originalLanguage: String!
-  originalName: String!
-  overview: String!
-  popularityIndex: Float
-  poster(size: PosterSize!): URL
-  rating: Float!
-  recommendations(
-    last: Int
-    after: String
-    first: Int
-    before: String
-  ): TVShowConnection!
-  reviews(
-    last: Int
-    after: String
-    first: Int
-    before: String
-  ): ReviewConnection!
-  season(number: Int!): DetailedSeason!
-  similar(
-    last: Int
-    after: String
-    first: Int
-    before: String
-  ): TVShowConnection!
-  streamingOptions: [StreamingOption!]
-  translations: [TranslationWithTranslatedMovieInfo!]!
-  videos: [Video!]!
 }
 
 type Keyword {
   id: Int!
-  movies(first: Int, before: String, last: Int, after: String): MovieConnection!
+  movies(after: String, last: Int, before: String, first: Int): MovieConnection!
   name: String!
 }
 
 enum LogoSize {
-  W154
-  W185
   W300
-  W92
+  W154
+  Original
   W45
   W500
-  Original
+  W185
+  W92
 }
 
 type LogoSizeDetailImage {
@@ -678,14 +253,19 @@ type MediaImages {
   posters: [PosterSizeDetailImage!]!
 }
 
-type Movie implements IMovie {
+type Movie implements Node {
   alternativeTitles: [AlternativeTitle!]!
   backdrop(size: BackdropSize!): URL
-  credits: ICreditsBasicPerson!
-  details: DetailedMovie!
+  budget: Int
+  credits: ICreditsWithPerson!
   externalIds: ExternalIDS!
-  id: Int!
+  genres: [Genre!]!
+  homepage: URL
+
+  # The id of the object
+  id: ID!
   images: MediaImages!
+  imdbID: String!
   isAdult: Boolean!
   isVideo: Boolean!
   keywords: [Keyword!]!
@@ -695,27 +275,34 @@ type Movie implements IMovie {
   overview: String!
   popularityIndex: Float
   poster(size: PosterSize!): URL
+  productionCompanies: [ProductionCompany!]!
+  productionCountries: [ProductionCountry!]!
   rating: Float!
   recommendations(
     last: Int
-    after: String
-    first: Int
     before: String
+    first: Int
+    after: String
   ): MovieConnection!
   releaseDate: Date
+  revenue: Int
   reviews(
-    last: Int
-    after: String
     first: Int
     before: String
-  ): ReviewConnection!
-  similar(
     last: Int
     after: String
+  ): ReviewConnection!
+  runtime: Int!
+  similar(
+    after: String
     first: Int
+    last: Int
     before: String
   ): MovieConnection!
+  spokenLanguages: [SpokenLanguage!]!
+  status: Status!
   streamingOptions: [StreamingOption!]
+  tagline: String!
   title: String!
   translations: [TranslationWithTranslatedMovieInfo!]!
   videos: [Video!]!
@@ -729,12 +316,12 @@ type MovieConnection {
 
 type MovieEdge {
   cursor: String!
-  node: IMovie
+  node: Movie
 }
 
-union MovieOrTV = MovieResult | TVShowResult
+union MovieOrTV = Movie | TVShow
 
-union MovieOrTVOrPeople = MovieResult | TVShowResult | PersonListResult
+union MovieOrTVOrPeople = Movie | TVShow | Person
 
 type MovieOrTVOrPeopleConnection {
   edges: [MovieOrTVOrPeopleEdge]
@@ -747,88 +334,45 @@ type MovieOrTVOrPeopleEdge {
   node: MovieOrTVOrPeople
 }
 
-type MovieResult implements IMovie {
-  alternativeTitles: [AlternativeTitle!]!
-  backdrop(size: BackdropSize!): URL
-  credits: ICreditsBasicPerson!
-  details: DetailedMovie!
-  externalIds: ExternalIDS!
-  id: Int!
-  images: MediaImages!
-  isAdult: Boolean!
-  isVideo: Boolean!
-  keywords: [Keyword!]!
-  numberOfRatings: Int!
-  originalLanguage: String!
-  originalTitle: String!
-  overview: String!
-  popularityIndex: Float
-  poster(size: PosterSize!): URL
-  rating: Float!
-  recommendations(
-    first: Int
-    before: String
-    last: Int
-    after: String
-  ): MovieConnection!
-  releaseDate: Date
-  reviews(
-    first: Int
-    before: String
-    last: Int
-    after: String
-  ): ReviewConnection!
-  similar(
-    first: Int
-    before: String
-    last: Int
-    after: String
-  ): MovieConnection!
-  streamingOptions: [StreamingOption!]
-  title: String!
-  translations: [TranslationWithTranslatedMovieInfo!]!
-  videos: [Video!]!
-}
-
 type Movies {
-  movie(id: Int!): IMovie!
+  movie(id: ID!): Movie!
   nowPlaying(
     last: Int
     after: String
-    first: Int
     before: String
+    first: Int
   ): MovieConnection!
   popular(
-    last: Int
     after: String
-    first: Int
+    last: Int
     before: String
+    first: Int
   ): MovieConnection!
   search(
-    last: Int
-    after: String
-    term: String!
     first: Int
+    term: String!
+    after: String
     before: String
+    last: Int
   ): MovieConnection!
   topRated(
     last: Int
     after: String
-    first: Int
     before: String
+    first: Int
   ): MovieConnection!
   trending(
-    last: Int
+    before: String
     after: String
     timeWindow: TimeWindow! = Day
     first: Int
-    before: String
+    last: Int
   ): MovieConnection!
   upcoming(
     last: Int
     after: String
-    first: Int
     before: String
+    first: Int
   ): MovieConnection!
 }
 
@@ -839,6 +383,11 @@ type Network {
   originCountry: String!
 }
 
+interface Node {
+  # The id of the object
+  id: ID!
+}
+
 type PageInfo {
   endCursor: String
   hasNextPage: Boolean!
@@ -847,88 +396,79 @@ type PageInfo {
 }
 
 type People {
-  person(id: Int!): DetailedPerson!
+  person(id: ID!): Person!
   popular(
     last: Int
+    before: String
     after: String
     first: Int
-    before: String
-  ): PersonListResultConnection!
+  ): PersonConnection!
   search(
-    last: Int
-    after: String
-    term: String!
     first: Int
+    after: String
+    last: Int
     before: String
-  ): PersonListResultConnection!
+    term: String!
+  ): PersonConnection!
   trending(
     last: Int
-    after: String
+    before: String
     timeWindow: TimeWindow! = Day
-    first: Int
-    before: String
-  ): PersonListResultConnection!
-}
-
-type Person implements IBasicPerson & IPerson {
-  credits: PersonCredits!
-  details: DetailedPerson!
-  externalIds: ExternalIDS!
-  id: Int!
-  images: [ProfileSizeDetailImage!]!
-  isAdult: Boolean!
-  name: String!
-  popularityIndex: Float!
-  profilePicture(size: ProfileSize!): URL
-  taggedImages(
-    last: Int
     after: String
     first: Int
-    before: String
-  ): TaggedImageConnection!
-  translations: [TranslationWithTranslatedPersonInfo!]!
+  ): PersonConnection!
 }
 
-type PersonCredits {
-  all: CreditsMovieOrTV!
-  movies: CreditsMovie!
-  tv: CreditsTVShow!
-}
-
-type PersonListResult implements IPerson & IBasicPerson {
+type Person implements Node {
+  alsoKnownAs: [String!]!
+  biography: String!
+  birthday: Date
   credits: PersonCredits!
-  details: DetailedPerson!
+  deathday: Date
   externalIds: ExternalIDS!
-  id: Int!
+  gender: Gender!
+  homepage: URL
+
+  # The id of the object
+  id: ID!
   images: [ProfileSizeDetailImage!]!
+  imdbID: String
   isAdult: Boolean!
   knownFor: [MovieOrTV!]!
+  knownForDepartment: String!
   name: String!
+  placeOfBirth: String
   popularityIndex: Float!
   profilePicture(size: ProfileSize!): URL
   taggedImages(
-    first: Int
-    before: String
-    last: Int
     after: String
+    first: Int
+    last: Int
+    before: String
   ): TaggedImageConnection!
   translations: [TranslationWithTranslatedPersonInfo!]!
 }
 
-type PersonListResultConnection {
-  edges: [PersonListResultEdge]
+type PersonConnection {
+  edges: [PersonEdge]
   pageInfo: PageInfo!
   totalCount: Int!
 }
 
-type PersonListResultEdge {
+type PersonCredits {
+  all: CreditsWithMovieOrTV!
+  movies: CreditsWithMovie!
+  tv: CreditsWithTVShow!
+}
+
+type PersonEdge {
   cursor: String!
-  node: PersonListResult
+  node: Person
 }
 
 enum PosterSize {
-  W780
   W500
+  W780
   W154
   W92
   W342
@@ -964,9 +504,9 @@ type ProductionCountry {
 }
 
 enum ProfileSize {
-  Original
   H632
   W185
+  Original
   W45
 }
 
@@ -983,20 +523,26 @@ type ProfileSizeDetailImage {
 type Query {
   find(externalId: String!, source: ExternalSource!): FromExternalIds!
   movies: Movies!
+
+  # Fetches an object given its ID
+  node(
+    # The ID of an object
+    id: ID!
+  ): Node
   people: People!
   search(
-    before: String
     after: String
-    last: Int
     term: String!
+    before: String
+    last: Int
     first: Int
   ): MovieOrTVOrPeopleConnection!
   trending(
     last: Int
-    after: String
     timeWindow: TimeWindow! = Day
-    first: Int
+    after: String
     before: String
+    first: Int
   ): MovieOrTVOrPeopleConnection!
   tv: TV!
 }
@@ -1019,56 +565,24 @@ type ReviewEdge {
   node: Review
 }
 
-type Season implements ISeasonData & ISeason {
+type Season implements Node {
   airDate: Date
-  credits: ICreditsBasicPerson!
-  details: DetailedSeason!
-  episode(number: Int!): DetailedEpisode!
+  credits: ICreditsWithPerson!
+  episode(number: Int!): Episode!
+  episodeCount: Int!
+  episodes: [Episode!]!
   externalIds: ExternalIDS!
-  id: Int!
+
+  # The id of the object
+  id: ID!
   images: MediaImages!
   name: String!
   overview: String
   poster(size: PosterSize!): URL
   seasonNumber: Int!
+  show: TVShow!
   streamingOptions: [StreamingOption!]
   videos: [Video!]!
-}
-
-type SeasonData implements ISeasonData {
-  airDate: Date
-  id: Int!
-  name: String!
-  overview: String
-  poster(size: PosterSize!): URL
-  seasonNumber: Int!
-}
-
-type SeasonResult implements ISeason & ISeasonData & ISeasonResultData {
-  airDate: Date
-  credits: ICreditsBasicPerson!
-  details: DetailedSeason!
-  episode(number: Int!): DetailedEpisode!
-  episodeCount: Int!
-  externalIds: ExternalIDS!
-  id: Int!
-  images: MediaImages!
-  name: String!
-  overview: String
-  poster(size: PosterSize!): URL
-  seasonNumber: Int!
-  streamingOptions: [StreamingOption!]
-  videos: [Video!]!
-}
-
-type SeasonResultData implements ISeasonData & ISeasonResultData {
-  airDate: Date
-  episodeCount: Int!
-  id: Int!
-  name: String!
-  overview: String
-  poster(size: PosterSize!): URL
-  seasonNumber: Int!
 }
 
 type SpokenLanguage {
@@ -1077,19 +591,19 @@ type SpokenLanguage {
 }
 
 enum Status {
-  Rumored
-  Released
+  PostProduction
   InProduction
   Cancelled
+  Released
+  Rumored
   Planned
-  PostProduction
 }
 
 enum StillSize {
-  Original
   W92
-  W185
   W300
+  W185
+  Original
 }
 
 type StillSizeDetailImage {
@@ -1110,12 +624,12 @@ type StreamingLinks {
 }
 
 enum StreamingMonetizationType {
-  Cinema
-  Free
-  Flatrate
   Ads
-  Buy
+  Free
+  Cinema
   Rent
+  Buy
+  Flatrate
 }
 
 type StreamingOption {
@@ -1141,92 +655,111 @@ type StreamingProvider {
 
 type TV {
   airingToday(
-    last: Int
-    after: String
     first: Int
+    last: Int
     before: String
+    after: String
   ): TVShowConnection!
+  episode(id: ID!): Episode!
   onTheAir(
-    last: Int
-    after: String
     first: Int
+    last: Int
     before: String
+    after: String
   ): TVShowConnection!
   popular(
-    last: Int
-    after: String
-    first: Int
     before: String
+    last: Int
+    first: Int
+    after: String
   ): TVShowConnection!
   search(
+    first: Int
     last: Int
-    after: String
+    before: String
     term: String!
-    first: Int
-    before: String
-  ): TVShowConnection!
-  show(id: Int!): DetailedTVShow!
-  topRated(
-    last: Int
     after: String
+  ): TVShowConnection!
+  season(id: ID!): Season!
+  show(id: ID!): TVShow!
+  topRated(
     first: Int
+    last: Int
     before: String
+    after: String
   ): TVShowConnection!
   trending(
-    last: Int
     after: String
     timeWindow: TimeWindow! = Day
+    last: Int
     first: Int
     before: String
   ): TVShowConnection!
   upcoming(
-    last: Int
-    after: String
-    first: Int
     before: String
+    first: Int
+    after: String
+    last: Int
   ): TVShowConnection!
 }
 
-type TVShow implements ITVShow {
+type TVShow implements Node {
   alternativeTitles: [AlternativeTitle!]!
   backdrop(size: BackdropSize!): URL
-  credits: ICreditsBasicPerson!
-  details: DetailedTVShow!
+  createdBy: [ICreditWithPerson!]!
+  credits: ICreditsWithPerson!
+  episodeRunTime: [Int!]!
   externalIds: ExternalIDS!
   firstAirDate: Date
-  id: Int!
+  genres: [Genre!]!
+  homepage: URL
+
+  # The id of the object
+  id: ID!
   images: MediaImages!
+  inProduction: Boolean!
   keywords: [Keyword!]!
+  languages: [String!]!
+  lastAirDate: Date
+  lastEpisodeToAir: Episode
   name: String!
+  networks: [Network!]!
+  nextEpisodeToAir: Episode
+  numberOfEpisodes: Int!
   numberOfRatings: Int!
+  numberOfSeasons: Int!
   originCountry: [String!]!
   originalLanguage: String!
   originalName: String!
   overview: String!
   popularityIndex: Float
   poster(size: PosterSize!): URL
+  productionCompanies: [Network!]!
   rating: Float!
   recommendations(
-    last: Int
     after: String
-    first: Int
     before: String
+    last: Int
+    first: Int
   ): TVShowConnection!
   reviews(
-    last: Int
-    after: String
     first: Int
+    after: String
+    last: Int
     before: String
   ): ReviewConnection!
-  season(number: Int!): DetailedSeason!
+  season(number: Int!): Season!
+  seasons: [Season!]!
   similar(
-    last: Int
     after: String
-    first: Int
     before: String
+    last: Int
+    first: Int
   ): TVShowConnection!
+  status: String!
   streamingOptions: [StreamingOption!]
   translations: [TranslationWithTranslatedMovieInfo!]!
+  type: String!
   videos: [Video!]!
 }
 
@@ -1238,50 +771,7 @@ type TVShowConnection {
 
 type TVShowEdge {
   cursor: String!
-  node: ITVShow
-}
-
-type TVShowResult implements ITVShow {
-  alternativeTitles: [AlternativeTitle!]!
-  backdrop(size: BackdropSize!): URL
-  credits: ICreditsBasicPerson!
-  details: DetailedTVShow!
-  externalIds: ExternalIDS!
-  firstAirDate: Date
-  id: Int!
-  images: MediaImages!
-  keywords: [Keyword!]!
-  name: String!
-  numberOfRatings: Int!
-  originCountry: [String!]!
-  originalLanguage: String!
-  originalName: String!
-  overview: String!
-  popularityIndex: Float
-  poster(size: PosterSize!): URL
-  rating: Float!
-  recommendations(
-    first: Int
-    before: String
-    last: Int
-    after: String
-  ): TVShowConnection!
-  reviews(
-    first: Int
-    before: String
-    last: Int
-    after: String
-  ): ReviewConnection!
-  season(number: Int!): DetailedSeason!
-  similar(
-    first: Int
-    before: String
-    last: Int
-    after: String
-  ): TVShowConnection!
-  streamingOptions: [StreamingOption!]
-  translations: [TranslationWithTranslatedMovieInfo!]!
-  videos: [Video!]!
+  node: TVShow
 }
 
 type TaggedImage {
@@ -1301,8 +791,8 @@ type TaggedImageEdge {
 }
 
 enum TimeWindow {
-  Week
   Day
+  Week
 }
 
 type TranslatedMovieInfo {
@@ -1346,10 +836,10 @@ type Video {
 }
 
 enum VideoResolution {
-  Sd
+  Bluray
   Theatre
+  Dvd
+  Sd
   Hd
   UltraHd
-  Bluray
-  Dvd
 }

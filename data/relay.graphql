@@ -1,0 +1,10 @@
+directive @refetchable(queryName: String!) on FRAGMENT_DEFINITION
+
+directive @connection(
+  key: String!
+  filters: [String]
+  handler: String
+  dynamicKey_UNSTABLE: String
+) on FIELD
+
+directive @inline on FRAGMENT_DEFINITION

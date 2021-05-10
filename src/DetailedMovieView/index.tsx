@@ -26,7 +26,7 @@ type Params = {
 function DetailedMovieView(props: LoadedProps) {
     const data = usePreloadedQuery(
         graphql`
-            query DetailedMovieViewQuery($id: Int!) {
+            query DetailedMovieViewQuery($id: ID!) {
                 movies {
                     movie(id: $id) {
                         ...DetailedMovieViewRoot_movie
@@ -53,7 +53,7 @@ function DetailedMovieViewWrapper() {
     const error = useRef<ErrorBoundary>(null);
     useEffect(() => {
         error.current?.reset();
-        loadQuery({ id: parseInt(id) });
+        loadQuery({ id });
         return () => {
             dispose();
         };

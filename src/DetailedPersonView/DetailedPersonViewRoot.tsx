@@ -12,7 +12,7 @@ type Props = {
 function DetailedPersonViewRoot(props: Props) {
     const person = useFragment(
         graphql`
-            fragment DetailedPersonViewRoot_person on DetailedPerson {
+            fragment DetailedPersonViewRoot_person on Person {
                 name
             }
         `,

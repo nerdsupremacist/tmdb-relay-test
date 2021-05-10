@@ -15,7 +15,7 @@ type Props = {
 function Cast(props: Props) {
     const credits = useFragment(
         graphql`
-            fragment Cast_credits on ICreditsBasicPerson {        
+            fragment Cast_credits on CreditsWithPerson {        
                 cast {
                     ...CastCredit_credit
                 }

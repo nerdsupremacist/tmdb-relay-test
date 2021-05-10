@@ -9,13 +9,7 @@ export type DetailedMovieViewRoot_movie = {
     readonly credits: {
         readonly " $fragmentRefs": FragmentRefs<"Cast_credits">;
     };
-    readonly recommendations: {
-        readonly " $fragmentRefs": FragmentRefs<"RelatedMovieList_connection">;
-    };
-    readonly similar: {
-        readonly " $fragmentRefs": FragmentRefs<"RelatedMovieList_connection">;
-    };
-    readonly " $fragmentRefs": FragmentRefs<"MovieHeader_movie" | "MovieStreamingLinks_movie" | "MovieParallaxBackdrop_movie">;
+    readonly " $fragmentRefs": FragmentRefs<"MovieHeader_movie" | "MovieStreamingLinks_movie" | "MovieParallaxBackdrop_movie" | "SimilarMovieList_movie">;
     readonly " $refType": "DetailedMovieViewRoot_movie";
 };
 export type DetailedMovieViewRoot_movie$data = DetailedMovieViewRoot_movie;
@@ -26,15 +20,7 @@ export type DetailedMovieViewRoot_movie$key = {
 
 
 
-const node: ReaderFragment = (function(){
-var v0 = [
-  {
-    "args": null,
-    "kind": "FragmentSpread",
-    "name": "RelatedMovieList_connection"
-  }
-];
-return {
+const node: ReaderFragment = {
   "argumentDefinitions": [],
   "kind": "Fragment",
   "metadata": null,
@@ -64,26 +50,6 @@ return {
       "storageKey": null
     },
     {
-      "alias": null,
-      "args": null,
-      "concreteType": "MovieConnection",
-      "kind": "LinkedField",
-      "name": "recommendations",
-      "plural": false,
-      "selections": (v0/*: any*/),
-      "storageKey": null
-    },
-    {
-      "alias": null,
-      "args": null,
-      "concreteType": "MovieConnection",
-      "kind": "LinkedField",
-      "name": "similar",
-      "plural": false,
-      "selections": (v0/*: any*/),
-      "storageKey": null
-    },
-    {
       "args": null,
       "kind": "FragmentSpread",
       "name": "MovieHeader_movie"
@@ -97,11 +63,21 @@ return {
       "args": null,
       "kind": "FragmentSpread",
       "name": "MovieParallaxBackdrop_movie"
+    },
+    {
+      "args": [
+        {
+          "kind": "Literal",
+          "name": "count",
+          "value": 20
+        }
+      ],
+      "kind": "FragmentSpread",
+      "name": "SimilarMovieList_movie"
     }
   ],
-  "type": "IMovie",
-  "abstractKey": "__isIMovie"
+  "type": "Movie",
+  "abstractKey": null
 };
-})();
-(node as any).hash = '024b7d95558f0684481309a14a9b3859';
+(node as any).hash = '0751bfb72bcb075ba7eaddea8961d95c';
 export default node;

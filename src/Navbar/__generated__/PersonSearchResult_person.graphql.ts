@@ -55,8 +55,8 @@ const node: ReaderFragment = {
       "name": "useKnownForDescription_person"
     }
   ],
-  "type": "IPerson",
-  "abstractKey": "__isIPerson"
+  "type": "Person",
+  "abstractKey": null
 };
-(node as any).hash = 'affbf173b9192bc3943040ece96e900a';
+(node as any).hash = '0d9ada3010630636d11dc7728569bc9f';
 export default node;

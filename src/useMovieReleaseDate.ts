@@ -6,7 +6,7 @@ import { graphql } from 'babel-plugin-relay/macro';
 function useMovieReleaseDate(movie: useMovieReleaseDate_movie$key) {
     const decoded = useFragment(
         graphql`
-            fragment useMovieReleaseDate_movie on IMovie {
+            fragment useMovieReleaseDate_movie on Movie {
                 releaseDate
             }
         `,

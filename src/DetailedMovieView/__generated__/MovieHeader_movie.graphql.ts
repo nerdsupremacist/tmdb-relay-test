@@ -8,13 +8,11 @@ export type MovieHeader_movie = {
     readonly poster: string | null;
     readonly title: string;
     readonly rating: number;
-    readonly details: {
-        readonly runtime: number;
-        readonly tagline: string;
-        readonly genres: ReadonlyArray<{
-            readonly " $fragmentRefs": FragmentRefs<"GenreTag_genre">;
-        }>;
-    };
+    readonly runtime: number;
+    readonly tagline: string;
+    readonly genres: ReadonlyArray<{
+        readonly " $fragmentRefs": FragmentRefs<"GenreTag_genre">;
+    }>;
     readonly " $fragmentRefs": FragmentRefs<"useMovieReleaseDate_movie">;
     readonly " $refType": "MovieHeader_movie";
 };
@@ -62,40 +60,29 @@ const node: ReaderFragment = {
     {
       "alias": null,
       "args": null,
-      "concreteType": "DetailedMovie",
+      "kind": "ScalarField",
+      "name": "runtime",
+      "storageKey": null
+    },
+    {
+      "alias": null,
+      "args": null,
+      "kind": "ScalarField",
+      "name": "tagline",
+      "storageKey": null
+    },
+    {
+      "alias": null,
+      "args": null,
+      "concreteType": "Genre",
       "kind": "LinkedField",
-      "name": "details",
-      "plural": false,
+      "name": "genres",
+      "plural": true,
       "selections": [
         {
-          "alias": null,
           "args": null,
-          "kind": "ScalarField",
-          "name": "runtime",
-          "storageKey": null
-        },
-        {
-          "alias": null,
-          "args": null,
-          "kind": "ScalarField",
-          "name": "tagline",
-          "storageKey": null
-        },
-        {
-          "alias": null,
-          "args": null,
-          "concreteType": "Genre",
-          "kind": "LinkedField",
-          "name": "genres",
-          "plural": true,
-          "selections": [
-            {
-              "args": null,
-              "kind": "FragmentSpread",
-              "name": "GenreTag_genre"
-            }
-          ],
-          "storageKey": null
+          "kind": "FragmentSpread",
+          "name": "GenreTag_genre"
         }
       ],
       "storageKey": null
@@ -106,8 +93,8 @@ const node: ReaderFragment = {
       "name": "useMovieReleaseDate_movie"
     }
   ],
-  "type": "IMovie",
-  "abstractKey": "__isIMovie"
+  "type": "Movie",
+  "abstractKey": null
 };
-(node as any).hash = '9b67b48b06535f5bd75ca43c345b5a2c';
+(node as any).hash = 'f4a648850449cac93cfb586c67d04d6b';
 export default node;

@@ -6,10 +6,10 @@ import { ReaderFragment } from "relay-runtime";
 import { FragmentRefs } from "relay-runtime";
 export type useKnownForDescription_person = {
     readonly knownFor: ReadonlyArray<{
-        readonly __typename: "MovieResult";
+        readonly __typename: "Movie";
         readonly title: string;
     } | {
-        readonly __typename: "TVShowResult";
+        readonly __typename: "TVShow";
         readonly name: string;
     } | {
         /*This will never be '%other', but we need some
@@ -58,7 +58,7 @@ const node: ReaderFragment = {
               "storageKey": null
             }
           ],
-          "type": "MovieResult",
+          "type": "Movie",
           "abstractKey": null
         },
         {
@@ -72,15 +72,15 @@ const node: ReaderFragment = {
               "storageKey": null
             }
           ],
-          "type": "TVShowResult",
+          "type": "TVShow",
           "abstractKey": null
         }
       ],
       "storageKey": null
     }
   ],
-  "type": "PersonListResult",
+  "type": "Person",
   "abstractKey": null
 };
-(node as any).hash = 'be9cb0c44b6b64efbfc1204df22ac8a0';
+(node as any).hash = '33c1b0b4bf9b055731bd63647b0068fe';
 export default node;

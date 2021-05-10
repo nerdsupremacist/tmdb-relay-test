@@ -6,13 +6,13 @@ import { graphql } from 'babel-plugin-relay/macro';
 function useKnownForDescription(person: useKnownForDescription_person$key) {
     const decoded = useFragment(
         graphql`
-            fragment useKnownForDescription_person on PersonListResult {
+            fragment useKnownForDescription_person on Person {
                 knownFor {
                     __typename
-                    ... on MovieResult {
+                    ... on Movie {
                         title
                     }
-                    ... on TVShowResult {
+                    ... on TVShow {
                         name
                     }
                 }
@@ -23,9 +23,9 @@ function useKnownForDescription(person: useKnownForDescription_person$key) {
 
     const names = decoded.knownFor.mapNotNull(item => {
         switch (item.__typename) {
-        case 'MovieResult':
+        case 'Movie':
             return item.title;
-        case 'TVShowResult':
+        case 'TVShow':
             return item.name;
         default:
             return null;

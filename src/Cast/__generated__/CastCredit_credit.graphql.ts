@@ -30,7 +30,7 @@ const node: ReaderFragment = {
     {
       "alias": "actor",
       "args": null,
-      "concreteType": null,
+      "concreteType": "Person",
       "kind": "LinkedField",
       "name": "value",
       "plural": false,
@@ -71,8 +71,8 @@ const node: ReaderFragment = {
       "storageKey": null
     }
   ],
-  "type": "CastCreditBasicPerson",
+  "type": "CastCreditWithPerson",
   "abstractKey": null
 };
-(node as any).hash = 'a67af28cdd8a48ec2734726d6aad0091';
+(node as any).hash = '344417bc13751e290a3ec750e52a42c7';
 export default node;
