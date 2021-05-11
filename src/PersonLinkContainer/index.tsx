@@ -16,14 +16,14 @@ function PersonLinkContainer(props: Props) {
     const person = useFragment(
         graphql`
             fragment PersonLinkContainer_person on Person {
-                personId: id
+                id
             }
         `,
         props.person,
     );
 
     return (
-        <Link to={`/person/${person.personId}`}>
+        <Link to={`/person/${person.id}`}>
             {props.children}
         </Link>
     );

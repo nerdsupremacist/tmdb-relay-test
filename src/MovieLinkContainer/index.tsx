@@ -15,14 +15,14 @@ function MovieLinkContainer(props: Props) {
     const movie = useFragment(
         graphql`
             fragment MovieLinkContainer_movie on Movie {
-                movieId: id
+                id
             }
         `,
         props.movie,
     );
 
     return (
-        <Link to={`/movie/${movie.movieId}`}>
+        <Link to={`/movie/${movie.id}`}>
             {props.children}
         </Link>
     );
