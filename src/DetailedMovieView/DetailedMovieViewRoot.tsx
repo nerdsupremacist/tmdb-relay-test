@@ -12,9 +12,11 @@ import { useFragment } from 'react-relay';
 import { graphql } from 'babel-plugin-relay/macro';
 
 import Cast from 'Cast';
+import Crew from 'Crew';
 import MovieHeader from './MovieHeader';
 import MovieParallaxBackdrop from './MovieParallaxBackdrop';
 import MovieStreamingLinks from './MovieStreamingLinks';
+import RecommendedMovieList from './RecommendedMovieList';
 import SimilarMovieList from './SimilarMovieList';
 
 type Props = {
@@ -32,10 +34,12 @@ function DetailedMovieViewRoot(props: Props) {
 
                 credits {
                     ...Cast_credits
+                    ...Crew_credits
                 }
 
                 ...MovieParallaxBackdrop_movie
                 ...SimilarMovieList_movie @arguments(count: 20, cursor: null)
+                ...RecommendedMovieList_movie @arguments(count: 20, cursor: null)
             }
         `,
         props.movie,
@@ -54,6 +58,16 @@ function DetailedMovieViewRoot(props: Props) {
             <MovieParallaxBackdrop movie={movie} />
             <Container maxW="container.md" paddingBottom={8} paddingTop={8}>
                 <VStack align="baseline" spacing={4}>
+                    <Text fontSize="xl" fontWeight="bold">
+                        Recommended Movies
+                    </Text>
+                    <RecommendedMovieList movie={movie} />
+                    
+                    <Text fontSize="xl" fontWeight="bold">
+                        Crew
+                    </Text>
+                    <Crew credits={movie.credits}/>
+
                     <Text fontSize="xl" fontWeight="bold">
                         Similar Movies
                     </Text>

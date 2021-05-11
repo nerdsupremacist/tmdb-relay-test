@@ -1,5 +1,4 @@
-
-import type { CastCredit_credit$key } from './__generated__/CastCredit_credit.graphql';
+import type { CrewCredit_credit$key } from './__generated__/CrewCredit_credit.graphql';
 
 import React from 'react';
 import { Avatar, Text, VStack } from '@chakra-ui/react';
@@ -10,19 +9,19 @@ import { graphql } from 'babel-plugin-relay/macro';
 import PersonLinkContainer from 'PersonLinkContainer';
 
 type Props = {
-    credit: CastCredit_credit$key,
+    credit: CrewCredit_credit$key,
 }
 
-function CastCredit(props: Props) {
+function CrewCredit(props: Props) {
     const credit = useFragment(
         graphql`
-            fragment CastCredit_credit on CastCreditWithPerson {
+            fragment CrewCredit_credit on CrewCreditWithPerson {
                 actor: value {
                     ...PersonLinkContainer_person
                     name
                     profilePicture(size: W185)
                 }
-                character
+                job
             }
         `,
         props.credit,
@@ -43,11 +42,13 @@ function CastCredit(props: Props) {
                             
                         {credit.actor.name}
                     </Text>
-                    <Text fontSize="sm" fontWeight="light" noOfLines={3} textAlign="center">as {credit.character}</Text>
+                    <Text fontSize="sm" fontWeight="light" noOfLines={2} textAlign="center">
+                        {credit.job}
+                    </Text>
                 </VStack>
             </VStack>
         </PersonLinkContainer>
     );
 }
 
-export default CastCredit;
+export default CrewCredit;

@@ -7,9 +7,9 @@ import { FragmentRefs } from "relay-runtime";
 export type DetailedMovieViewRoot_movie = {
     readonly overview: string;
     readonly credits: {
-        readonly " $fragmentRefs": FragmentRefs<"Cast_credits">;
+        readonly " $fragmentRefs": FragmentRefs<"Cast_credits" | "Crew_credits">;
     };
-    readonly " $fragmentRefs": FragmentRefs<"MovieHeader_movie" | "MovieStreamingLinks_movie" | "MovieParallaxBackdrop_movie" | "SimilarMovieList_movie">;
+    readonly " $fragmentRefs": FragmentRefs<"MovieHeader_movie" | "MovieStreamingLinks_movie" | "MovieParallaxBackdrop_movie" | "SimilarMovieList_movie" | "RecommendedMovieList_movie">;
     readonly " $refType": "DetailedMovieViewRoot_movie";
 };
 export type DetailedMovieViewRoot_movie$data = DetailedMovieViewRoot_movie;
@@ -20,7 +20,15 @@ export type DetailedMovieViewRoot_movie$key = {
 
 
 
-const node: ReaderFragment = {
+const node: ReaderFragment = (function(){
+var v0 = [
+  {
+    "kind": "Literal",
+    "name": "count",
+    "value": 20
+  }
+];
+return {
   "argumentDefinitions": [],
   "kind": "Fragment",
   "metadata": null,
@@ -45,6 +53,11 @@ const node: ReaderFragment = {
           "args": null,
           "kind": "FragmentSpread",
           "name": "Cast_credits"
+        },
+        {
+          "args": null,
+          "kind": "FragmentSpread",
+          "name": "Crew_credits"
         }
       ],
       "storageKey": null
@@ -65,19 +78,19 @@ const node: ReaderFragment = {
       "name": "MovieParallaxBackdrop_movie"
     },
     {
-      "args": [
-        {
-          "kind": "Literal",
-          "name": "count",
-          "value": 20
-        }
-      ],
+      "args": (v0/*: any*/),
       "kind": "FragmentSpread",
       "name": "SimilarMovieList_movie"
+    },
+    {
+      "args": (v0/*: any*/),
+      "kind": "FragmentSpread",
+      "name": "RecommendedMovieList_movie"
     }
   ],
   "type": "Movie",
   "abstractKey": null
 };
-(node as any).hash = '0751bfb72bcb075ba7eaddea8961d95c';
+})();
+(node as any).hash = '8dc38b77b2a2dda5a3c58ef476e83695';
 export default node;

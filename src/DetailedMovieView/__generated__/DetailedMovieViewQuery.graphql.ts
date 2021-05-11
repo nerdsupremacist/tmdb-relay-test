@@ -49,6 +49,22 @@ fragment Cast_credits on CreditsWithPerson {
   }
 }
 
+fragment CrewCredit_credit on CrewCreditWithPerson {
+  actor: value {
+    ...PersonLinkContainer_person
+    name
+    profilePicture(size: W185)
+    id
+  }
+  job
+}
+
+fragment Crew_credits on CreditsWithPerson {
+  crew {
+    ...CrewCredit_credit
+  }
+}
+
 fragment DetailedMovieViewRoot_movie on Movie {
   ...MovieHeader_movie
   ...MovieStreamingLinks_movie
@@ -56,9 +72,11 @@ fragment DetailedMovieViewRoot_movie on Movie {
   credits {
     __typename
     ...Cast_credits
+    ...Crew_credits
   }
   ...MovieParallaxBackdrop_movie
   ...SimilarMovieList_movie_42LEEo
+  ...RecommendedMovieList_movie_42LEEo
 }
 
 fragment GenreTag_genre on Genre {
@@ -98,6 +116,24 @@ fragment MovieStreamingLinks_movie on Movie {
 }
 
 fragment PersonLinkContainer_person on Person {
+  id
+}
+
+fragment RecommendedMovieList_movie_42LEEo on Movie {
+  recommendations(first: 20) {
+    edges {
+      node {
+        ...MovieListItem_movie
+        id
+        __typename
+      }
+      cursor
+    }
+    pageInfo {
+      endCursor
+      hasNextPage
+    }
+  }
   id
 }
 
@@ -206,11 +242,103 @@ v6 = {
   "name": "id",
   "storageKey": null
 },
-v7 = [
+v7 = {
+  "alias": "actor",
+  "args": null,
+  "concreteType": "Person",
+  "kind": "LinkedField",
+  "name": "value",
+  "plural": false,
+  "selections": [
+    (v6/*: any*/),
+    (v4/*: any*/),
+    {
+      "alias": null,
+      "args": (v2/*: any*/),
+      "kind": "ScalarField",
+      "name": "profilePicture",
+      "storageKey": "profilePicture(size:\"W185\")"
+    }
+  ],
+  "storageKey": null
+},
+v8 = [
   {
     "kind": "Literal",
     "name": "first",
     "value": 20
+  }
+],
+v9 = [
+  {
+    "alias": null,
+    "args": null,
+    "concreteType": "MovieEdge",
+    "kind": "LinkedField",
+    "name": "edges",
+    "plural": true,
+    "selections": [
+      {
+        "alias": null,
+        "args": null,
+        "concreteType": "Movie",
+        "kind": "LinkedField",
+        "name": "node",
+        "plural": false,
+        "selections": [
+          (v6/*: any*/),
+          (v3/*: any*/),
+          {
+            "alias": null,
+            "args": [
+              {
+                "kind": "Literal",
+                "name": "size",
+                "value": "W154"
+              }
+            ],
+            "kind": "ScalarField",
+            "name": "poster",
+            "storageKey": "poster(size:\"W154\")"
+          },
+          (v5/*: any*/)
+        ],
+        "storageKey": null
+      },
+      {
+        "alias": null,
+        "args": null,
+        "kind": "ScalarField",
+        "name": "cursor",
+        "storageKey": null
+      }
+    ],
+    "storageKey": null
+  },
+  {
+    "alias": null,
+    "args": null,
+    "concreteType": "PageInfo",
+    "kind": "LinkedField",
+    "name": "pageInfo",
+    "plural": false,
+    "selections": [
+      {
+        "alias": null,
+        "args": null,
+        "kind": "ScalarField",
+        "name": "endCursor",
+        "storageKey": null
+      },
+      {
+        "alias": null,
+        "args": null,
+        "kind": "ScalarField",
+        "name": "hasNextPage",
+        "storageKey": null
+      }
+    ],
+    "storageKey": null
   }
 ];
 return {
@@ -439,31 +567,31 @@ return {
                         "name": "cast",
                         "plural": true,
                         "selections": [
-                          {
-                            "alias": "actor",
-                            "args": null,
-                            "concreteType": "Person",
-                            "kind": "LinkedField",
-                            "name": "value",
-                            "plural": false,
-                            "selections": [
-                              (v6/*: any*/),
-                              (v4/*: any*/),
-                              {
-                                "alias": null,
-                                "args": (v2/*: any*/),
-                                "kind": "ScalarField",
-                                "name": "profilePicture",
-                                "storageKey": "profilePicture(size:\"W185\")"
-                              }
-                            ],
-                            "storageKey": null
-                          },
+                          (v7/*: any*/),
                           {
                             "alias": null,
                             "args": null,
                             "kind": "ScalarField",
                             "name": "character",
+                            "storageKey": null
+                          }
+                        ],
+                        "storageKey": null
+                      },
+                      {
+                        "alias": null,
+                        "args": null,
+                        "concreteType": "CrewCreditWithPerson",
+                        "kind": "LinkedField",
+                        "name": "crew",
+                        "plural": true,
+                        "selections": [
+                          (v7/*: any*/),
+                          {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "job",
                             "storageKey": null
                           }
                         ],
@@ -491,95 +619,43 @@ return {
               },
               {
                 "alias": null,
-                "args": (v7/*: any*/),
+                "args": (v8/*: any*/),
                 "concreteType": "MovieConnection",
                 "kind": "LinkedField",
                 "name": "similar",
                 "plural": false,
-                "selections": [
-                  {
-                    "alias": null,
-                    "args": null,
-                    "concreteType": "MovieEdge",
-                    "kind": "LinkedField",
-                    "name": "edges",
-                    "plural": true,
-                    "selections": [
-                      {
-                        "alias": null,
-                        "args": null,
-                        "concreteType": "Movie",
-                        "kind": "LinkedField",
-                        "name": "node",
-                        "plural": false,
-                        "selections": [
-                          (v6/*: any*/),
-                          (v3/*: any*/),
-                          {
-                            "alias": null,
-                            "args": [
-                              {
-                                "kind": "Literal",
-                                "name": "size",
-                                "value": "W154"
-                              }
-                            ],
-                            "kind": "ScalarField",
-                            "name": "poster",
-                            "storageKey": "poster(size:\"W154\")"
-                          },
-                          (v5/*: any*/)
-                        ],
-                        "storageKey": null
-                      },
-                      {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "cursor",
-                        "storageKey": null
-                      }
-                    ],
-                    "storageKey": null
-                  },
-                  {
-                    "alias": null,
-                    "args": null,
-                    "concreteType": "PageInfo",
-                    "kind": "LinkedField",
-                    "name": "pageInfo",
-                    "plural": false,
-                    "selections": [
-                      {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "endCursor",
-                        "storageKey": null
-                      },
-                      {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "hasNextPage",
-                        "storageKey": null
-                      }
-                    ],
-                    "storageKey": null
-                  }
-                ],
+                "selections": (v9/*: any*/),
                 "storageKey": "similar(first:20)"
               },
               {
                 "alias": null,
-                "args": (v7/*: any*/),
+                "args": (v8/*: any*/),
                 "filters": [],
                 "handle": "connection",
                 "key": "SimilarMovieList_similar",
                 "kind": "LinkedHandle",
                 "name": "similar"
               },
-              (v6/*: any*/)
+              (v6/*: any*/),
+              {
+                "alias": null,
+                "args": (v8/*: any*/),
+                "concreteType": "MovieConnection",
+                "kind": "LinkedField",
+                "name": "recommendations",
+                "plural": false,
+                "selections": (v9/*: any*/),
+                "storageKey": "recommendations(first:20)"
+              },
+              {
+                "alias": null,
+                "args": (v8/*: any*/),
+                "filters": [],
+                "handle": "connection",
+                "key": "RecommendedMovieList_recommendations",
+                "kind": "LinkedHandle",
+                "name": "recommendations"
+              }
             ],
             "storageKey": null
           }
@@ -589,12 +665,12 @@ return {
     ]
   },
   "params": {
-    "cacheID": "916383438b74d10c54f15ea2635d14fa",
+    "cacheID": "1d278e0a6e13c0a91df6c284376cd6a3",
     "id": null,
     "metadata": {},
     "name": "DetailedMovieViewQuery",
     "operationKind": "query",
-    "text": "query DetailedMovieViewQuery(\n  $id: ID!\n) {\n  movies {\n    movie(id: $id) {\n      ...DetailedMovieViewRoot_movie\n      id\n    }\n  }\n}\n\nfragment CastCredit_credit on CastCreditWithPerson {\n  actor: value {\n    ...PersonLinkContainer_person\n    name\n    profilePicture(size: W185)\n    id\n  }\n  character\n}\n\nfragment Cast_credits on CreditsWithPerson {\n  cast {\n    ...CastCredit_credit\n  }\n}\n\nfragment DetailedMovieViewRoot_movie on Movie {\n  ...MovieHeader_movie\n  ...MovieStreamingLinks_movie\n  overview\n  credits {\n    __typename\n    ...Cast_credits\n  }\n  ...MovieParallaxBackdrop_movie\n  ...SimilarMovieList_movie_42LEEo\n}\n\nfragment GenreTag_genre on Genre {\n  name\n}\n\nfragment MovieHeader_movie on Movie {\n  poster(size: W185)\n  title\n  rating\n  ...useMovieReleaseDate_movie\n  runtime\n  tagline\n  genres {\n    ...GenreTag_genre\n  }\n}\n\nfragment MovieLinkContainer_movie on Movie {\n  id\n}\n\nfragment MovieListItem_movie on Movie {\n  ...MovieLinkContainer_movie\n  title\n  poster(size: W154)\n}\n\nfragment MovieParallaxBackdrop_movie on Movie {\n  backdrop(size: Original)\n}\n\nfragment MovieStreamingLinks_movie on Movie {\n  streamingOptions {\n    ...StreamingLink_option\n  }\n}\n\nfragment PersonLinkContainer_person on Person {\n  id\n}\n\nfragment SimilarMovieList_movie_42LEEo on Movie {\n  similar(first: 20) {\n    edges {\n      node {\n        ...MovieListItem_movie\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n  id\n}\n\nfragment StreamingLinkToolTip_option on StreamingOption {\n  provider {\n    name\n  }\n}\n\nfragment StreamingLink_option on StreamingOption {\n  ...StreamingLinkToolTip_option\n  provider {\n    iconURL\n  }\n  bestOffering {\n    links {\n      web\n    }\n    ...useStreamingLinkTitle_offering\n    ...useStreamingLinkPriceDescription_offering\n  }\n}\n\nfragment useMovieReleaseDate_movie on Movie {\n  releaseDate\n}\n\nfragment useStreamingLinkPriceDescription_offering on StreamingOptionOffering {\n  type\n  price {\n    amount\n    currency\n  }\n}\n\nfragment useStreamingLinkTitle_offering on StreamingOptionOffering {\n  type\n}\n"
+    "text": "query DetailedMovieViewQuery(\n  $id: ID!\n) {\n  movies {\n    movie(id: $id) {\n      ...DetailedMovieViewRoot_movie\n      id\n    }\n  }\n}\n\nfragment CastCredit_credit on CastCreditWithPerson {\n  actor: value {\n    ...PersonLinkContainer_person\n    name\n    profilePicture(size: W185)\n    id\n  }\n  character\n}\n\nfragment Cast_credits on CreditsWithPerson {\n  cast {\n    ...CastCredit_credit\n  }\n}\n\nfragment CrewCredit_credit on CrewCreditWithPerson {\n  actor: value {\n    ...PersonLinkContainer_person\n    name\n    profilePicture(size: W185)\n    id\n  }\n  job\n}\n\nfragment Crew_credits on CreditsWithPerson {\n  crew {\n    ...CrewCredit_credit\n  }\n}\n\nfragment DetailedMovieViewRoot_movie on Movie {\n  ...MovieHeader_movie\n  ...MovieStreamingLinks_movie\n  overview\n  credits {\n    __typename\n    ...Cast_credits\n    ...Crew_credits\n  }\n  ...MovieParallaxBackdrop_movie\n  ...SimilarMovieList_movie_42LEEo\n  ...RecommendedMovieList_movie_42LEEo\n}\n\nfragment GenreTag_genre on Genre {\n  name\n}\n\nfragment MovieHeader_movie on Movie {\n  poster(size: W185)\n  title\n  rating\n  ...useMovieReleaseDate_movie\n  runtime\n  tagline\n  genres {\n    ...GenreTag_genre\n  }\n}\n\nfragment MovieLinkContainer_movie on Movie {\n  id\n}\n\nfragment MovieListItem_movie on Movie {\n  ...MovieLinkContainer_movie\n  title\n  poster(size: W154)\n}\n\nfragment MovieParallaxBackdrop_movie on Movie {\n  backdrop(size: Original)\n}\n\nfragment MovieStreamingLinks_movie on Movie {\n  streamingOptions {\n    ...StreamingLink_option\n  }\n}\n\nfragment PersonLinkContainer_person on Person {\n  id\n}\n\nfragment RecommendedMovieList_movie_42LEEo on Movie {\n  recommendations(first: 20) {\n    edges {\n      node {\n        ...MovieListItem_movie\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n  id\n}\n\nfragment SimilarMovieList_movie_42LEEo on Movie {\n  similar(first: 20) {\n    edges {\n      node {\n        ...MovieListItem_movie\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n  id\n}\n\nfragment StreamingLinkToolTip_option on StreamingOption {\n  provider {\n    name\n  }\n}\n\nfragment StreamingLink_option on StreamingOption {\n  ...StreamingLinkToolTip_option\n  provider {\n    iconURL\n  }\n  bestOffering {\n    links {\n      web\n    }\n    ...useStreamingLinkTitle_offering\n    ...useStreamingLinkPriceDescription_offering\n  }\n}\n\nfragment useMovieReleaseDate_movie on Movie {\n  releaseDate\n}\n\nfragment useStreamingLinkPriceDescription_offering on StreamingOptionOffering {\n  type\n  price {\n    amount\n    currency\n  }\n}\n\nfragment useStreamingLinkTitle_offering on StreamingOptionOffering {\n  type\n}\n"
   }
 };
 })();
