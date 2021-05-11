@@ -43,7 +43,7 @@ function DetailedMovieViewRoot(props: Props) {
 
     return (
         <div>
-            <Container paddingBottom={8} paddingTop={8}>
+            <Container maxW="container.sm" paddingBottom={8} paddingTop={8}>
                 <VStack align="baseline" spacing={4}>
                     <MovieHeader movie={movie} />
                     <MovieStreamingLinks movie={movie} />
@@ -52,7 +52,7 @@ function DetailedMovieViewRoot(props: Props) {
                 </VStack>
             </Container>
             <MovieParallaxBackdrop movie={movie} />
-            <Container paddingBottom={8} paddingTop={8}>
+            <Container maxW="container.md" paddingBottom={8} paddingTop={8}>
                 <VStack align="baseline" spacing={4}>
                     <Text fontSize="xl" fontWeight="bold">
                         Similar Movies

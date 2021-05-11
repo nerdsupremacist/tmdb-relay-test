@@ -8,7 +8,7 @@ export type SimilarMovieList_movie = {
     readonly similar: {
         readonly edges: ReadonlyArray<{
             readonly node: {
-                readonly " $fragmentRefs": FragmentRefs<"RelatedMovie_movie">;
+                readonly " $fragmentRefs": FragmentRefs<"MovieListItem_movie">;
             } | null;
         } | null> | null;
     };
@@ -30,7 +30,7 @@ var v0 = [
 return {
   "argumentDefinitions": [
     {
-      "defaultValue": null,
+      "defaultValue": 20,
       "kind": "LocalArgument",
       "name": "count"
     },
@@ -73,7 +73,7 @@ return {
       "args": null,
       "concreteType": "MovieConnection",
       "kind": "LinkedField",
-      "name": "__SimilarMovieList_movie_similar_connection",
+      "name": "__SimilarMovieList_similar_connection",
       "plural": false,
       "selections": [
         {
@@ -102,7 +102,7 @@ return {
                 {
                   "args": null,
                   "kind": "FragmentSpread",
-                  "name": "RelatedMovie_movie"
+                  "name": "MovieListItem_movie"
                 }
               ],
               "storageKey": null
@@ -157,5 +157,5 @@ return {
   "abstractKey": null
 };
 })();
-(node as any).hash = '219dcaecb81fb8631005694c77ae312b';
+(node as any).hash = 'f7b8ddaae67d49ad1122106783e66123';
 export default node;

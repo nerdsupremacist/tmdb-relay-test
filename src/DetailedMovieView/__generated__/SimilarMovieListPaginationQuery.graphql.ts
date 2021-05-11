@@ -23,7 +23,7 @@ export type SimilarMovieListPaginationQuery = {
 
 /*
 query SimilarMovieListPaginationQuery(
-  $count: Int!
+  $count: Int! = 20
   $cursor: String
   $id: ID!
 ) {
@@ -38,7 +38,7 @@ fragment MovieLinkContainer_movie on Movie {
   id
 }
 
-fragment RelatedMovie_movie on Movie {
+fragment MovieListItem_movie on Movie {
   ...MovieLinkContainer_movie
   title
   poster(size: W154)
@@ -48,7 +48,7 @@ fragment SimilarMovieList_movie_1G22uz on Movie {
   similar(first: $count, after: $cursor) {
     edges {
       node {
-        ...RelatedMovie_movie
+        ...MovieListItem_movie
         id
         __typename
       }
@@ -66,7 +66,7 @@ fragment SimilarMovieList_movie_1G22uz on Movie {
 const node: ConcreteRequest = (function(){
 var v0 = [
   {
-    "defaultValue": null,
+    "defaultValue": 20,
     "kind": "LocalArgument",
     "name": "count"
   },
@@ -261,9 +261,9 @@ return {
               {
                 "alias": null,
                 "args": (v4/*: any*/),
-                "filters": null,
+                "filters": [],
                 "handle": "connection",
-                "key": "SimilarMovieList_movie_similar",
+                "key": "SimilarMovieList_similar",
                 "kind": "LinkedHandle",
                 "name": "similar"
               }
@@ -277,14 +277,14 @@ return {
     ]
   },
   "params": {
-    "cacheID": "e0f9e50f8aba065cc75358d80f8e4823",
+    "cacheID": "c0c89433ec98ac997c08ad6dbee2d611",
     "id": null,
     "metadata": {},
     "name": "SimilarMovieListPaginationQuery",
     "operationKind": "query",
-    "text": "query SimilarMovieListPaginationQuery(\n  $count: Int!\n  $cursor: String\n  $id: ID!\n) {\n  node(id: $id) {\n    __typename\n    ...SimilarMovieList_movie_1G22uz\n    id\n  }\n}\n\nfragment MovieLinkContainer_movie on Movie {\n  id\n}\n\nfragment RelatedMovie_movie on Movie {\n  ...MovieLinkContainer_movie\n  title\n  poster(size: W154)\n}\n\nfragment SimilarMovieList_movie_1G22uz on Movie {\n  similar(first: $count, after: $cursor) {\n    edges {\n      node {\n        ...RelatedMovie_movie\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n  id\n}\n"
+    "text": "query SimilarMovieListPaginationQuery(\n  $count: Int! = 20\n  $cursor: String\n  $id: ID!\n) {\n  node(id: $id) {\n    __typename\n    ...SimilarMovieList_movie_1G22uz\n    id\n  }\n}\n\nfragment MovieLinkContainer_movie on Movie {\n  id\n}\n\nfragment MovieListItem_movie on Movie {\n  ...MovieLinkContainer_movie\n  title\n  poster(size: W154)\n}\n\nfragment SimilarMovieList_movie_1G22uz on Movie {\n  similar(first: $count, after: $cursor) {\n    edges {\n      node {\n        ...MovieListItem_movie\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n  id\n}\n"
   }
 };
 })();
-(node as any).hash = '219dcaecb81fb8631005694c77ae312b';
+(node as any).hash = 'f7b8ddaae67d49ad1122106783e66123';
 export default node;

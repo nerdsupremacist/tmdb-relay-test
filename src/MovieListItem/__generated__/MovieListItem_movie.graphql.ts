@@ -4,16 +4,16 @@
 
 import { ReaderFragment } from "relay-runtime";
 import { FragmentRefs } from "relay-runtime";
-export type RelatedMovie_movie = {
+export type MovieListItem_movie = {
     readonly title: string;
     readonly poster: string | null;
     readonly " $fragmentRefs": FragmentRefs<"MovieLinkContainer_movie">;
-    readonly " $refType": "RelatedMovie_movie";
+    readonly " $refType": "MovieListItem_movie";
 };
-export type RelatedMovie_movie$data = RelatedMovie_movie;
-export type RelatedMovie_movie$key = {
-    readonly " $data"?: RelatedMovie_movie$data;
-    readonly " $fragmentRefs": FragmentRefs<"RelatedMovie_movie">;
+export type MovieListItem_movie$data = MovieListItem_movie;
+export type MovieListItem_movie$key = {
+    readonly " $data"?: MovieListItem_movie$data;
+    readonly " $fragmentRefs": FragmentRefs<"MovieListItem_movie">;
 };
 
 
@@ -22,7 +22,7 @@ const node: ReaderFragment = {
   "argumentDefinitions": [],
   "kind": "Fragment",
   "metadata": null,
-  "name": "RelatedMovie_movie",
+  "name": "MovieListItem_movie",
   "selections": [
     {
       "alias": null,
@@ -53,5 +53,5 @@ const node: ReaderFragment = {
   "type": "Movie",
   "abstractKey": null
 };
-(node as any).hash = 'c1832b5d053dd2750cc780fbb59f423f';
+(node as any).hash = 'c6c6af27e73009f8089cedd147026d7e';
 export default node;

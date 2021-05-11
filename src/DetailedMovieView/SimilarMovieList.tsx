@@ -8,32 +8,27 @@ import React from 'react';
 import { usePaginationFragment } from 'react-relay';
 import { graphql } from 'babel-plugin-relay/macro';
 
-import RelatedMovieList from './RelatedMovieList';
+import InfiniteScrollview from 'InfiniteScrollview';
+import MovieListItem from 'MovieListItem';
 
 type Props = {
     movie: SimilarMovieList_movie$key,
 }
 
 function SimilarMovieList(props: Props) {
-    const {
-        data,
-        hasNext,
-        isLoadingNext,
-        loadNext,
     // eslint-disable-next-line relay/generated-flow-types
-    } = usePaginationFragment<SimilarMovieListPaginationQuery, SimilarMovieList_movie$key>(
+    const { data, ...connection } = usePaginationFragment<SimilarMovieListPaginationQuery, SimilarMovieList_movie$key>(
         graphql`
             fragment SimilarMovieList_movie on Movie 
             @argumentDefinitions(
-                count: { type: "Int!" }
+                count: { type: "Int!", defaultValue: 20 }
                 cursor: { type: "String" }
             )
             @refetchable(queryName: "SimilarMovieListPaginationQuery") {
-                similar(first: $count, after: $cursor) @connection(key: "SimilarMovieList_movie_similar") {
+                similar(first: $count, after: $cursor) @connection(key: "SimilarMovieList_similar", filters: []) {
                     edges {
                         node {
-                            # eslint-disable-next-line relay/must-colocate-fragment-spreads
-                            ...RelatedMovie_movie
+                            ...MovieListItem_movie
                         }
                     }
                 }
@@ -45,13 +40,15 @@ function SimilarMovieList(props: Props) {
     const movies = data.similar.edges?.mapNotNull(edge => edge?.node) ?? [];
 
     return (
-        <RelatedMovieList
-            error={null}
-            hasMore={hasNext}
-            isLoading={isLoadingNext}
-            loadMore={() => loadNext(20)}
-            movies={movies}
-        />
+        <InfiniteScrollview
+            align="start"
+            maxW="100%"
+            padding={2}
+            scrollDirection="horizontal"
+            {...connection}
+        >
+            {movies.map((movie, index) => <MovieListItem key={`similar_movie_${index}`} movie={movie}/>)}
+        </InfiniteScrollview>
     );
 }
 

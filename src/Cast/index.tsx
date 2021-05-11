@@ -1,11 +1,11 @@
 import type { Cast_credits$key } from './__generated__/Cast_credits.graphql';
 
 import React from 'react';
-import { HStack } from '@chakra-ui/react';
 
 import { useFragment } from 'react-relay';
 import { graphql } from 'babel-plugin-relay/macro';
 
+import HorizonalScrollview from 'HorizonalScrollview';
 import CastCredit from './CastCredit';
 
 type Props = {
@@ -25,13 +25,13 @@ function Cast(props: Props) {
     );
 
     return (
-        <HStack align="start" maxW="100%" overflowY="scroll" padding={2}>
+        <HorizonalScrollview align="start" maxW="100%" padding={2}>
             {
                 credits.cast.map((credit, index) => {
                     return <CastCredit credit={credit} key={`cast_credit_${index}`} />;
                 })
             }
-        </HStack>
+        </HorizonalScrollview>
     );
 }
 
