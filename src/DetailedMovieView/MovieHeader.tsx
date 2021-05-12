@@ -2,6 +2,7 @@ import type { MovieHeader_movie$key } from './__generated__/MovieHeader_movie.gr
 
 import React from 'react';
 import {
+    Badge,
     HStack,
     Image,
     Text,
@@ -14,8 +15,10 @@ import { useFragment } from 'react-relay';
 import { graphql } from 'babel-plugin-relay/macro';
 
 import GenreTag from './GenreTag';
+import MovieRatingCircle from './MovieRatingCircle';
 
 import useMovieReleaseDate from 'useMovieReleaseDate';
+import useMovieStatus from './useMovieStatus';
 
 import { POSTER_PLACEHOLDER } from 'utils/constants';
 
@@ -27,10 +30,11 @@ function MovieHeader(props: Props) {
     const movie = useFragment(
         graphql`
             fragment MovieHeader_movie on Movie {
-                poster(size: W185)
+                poster(size: W342)
                 title
-                rating
-
+                
+                ...MovieRatingCircle_movie
+                ...useMovieStatus_movie
                 ...useMovieReleaseDate_movie
 
                 runtime
@@ -38,12 +42,16 @@ function MovieHeader(props: Props) {
                 genres {
                     ...GenreTag_genre
                 }
+                productionCompanies {
+                    name
+                }
             }
         `,
         props.movie,
     );
 
     const poster = movie.poster ?? POSTER_PLACEHOLDER;
+    const status = useMovieStatus(movie);
     const releaseDate = useMovieReleaseDate(movie);
     const releaseYear = releaseDate?.getFullYear();
 
@@ -52,7 +60,8 @@ function MovieHeader(props: Props) {
             <Image
                 borderRadius="lg"
                 borderWidth="1px"
-                maxW="150"
+                maxW="200"
+                minW="100"
                 objectFit="cover"
                 overflow="hidden"
                 shadow="lg"
@@ -60,6 +69,12 @@ function MovieHeader(props: Props) {
             />
             <VStack align="baseline" spacing={2}>
                 <VStack align="baseline" spacing={0}>
+                    <MovieRatingCircle movie={movie} />
+                    {status != null && (
+                        <Badge borderRadius="xl" colorScheme={status[1]} px="2">
+                            {status[0]}
+                        </Badge>
+                    )}
                     <Text fontSize="3xl" fontWeight="bold">
                         {movie.title}
                     </Text>
@@ -69,12 +84,14 @@ function MovieHeader(props: Props) {
                                 {releaseYear}
                             </Text>
                         }
-                        <Text fontSize="md" fontWeight="light">
-                            {movie.runtime} min
-                        </Text>
-                        <Text fontSize="md" fontWeight="light">
-                            ★ {movie.rating}
-                        </Text>
+                        {
+                            movie.runtime > 0 && <Text fontSize="md" fontWeight="light">
+                                {movie.runtime} min
+                            </Text>
+                        }
+                        {movie.productionCompanies.length > 1 && <Text fontSize="md" fontWeight="light">
+                            {movie.productionCompanies[0].name}
+                        </Text>}
                     </HStack>
                 </VStack>
                 <Wrap spacing={2}>

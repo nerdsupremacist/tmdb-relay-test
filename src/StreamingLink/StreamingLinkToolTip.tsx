@@ -2,7 +2,7 @@ import type { StreamingLinkToolTip_option$key } from './__generated__/StreamingL
 import type { ReactNode } from 'react';
 
 import React from 'react';
-import { Tooltip } from '@chakra-ui/tooltip';
+import { Tooltip } from '@chakra-ui/react';
 
 import { useFragment } from 'react-relay';
 import { graphql } from 'babel-plugin-relay/macro';
