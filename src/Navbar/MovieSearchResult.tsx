@@ -41,7 +41,7 @@ function MovieSearchResult(props: Props) {
                     minW="100px"
                     objectFit="cover"
                     overflow="hidden"
-                    shadow="lg"
+                    shadow="xl"
                     src={poster}
                     w="100px"
                 />

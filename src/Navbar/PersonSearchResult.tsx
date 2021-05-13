@@ -38,7 +38,7 @@ function PersonSearchResult(props: Props) {
                 <Avatar
                     h="100px"
                     name={person.name}
-                    shadow="lg"
+                    shadow="xl"
                     w="100px"
 
                     {...avatarProps}

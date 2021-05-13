@@ -64,7 +64,7 @@ function MovieHeader(props: Props) {
                 minW="100"
                 objectFit="cover"
                 overflow="hidden"
-                shadow="lg"
+                shadow="xl"
                 src={poster}
             />
             <VStack align="baseline" spacing={2}>

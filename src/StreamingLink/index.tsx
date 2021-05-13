@@ -53,7 +53,7 @@ function StreamingLink(props: Props) {
                         borderRadius="xl"
                         borderWidth="1px"
                         maxW="50"
-                        shadow="lg"
+                        shadow="xl"
                         src={option.provider.iconURL}
                     />
                     <Text fontSize="sm" fontWeight="semibold" paddingTop="2">
