@@ -5,6 +5,7 @@ import { useHotkeys } from 'react-hotkeys-hook';
 import { AiFillHome } from 'react-icons/ai';
 import { Link as InternalLink } from 'react-router-dom';
 import {
+    Button,
     Collapse,
     Container,
     Flex,
@@ -50,7 +51,9 @@ function Navbar() {
                 <Flex>
                     <HStack align="center" flex={1} justify="left" paddingLeft={8}>
                         <InternalLink to="/">
-                            <Icon as={AiFillHome}/>
+                            <Button variant="ghost">
+                                <Icon as={AiFillHome}/>
+                            </Button>
                         </InternalLink>
                     </HStack>
                     <Container maxW="container.sm">
@@ -76,15 +79,29 @@ function Navbar() {
                     </Container>
                     <HStack align="center" flex={1} justify="right" paddingRight={8}>
                         <Spacer />
-                        <Link href={REPO_URL}>
-                            <Text fontSize="md" fontWeight="semibold">
-                                GitHub
-                            </Text>
+                        <Link
+                            href={REPO_URL}
+                            style={{
+                                textDecoration: 'none',
+                            }}
+                        >
+                            <Button variant="ghost">
+                                <Text fontSize="md" fontWeight="semibold">
+                                    GitHub
+                                </Text>
+                            </Button>
                         </Link>
-                        <Link href={GRAPHQL_URL}>
-                            <Text fontSize="md" fontWeight="semibold">
-                                API
-                            </Text>
+                        <Link
+                            href={GRAPHQL_URL}
+                            style={{
+                                textDecoration: 'none',
+                            }}
+                        >
+                            <Button variant="ghost">
+                                <Text fontSize="md" fontWeight="semibold">
+                                    API
+                                </Text>
+                            </Button>
                         </Link>
                     </HStack>
                 </Flex>
