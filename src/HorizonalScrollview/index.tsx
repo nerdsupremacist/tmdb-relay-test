@@ -2,7 +2,7 @@ import type { StackProps } from '@chakra-ui/react';
 
 import { ForwardedRef, ReactNode } from 'react';
 import React, { forwardRef, useLayoutEffect, useRef, useState } from 'react';
-import { Box, Flex, HStack, Spacer, useColorMode } from '@chakra-ui/react';
+import { Box, Flex, HStack, Spacer, useColorModeValue } from '@chakra-ui/react';
 
 interface Props extends Omit<
     Omit<
@@ -19,7 +19,6 @@ function HorizonalScrollview(
     { children, offsetAtWhichBordersAreVisible, ...stackProps }: Props,
     ref: ForwardedRef<HTMLDivElement>,
 ) {
-    const { colorMode } = useColorMode();
     const stackReference = useRef<HTMLDivElement>(null);
 
     useLayoutEffect(() => {
@@ -57,7 +56,7 @@ function HorizonalScrollview(
     const offsetTop = stackReference.current?.offsetTop ?? 0;
     const parentOffset = stackReference.current?.parentElement?.offsetTop ?? 0;
     
-    const color = colorMode === 'dark' ? '#1A202C' : '#FFFFFF';
+    const color = useColorModeValue('#FFFFFF', '#1A202C');
     const borderColor = `${color}FF`;
     const innerColor = `${color}00`;
 
