@@ -47,7 +47,13 @@ function StreamingLink(props: Props) {
 
     return (
         <StreamingLinkToolTip option={option}>
-            <Link href={option.bestOffering.links.web} textAlign="center">
+            <Link
+                href={option.bestOffering.links.web}
+                style={{
+                    textDecoration: 'none',
+                }}
+                textAlign="center"
+            >
                 <VStack align="center" spacing="0">
                     <Image
                         borderRadius="xl"
