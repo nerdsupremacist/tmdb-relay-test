@@ -6,6 +6,9 @@ import { ReaderFragment } from "relay-runtime";
 import { FragmentRefs } from "relay-runtime";
 export type MovieStreamingLinks_movie = {
     readonly streamingOptions: ReadonlyArray<{
+        readonly provider: {
+            readonly __typename: string;
+        } | null;
         readonly " $fragmentRefs": FragmentRefs<"StreamingLink_option">;
     }> | null;
     readonly " $refType": "MovieStreamingLinks_movie";
@@ -33,6 +36,24 @@ const node: ReaderFragment = {
       "plural": true,
       "selections": [
         {
+          "alias": null,
+          "args": null,
+          "concreteType": "StreamingProvider",
+          "kind": "LinkedField",
+          "name": "provider",
+          "plural": false,
+          "selections": [
+            {
+              "alias": null,
+              "args": null,
+              "kind": "ScalarField",
+              "name": "__typename",
+              "storageKey": null
+            }
+          ],
+          "storageKey": null
+        },
+        {
           "args": null,
           "kind": "FragmentSpread",
           "name": "StreamingLink_option"
@@ -44,5 +65,5 @@ const node: ReaderFragment = {
   "type": "Movie",
   "abstractKey": null
 };
-(node as any).hash = 'ca075af19fcd24c0194ce35b1dd17a6f';
+(node as any).hash = '9961158b414e93014bd3827118914bd8';
 export default node;

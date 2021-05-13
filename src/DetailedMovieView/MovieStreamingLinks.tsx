@@ -1,7 +1,7 @@
 import type { MovieStreamingLinks_movie$key } from './__generated__/MovieStreamingLinks_movie.graphql';
 
 import React from 'react';
-import { HStack } from '@chakra-ui/react';
+import { HStack, Link, Text } from '@chakra-ui/react';
 
 import { useFragment } from 'react-relay';
 import { graphql } from 'babel-plugin-relay/macro';
@@ -17,6 +17,9 @@ function MovieStreamingLinks(props: Props) {
         graphql`
             fragment MovieStreamingLinks_movie on Movie {
                 streamingOptions {
+                    provider {
+                        __typename
+                    }
                     ...StreamingLink_option
                 }
             }
@@ -24,15 +27,22 @@ function MovieStreamingLinks(props: Props) {
         props.movie,
     );
 
-    if (movie.streamingOptions != null && movie.streamingOptions.length > 0) {
+    const options = movie.streamingOptions?.filter(option => option.provider != null) ?? [];
+
+    if (options.length > 0) {
         return (
-            <HStack align="start" spacing={4}>
-                {
-                    movie.streamingOptions.slice(0, 5).map((option, index) => {
-                        return <StreamingLink key={`streaming_link_${index}`} option={option} />;
-                    })
-                }
-            </HStack>
+            <>
+                <HStack align="start" spacing={4}>
+                    {
+                        options.slice(0, 5).map((option, index) => {
+                            return <StreamingLink key={`streaming_link_${index}`} option={option} />;
+                        })
+                    }
+                </HStack>
+                <Text align="right" fontSize="sm" fontWeight="light" w="100%">
+                    Links powered by <Link href="">JustWatch</Link>
+                </Text>
+            </>
         );
     }
 
