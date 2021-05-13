@@ -6,6 +6,7 @@ import { ReaderFragment } from "relay-runtime";
 import { FragmentRefs } from "relay-runtime";
 export type RecommendedMovieList_movie = {
     readonly recommendations: {
+        readonly totalCount: number;
         readonly edges: ReadonlyArray<{
             readonly node: {
                 readonly " $fragmentRefs": FragmentRefs<"MovieListItem_movie">;
@@ -76,6 +77,13 @@ return {
       "name": "__RecommendedMovieList_recommendations_connection",
       "plural": false,
       "selections": [
+        {
+          "alias": null,
+          "args": null,
+          "kind": "ScalarField",
+          "name": "totalCount",
+          "storageKey": null
+        },
         {
           "alias": null,
           "args": null,
@@ -157,5 +165,5 @@ return {
   "abstractKey": null
 };
 })();
-(node as any).hash = '02033db96ac190263512c03a35462760';
+(node as any).hash = 'fc399d78c0ccb96658a325ed4a2f6f85';
 export default node;

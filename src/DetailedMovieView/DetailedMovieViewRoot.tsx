@@ -58,9 +58,6 @@ function DetailedMovieViewRoot(props: Props) {
             <MovieParallaxBackdrop movie={movie} />
             <Container maxW="container.md" paddingBottom={8} paddingTop={8}>
                 <VStack align="baseline" spacing={4}>
-                    <Text fontSize="xl" fontWeight="bold">
-                        Recommended Movies
-                    </Text>
                     <RecommendedMovieList movie={movie} />
                     
                     <Text fontSize="xl" fontWeight="bold">
@@ -68,9 +65,6 @@ function DetailedMovieViewRoot(props: Props) {
                     </Text>
                     <Crew credits={movie.credits}/>
 
-                    <Text fontSize="xl" fontWeight="bold">
-                        Similar Movies
-                    </Text>
                     <SimilarMovieList movie={movie} />
                 </VStack>
             </Container>

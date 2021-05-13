@@ -46,6 +46,7 @@ fragment MovieListItem_movie on Movie {
 
 fragment RecommendedMovieList_movie_1G22uz on Movie {
   recommendations(first: $count, after: $cursor) {
+    totalCount
     edges {
       node {
         ...MovieListItem_movie
@@ -182,6 +183,13 @@ return {
                   {
                     "alias": null,
                     "args": null,
+                    "kind": "ScalarField",
+                    "name": "totalCount",
+                    "storageKey": null
+                  },
+                  {
+                    "alias": null,
+                    "args": null,
                     "concreteType": "MovieEdge",
                     "kind": "LinkedField",
                     "name": "edges",
@@ -277,14 +285,14 @@ return {
     ]
   },
   "params": {
-    "cacheID": "340650cefbfed431a0fe7f1db626cf19",
+    "cacheID": "96563fa813bae4d77cd3b0e759e0cd7b",
     "id": null,
     "metadata": {},
     "name": "RecommendedMovieListPaginationQuery",
     "operationKind": "query",
-    "text": "query RecommendedMovieListPaginationQuery(\n  $count: Int! = 20\n  $cursor: String\n  $id: ID!\n) {\n  node(id: $id) {\n    __typename\n    ...RecommendedMovieList_movie_1G22uz\n    id\n  }\n}\n\nfragment MovieLinkContainer_movie on Movie {\n  id\n}\n\nfragment MovieListItem_movie on Movie {\n  ...MovieLinkContainer_movie\n  title\n  poster(size: W154)\n}\n\nfragment RecommendedMovieList_movie_1G22uz on Movie {\n  recommendations(first: $count, after: $cursor) {\n    edges {\n      node {\n        ...MovieListItem_movie\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n  id\n}\n"
+    "text": "query RecommendedMovieListPaginationQuery(\n  $count: Int! = 20\n  $cursor: String\n  $id: ID!\n) {\n  node(id: $id) {\n    __typename\n    ...RecommendedMovieList_movie_1G22uz\n    id\n  }\n}\n\nfragment MovieLinkContainer_movie on Movie {\n  id\n}\n\nfragment MovieListItem_movie on Movie {\n  ...MovieLinkContainer_movie\n  title\n  poster(size: W154)\n}\n\nfragment RecommendedMovieList_movie_1G22uz on Movie {\n  recommendations(first: $count, after: $cursor) {\n    totalCount\n    edges {\n      node {\n        ...MovieListItem_movie\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n  id\n}\n"
   }
 };
 })();
-(node as any).hash = '02033db96ac190263512c03a35462760';
+(node as any).hash = 'fc399d78c0ccb96658a325ed4a2f6f85';
 export default node;

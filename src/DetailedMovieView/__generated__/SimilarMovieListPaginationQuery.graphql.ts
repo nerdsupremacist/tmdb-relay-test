@@ -46,6 +46,7 @@ fragment MovieListItem_movie on Movie {
 
 fragment SimilarMovieList_movie_1G22uz on Movie {
   similar(first: $count, after: $cursor) {
+    totalCount
     edges {
       node {
         ...MovieListItem_movie
@@ -182,6 +183,13 @@ return {
                   {
                     "alias": null,
                     "args": null,
+                    "kind": "ScalarField",
+                    "name": "totalCount",
+                    "storageKey": null
+                  },
+                  {
+                    "alias": null,
+                    "args": null,
                     "concreteType": "MovieEdge",
                     "kind": "LinkedField",
                     "name": "edges",
@@ -277,14 +285,14 @@ return {
     ]
   },
   "params": {
-    "cacheID": "c0c89433ec98ac997c08ad6dbee2d611",
+    "cacheID": "57696aeb8d0dd6ce954a41ab6718ad6d",
     "id": null,
     "metadata": {},
     "name": "SimilarMovieListPaginationQuery",
     "operationKind": "query",
-    "text": "query SimilarMovieListPaginationQuery(\n  $count: Int! = 20\n  $cursor: String\n  $id: ID!\n) {\n  node(id: $id) {\n    __typename\n    ...SimilarMovieList_movie_1G22uz\n    id\n  }\n}\n\nfragment MovieLinkContainer_movie on Movie {\n  id\n}\n\nfragment MovieListItem_movie on Movie {\n  ...MovieLinkContainer_movie\n  title\n  poster(size: W154)\n}\n\nfragment SimilarMovieList_movie_1G22uz on Movie {\n  similar(first: $count, after: $cursor) {\n    edges {\n      node {\n        ...MovieListItem_movie\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n  id\n}\n"
+    "text": "query SimilarMovieListPaginationQuery(\n  $count: Int! = 20\n  $cursor: String\n  $id: ID!\n) {\n  node(id: $id) {\n    __typename\n    ...SimilarMovieList_movie_1G22uz\n    id\n  }\n}\n\nfragment MovieLinkContainer_movie on Movie {\n  id\n}\n\nfragment MovieListItem_movie on Movie {\n  ...MovieLinkContainer_movie\n  title\n  poster(size: W154)\n}\n\nfragment SimilarMovieList_movie_1G22uz on Movie {\n  similar(first: $count, after: $cursor) {\n    totalCount\n    edges {\n      node {\n        ...MovieListItem_movie\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n  id\n}\n"
   }
 };
 })();
-(node as any).hash = 'f7b8ddaae67d49ad1122106783e66123';
+(node as any).hash = 'e30f431df1150bb1538c8e1a3bb05ccc';
 export default node;

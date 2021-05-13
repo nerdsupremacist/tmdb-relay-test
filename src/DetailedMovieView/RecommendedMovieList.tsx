@@ -4,6 +4,7 @@ import type {
 import type { RecommendedMovieListPaginationQuery } from './__generated__/RecommendedMovieListPaginationQuery.graphql';
 
 import React from 'react';
+import { Text } from '@chakra-ui/react';
 
 import { usePaginationFragment } from 'react-relay';
 import { graphql } from 'babel-plugin-relay/macro';
@@ -32,6 +33,7 @@ function RecommendedMovieList(props: Props) {
                     first: $count, 
                     after: $cursor
                 ) @connection(key: "RecommendedMovieList_recommendations", filters: []) {
+                    totalCount
                     edges {
                         node {
                             ...MovieListItem_movie
@@ -43,18 +45,27 @@ function RecommendedMovieList(props: Props) {
         props.movie,
     );
 
+    if (data.recommendations.totalCount < 1) {
+        return null;
+    }
+
     const movies = data.recommendations.edges?.mapNotNull(edge => edge?.node) ?? [];
 
     return (
-        <InfiniteScrollview
-            align="start"
-            maxW="100%"
-            padding={2}
-            scrollDirection="horizontal"
-            {...connection}
-        >
-            {movies.map((movie, index) => <MovieListItem key={`similar_movie_${index}`} movie={movie}/>)}
-        </InfiniteScrollview>
+        <>
+            <Text fontSize="xl" fontWeight="bold">
+                Recommended Movies
+            </Text>
+            <InfiniteScrollview
+                align="start"
+                maxW="100%"
+                padding={2}
+                scrollDirection="horizontal"
+                {...connection}
+            >
+                {movies.map((movie, index) => <MovieListItem key={`similar_movie_${index}`} movie={movie}/>)}
+            </InfiniteScrollview>
+        </>
     );
 }
 
