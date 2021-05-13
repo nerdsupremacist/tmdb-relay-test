@@ -19,7 +19,10 @@ import {
     Link,
     Spacer,
     Text,
+    useColorMode,
+    useColorModeValue,
 } from '@chakra-ui/react';
+import { MoonIcon, SunIcon } from '@chakra-ui/icons';
 import { SearchIcon } from '@chakra-ui/icons';
 
 import SearchResultsList from './SearchResultsList';
@@ -28,6 +31,9 @@ import { useDebounce } from 'use-debounce';
 import { GRAPHQL_URL, REPO_URL } from 'utils/constants';
 
 function Navbar() {
+    const { toggleColorMode } = useColorMode();
+    const icon = useColorModeValue(<MoonIcon />, <SunIcon />);
+
     const inputRef = useRef<HTMLInputElement>(null);
     const setFocus = () => { inputRef.current?.focus(); };
 
@@ -79,6 +85,9 @@ function Navbar() {
                     </Container>
                     <HStack align="center" flex={1} justify="right" paddingRight={8}>
                         <Spacer />
+                        <Button onClick={toggleColorMode} variant="ghost">
+                            {icon}
+                        </Button>
                         <Link
                             href={REPO_URL}
                             style={{
