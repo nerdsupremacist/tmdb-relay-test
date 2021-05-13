@@ -5,10 +5,10 @@ import {
     Route,
     Switch,
 } from 'react-router-dom';
-import { Container, Text } from '@chakra-ui/react';
 
 import DetailedMovieView from 'DetailedMovieView';
 import DetailedPersonView from 'DetailedPersonView';
+import Home from 'Home';
 import Navbar from 'Navbar';
 
 function App() {
@@ -18,13 +18,7 @@ function App() {
                 <Navbar />
                 <Switch>
                     <Route exact path="/">
-                        <Container>
-                            <Text fontSize="4xl" padding={16} textAlign="center">
-                                Hi there!
-                                <br />
-                                Use the search bar to search for any movie ;)
-                            </Text>
-                        </Container>
+                        <Home />
                     </Route>
                     <Route path="/movie/:id">
                         <DetailedMovieView />
