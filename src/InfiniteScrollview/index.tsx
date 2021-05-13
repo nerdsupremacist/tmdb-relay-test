@@ -123,7 +123,7 @@ function InfiniteScrollview<
             <VStack ref={heightRef} {...stackProps} >
                 {children}
                 {enabled && (isLoadingNext || hasNext) && (
-                    <Center ref={lastItemRef}>
+                    <Center padding={8} ref={lastItemRef}>
                         <Spinner
                             color="blue.500"
                             emptyColor="gray.200"

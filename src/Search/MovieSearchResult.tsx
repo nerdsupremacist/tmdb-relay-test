@@ -8,14 +8,16 @@ import { useFragment } from 'react-relay';
 import { graphql } from 'babel-plugin-relay/macro';
 
 import MovieLinkContainer from 'MovieLinkContainer';
+import { useOnClickOnResults } from './SearchContext';
 
-import { POSTER_PLACEHOLDER } from '../utils/constants';
+import { POSTER_PLACEHOLDER } from 'utils/constants';
 
 type Props = {
     movie: MovieSearchResult_movie$key
 }
 
 function MovieSearchResult(props: Props) {
+    const onClick = useOnClickOnResults();
     const movie = useFragment(
         graphql`
             fragment MovieSearchResult_movie on Movie {
@@ -31,7 +33,7 @@ function MovieSearchResult(props: Props) {
     const poster = movie.poster ?? POSTER_PLACEHOLDER;
 
     return (
-        <MovieLinkContainer movie={movie}>
+        <MovieLinkContainer movie={movie} onClick={onClick}>
             <HStack align="start" spacing="4">
                 <Image
                     borderRadius="lg"

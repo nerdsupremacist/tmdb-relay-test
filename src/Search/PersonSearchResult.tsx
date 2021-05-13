@@ -7,6 +7,7 @@ import { useFragment } from 'react-relay';
 import { graphql } from 'babel-plugin-relay/macro';
 
 import PersonLinkContainer from 'PersonLinkContainer';
+import { useOnClickOnResults } from './SearchContext';
 
 import useKnownForDescription from './useKnownForDescription';
 
@@ -15,6 +16,7 @@ type Props = {
 }
 
 function PersonSearchResult(props: Props) {
+    const onClick = useOnClickOnResults();
     const person = useFragment(
         graphql`
             fragment PersonSearchResult_person on Person {
@@ -33,7 +35,7 @@ function PersonSearchResult(props: Props) {
     const knownFor = useKnownForDescription(person);
 
     return (
-        <PersonLinkContainer person={person}>
+        <PersonLinkContainer onClick={onClick} person={person}>
             <HStack align="start" spacing="4">
                 <Avatar
                     h="100px"

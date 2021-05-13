@@ -7,13 +7,12 @@ import type { ErrorBoundary } from 'react-error-boundary';
 import SearchResultsListQuery from './__generated__/SearchResultsListQuery.graphql';
 
 import React, { useEffect, useRef } from 'react';
-import { VStack } from '@chakra-ui/react';
 
 import { PreloadedQuery, usePreloadedQuery, useQueryLoader } from 'react-relay';
 import { graphql } from 'babel-plugin-relay/macro';
 
 import LoadingSuspense from 'LoadingSuspense';
-import SearchResult from './SearchResult';
+import SearchResultPaginatedList from './SearchResultPaginatedList';
 
 type LoadedProps = {
     data: PreloadedQuery<SearchResultsListQueryType>
@@ -27,28 +26,14 @@ function SearchResultsList(props: LoadedProps) {
     const data = usePreloadedQuery(
         graphql`
             query SearchResultsListQuery($term: String!) {
-                search(term: $term, first: 5) {
-                    edges {
-                        node {
-                            ...SearchResult_result
-                        }
-                    }
-                }
+                ...SearchResultPaginatedList_data @arguments(term: $term, count: 5)
             }
         `,
         props.data,
     );
 
-    const results = data.search.edges?.mapNotNull(edge => edge?.node) ?? [];
-
     return (
-        <VStack align="start" spacing={4}>
-            {
-                results.map((result, index) => {
-                    return <SearchResult key={`search_result_${index}`} result={result} />;
-                })
-            }
-        </VStack>
+        <SearchResultPaginatedList data={data}/>
     );
 }
 

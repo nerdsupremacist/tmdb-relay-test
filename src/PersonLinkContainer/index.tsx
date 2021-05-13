@@ -10,6 +10,7 @@ import { graphql } from 'babel-plugin-relay/macro';
 type Props = {
     person: PersonLinkContainer_person$key,
     children: ReactNode | ReactNode[],
+    onClick?: () => void,
 }
 
 function PersonLinkContainer(props: Props) {
@@ -23,7 +24,7 @@ function PersonLinkContainer(props: Props) {
     );
 
     return (
-        <Link to={`/person/${person.id}`}>
+        <Link onClick={() => props.onClick?.()} to={`/person/${person.id}`}>
             {props.children}
         </Link>
     );

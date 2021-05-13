@@ -8,13 +8,7 @@ export type SearchResultsListQueryVariables = {
     term: string;
 };
 export type SearchResultsListQueryResponse = {
-    readonly search: {
-        readonly edges: ReadonlyArray<{
-            readonly node: {
-                readonly " $fragmentRefs": FragmentRefs<"SearchResult_result">;
-            } | null;
-        } | null> | null;
-    };
+    readonly " $fragmentRefs": FragmentRefs<"SearchResultPaginatedList_data">;
 };
 export type SearchResultsListQuery = {
     readonly response: SearchResultsListQueryResponse;
@@ -27,18 +21,7 @@ export type SearchResultsListQuery = {
 query SearchResultsListQuery(
   $term: String!
 ) {
-  search(term: $term, first: 5) {
-    edges {
-      node {
-        __typename
-        ...SearchResult_result
-        ... on Node {
-          __isNode: __typename
-          id
-        }
-      }
-    }
-  }
+  ...SearchResultPaginatedList_data_4E8ZZm
 }
 
 fragment MovieLinkContainer_movie on Movie {
@@ -61,6 +44,26 @@ fragment PersonSearchResult_person on Person {
   name
   profilePicture(size: W185)
   ...useKnownForDescription_person
+}
+
+fragment SearchResultPaginatedList_data_4E8ZZm on Query {
+  search(term: $term, first: 5) {
+    edges {
+      node {
+        __typename
+        ...SearchResult_result
+        ... on Node {
+          __isNode: __typename
+          id
+        }
+      }
+      cursor
+    }
+    pageInfo {
+      endCursor
+      hasNextPage
+    }
+  }
 }
 
 fragment SearchResult_result on MovieOrTVOrPeople {
@@ -99,57 +102,58 @@ var v0 = [
     "name": "term"
   }
 ],
-v1 = [
+v1 = {
+  "kind": "Variable",
+  "name": "term",
+  "variableName": "term"
+},
+v2 = [
   {
     "kind": "Literal",
     "name": "first",
     "value": 5
   },
-  {
-    "kind": "Variable",
-    "name": "term",
-    "variableName": "term"
-  }
+  (v1/*: any*/)
 ],
-v2 = {
+v3 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
   "name": "__typename",
   "storageKey": null
 },
-v3 = {
+v4 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
   "name": "id",
   "storageKey": null
 },
-v4 = {
+v5 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
   "name": "title",
   "storageKey": null
 },
-v5 = [
+v6 = [
   {
     "kind": "Literal",
     "name": "size",
     "value": "W185"
   }
 ],
-v6 = {
+v7 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
   "name": "name",
   "storageKey": null
 },
-v7 = {
+v8 = {
   "kind": "InlineFragment",
   "selections": [
-    (v3/*: any*/)
+    (v4/*: any*/)
   ],
   "type": "Node",
   "abstractKey": "__isNode"
@@ -162,42 +166,16 @@ return {
     "name": "SearchResultsListQuery",
     "selections": [
       {
-        "alias": null,
-        "args": (v1/*: any*/),
-        "concreteType": "MovieOrTVOrPeopleConnection",
-        "kind": "LinkedField",
-        "name": "search",
-        "plural": false,
-        "selections": [
+        "args": [
           {
-            "alias": null,
-            "args": null,
-            "concreteType": "MovieOrTVOrPeopleEdge",
-            "kind": "LinkedField",
-            "name": "edges",
-            "plural": true,
-            "selections": [
-              {
-                "alias": null,
-                "args": null,
-                "concreteType": null,
-                "kind": "LinkedField",
-                "name": "node",
-                "plural": false,
-                "selections": [
-                  {
-                    "args": null,
-                    "kind": "FragmentSpread",
-                    "name": "SearchResult_result"
-                  }
-                ],
-                "storageKey": null
-              }
-            ],
-            "storageKey": null
-          }
+            "kind": "Literal",
+            "name": "count",
+            "value": 5
+          },
+          (v1/*: any*/)
         ],
-        "storageKey": null
+        "kind": "FragmentSpread",
+        "name": "SearchResultPaginatedList_data"
       }
     ],
     "type": "Query",
@@ -211,7 +189,7 @@ return {
     "selections": [
       {
         "alias": null,
-        "args": (v1/*: any*/),
+        "args": (v2/*: any*/),
         "concreteType": "MovieOrTVOrPeopleConnection",
         "kind": "LinkedField",
         "name": "search",
@@ -233,7 +211,7 @@ return {
                 "name": "node",
                 "plural": false,
                 "selections": [
-                  (v2/*: any*/),
+                  (v3/*: any*/),
                   {
                     "kind": "TypeDiscriminator",
                     "abstractKey": "__isMovieOrTVOrPeople"
@@ -241,8 +219,8 @@ return {
                   {
                     "kind": "InlineFragment",
                     "selections": [
-                      (v3/*: any*/),
                       (v4/*: any*/),
+                      (v5/*: any*/),
                       {
                         "alias": null,
                         "args": null,
@@ -252,7 +230,7 @@ return {
                       },
                       {
                         "alias": null,
-                        "args": (v5/*: any*/),
+                        "args": (v6/*: any*/),
                         "kind": "ScalarField",
                         "name": "poster",
                         "storageKey": "poster(size:\"W185\")"
@@ -264,11 +242,11 @@ return {
                   {
                     "kind": "InlineFragment",
                     "selections": [
-                      (v3/*: any*/),
-                      (v6/*: any*/),
+                      (v4/*: any*/),
+                      (v7/*: any*/),
                       {
                         "alias": null,
-                        "args": (v5/*: any*/),
+                        "args": (v6/*: any*/),
                         "kind": "ScalarField",
                         "name": "profilePicture",
                         "storageKey": "profilePicture(size:\"W185\")"
@@ -281,11 +259,11 @@ return {
                         "name": "knownFor",
                         "plural": true,
                         "selections": [
-                          (v2/*: any*/),
+                          (v3/*: any*/),
                           {
                             "kind": "InlineFragment",
                             "selections": [
-                              (v4/*: any*/)
+                              (v5/*: any*/)
                             ],
                             "type": "Movie",
                             "abstractKey": null
@@ -293,12 +271,12 @@ return {
                           {
                             "kind": "InlineFragment",
                             "selections": [
-                              (v6/*: any*/)
+                              (v7/*: any*/)
                             ],
                             "type": "TVShow",
                             "abstractKey": null
                           },
-                          (v7/*: any*/)
+                          (v8/*: any*/)
                         ],
                         "storageKey": null
                       }
@@ -306,8 +284,40 @@ return {
                     "type": "Person",
                     "abstractKey": null
                   },
-                  (v7/*: any*/)
+                  (v8/*: any*/)
                 ],
+                "storageKey": null
+              },
+              {
+                "alias": null,
+                "args": null,
+                "kind": "ScalarField",
+                "name": "cursor",
+                "storageKey": null
+              }
+            ],
+            "storageKey": null
+          },
+          {
+            "alias": null,
+            "args": null,
+            "concreteType": "PageInfo",
+            "kind": "LinkedField",
+            "name": "pageInfo",
+            "plural": false,
+            "selections": [
+              {
+                "alias": null,
+                "args": null,
+                "kind": "ScalarField",
+                "name": "endCursor",
+                "storageKey": null
+              },
+              {
+                "alias": null,
+                "args": null,
+                "kind": "ScalarField",
+                "name": "hasNextPage",
                 "storageKey": null
               }
             ],
@@ -315,18 +325,29 @@ return {
           }
         ],
         "storageKey": null
+      },
+      {
+        "alias": null,
+        "args": (v2/*: any*/),
+        "filters": [
+          "term"
+        ],
+        "handle": "connection",
+        "key": "SearchResultPaginatedList_data_search",
+        "kind": "LinkedHandle",
+        "name": "search"
       }
     ]
   },
   "params": {
-    "cacheID": "7db36836fb19b77eb8d98fa61bdd0df0",
+    "cacheID": "3b523ffc1d0594424653505adb5e1318",
     "id": null,
     "metadata": {},
     "name": "SearchResultsListQuery",
     "operationKind": "query",
-    "text": "query SearchResultsListQuery(\n  $term: String!\n) {\n  search(term: $term, first: 5) {\n    edges {\n      node {\n        __typename\n        ...SearchResult_result\n        ... on Node {\n          __isNode: __typename\n          id\n        }\n      }\n    }\n  }\n}\n\nfragment MovieLinkContainer_movie on Movie {\n  id\n}\n\nfragment MovieSearchResult_movie on Movie {\n  ...MovieLinkContainer_movie\n  title\n  overview\n  poster(size: W185)\n}\n\nfragment PersonLinkContainer_person on Person {\n  id\n}\n\nfragment PersonSearchResult_person on Person {\n  ...PersonLinkContainer_person\n  name\n  profilePicture(size: W185)\n  ...useKnownForDescription_person\n}\n\nfragment SearchResult_result on MovieOrTVOrPeople {\n  __isMovieOrTVOrPeople: __typename\n  __typename\n  ... on Movie {\n    ...MovieSearchResult_movie\n  }\n  ... on Person {\n    ...PersonSearchResult_person\n  }\n}\n\nfragment useKnownForDescription_person on Person {\n  knownFor {\n    __typename\n    ... on Movie {\n      title\n    }\n    ... on TVShow {\n      name\n    }\n    ... on Node {\n      __isNode: __typename\n      id\n    }\n  }\n}\n"
+    "text": "query SearchResultsListQuery(\n  $term: String!\n) {\n  ...SearchResultPaginatedList_data_4E8ZZm\n}\n\nfragment MovieLinkContainer_movie on Movie {\n  id\n}\n\nfragment MovieSearchResult_movie on Movie {\n  ...MovieLinkContainer_movie\n  title\n  overview\n  poster(size: W185)\n}\n\nfragment PersonLinkContainer_person on Person {\n  id\n}\n\nfragment PersonSearchResult_person on Person {\n  ...PersonLinkContainer_person\n  name\n  profilePicture(size: W185)\n  ...useKnownForDescription_person\n}\n\nfragment SearchResultPaginatedList_data_4E8ZZm on Query {\n  search(term: $term, first: 5) {\n    edges {\n      node {\n        __typename\n        ...SearchResult_result\n        ... on Node {\n          __isNode: __typename\n          id\n        }\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n\nfragment SearchResult_result on MovieOrTVOrPeople {\n  __isMovieOrTVOrPeople: __typename\n  __typename\n  ... on Movie {\n    ...MovieSearchResult_movie\n  }\n  ... on Person {\n    ...PersonSearchResult_person\n  }\n}\n\nfragment useKnownForDescription_person on Person {\n  knownFor {\n    __typename\n    ... on Movie {\n      title\n    }\n    ... on TVShow {\n      name\n    }\n    ... on Node {\n      __isNode: __typename\n      id\n    }\n  }\n}\n"
   }
 };
 })();
-(node as any).hash = '7472b51ac2cd673794c6c19c1d32f7a4';
+(node as any).hash = '559330944464dd010c934bfaa7de095c';
 export default node;
