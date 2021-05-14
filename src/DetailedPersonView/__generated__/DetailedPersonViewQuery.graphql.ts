@@ -34,7 +34,15 @@ query DetailedPersonViewQuery(
 }
 
 fragment DetailedPersonViewRoot_person on Person {
+  ...PersonHeader_person
+  biography
+}
+
+fragment PersonHeader_person on Person {
   name
+  profilePicture(size: W185)
+  knownForDepartment
+  placeOfBirth
 }
 */
 
@@ -122,6 +130,40 @@ return {
               },
               {
                 "alias": null,
+                "args": [
+                  {
+                    "kind": "Literal",
+                    "name": "size",
+                    "value": "W185"
+                  }
+                ],
+                "kind": "ScalarField",
+                "name": "profilePicture",
+                "storageKey": "profilePicture(size:\"W185\")"
+              },
+              {
+                "alias": null,
+                "args": null,
+                "kind": "ScalarField",
+                "name": "knownForDepartment",
+                "storageKey": null
+              },
+              {
+                "alias": null,
+                "args": null,
+                "kind": "ScalarField",
+                "name": "placeOfBirth",
+                "storageKey": null
+              },
+              {
+                "alias": null,
+                "args": null,
+                "kind": "ScalarField",
+                "name": "biography",
+                "storageKey": null
+              },
+              {
+                "alias": null,
                 "args": null,
                 "kind": "ScalarField",
                 "name": "id",
@@ -136,12 +178,12 @@ return {
     ]
   },
   "params": {
-    "cacheID": "fac7858f0b5099c662bbd695ceb339df",
+    "cacheID": "222dd9c8febbceb1c3f659a5e51e2c3f",
     "id": null,
     "metadata": {},
     "name": "DetailedPersonViewQuery",
     "operationKind": "query",
-    "text": "query DetailedPersonViewQuery(\n  $id: ID!\n) {\n  people {\n    person(id: $id) {\n      ...DetailedPersonViewRoot_person\n      id\n    }\n  }\n}\n\nfragment DetailedPersonViewRoot_person on Person {\n  name\n}\n"
+    "text": "query DetailedPersonViewQuery(\n  $id: ID!\n) {\n  people {\n    person(id: $id) {\n      ...DetailedPersonViewRoot_person\n      id\n    }\n  }\n}\n\nfragment DetailedPersonViewRoot_person on Person {\n  ...PersonHeader_person\n  biography\n}\n\nfragment PersonHeader_person on Person {\n  name\n  profilePicture(size: W185)\n  knownForDepartment\n  placeOfBirth\n}\n"
   }
 };
 })();
