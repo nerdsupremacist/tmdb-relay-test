@@ -15,6 +15,8 @@ import { SearchIcon } from '@chakra-ui/icons';
 import { SearchContextProvider } from './SearchContext';
 import SearchResultsList from './SearchResultsList';
 
+import useSearchList from './useSearchList';
+
 import { useDebounce } from 'use-debounce';
 
 type Props = {
@@ -39,8 +41,10 @@ function Search(props: Props) {
     const borderColor = `${color}FF`;
     const innerColor = `${color}00`;
 
+    const { onKeyDown, ...searchList } = useSearchList(props.onClickOnResults);
+
     return (
-        <SearchContextProvider {...props}>
+        <SearchContextProvider {...props} {...searchList}>
             <InputGroup size="lg">
                 <InputLeftElement h="68px" paddingLeft={4} pointerEvents="none" >
                     <SearchIcon color="gray.300" />
@@ -51,6 +55,7 @@ function Search(props: Props) {
                     autoCorrect="off"
                     autoFocus
                     onChange={event => setSearchTerm(event.target.value)}
+                    onKeyDown={onKeyDown}
                     placeholder="Search"
                     pr="4.5rem"
                     spellCheck="false"

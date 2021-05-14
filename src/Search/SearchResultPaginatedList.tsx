@@ -9,6 +9,7 @@ import { usePaginationFragment } from 'react-relay';
 import { graphql } from 'babel-plugin-relay/macro';
 
 import InfiniteScrollview from 'InfiniteScrollview';
+import { useLinks, useLoadingIndicatorRef, useSelected } from './SearchContext';
 import SearchResult from './SearchResult';
 
 type Props = {
@@ -36,7 +37,14 @@ function SearchResultPaginatedList(props: Props) {
                 ) @connection(key: "SearchResultPaginatedList_data_search") {
                     edges {
                         node {
+                            __typename
                             ...SearchResult_result
+                            ... on Movie {
+                                id
+                            }
+                            ... on Person {
+                                id
+                            }
                         }
                     }
                 }
@@ -45,15 +53,41 @@ function SearchResultPaginatedList(props: Props) {
         props.data,
     );
 
-    if (data.search == null) {
-        return null;
-    }
+    const selected = useSelected();
+    const nodes = data.search?.edges?.mapNotNull(edge => edge?.node) ?? [];
 
-    const nodes = data.search.edges?.mapNotNull(edge => edge?.node) ?? [];
+    useLinks(() => {
+        return nodes.map(node => {
+            switch (node.__typename) {
+            case 'Movie':
+                return `/movie/${node.id}`;
+            case 'Person':
+                return `/person/${node.id}`;
+            default:
+                return null;
+            }
+        });
+    }, [nodes]);
+
+    const loadingIndicatorRef = useLoadingIndicatorRef();
 
     return (
-        <InfiniteScrollview align="start" {...connection} loadMoreCount={5}>
-            {nodes.map((result, index) => <SearchResult key={`search_SearchResult_${index}`} result={result}/>)}
+        <InfiniteScrollview
+            align="start"
+            loadMoreCount={5}
+            loadingIndicatorRef={loadingIndicatorRef}
+            {...connection}
+        >
+            {nodes.map((result, index) => {
+                return (
+                    <SearchResult
+                        index={index}
+                        key={`search_SearchResult_${index}`}
+                        result={result}
+                        selected={selected === index}
+                    />
+                );
+            })}
         </InfiniteScrollview>
     );
 }

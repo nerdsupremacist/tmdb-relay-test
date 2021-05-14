@@ -52,6 +52,12 @@ fragment SearchResultPaginatedList_data_4E8ZZm on Query {
       node {
         __typename
         ...SearchResult_result
+        ... on Movie {
+          id
+        }
+        ... on Person {
+          id
+        }
         ... on Node {
           __isNode: __typename
           id
@@ -340,12 +346,12 @@ return {
     ]
   },
   "params": {
-    "cacheID": "3b523ffc1d0594424653505adb5e1318",
+    "cacheID": "dc7030d97f18188be9a7255c310a2a8d",
     "id": null,
     "metadata": {},
     "name": "SearchResultsListQuery",
     "operationKind": "query",
-    "text": "query SearchResultsListQuery(\n  $term: String!\n) {\n  ...SearchResultPaginatedList_data_4E8ZZm\n}\n\nfragment MovieLinkContainer_movie on Movie {\n  id\n}\n\nfragment MovieSearchResult_movie on Movie {\n  ...MovieLinkContainer_movie\n  title\n  overview\n  poster(size: W185)\n}\n\nfragment PersonLinkContainer_person on Person {\n  id\n}\n\nfragment PersonSearchResult_person on Person {\n  ...PersonLinkContainer_person\n  name\n  profilePicture(size: W185)\n  ...useKnownForDescription_person\n}\n\nfragment SearchResultPaginatedList_data_4E8ZZm on Query {\n  search(term: $term, first: 5) {\n    edges {\n      node {\n        __typename\n        ...SearchResult_result\n        ... on Node {\n          __isNode: __typename\n          id\n        }\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n\nfragment SearchResult_result on MovieOrTVOrPeople {\n  __isMovieOrTVOrPeople: __typename\n  __typename\n  ... on Movie {\n    ...MovieSearchResult_movie\n  }\n  ... on Person {\n    ...PersonSearchResult_person\n  }\n}\n\nfragment useKnownForDescription_person on Person {\n  knownFor {\n    __typename\n    ... on Movie {\n      title\n    }\n    ... on TVShow {\n      name\n    }\n    ... on Node {\n      __isNode: __typename\n      id\n    }\n  }\n}\n"
+    "text": "query SearchResultsListQuery(\n  $term: String!\n) {\n  ...SearchResultPaginatedList_data_4E8ZZm\n}\n\nfragment MovieLinkContainer_movie on Movie {\n  id\n}\n\nfragment MovieSearchResult_movie on Movie {\n  ...MovieLinkContainer_movie\n  title\n  overview\n  poster(size: W185)\n}\n\nfragment PersonLinkContainer_person on Person {\n  id\n}\n\nfragment PersonSearchResult_person on Person {\n  ...PersonLinkContainer_person\n  name\n  profilePicture(size: W185)\n  ...useKnownForDescription_person\n}\n\nfragment SearchResultPaginatedList_data_4E8ZZm on Query {\n  search(term: $term, first: 5) {\n    edges {\n      node {\n        __typename\n        ...SearchResult_result\n        ... on Movie {\n          id\n        }\n        ... on Person {\n          id\n        }\n        ... on Node {\n          __isNode: __typename\n          id\n        }\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n\nfragment SearchResult_result on MovieOrTVOrPeople {\n  __isMovieOrTVOrPeople: __typename\n  __typename\n  ... on Movie {\n    ...MovieSearchResult_movie\n  }\n  ... on Person {\n    ...PersonSearchResult_person\n  }\n}\n\nfragment useKnownForDescription_person on Person {\n  knownFor {\n    __typename\n    ... on Movie {\n      title\n    }\n    ... on TVShow {\n      name\n    }\n    ... on Node {\n      __isNode: __typename\n      id\n    }\n  }\n}\n"
   }
 };
 })();

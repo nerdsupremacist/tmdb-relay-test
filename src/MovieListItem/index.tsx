@@ -31,7 +31,7 @@ function MovieListItem(props: Props) {
     return (
         <MovieLinkContainer movie={movie}>
             <VStack>
-                <Image borderRadius="lg" h="220px" maxW="150px" minW="150px" shadow="lg" src={poster}/>
+                <Image borderRadius="lg" h="220px" maxW="150px" minW="150px" shadow="xl" src={poster}/>
                 <VStack spacing={0}>
                     <Text fontSize="sm" fontWeight="semibold" noOfLines={2} textAlign="center">{movie.title}</Text>
                 </VStack>

@@ -1,12 +1,12 @@
 import type { StackProps } from '@chakra-ui/react';
+import type { ForwardedRef, ReactNode } from 'react';
 import type { KeyType } from 'react-relay/relay-hooks/helpers';
 import type { usePaginationFragmentHookType as HookType } from 'react-relay/relay-hooks/usePaginationFragment';
 import type { Disposable, OperationType } from 'relay-runtime';
 
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { ReactNode } from 'react';
 import useInfiniteScroll from 'react-infinite-scroll-hook';
-import { Center, Spinner, VStack } from '@chakra-ui/react';
+import { Center, Spinner, useMergeRefs, VStack } from '@chakra-ui/react';
 
 import HorizonalScrollview from 'HorizonalScrollview';
 
@@ -39,6 +39,7 @@ export interface Props<
     loadMoreCount?: number,
     scrollDirection?: 'horizontal' | 'vertical',
     children: ReactNode[] | ReactNode | null,
+    loadingIndicatorRef?: ForwardedRef<HTMLDivElement>,
 }
 
 function InfiniteScrollview<
@@ -88,6 +89,8 @@ function InfiniteScrollview<
         onLoadMore: loadMore,
     });
 
+    const loadingIndicatorRef = useMergeRefs(lastItemRef, props.loadingIndicatorRef);
+
     const heightRef = useRef<HTMLDivElement | null>(null);
     const clientHeight = heightRef.current?.clientHeight;
     const {
@@ -106,7 +109,7 @@ function InfiniteScrollview<
             <HorizonalScrollview ref={heightRef} {...stackProps}>
                 {children}
                 {enabled && (isLoadingNext || hasNext) && (
-                    <Center h={spinnerHeight} ref={lastItemRef}>
+                    <Center h={spinnerHeight} ref={loadingIndicatorRef}>
                         <Spinner
                             color="blue.500"
                             emptyColor="gray.200"
@@ -123,7 +126,7 @@ function InfiniteScrollview<
             <VStack ref={heightRef} {...stackProps} >
                 {children}
                 {enabled && (isLoadingNext || hasNext) && (
-                    <Center padding={8} ref={lastItemRef}>
+                    <Center padding={8} ref={loadingIndicatorRef}>
                         <Spinner
                             color="blue.500"
                             emptyColor="gray.200"

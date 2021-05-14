@@ -8,6 +8,8 @@ export type SearchResultPaginatedList_data = {
     readonly search: {
         readonly edges: ReadonlyArray<{
             readonly node: {
+                readonly __typename: string;
+                readonly id?: string;
                 readonly " $fragmentRefs": FragmentRefs<"SearchResult_result">;
             } | null;
         } | null> | null;
@@ -25,6 +27,15 @@ export type SearchResultPaginatedList_data$key = {
 const node: ReaderFragment = (function(){
 var v0 = [
   "search"
+],
+v1 = [
+  {
+    "alias": null,
+    "args": null,
+    "kind": "ScalarField",
+    "name": "id",
+    "storageKey": null
+  }
 ];
 return {
   "argumentDefinitions": [
@@ -110,6 +121,18 @@ return {
                   "args": null,
                   "kind": "FragmentSpread",
                   "name": "SearchResult_result"
+                },
+                {
+                  "kind": "InlineFragment",
+                  "selections": (v1/*: any*/),
+                  "type": "Movie",
+                  "abstractKey": null
+                },
+                {
+                  "kind": "InlineFragment",
+                  "selections": (v1/*: any*/),
+                  "type": "Person",
+                  "abstractKey": null
                 }
               ],
               "storageKey": null
@@ -157,5 +180,5 @@ return {
   "abstractKey": null
 };
 })();
-(node as any).hash = 'b7a31513e9e13882453a4ce20616deb3';
+(node as any).hash = 'a60a2d280b0de9acd254896649e166e6';
 export default node;

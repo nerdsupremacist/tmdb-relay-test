@@ -34,7 +34,7 @@ function CastCredit(props: Props) {
     return (
         <PersonLinkContainer person={credit.actor}>
             <VStack w="120px">
-                <Avatar h="100px" name={credit.actor.name} shadow="lg" w="100px" {...rest} />
+                <Avatar h="100px" name={credit.actor.name} shadow="xl" w="100px" {...rest} />
                 <VStack spacing={0}>
                     <Text fontSize="sm"
                         fontWeight="semibold"

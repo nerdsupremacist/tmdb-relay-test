@@ -13,7 +13,7 @@ import { useOnClickOnResults } from './SearchContext';
 import { POSTER_PLACEHOLDER } from 'utils/constants';
 
 type Props = {
-    movie: MovieSearchResult_movie$key
+    movie: MovieSearchResult_movie$key,
 }
 
 function MovieSearchResult(props: Props) {
@@ -34,7 +34,7 @@ function MovieSearchResult(props: Props) {
 
     return (
         <MovieLinkContainer movie={movie} onClick={onClick}>
-            <HStack align="start" spacing="4">
+            <HStack align="start" spacing={4}>
                 <Image
                     borderRadius="lg"
                     borderWidth="1px"
