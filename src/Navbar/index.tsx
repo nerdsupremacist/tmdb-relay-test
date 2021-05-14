@@ -106,10 +106,20 @@ function Navbar() {
                 closeOnEsc
                 isOpen={isOpen}
                 onClose={onClose}
+                scrollBehavior="inside"
                 size="xl"
             >
                 <ModalOverlay />
-                <ModalContent>
+                <ModalContent
+                    aria-expanded="true"
+                    aria-haspopup="listbox"
+                    maxW="600px"
+                    overflow="hidden"
+                    role="combobox"
+                    rounded="lg"
+                    shadow="lg"
+                    top="4vh"
+                >
                     <Search onClickOnResults={onClose}/>
                 </ModalContent>
             </Modal>
