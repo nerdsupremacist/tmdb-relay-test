@@ -90,7 +90,7 @@ function PersonHeader(props: Props) {
                                         textDecoration: 'none',
                                     }}
                                 >
-                                    <Button>
+                                    <Button variant="outline">
                                         <Text fontSize="lg" fontWeight="semibold">
                                             <Icon as={FaImdb}/>
                                         </Text>
@@ -114,7 +114,7 @@ function PersonHeader(props: Props) {
                                         textDecoration: 'none',
                                     }}
                                 >
-                                    <Button>
+                                    <Button variant="outline">
                                         <Text fontSize="lg" fontWeight="semibold">
                                             <Icon as={FaTwitter}/>
                                         </Text>
@@ -138,7 +138,7 @@ function PersonHeader(props: Props) {
                                         textDecoration: 'none',
                                     }}
                                 >
-                                    <Button>
+                                    <Button variant="outline">
                                         <Text fontSize="lg" fontWeight="semibold">
                                             <Icon as={FaInstagram}/>
                                         </Text>
@@ -162,7 +162,7 @@ function PersonHeader(props: Props) {
                                         textDecoration: 'none',
                                     }}
                                 >
-                                    <Button>
+                                    <Button variant="outline">
                                         <Text fontSize="lg" fontWeight="semibold">
                                             <Icon as={FaFacebook}/>
                                         </Text>
