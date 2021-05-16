@@ -12,8 +12,12 @@ import { graphql } from 'babel-plugin-relay/macro';
 import LoadingSuspense from 'LoadingSuspense';
 import NowPlayingMovies from './NowPlayingMovies';
 import PopularMovies from './PopularMovies';
+import PopularShows from './PopularShows';
+import ShowsOnTheAir from './ShowsOnTheAir';
 import TopRatedMovies from './TopRatedMovies';
+import TopRatedShows from './TopRatedShows';
 import TrendingMovies from './TrendingMovies';
+import TrendingShows from './TrendingShows';
 
 type LoadedProps = {
     data: PreloadedQuery<HomeQueryType>
@@ -23,10 +27,14 @@ function Home(props: LoadedProps) {
     const data = usePreloadedQuery(
         graphql`
             query HomeQuery {
-                ...TrendingMovies_data
-                ...PopularMovies_data
-                ...NowPlayingMovies_data
-                ...TopRatedMovies_data
+                ...TrendingMovies_data @arguments(count: 7)
+                ...TrendingShows_data @arguments(count: 7)
+                ...PopularMovies_data @arguments(count: 7)
+                ...PopularShows_data @arguments(count: 7)
+                ...NowPlayingMovies_data @arguments(count: 7)
+                ...ShowsOnTheAir_data @arguments(count: 7)
+                ...TopRatedMovies_data @arguments(count: 7)
+                ...TopRatedShows_data @arguments(count: 7)
             }
         `,
         props.data,
@@ -40,17 +48,33 @@ function Home(props: LoadedProps) {
                 </Text>
                 <TrendingMovies data={data} />
                 <Text fontSize="xl" fontWeight="bold">
+                    Trending TV Shows
+                </Text>
+                <TrendingShows data={data} />
+                <Text fontSize="xl" fontWeight="bold">
                     Popular Movies
                 </Text>
                 <PopularMovies data={data} />
+                <Text fontSize="xl" fontWeight="bold">
+                    Popular TV Shows
+                </Text>
+                <PopularShows data={data} />
                 <Text fontSize="xl" fontWeight="bold">
                     Now Playing Movies
                 </Text>
                 <NowPlayingMovies data={data} />
                 <Text fontSize="xl" fontWeight="bold">
+                    TV Shows on the Air this Week
+                </Text>
+                <ShowsOnTheAir data={data} />
+                <Text fontSize="xl" fontWeight="bold">
                     Top Rated Movies
                 </Text>
                 <TopRatedMovies data={data} />
+                <Text fontSize="xl" fontWeight="bold">
+                    Top Rated TV Shows
+                </Text>
+                <TopRatedShows data={data} />
             </VStack>
         </Container>
     );
