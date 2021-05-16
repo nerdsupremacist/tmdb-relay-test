@@ -1,7 +1,9 @@
 
 import React from 'react';
+import DarkModeToggle from 'react-dark-mode-toggle';
 import { useHotkeys } from 'react-hotkeys-hook';
-import { AiFillHome } from 'react-icons/ai';
+import { FaGithub, FaHome } from 'react-icons/fa';
+import { SiGraphql } from 'react-icons/si';
 import { Link as InternalLink } from 'react-router-dom';
 import {
     Button,
@@ -20,11 +22,10 @@ import {
     ModalOverlay,
     Spacer,
     Text,
+    Tooltip,
     useColorMode,
-    useColorModeValue,
     useDisclosure,
 } from '@chakra-ui/react';
-import { MoonIcon, SunIcon } from '@chakra-ui/icons';
 import { SearchIcon } from '@chakra-ui/icons';
 
 import Search from 'Search';
@@ -32,8 +33,7 @@ import Search from 'Search';
 import { GRAPHQL_URL, REPO_URL } from 'utils/constants';
 
 function Navbar() {
-    const { toggleColorMode } = useColorMode();
-    const icon = useColorModeValue(<MoonIcon />, <SunIcon />);
+    const { colorMode, toggleColorMode } = useColorMode();
     const { isOpen, onOpen, onClose } = useDisclosure();
 
     useHotkeys('/', event => {
@@ -48,7 +48,7 @@ function Navbar() {
                     <HStack align="center" flex={1} justify="left" paddingLeft={8}>
                         <InternalLink to="/">
                             <Button variant="ghost">
-                                <Icon as={AiFillHome}/>
+                                <Icon as={FaHome}/>
                             </Button>
                         </InternalLink>
                     </HStack>
@@ -70,35 +70,43 @@ function Navbar() {
                             </InputGroup>
                         </Button>
                     </Container>
-                    <HStack align="center" flex={1} justify="right" paddingRight={8}>
+                    <HStack flex={1} justify="right" paddingRight={8}>
                         <Spacer />
-                        <Button onClick={toggleColorMode} variant="ghost">
-                            {icon}
-                        </Button>
-                        <Link
-                            href={REPO_URL}
-                            style={{
-                                textDecoration: 'none',
-                            }}
-                        >
-                            <Button variant="ghost">
-                                <Text fontSize="md" fontWeight="semibold">
-                                    GitHub
-                                </Text>
-                            </Button>
-                        </Link>
-                        <Link
-                            href={GRAPHQL_URL}
-                            style={{
-                                textDecoration: 'none',
-                            }}
-                        >
-                            <Button variant="ghost">
-                                <Text fontSize="md" fontWeight="semibold">
-                                    API
-                                </Text>
-                            </Button>
-                        </Link>
+                        <HStack align="center" >
+                            <DarkModeToggle
+                                checked={colorMode === 'dark'}
+                                onChange={toggleColorMode}
+                                size={50}
+                                speed={2.6}
+                            />
+                            <Spacer w="1px"/>
+                            <Tooltip bg="gray.300" color="black" hasArrow label="GraphQL API" placement="bottom">
+                                <Link
+                                    href={GRAPHQL_URL}
+                                    style={{
+                                        textDecoration: 'none',
+                                    }}
+                                >
+                                    <Button variant="ghost">
+                                        <Text fontSize="md" fontWeight="semibold">
+                                            <Icon as={SiGraphql}/>
+                                        </Text>
+                                    </Button>
+                                </Link>
+                            </Tooltip>
+                            <Tooltip bg="gray.300" color="black" hasArrow label="GitHub Repo" placement="bottom">
+                                <Link
+                                    href={REPO_URL}
+                                    style={{
+                                        textDecoration: 'none',
+                                    }}
+                                >
+                                    <Button variant="ghost">
+                                        <Icon as={FaGithub}/>
+                                    </Button>
+                                </Link>
+                            </Tooltip>
+                        </HStack>
                     </HStack>
                 </Flex>
             </Container>
