@@ -6,6 +6,8 @@ import { Image, Text, VStack } from '@chakra-ui/react';
 import { useFragment } from 'react-relay';
 import { graphql } from 'babel-plugin-relay/macro';
 
+import ShowLinkContainer from 'ShowLinkContainer/ShowLinkContainer';
+
 import { POSTER_PLACEHOLDER } from 'utils/constants';
 
 type Props = {
@@ -16,6 +18,7 @@ function ShowListItem(props: Props) {
     const show = useFragment(
         graphql`
             fragment ShowListItem_show on TVShow {
+                ...ShowLinkContainer_show
                 name
                 poster(size: W154)
             }
@@ -25,12 +28,14 @@ function ShowListItem(props: Props) {
     const poster = show.poster ?? POSTER_PLACEHOLDER;
 
     return (
-        <VStack>
-            <Image borderRadius="lg" h="220px" maxW="150px" minW="150px" shadow="xl" src={poster}/>
-            <VStack spacing={0}>
-                <Text fontSize="sm" fontWeight="semibold" noOfLines={2} textAlign="center">{show.name}</Text>
+        <ShowLinkContainer show={show}>
+            <VStack>
+                <Image borderRadius="lg" h="220px" maxW="150px" minW="150px" shadow="xl" src={poster}/>
+                <VStack spacing={0}>
+                    <Text fontSize="sm" fontWeight="semibold" noOfLines={2} textAlign="center">{show.name}</Text>
+                </VStack>
             </VStack>
-        </VStack>
+        </ShowLinkContainer>
     );
 }
 

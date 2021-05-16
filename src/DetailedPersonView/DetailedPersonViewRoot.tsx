@@ -41,9 +41,6 @@ function DetailedPersonViewRoot(props: Props) {
                         {showMoreBio ? 'Show Less' : 'Show More'}
                     </Button>
                 </Flex>
-                <Text fontSize="xl" fontWeight="bold">
-                    Known For
-                </Text>
                 <KnownForList person={person} />
             </VStack>
         </Container>

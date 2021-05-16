@@ -9,6 +9,12 @@ export type PersonHeader_person = {
     readonly profilePicture: string | null;
     readonly knownForDepartment: string;
     readonly placeOfBirth: string | null;
+    readonly externalIds: {
+        readonly imdb: string | null;
+        readonly facebook: string | null;
+        readonly instagram: string | null;
+        readonly twitter: string | null;
+    };
     readonly " $refType": "PersonHeader_person";
 };
 export type PersonHeader_person$data = PersonHeader_person;
@@ -58,10 +64,49 @@ const node: ReaderFragment = {
       "kind": "ScalarField",
       "name": "placeOfBirth",
       "storageKey": null
+    },
+    {
+      "alias": null,
+      "args": null,
+      "concreteType": "ExternalIDS",
+      "kind": "LinkedField",
+      "name": "externalIds",
+      "plural": false,
+      "selections": [
+        {
+          "alias": null,
+          "args": null,
+          "kind": "ScalarField",
+          "name": "imdb",
+          "storageKey": null
+        },
+        {
+          "alias": null,
+          "args": null,
+          "kind": "ScalarField",
+          "name": "facebook",
+          "storageKey": null
+        },
+        {
+          "alias": null,
+          "args": null,
+          "kind": "ScalarField",
+          "name": "instagram",
+          "storageKey": null
+        },
+        {
+          "alias": null,
+          "args": null,
+          "kind": "ScalarField",
+          "name": "twitter",
+          "storageKey": null
+        }
+      ],
+      "storageKey": null
     }
   ],
   "type": "Person",
   "abstractKey": null
 };
-(node as any).hash = '059654c56635af7452e43795097c5ed6';
+(node as any).hash = '473bdeb00984b4db2af161041908292e';
 export default node;
