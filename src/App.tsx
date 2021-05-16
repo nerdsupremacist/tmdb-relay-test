@@ -6,6 +6,7 @@ import {
     Switch,
 } from 'react-router-dom';
 
+import DetailedEpisodeView from 'DetailedEpisodeView';
 import DetailedMovieView from 'DetailedMovieView';
 import DetailedPersonView from 'DetailedPersonView';
 import DetailedShowView from 'DetailedShowView';
@@ -29,6 +30,9 @@ function App() {
                     </Route>
                     <Route path="/show/:id">
                         <DetailedShowView />
+                    </Route>
+                    <Route path="/episode/:id">
+                        <DetailedEpisodeView />
                     </Route>
                     <Route path="*">
                         <h1>Not found!</h1>

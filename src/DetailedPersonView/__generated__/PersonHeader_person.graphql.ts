@@ -9,6 +9,7 @@ export type PersonHeader_person = {
     readonly profilePicture: string | null;
     readonly knownForDepartment: string;
     readonly placeOfBirth: string | null;
+    readonly homepage: string | null;
     readonly externalIds: {
         readonly imdb: string | null;
         readonly facebook: string | null;
@@ -68,6 +69,13 @@ const node: ReaderFragment = {
     {
       "alias": null,
       "args": null,
+      "kind": "ScalarField",
+      "name": "homepage",
+      "storageKey": null
+    },
+    {
+      "alias": null,
+      "args": null,
       "concreteType": "ExternalIDS",
       "kind": "LinkedField",
       "name": "externalIds",
@@ -108,5 +116,5 @@ const node: ReaderFragment = {
   "type": "Person",
   "abstractKey": null
 };
-(node as any).hash = '473bdeb00984b4db2af161041908292e';
+(node as any).hash = '4b079a1176b889c2236c833379f0449c';
 export default node;

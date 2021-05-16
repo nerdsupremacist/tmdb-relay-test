@@ -1,6 +1,7 @@
 import type { PersonHeader_person$key } from './__generated__/PersonHeader_person.graphql';
 
 import React from 'react';
+import { CgWebsite } from 'react-icons/cg';
 import { FaFacebook, FaImdb, FaInstagram, FaTwitter } from 'react-icons/fa';
 import {
     Badge,
@@ -31,6 +32,7 @@ function PersonHeader(props: Props) {
                 profilePicture(size: W185)
                 knownForDepartment
                 placeOfBirth
+                homepage
                 externalIds {
                     imdb
                     facebook
@@ -93,6 +95,30 @@ function PersonHeader(props: Props) {
                                     <Button variant="outline">
                                         <Text fontSize="lg" fontWeight="semibold">
                                             <Icon as={FaImdb}/>
+                                        </Text>
+                                    </Button>
+                                </Link>
+                            </Tooltip>
+                        )
+                    }
+                    {
+                        person.homepage != null && (
+                            <Tooltip
+                                bg="gray.300"
+                                color="black"
+                                hasArrow
+                                label="Personal Website"
+                                placement="bottom"
+                            >
+                                <Link
+                                    href={person.homepage}
+                                    style={{
+                                        textDecoration: 'none',
+                                    }}
+                                >
+                                    <Button variant="outline">
+                                        <Text fontSize="lg" fontWeight="semibold">
+                                            <Icon as={CgWebsite}/>
                                         </Text>
                                     </Button>
                                 </Link>
