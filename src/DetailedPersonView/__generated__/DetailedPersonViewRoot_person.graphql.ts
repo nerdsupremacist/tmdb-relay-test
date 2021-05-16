@@ -6,7 +6,7 @@ import { ReaderFragment } from "relay-runtime";
 import { FragmentRefs } from "relay-runtime";
 export type DetailedPersonViewRoot_person = {
     readonly biography: string;
-    readonly " $fragmentRefs": FragmentRefs<"PersonHeader_person" | "KnownForList_person">;
+    readonly " $fragmentRefs": FragmentRefs<"PersonHeader_person" | "KnownForList_person" | "AdditionalCredits_person">;
     readonly " $refType": "DetailedPersonViewRoot_person";
 };
 export type DetailedPersonViewRoot_person$data = DetailedPersonViewRoot_person;
@@ -39,10 +39,15 @@ const node: ReaderFragment = {
       "args": null,
       "kind": "FragmentSpread",
       "name": "KnownForList_person"
+    },
+    {
+      "args": null,
+      "kind": "FragmentSpread",
+      "name": "AdditionalCredits_person"
     }
   ],
   "type": "Person",
   "abstractKey": null
 };
-(node as any).hash = 'f02dc1fa7f578fdf06907188bc083d74';
+(node as any).hash = '37d092cf1b7af2c51b82926d16e527f9';
 export default node;

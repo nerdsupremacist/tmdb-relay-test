@@ -8,7 +8,10 @@ import { graphql } from 'babel-plugin-relay/macro';
 
 import HorizonalScrollview from 'HorizonalScrollview';
 import CastCreditForPerson from './CastCreditForPerson';
+import CrewCreditForPerson from './CrewCreditForPerson';
 import MovieOrShowResult from './MovieOrShowResult';
+
+import useIsActor from './useIsActor';
 
 type Props = {
     person: KnownForList_person$key,
@@ -18,7 +21,7 @@ function KnownForList(props: Props) {
     const person = useFragment(
         graphql`
             fragment KnownForList_person on Person {
-                knownForDepartment
+                ...useIsActor_person
                 knownFor {
                     ...MovieOrShowResult_result
                 }
@@ -27,6 +30,9 @@ function KnownForList(props: Props) {
                         cast {
                             ...CastCreditForPerson_credit
                         }
+                        crew {
+                            ...CrewCreditForPerson_credit
+                        }
                     }
                 }
             }
@@ -34,7 +40,7 @@ function KnownForList(props: Props) {
         props.person,
     );
 
-    const isActor = person.knownForDepartment === 'Acting';
+    const isActor = useIsActor(person);
 
     return (
         <HorizonalScrollview align="baseline" w="100%">
@@ -69,6 +75,27 @@ function KnownForList(props: Props) {
                                         <CastCreditForPerson
                                             credit={credit}
                                             key={`cast_credit_person_${index}`}
+                                        />
+                                    );
+                                })
+                            }
+                        </HStack>
+                    </VStack>
+                )
+            }
+            {
+                !isActor && (
+                    <VStack align="start">
+                        <Text fontSize="xl" fontWeight="bold">
+                            Worked on
+                        </Text>
+                        <HStack align="baseline">
+                            {
+                                person.credits.all.crew.map((credit, index) => {
+                                    return (
+                                        <CrewCreditForPerson
+                                            credit={credit}
+                                            key={`crew_credit_person_${index}`}
                                         />
                                     );
                                 })

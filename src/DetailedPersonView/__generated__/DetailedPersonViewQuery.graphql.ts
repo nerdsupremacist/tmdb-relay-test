@@ -33,8 +33,43 @@ query DetailedPersonViewQuery(
   }
 }
 
+fragment AdditionalCredits_person on Person {
+  ...useIsActor_person
+  credits {
+    all {
+      cast {
+        ...CastCreditForPerson_credit
+      }
+      crew {
+        ...CrewCreditForPerson_credit
+      }
+    }
+  }
+}
+
 fragment CastCreditForPerson_credit on CastCreditWithMovieOrTV {
   character
+  value {
+    __typename
+    ... on Movie {
+      ...MovieLinkContainer_movie
+      title
+      poster(size: W185)
+    }
+    ... on TVShow {
+      ...ShowLinkContainer_show
+      name
+      poster(size: W185)
+    }
+    ... on Node {
+      __isNode: __typename
+      id
+    }
+  }
+}
+
+fragment CrewCreditForPerson_credit on CrewCreditWithMovieOrTV {
+  job
   value {
     __typename
     ... on Movie {
@@ -58,10 +93,11 @@ fragment DetailedPersonViewRoot_person on Person {
   ...PersonHeader_person
   biography
   ...KnownForList_person
+  ...AdditionalCredits_person
 }
 
 fragment KnownForList_person on Person {
-  knownForDepartment
+  ...useIsActor_person
   knownFor {
     __typename
     ...MovieOrShowResult_result
@@ -74,6 +110,9 @@ fragment KnownForList_person on Person {
     all {
       cast {
         ...CastCreditForPerson_credit
+      }
+      crew {
+        ...CrewCreditForPerson_credit
       }
     }
   }
@@ -121,6 +160,10 @@ fragment ShowListItem_show on TVShow {
   ...ShowLinkContainer_show
   name
   poster(size: W154)
+}
+
+fragment useIsActor_person on Person {
+  knownForDepartment
 }
 */
 
@@ -201,6 +244,39 @@ v9 = {
   "kind": "ScalarField",
   "name": "poster",
   "storageKey": "poster(size:\"W185\")"
+},
+v10 = {
+  "alias": null,
+  "args": null,
+  "concreteType": null,
+  "kind": "LinkedField",
+  "name": "value",
+  "plural": false,
+  "selections": [
+    (v4/*: any*/),
+    {
+      "kind": "InlineFragment",
+      "selections": [
+        (v5/*: any*/),
+        (v6/*: any*/),
+        (v9/*: any*/)
+      ],
+      "type": "Movie",
+      "abstractKey": null
+    },
+    {
+      "kind": "InlineFragment",
+      "selections": [
+        (v5/*: any*/),
+        (v2/*: any*/),
+        (v9/*: any*/)
+      ],
+      "type": "TVShow",
+      "abstractKey": null
+    },
+    (v8/*: any*/)
+  ],
+  "storageKey": null
 };
 return {
   "fragment": {
@@ -398,39 +474,26 @@ return {
                             "name": "character",
                             "storageKey": null
                           },
+                          (v10/*: any*/)
+                        ],
+                        "storageKey": null
+                      },
+                      {
+                        "alias": null,
+                        "args": null,
+                        "concreteType": "CrewCreditWithMovieOrTV",
+                        "kind": "LinkedField",
+                        "name": "crew",
+                        "plural": true,
+                        "selections": [
                           {
                             "alias": null,
                             "args": null,
-                            "concreteType": null,
-                            "kind": "LinkedField",
-                            "name": "value",
-                            "plural": false,
-                            "selections": [
-                              (v4/*: any*/),
-                              {
-                                "kind": "InlineFragment",
-                                "selections": [
-                                  (v5/*: any*/),
-                                  (v6/*: any*/),
-                                  (v9/*: any*/)
-                                ],
-                                "type": "Movie",
-                                "abstractKey": null
-                              },
-                              {
-                                "kind": "InlineFragment",
-                                "selections": [
-                                  (v5/*: any*/),
-                                  (v2/*: any*/),
-                                  (v9/*: any*/)
-                                ],
-                                "type": "TVShow",
-                                "abstractKey": null
-                              },
-                              (v8/*: any*/)
-                            ],
+                            "kind": "ScalarField",
+                            "name": "job",
                             "storageKey": null
-                          }
+                          },
+                          (v10/*: any*/)
                         ],
                         "storageKey": null
                       }
@@ -450,12 +513,12 @@ return {
     ]
   },
   "params": {
-    "cacheID": "89f95cd1a48bef41dc5556577e21abeb",
+    "cacheID": "5e540e7784d4af2eef6028d91afc5755",
     "id": null,
     "metadata": {},
     "name": "DetailedPersonViewQuery",
     "operationKind": "query",
-    "text": "query DetailedPersonViewQuery(\n  $id: ID!\n) {\n  people {\n    person(id: $id) {\n      ...DetailedPersonViewRoot_person\n      id\n    }\n  }\n}\n\nfragment CastCreditForPerson_credit on CastCreditWithMovieOrTV {\n  character\n  value {\n    __typename\n    ... on Movie {\n      ...MovieLinkContainer_movie\n      title\n      poster(size: W185)\n    }\n    ... on TVShow {\n      ...ShowLinkContainer_show\n      name\n      poster(size: W185)\n    }\n    ... on Node {\n      __isNode: __typename\n      id\n    }\n  }\n}\n\nfragment DetailedPersonViewRoot_person on Person {\n  ...PersonHeader_person\n  biography\n  ...KnownForList_person\n}\n\nfragment KnownForList_person on Person {\n  knownForDepartment\n  knownFor {\n    __typename\n    ...MovieOrShowResult_result\n    ... on Node {\n      __isNode: __typename\n      id\n    }\n  }\n  credits {\n    all {\n      cast {\n        ...CastCreditForPerson_credit\n      }\n    }\n  }\n}\n\nfragment MovieLinkContainer_movie on Movie {\n  id\n}\n\nfragment MovieListItem_movie on Movie {\n  ...MovieLinkContainer_movie\n  title\n  poster(size: W154)\n}\n\nfragment MovieOrShowResult_result on MovieOrTV {\n  __isMovieOrTV: __typename\n  __typename\n  ... on Movie {\n    ...MovieListItem_movie\n  }\n  ... on TVShow {\n    ...ShowListItem_show\n  }\n}\n\nfragment PersonHeader_person on Person {\n  name\n  profilePicture(size: W185)\n  knownForDepartment\n  placeOfBirth\n  externalIds {\n    imdb\n    facebook\n    instagram\n    twitter\n  }\n}\n\nfragment ShowLinkContainer_show on TVShow {\n  id\n}\n\nfragment ShowListItem_show on TVShow {\n  ...ShowLinkContainer_show\n  name\n  poster(size: W154)\n}\n"
+    "text": "query DetailedPersonViewQuery(\n  $id: ID!\n) {\n  people {\n    person(id: $id) {\n      ...DetailedPersonViewRoot_person\n      id\n    }\n  }\n}\n\nfragment AdditionalCredits_person on Person {\n  ...useIsActor_person\n  credits {\n    all {\n      cast {\n        ...CastCreditForPerson_credit\n      }\n      crew {\n        ...CrewCreditForPerson_credit\n      }\n    }\n  }\n}\n\nfragment CastCreditForPerson_credit on CastCreditWithMovieOrTV {\n  character\n  value {\n    __typename\n    ... on Movie {\n      ...MovieLinkContainer_movie\n      title\n      poster(size: W185)\n    }\n    ... on TVShow {\n      ...ShowLinkContainer_show\n      name\n      poster(size: W185)\n    }\n    ... on Node {\n      __isNode: __typename\n      id\n    }\n  }\n}\n\nfragment CrewCreditForPerson_credit on CrewCreditWithMovieOrTV {\n  job\n  value {\n    __typename\n    ... on Movie {\n      ...MovieLinkContainer_movie\n      title\n      poster(size: W185)\n    }\n    ... on TVShow {\n      ...ShowLinkContainer_show\n      name\n      poster(size: W185)\n    }\n    ... on Node {\n      __isNode: __typename\n      id\n    }\n  }\n}\n\nfragment DetailedPersonViewRoot_person on Person {\n  ...PersonHeader_person\n  biography\n  ...KnownForList_person\n  ...AdditionalCredits_person\n}\n\nfragment KnownForList_person on Person {\n  ...useIsActor_person\n  knownFor {\n    __typename\n    ...MovieOrShowResult_result\n    ... on Node {\n      __isNode: __typename\n      id\n    }\n  }\n  credits {\n    all {\n      cast {\n        ...CastCreditForPerson_credit\n      }\n      crew {\n        ...CrewCreditForPerson_credit\n      }\n    }\n  }\n}\n\nfragment MovieLinkContainer_movie on Movie {\n  id\n}\n\nfragment MovieListItem_movie on Movie {\n  ...MovieLinkContainer_movie\n  title\n  poster(size: W154)\n}\n\nfragment MovieOrShowResult_result on MovieOrTV {\n  __isMovieOrTV: __typename\n  __typename\n  ... on Movie {\n    ...MovieListItem_movie\n  }\n  ... on TVShow {\n    ...ShowListItem_show\n  }\n}\n\nfragment PersonHeader_person on Person {\n  name\n  profilePicture(size: W185)\n  knownForDepartment\n  placeOfBirth\n  externalIds {\n    imdb\n    facebook\n    instagram\n    twitter\n  }\n}\n\nfragment ShowLinkContainer_show on TVShow {\n  id\n}\n\nfragment ShowListItem_show on TVShow {\n  ...ShowLinkContainer_show\n  name\n  poster(size: W154)\n}\n\nfragment useIsActor_person on Person {\n  knownForDepartment\n}\n"
   }
 };
 })();

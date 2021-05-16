@@ -6,6 +6,7 @@ import { Button, Collapse, Container, Flex, Spacer, Text, VStack } from '@chakra
 import { useFragment } from 'react-relay';
 import { graphql } from 'babel-plugin-relay/macro';
 
+import AdditionalCredits from './AdditionalCredits';
 import KnownForList from './KnownForList';
 import PersonHeader from './PersonHeader';
 
@@ -21,6 +22,7 @@ function DetailedPersonViewRoot(props: Props) {
                 ...PersonHeader_person
                 biography
                 ...KnownForList_person
+                ...AdditionalCredits_person
             }
         `,
         props.person,
@@ -42,6 +44,7 @@ function DetailedPersonViewRoot(props: Props) {
                     </Button>
                 </Flex>
                 <KnownForList person={person} />
+                <AdditionalCredits person={person} />
             </VStack>
         </Container>
     );

@@ -4,10 +4,7 @@
 
 import { ReaderFragment } from "relay-runtime";
 import { FragmentRefs } from "relay-runtime";
-export type KnownForList_person = {
-    readonly knownFor: ReadonlyArray<{
-        readonly " $fragmentRefs": FragmentRefs<"MovieOrShowResult_result">;
-    }>;
+export type AdditionalCredits_person = {
     readonly credits: {
         readonly all: {
             readonly cast: ReadonlyArray<{
@@ -19,12 +16,12 @@ export type KnownForList_person = {
         };
     };
     readonly " $fragmentRefs": FragmentRefs<"useIsActor_person">;
-    readonly " $refType": "KnownForList_person";
+    readonly " $refType": "AdditionalCredits_person";
 };
-export type KnownForList_person$data = KnownForList_person;
-export type KnownForList_person$key = {
-    readonly " $data"?: KnownForList_person$data;
-    readonly " $fragmentRefs": FragmentRefs<"KnownForList_person">;
+export type AdditionalCredits_person$data = AdditionalCredits_person;
+export type AdditionalCredits_person$key = {
+    readonly " $data"?: AdditionalCredits_person$data;
+    readonly " $fragmentRefs": FragmentRefs<"AdditionalCredits_person">;
 };
 
 
@@ -33,24 +30,8 @@ const node: ReaderFragment = {
   "argumentDefinitions": [],
   "kind": "Fragment",
   "metadata": null,
-  "name": "KnownForList_person",
+  "name": "AdditionalCredits_person",
   "selections": [
-    {
-      "alias": null,
-      "args": null,
-      "concreteType": null,
-      "kind": "LinkedField",
-      "name": "knownFor",
-      "plural": true,
-      "selections": [
-        {
-          "args": null,
-          "kind": "FragmentSpread",
-          "name": "MovieOrShowResult_result"
-        }
-      ],
-      "storageKey": null
-    },
     {
       "alias": null,
       "args": null,
@@ -114,5 +95,5 @@ const node: ReaderFragment = {
   "type": "Person",
   "abstractKey": null
 };
-(node as any).hash = 'a888c6b92f606b9e182c89600faa9aa8';
+(node as any).hash = 'b1be62f3f6e2660df9595c0b372c48f0';
 export default node;
