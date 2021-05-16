@@ -6,6 +6,12 @@ import { ReaderFragment } from "relay-runtime";
 import { FragmentRefs } from "relay-runtime";
 export type DetailedShowViewRoot_show = {
     readonly name: string;
+    readonly lastEpisodeToAir: {
+        readonly " $fragmentRefs": FragmentRefs<"FeaturedEpisodeCard_episode">;
+    } | null;
+    readonly nextEpisodeToAir: {
+        readonly " $fragmentRefs": FragmentRefs<"FeaturedEpisodeCard_episode">;
+    } | null;
     readonly " $refType": "DetailedShowViewRoot_show";
 };
 export type DetailedShowViewRoot_show$data = DetailedShowViewRoot_show;
@@ -16,7 +22,15 @@ export type DetailedShowViewRoot_show$key = {
 
 
 
-const node: ReaderFragment = {
+const node: ReaderFragment = (function(){
+var v0 = [
+  {
+    "args": null,
+    "kind": "FragmentSpread",
+    "name": "FeaturedEpisodeCard_episode"
+  }
+];
+return {
   "argumentDefinitions": [],
   "kind": "Fragment",
   "metadata": null,
@@ -28,10 +42,31 @@ const node: ReaderFragment = {
       "kind": "ScalarField",
       "name": "name",
       "storageKey": null
+    },
+    {
+      "alias": null,
+      "args": null,
+      "concreteType": "Episode",
+      "kind": "LinkedField",
+      "name": "lastEpisodeToAir",
+      "plural": false,
+      "selections": (v0/*: any*/),
+      "storageKey": null
+    },
+    {
+      "alias": null,
+      "args": null,
+      "concreteType": "Episode",
+      "kind": "LinkedField",
+      "name": "nextEpisodeToAir",
+      "plural": false,
+      "selections": (v0/*: any*/),
+      "storageKey": null
     }
   ],
   "type": "TVShow",
   "abstractKey": null
 };
-(node as any).hash = '5ece28a2abd4f26af5017ca8bd322605';
+})();
+(node as any).hash = '4c8019fcf514811416fe86980666e60a';
 export default node;
