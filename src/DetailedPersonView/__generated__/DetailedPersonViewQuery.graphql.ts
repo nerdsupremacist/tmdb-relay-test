@@ -36,6 +36,39 @@ query DetailedPersonViewQuery(
 fragment DetailedPersonViewRoot_person on Person {
   ...PersonHeader_person
   biography
+  ...KnownForList_person
+}
+
+fragment KnownForList_person on Person {
+  knownFor {
+    __typename
+    ...MovieOrShowResult_result
+    ... on Node {
+      __isNode: __typename
+      id
+    }
+  }
+}
+
+fragment MovieLinkContainer_movie on Movie {
+  id
+}
+
+fragment MovieListItem_movie on Movie {
+  ...MovieLinkContainer_movie
+  title
+  poster(size: W154)
+}
+
+fragment MovieOrShowResult_result on MovieOrTV {
+  __isMovieOrTV: __typename
+  __typename
+  ... on Movie {
+    ...MovieListItem_movie
+  }
+  ... on TVShow {
+    ...ShowListItem_show
+  }
 }
 
 fragment PersonHeader_person on Person {
@@ -43,6 +76,11 @@ fragment PersonHeader_person on Person {
   profilePicture(size: W185)
   knownForDepartment
   placeOfBirth
+}
+
+fragment ShowListItem_show on TVShow {
+  name
+  poster(size: W154)
 }
 */
 
@@ -60,7 +98,34 @@ v1 = [
     "name": "id",
     "variableName": "id"
   }
-];
+],
+v2 = {
+  "alias": null,
+  "args": null,
+  "kind": "ScalarField",
+  "name": "name",
+  "storageKey": null
+},
+v3 = {
+  "alias": null,
+  "args": null,
+  "kind": "ScalarField",
+  "name": "id",
+  "storageKey": null
+},
+v4 = {
+  "alias": null,
+  "args": [
+    {
+      "kind": "Literal",
+      "name": "size",
+      "value": "W154"
+    }
+  ],
+  "kind": "ScalarField",
+  "name": "poster",
+  "storageKey": "poster(size:\"W154\")"
+};
 return {
   "fragment": {
     "argumentDefinitions": (v0/*: any*/),
@@ -121,13 +186,7 @@ return {
             "name": "person",
             "plural": false,
             "selections": [
-              {
-                "alias": null,
-                "args": null,
-                "kind": "ScalarField",
-                "name": "name",
-                "storageKey": null
-              },
+              (v2/*: any*/),
               {
                 "alias": null,
                 "args": [
@@ -165,10 +224,59 @@ return {
               {
                 "alias": null,
                 "args": null,
-                "kind": "ScalarField",
-                "name": "id",
+                "concreteType": null,
+                "kind": "LinkedField",
+                "name": "knownFor",
+                "plural": true,
+                "selections": [
+                  {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "__typename",
+                    "storageKey": null
+                  },
+                  {
+                    "kind": "TypeDiscriminator",
+                    "abstractKey": "__isMovieOrTV"
+                  },
+                  {
+                    "kind": "InlineFragment",
+                    "selections": [
+                      (v3/*: any*/),
+                      {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "title",
+                        "storageKey": null
+                      },
+                      (v4/*: any*/)
+                    ],
+                    "type": "Movie",
+                    "abstractKey": null
+                  },
+                  {
+                    "kind": "InlineFragment",
+                    "selections": [
+                      (v2/*: any*/),
+                      (v4/*: any*/)
+                    ],
+                    "type": "TVShow",
+                    "abstractKey": null
+                  },
+                  {
+                    "kind": "InlineFragment",
+                    "selections": [
+                      (v3/*: any*/)
+                    ],
+                    "type": "Node",
+                    "abstractKey": "__isNode"
+                  }
+                ],
                 "storageKey": null
-              }
+              },
+              (v3/*: any*/)
             ],
             "storageKey": null
           }
@@ -178,12 +286,12 @@ return {
     ]
   },
   "params": {
-    "cacheID": "222dd9c8febbceb1c3f659a5e51e2c3f",
+    "cacheID": "193d69aba57beebef825c546f5195e36",
     "id": null,
     "metadata": {},
     "name": "DetailedPersonViewQuery",
     "operationKind": "query",
-    "text": "query DetailedPersonViewQuery(\n  $id: ID!\n) {\n  people {\n    person(id: $id) {\n      ...DetailedPersonViewRoot_person\n      id\n    }\n  }\n}\n\nfragment DetailedPersonViewRoot_person on Person {\n  ...PersonHeader_person\n  biography\n}\n\nfragment PersonHeader_person on Person {\n  name\n  profilePicture(size: W185)\n  knownForDepartment\n  placeOfBirth\n}\n"
+    "text": "query DetailedPersonViewQuery(\n  $id: ID!\n) {\n  people {\n    person(id: $id) {\n      ...DetailedPersonViewRoot_person\n      id\n    }\n  }\n}\n\nfragment DetailedPersonViewRoot_person on Person {\n  ...PersonHeader_person\n  biography\n  ...KnownForList_person\n}\n\nfragment KnownForList_person on Person {\n  knownFor {\n    __typename\n    ...MovieOrShowResult_result\n    ... on Node {\n      __isNode: __typename\n      id\n    }\n  }\n}\n\nfragment MovieLinkContainer_movie on Movie {\n  id\n}\n\nfragment MovieListItem_movie on Movie {\n  ...MovieLinkContainer_movie\n  title\n  poster(size: W154)\n}\n\nfragment MovieOrShowResult_result on MovieOrTV {\n  __isMovieOrTV: __typename\n  __typename\n  ... on Movie {\n    ...MovieListItem_movie\n  }\n  ... on TVShow {\n    ...ShowListItem_show\n  }\n}\n\nfragment PersonHeader_person on Person {\n  name\n  profilePicture(size: W185)\n  knownForDepartment\n  placeOfBirth\n}\n\nfragment ShowListItem_show on TVShow {\n  name\n  poster(size: W154)\n}\n"
   }
 };
 })();
