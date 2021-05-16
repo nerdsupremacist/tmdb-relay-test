@@ -45,6 +45,9 @@ function SearchResultPaginatedList(props: Props) {
                             ... on Person {
                                 id
                             }
+                            ... on TVShow {
+                                id
+                            }
                         }
                     }
                 }
@@ -63,6 +66,8 @@ function SearchResultPaginatedList(props: Props) {
                 return `/movie/${node.id}`;
             case 'Person':
                 return `/person/${node.id}`;
+            case 'TVShow':
+                return `/show/${node.id}`;
             default:
                 return null;
             }

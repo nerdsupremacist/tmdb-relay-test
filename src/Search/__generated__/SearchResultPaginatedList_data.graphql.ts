@@ -133,6 +133,12 @@ return {
                   "selections": (v1/*: any*/),
                   "type": "Person",
                   "abstractKey": null
+                },
+                {
+                  "kind": "InlineFragment",
+                  "selections": (v1/*: any*/),
+                  "type": "TVShow",
+                  "abstractKey": null
                 }
               ],
               "storageKey": null
@@ -180,5 +186,5 @@ return {
   "abstractKey": null
 };
 })();
-(node as any).hash = 'a60a2d280b0de9acd254896649e166e6';
+(node as any).hash = '4ba82d133b01c3188f90fa04cfa7e204';
 export default node;

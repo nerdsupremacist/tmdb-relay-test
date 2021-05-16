@@ -58,6 +58,9 @@ fragment SearchResultPaginatedList_data_4E8ZZm on Query {
         ... on Person {
           id
         }
+        ... on TVShow {
+          id
+        }
         ... on Node {
           __isNode: __typename
           id
@@ -81,6 +84,20 @@ fragment SearchResult_result on MovieOrTVOrPeople {
   ... on Person {
     ...PersonSearchResult_person
   }
+  ... on TVShow {
+    ...ShowSearchResult_show
+  }
+}
+
+fragment ShowLinkContainer_show on TVShow {
+  id
+}
+
+fragment ShowSearchResult_show on TVShow {
+  ...ShowLinkContainer_show
+  name
+  overview
+  poster(size: W185)
 }
 
 fragment useKnownForDescription_person on Person {
@@ -142,21 +159,35 @@ v5 = {
   "name": "title",
   "storageKey": null
 },
-v6 = [
+v6 = {
+  "alias": null,
+  "args": null,
+  "kind": "ScalarField",
+  "name": "overview",
+  "storageKey": null
+},
+v7 = [
   {
     "kind": "Literal",
     "name": "size",
     "value": "W185"
   }
 ],
-v7 = {
+v8 = {
+  "alias": null,
+  "args": (v7/*: any*/),
+  "kind": "ScalarField",
+  "name": "poster",
+  "storageKey": "poster(size:\"W185\")"
+},
+v9 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
   "name": "name",
   "storageKey": null
 },
-v8 = {
+v10 = {
   "kind": "InlineFragment",
   "selections": [
     (v4/*: any*/)
@@ -227,20 +258,8 @@ return {
                     "selections": [
                       (v4/*: any*/),
                       (v5/*: any*/),
-                      {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "overview",
-                        "storageKey": null
-                      },
-                      {
-                        "alias": null,
-                        "args": (v6/*: any*/),
-                        "kind": "ScalarField",
-                        "name": "poster",
-                        "storageKey": "poster(size:\"W185\")"
-                      }
+                      (v6/*: any*/),
+                      (v8/*: any*/)
                     ],
                     "type": "Movie",
                     "abstractKey": null
@@ -249,10 +268,10 @@ return {
                     "kind": "InlineFragment",
                     "selections": [
                       (v4/*: any*/),
-                      (v7/*: any*/),
+                      (v9/*: any*/),
                       {
                         "alias": null,
-                        "args": (v6/*: any*/),
+                        "args": (v7/*: any*/),
                         "kind": "ScalarField",
                         "name": "profilePicture",
                         "storageKey": "profilePicture(size:\"W185\")"
@@ -277,12 +296,12 @@ return {
                           {
                             "kind": "InlineFragment",
                             "selections": [
-                              (v7/*: any*/)
+                              (v9/*: any*/)
                             ],
                             "type": "TVShow",
                             "abstractKey": null
                           },
-                          (v8/*: any*/)
+                          (v10/*: any*/)
                         ],
                         "storageKey": null
                       }
@@ -290,7 +309,18 @@ return {
                     "type": "Person",
                     "abstractKey": null
                   },
-                  (v8/*: any*/)
+                  {
+                    "kind": "InlineFragment",
+                    "selections": [
+                      (v4/*: any*/),
+                      (v9/*: any*/),
+                      (v6/*: any*/),
+                      (v8/*: any*/)
+                    ],
+                    "type": "TVShow",
+                    "abstractKey": null
+                  },
+                  (v10/*: any*/)
                 ],
                 "storageKey": null
               },
@@ -346,12 +376,12 @@ return {
     ]
   },
   "params": {
-    "cacheID": "dc7030d97f18188be9a7255c310a2a8d",
+    "cacheID": "6fb67134668c232dd6823e7986a814c3",
     "id": null,
     "metadata": {},
     "name": "SearchResultsListQuery",
     "operationKind": "query",
-    "text": "query SearchResultsListQuery(\n  $term: String!\n) {\n  ...SearchResultPaginatedList_data_4E8ZZm\n}\n\nfragment MovieLinkContainer_movie on Movie {\n  id\n}\n\nfragment MovieSearchResult_movie on Movie {\n  ...MovieLinkContainer_movie\n  title\n  overview\n  poster(size: W185)\n}\n\nfragment PersonLinkContainer_person on Person {\n  id\n}\n\nfragment PersonSearchResult_person on Person {\n  ...PersonLinkContainer_person\n  name\n  profilePicture(size: W185)\n  ...useKnownForDescription_person\n}\n\nfragment SearchResultPaginatedList_data_4E8ZZm on Query {\n  search(term: $term, first: 5) {\n    edges {\n      node {\n        __typename\n        ...SearchResult_result\n        ... on Movie {\n          id\n        }\n        ... on Person {\n          id\n        }\n        ... on Node {\n          __isNode: __typename\n          id\n        }\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n\nfragment SearchResult_result on MovieOrTVOrPeople {\n  __isMovieOrTVOrPeople: __typename\n  __typename\n  ... on Movie {\n    ...MovieSearchResult_movie\n  }\n  ... on Person {\n    ...PersonSearchResult_person\n  }\n}\n\nfragment useKnownForDescription_person on Person {\n  knownFor {\n    __typename\n    ... on Movie {\n      title\n    }\n    ... on TVShow {\n      name\n    }\n    ... on Node {\n      __isNode: __typename\n      id\n    }\n  }\n}\n"
+    "text": "query SearchResultsListQuery(\n  $term: String!\n) {\n  ...SearchResultPaginatedList_data_4E8ZZm\n}\n\nfragment MovieLinkContainer_movie on Movie {\n  id\n}\n\nfragment MovieSearchResult_movie on Movie {\n  ...MovieLinkContainer_movie\n  title\n  overview\n  poster(size: W185)\n}\n\nfragment PersonLinkContainer_person on Person {\n  id\n}\n\nfragment PersonSearchResult_person on Person {\n  ...PersonLinkContainer_person\n  name\n  profilePicture(size: W185)\n  ...useKnownForDescription_person\n}\n\nfragment SearchResultPaginatedList_data_4E8ZZm on Query {\n  search(term: $term, first: 5) {\n    edges {\n      node {\n        __typename\n        ...SearchResult_result\n        ... on Movie {\n          id\n        }\n        ... on Person {\n          id\n        }\n        ... on TVShow {\n          id\n        }\n        ... on Node {\n          __isNode: __typename\n          id\n        }\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n\nfragment SearchResult_result on MovieOrTVOrPeople {\n  __isMovieOrTVOrPeople: __typename\n  __typename\n  ... on Movie {\n    ...MovieSearchResult_movie\n  }\n  ... on Person {\n    ...PersonSearchResult_person\n  }\n  ... on TVShow {\n    ...ShowSearchResult_show\n  }\n}\n\nfragment ShowLinkContainer_show on TVShow {\n  id\n}\n\nfragment ShowSearchResult_show on TVShow {\n  ...ShowLinkContainer_show\n  name\n  overview\n  poster(size: W185)\n}\n\nfragment useKnownForDescription_person on Person {\n  knownFor {\n    __typename\n    ... on Movie {\n      title\n    }\n    ... on TVShow {\n      name\n    }\n    ... on Node {\n      __isNode: __typename\n      id\n    }\n  }\n}\n"
   }
 };
 })();

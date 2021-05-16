@@ -10,6 +10,7 @@ import { graphql } from 'babel-plugin-relay/macro';
 import MovieSearchResult from './MovieSearchResult';
 import PersonSearchResult from './PersonSearchResult';
 import { useResultRef, useSelect } from './SearchContext';
+import ShowSearchResult from './ShowSearchResult';
 
 type Props = {
     result: SearchResult_result$key,
@@ -28,6 +29,9 @@ function SearchResult(props: Props) {
                 ... on Person {
                     ...PersonSearchResult_person
                 }
+                ... on TVShow {
+                    ...ShowSearchResult_show
+                }
             }
         `,
         props.result,
@@ -43,6 +47,9 @@ function SearchResult(props: Props) {
         break;
     case 'Person':
         inner = <PersonSearchResult person={result} />;
+        break;
+    case 'TVShow':
+        inner = <ShowSearchResult show={result} />;
         break;
     default:
         return null;

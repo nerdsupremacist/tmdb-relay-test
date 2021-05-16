@@ -8,6 +8,7 @@ import {
 
 import DetailedMovieView from 'DetailedMovieView';
 import DetailedPersonView from 'DetailedPersonView';
+import DetailedShowView from 'DetailedShowView';
 import Home from 'Home';
 import Navbar from 'Navbar';
 
@@ -25,6 +26,9 @@ function App() {
                     </Route>
                     <Route path="/person/:id">
                         <DetailedPersonView />
+                    </Route>
+                    <Route path="/show/:id">
+                        <DetailedShowView />
                     </Route>
                     <Route path="*">
                         <h1>Not found!</h1>
