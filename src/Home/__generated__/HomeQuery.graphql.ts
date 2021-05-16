@@ -6,7 +6,7 @@ import { ConcreteRequest } from "relay-runtime";
 import { FragmentRefs } from "relay-runtime";
 export type HomeQueryVariables = {};
 export type HomeQueryResponse = {
-    readonly " $fragmentRefs": FragmentRefs<"NowPlayingMovies_data" | "TrendingMovies_data" | "TopRatedMovies_data">;
+    readonly " $fragmentRefs": FragmentRefs<"TrendingMovies_data" | "PopularMovies_data" | "NowPlayingMovies_data" | "TopRatedMovies_data">;
 };
 export type HomeQuery = {
     readonly response: HomeQueryResponse;
@@ -17,8 +17,9 @@ export type HomeQuery = {
 
 /*
 query HomeQuery {
-  ...NowPlayingMovies_data
   ...TrendingMovies_data
+  ...PopularMovies_data
+  ...NowPlayingMovies_data
   ...TopRatedMovies_data
 }
 
@@ -35,6 +36,25 @@ fragment MovieListItem_movie on Movie {
 fragment NowPlayingMovies_data on Query {
   movies {
     nowPlaying(first: 20) {
+      edges {
+        node {
+          ...MovieListItem_movie
+          id
+          __typename
+        }
+        cursor
+      }
+      pageInfo {
+        endCursor
+        hasNextPage
+      }
+    }
+  }
+}
+
+fragment PopularMovies_data on Query {
+  movies {
+    popular(first: 20) {
       edges {
         node {
           ...MovieListItem_movie
@@ -198,12 +218,17 @@ return {
       {
         "args": null,
         "kind": "FragmentSpread",
-        "name": "NowPlayingMovies_data"
+        "name": "TrendingMovies_data"
       },
       {
         "args": null,
         "kind": "FragmentSpread",
-        "name": "TrendingMovies_data"
+        "name": "PopularMovies_data"
+      },
+      {
+        "args": null,
+        "kind": "FragmentSpread",
+        "name": "NowPlayingMovies_data"
       },
       {
         "args": null,
@@ -233,25 +258,6 @@ return {
             "args": (v0/*: any*/),
             "concreteType": "MovieConnection",
             "kind": "LinkedField",
-            "name": "nowPlaying",
-            "plural": false,
-            "selections": (v1/*: any*/),
-            "storageKey": "nowPlaying(first:20)"
-          },
-          {
-            "alias": null,
-            "args": (v0/*: any*/),
-            "filters": null,
-            "handle": "connection",
-            "key": "NowPlayingMovies_data_movies_nowPlaying",
-            "kind": "LinkedHandle",
-            "name": "nowPlaying"
-          },
-          {
-            "alias": null,
-            "args": (v0/*: any*/),
-            "concreteType": "MovieConnection",
-            "kind": "LinkedField",
             "name": "trending",
             "plural": false,
             "selections": (v1/*: any*/),
@@ -265,6 +271,44 @@ return {
             "key": "TrendingMovies_trending",
             "kind": "LinkedHandle",
             "name": "trending"
+          },
+          {
+            "alias": null,
+            "args": (v0/*: any*/),
+            "concreteType": "MovieConnection",
+            "kind": "LinkedField",
+            "name": "popular",
+            "plural": false,
+            "selections": (v1/*: any*/),
+            "storageKey": "popular(first:20)"
+          },
+          {
+            "alias": null,
+            "args": (v0/*: any*/),
+            "filters": null,
+            "handle": "connection",
+            "key": "PopularMovies_data_movies_popular",
+            "kind": "LinkedHandle",
+            "name": "popular"
+          },
+          {
+            "alias": null,
+            "args": (v0/*: any*/),
+            "concreteType": "MovieConnection",
+            "kind": "LinkedField",
+            "name": "nowPlaying",
+            "plural": false,
+            "selections": (v1/*: any*/),
+            "storageKey": "nowPlaying(first:20)"
+          },
+          {
+            "alias": null,
+            "args": (v0/*: any*/),
+            "filters": null,
+            "handle": "connection",
+            "key": "NowPlayingMovies_data_movies_nowPlaying",
+            "kind": "LinkedHandle",
+            "name": "nowPlaying"
           },
           {
             "alias": null,
@@ -291,14 +335,14 @@ return {
     ]
   },
   "params": {
-    "cacheID": "d5c1889a6841af4a7df994ff743ceaa0",
+    "cacheID": "7043e599a18e612af37a5fb9ec55c3c5",
     "id": null,
     "metadata": {},
     "name": "HomeQuery",
     "operationKind": "query",
-    "text": "query HomeQuery {\n  ...NowPlayingMovies_data\n  ...TrendingMovies_data\n  ...TopRatedMovies_data\n}\n\nfragment MovieLinkContainer_movie on Movie {\n  id\n}\n\nfragment MovieListItem_movie on Movie {\n  ...MovieLinkContainer_movie\n  title\n  poster(size: W154)\n}\n\nfragment NowPlayingMovies_data on Query {\n  movies {\n    nowPlaying(first: 20) {\n      edges {\n        node {\n          ...MovieListItem_movie\n          id\n          __typename\n        }\n        cursor\n      }\n      pageInfo {\n        endCursor\n        hasNextPage\n      }\n    }\n  }\n}\n\nfragment TopRatedMovies_data on Query {\n  movies {\n    topRated(first: 20) {\n      edges {\n        node {\n          ...MovieListItem_movie\n          id\n          __typename\n        }\n        cursor\n      }\n      pageInfo {\n        endCursor\n        hasNextPage\n      }\n    }\n  }\n}\n\nfragment TrendingMovies_data on Query {\n  movies {\n    trending(first: 20) {\n      edges {\n        node {\n          ...MovieListItem_movie\n          id\n          __typename\n        }\n        cursor\n      }\n      pageInfo {\n        endCursor\n        hasNextPage\n      }\n    }\n  }\n}\n"
+    "text": "query HomeQuery {\n  ...TrendingMovies_data\n  ...PopularMovies_data\n  ...NowPlayingMovies_data\n  ...TopRatedMovies_data\n}\n\nfragment MovieLinkContainer_movie on Movie {\n  id\n}\n\nfragment MovieListItem_movie on Movie {\n  ...MovieLinkContainer_movie\n  title\n  poster(size: W154)\n}\n\nfragment NowPlayingMovies_data on Query {\n  movies {\n    nowPlaying(first: 20) {\n      edges {\n        node {\n          ...MovieListItem_movie\n          id\n          __typename\n        }\n        cursor\n      }\n      pageInfo {\n        endCursor\n        hasNextPage\n      }\n    }\n  }\n}\n\nfragment PopularMovies_data on Query {\n  movies {\n    popular(first: 20) {\n      edges {\n        node {\n          ...MovieListItem_movie\n          id\n          __typename\n        }\n        cursor\n      }\n      pageInfo {\n        endCursor\n        hasNextPage\n      }\n    }\n  }\n}\n\nfragment TopRatedMovies_data on Query {\n  movies {\n    topRated(first: 20) {\n      edges {\n        node {\n          ...MovieListItem_movie\n          id\n          __typename\n        }\n        cursor\n      }\n      pageInfo {\n        endCursor\n        hasNextPage\n      }\n    }\n  }\n}\n\nfragment TrendingMovies_data on Query {\n  movies {\n    trending(first: 20) {\n      edges {\n        node {\n          ...MovieListItem_movie\n          id\n          __typename\n        }\n        cursor\n      }\n      pageInfo {\n        endCursor\n        hasNextPage\n      }\n    }\n  }\n}\n"
   }
 };
 })();
-(node as any).hash = '9ec202effb4910bb9ed890c18870dc98';
+(node as any).hash = 'ea1aee231caef7e725f4d9a81ef48000';
 export default node;

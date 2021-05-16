@@ -11,6 +11,7 @@ import { graphql } from 'babel-plugin-relay/macro';
 
 import LoadingSuspense from 'LoadingSuspense';
 import NowPlayingMovies from './NowPlayingMovies';
+import PopularMovies from './PopularMovies';
 import TopRatedMovies from './TopRatedMovies';
 import TrendingMovies from './TrendingMovies';
 
@@ -22,8 +23,9 @@ function Home(props: LoadedProps) {
     const data = usePreloadedQuery(
         graphql`
             query HomeQuery {
-                ...NowPlayingMovies_data
                 ...TrendingMovies_data
+                ...PopularMovies_data
+                ...NowPlayingMovies_data
                 ...TopRatedMovies_data
             }
         `,
@@ -34,13 +36,17 @@ function Home(props: LoadedProps) {
         <Container maxW="container.lg" paddingBottom={8} paddingTop={8}>
             <VStack align="baseline" spacing={4}>
                 <Text fontSize="xl" fontWeight="bold">
-                    Now Playing Movies
-                </Text>
-                <NowPlayingMovies data={data} />
-                <Text fontSize="xl" fontWeight="bold">
                     Trending Movies
                 </Text>
                 <TrendingMovies data={data} />
+                <Text fontSize="xl" fontWeight="bold">
+                    Popular Movies
+                </Text>
+                <PopularMovies data={data} />
+                <Text fontSize="xl" fontWeight="bold">
+                    Now Playing Movies
+                </Text>
+                <NowPlayingMovies data={data} />
                 <Text fontSize="xl" fontWeight="bold">
                     Top Rated Movies
                 </Text>
