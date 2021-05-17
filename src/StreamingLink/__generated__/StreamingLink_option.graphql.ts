@@ -10,7 +10,7 @@ export type StreamingLink_option = {
     } | null;
     readonly bestOffering: {
         readonly links: {
-            readonly web: string;
+            readonly web: string | null;
         };
         readonly " $fragmentRefs": FragmentRefs<"useStreamingLinkTitle_offering" | "useStreamingLinkPriceDescription_offering">;
     };
