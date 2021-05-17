@@ -1,4 +1,4 @@
-import type { ShowStreamingLinks_show$key } from './__generated__/ShowStreamingLinks_show.graphql';
+import type { StreamingLinks_links$key } from './__generated__/StreamingLinks_links.graphql';
 
 import React from 'react';
 import { HStack, Link, Text } from '@chakra-ui/react';
@@ -9,25 +9,23 @@ import { graphql } from 'babel-plugin-relay/macro';
 import StreamingLink from 'StreamingLink';
 
 type Props = {
-    show: ShowStreamingLinks_show$key,
+    links: StreamingLinks_links$key,
 }
 
-function ShowStreamingLinks(props: Props) {
-    const show = useFragment(
+function StreamingLinks(props: Props) {
+    const links = useFragment(
         graphql`
-            fragment ShowStreamingLinks_show on TVShow {
-                streamingOptions {
-                    provider {
-                        __typename
-                    }
-                    ...StreamingLink_option
+            fragment StreamingLinks_links on StreamingOption @relay(plural: true) {
+                provider {
+                    __typename
                 }
+                ...StreamingLink_option
             }
         `,
-        props.show,
+        props.links,
     );
 
-    const options = show.streamingOptions?.filter(option => option.provider != null) ?? [];
+    const options = links.filter(option => option.provider != null) ?? [];
 
     if (options.length > 0) {
         return (
@@ -49,4 +47,4 @@ function ShowStreamingLinks(props: Props) {
     return null;
 }
 
-export default ShowStreamingLinks;
+export default StreamingLinks;

@@ -13,9 +13,9 @@ import { graphql } from 'babel-plugin-relay/macro';
 
 import Cast from 'Cast';
 import Crew from 'Crew';
+import StreamingLinks from 'StreamingLinks';
 import MovieHeader from './MovieHeader';
 import MovieParallaxBackdrop from './MovieParallaxBackdrop';
-import MovieStreamingLinks from './MovieStreamingLinks';
 import RecommendedMovieList from './RecommendedMovieList';
 import SimilarMovieList from './SimilarMovieList';
 
@@ -28,13 +28,19 @@ function DetailedMovieViewRoot(props: Props) {
         graphql`
             fragment DetailedMovieViewRoot_movie on Movie {    
                 ...MovieHeader_movie
-                ...MovieStreamingLinks_movie
+                streamingOptions {
+                    ...StreamingLinks_links
+                }
 
                 overview
 
                 credits {
-                    ...Cast_credits
-                    ...Crew_credits
+                    cast {
+                        ...Cast_credits
+                    }
+                    crew {
+                        ...Crew_credits
+                    }
                 }
 
                 ...MovieParallaxBackdrop_movie
@@ -50,12 +56,16 @@ function DetailedMovieViewRoot(props: Props) {
             <Container maxW="container.sm" paddingBottom={8} paddingTop={8}>
                 <VStack align="baseline" spacing={4}>
                     <MovieHeader movie={movie} />
-                    <MovieStreamingLinks movie={movie} />
+                    {
+                        movie.streamingOptions != null && (
+                            <StreamingLinks links={movie.streamingOptions} />
+                        )
+                    }
                     <Text>{movie.overview}</Text>
                     <Text fontSize="xl" fontWeight="bold">
                         Cast
                     </Text>
-                    <Cast credits={movie.credits} />
+                    <Cast credits={movie.credits.cast} />
                 </VStack>
             </Container>
             <MovieParallaxBackdrop movie={movie} />
@@ -66,7 +76,7 @@ function DetailedMovieViewRoot(props: Props) {
                     <Text fontSize="xl" fontWeight="bold">
                         Crew
                     </Text>
-                    <Crew credits={movie.credits}/>
+                    <Crew credits={movie.credits.crew}/>
 
                     <SimilarMovieList movie={movie} />
                 </VStack>

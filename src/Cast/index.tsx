@@ -15,10 +15,8 @@ type Props = {
 function Cast(props: Props) {
     const credits = useFragment(
         graphql`
-            fragment Cast_credits on CreditsWithPerson {        
-                cast {
-                    ...CastCredit_credit
-                }
+            fragment Cast_credits on CastCreditWithPerson @relay(plural: true) {        
+                ...CastCredit_credit
             }
         `,
         props.credits,
@@ -27,7 +25,7 @@ function Cast(props: Props) {
     return (
         <HorizonalScrollview align="start" maxW="100%" padding={2}>
             {
-                credits.cast.map((credit, index) => {
+                credits.map((credit, index) => {
                     return <CastCredit credit={credit} key={`cast_credit_${index}`} />;
                 })
             }

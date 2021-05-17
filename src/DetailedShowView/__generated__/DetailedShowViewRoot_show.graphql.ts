@@ -5,6 +5,9 @@
 import { ReaderFragment } from "relay-runtime";
 import { FragmentRefs } from "relay-runtime";
 export type DetailedShowViewRoot_show = {
+    readonly streamingOptions: ReadonlyArray<{
+        readonly " $fragmentRefs": FragmentRefs<"StreamingLinks_links">;
+    }> | null;
     readonly overview: string;
     readonly lastEpisodeToAir: {
         readonly " $fragmentRefs": FragmentRefs<"FeaturedEpisodeCard_episode">;
@@ -16,12 +19,17 @@ export type DetailedShowViewRoot_show = {
         readonly " $fragmentRefs": FragmentRefs<"FeaturedEpisodeCard_episode">;
     } | null;
     readonly credits: {
-        readonly " $fragmentRefs": FragmentRefs<"Cast_credits" | "Crew_credits">;
+        readonly cast: ReadonlyArray<{
+            readonly " $fragmentRefs": FragmentRefs<"Cast_credits">;
+        }>;
+        readonly crew: ReadonlyArray<{
+            readonly " $fragmentRefs": FragmentRefs<"Crew_credits">;
+        }>;
     };
     readonly seasons: ReadonlyArray<{
         readonly " $fragmentRefs": FragmentRefs<"SeasonRow_season">;
     }>;
-    readonly " $fragmentRefs": FragmentRefs<"ShowHeader_show" | "ShowStreamingLinks_show" | "ShowParallaxBackdrop_show">;
+    readonly " $fragmentRefs": FragmentRefs<"ShowHeader_show" | "ShowParallaxBackdrop_show">;
     readonly " $refType": "DetailedShowViewRoot_show";
 };
 export type DetailedShowViewRoot_show$data = DetailedShowViewRoot_show;
@@ -46,6 +54,22 @@ return {
   "metadata": null,
   "name": "DetailedShowViewRoot_show",
   "selections": [
+    {
+      "alias": null,
+      "args": null,
+      "concreteType": "StreamingOption",
+      "kind": "LinkedField",
+      "name": "streamingOptions",
+      "plural": true,
+      "selections": [
+        {
+          "args": null,
+          "kind": "FragmentSpread",
+          "name": "StreamingLinks_links"
+        }
+      ],
+      "storageKey": null
+    },
     {
       "alias": null,
       "args": null,
@@ -92,14 +116,36 @@ return {
       "plural": false,
       "selections": [
         {
+          "alias": null,
           "args": null,
-          "kind": "FragmentSpread",
-          "name": "Cast_credits"
+          "concreteType": "CastCreditWithPerson",
+          "kind": "LinkedField",
+          "name": "cast",
+          "plural": true,
+          "selections": [
+            {
+              "args": null,
+              "kind": "FragmentSpread",
+              "name": "Cast_credits"
+            }
+          ],
+          "storageKey": null
         },
         {
+          "alias": null,
           "args": null,
-          "kind": "FragmentSpread",
-          "name": "Crew_credits"
+          "concreteType": "CrewCreditWithPerson",
+          "kind": "LinkedField",
+          "name": "crew",
+          "plural": true,
+          "selections": [
+            {
+              "args": null,
+              "kind": "FragmentSpread",
+              "name": "Crew_credits"
+            }
+          ],
+          "storageKey": null
         }
       ],
       "storageKey": null
@@ -128,11 +174,6 @@ return {
     {
       "args": null,
       "kind": "FragmentSpread",
-      "name": "ShowStreamingLinks_show"
-    },
-    {
-      "args": null,
-      "kind": "FragmentSpread",
       "name": "ShowParallaxBackdrop_show"
     }
   ],
@@ -140,5 +181,5 @@ return {
   "abstractKey": null
 };
 })();
-(node as any).hash = 'bddd95452cf5f087e97f88c31af25f27';
+(node as any).hash = '9fb5421f32664f1e9d909b1baf1fd617';
 export default node;

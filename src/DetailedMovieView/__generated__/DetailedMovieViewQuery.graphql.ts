@@ -43,10 +43,8 @@ fragment CastCredit_credit on CastCreditWithPerson {
   character
 }
 
-fragment Cast_credits on CreditsWithPerson {
-  cast {
-    ...CastCredit_credit
-  }
+fragment Cast_credits on CastCreditWithPerson {
+  ...CastCredit_credit
 }
 
 fragment CrewCredit_credit on CrewCreditWithPerson {
@@ -59,20 +57,24 @@ fragment CrewCredit_credit on CrewCreditWithPerson {
   job
 }
 
-fragment Crew_credits on CreditsWithPerson {
-  crew {
-    ...CrewCredit_credit
-  }
+fragment Crew_credits on CrewCreditWithPerson {
+  ...CrewCredit_credit
 }
 
 fragment DetailedMovieViewRoot_movie on Movie {
   ...MovieHeader_movie
-  ...MovieStreamingLinks_movie
+  streamingOptions {
+    ...StreamingLinks_links
+  }
   overview
   credits {
     __typename
-    ...Cast_credits
-    ...Crew_credits
+    cast {
+      ...Cast_credits
+    }
+    crew {
+      ...Crew_credits
+    }
   }
   ...MovieParallaxBackdrop_movie
   ...SimilarMovieList_movie_42LEEo
@@ -117,15 +119,6 @@ fragment MovieRatingCircle_movie on Movie {
   rating
   numberOfRatings
   status
-}
-
-fragment MovieStreamingLinks_movie on Movie {
-  streamingOptions {
-    provider {
-      __typename
-    }
-    ...StreamingLink_option
-  }
 }
 
 fragment PersonLinkContainer_person on Person {
@@ -188,6 +181,13 @@ fragment StreamingLink_option on StreamingOption {
     ...useStreamingLinkTitle_offering
     ...useStreamingLinkPriceDescription_offering
   }
+}
+
+fragment StreamingLinks_links on StreamingOption {
+  provider {
+    __typename
+  }
+  ...StreamingLink_option
 }
 
 fragment useMovieReleaseDate_movie on Movie {
@@ -614,49 +614,42 @@ return {
                 "selections": [
                   (v5/*: any*/),
                   {
-                    "kind": "InlineFragment",
+                    "alias": null,
+                    "args": null,
+                    "concreteType": "CastCreditWithPerson",
+                    "kind": "LinkedField",
+                    "name": "cast",
+                    "plural": true,
                     "selections": [
+                      (v7/*: any*/),
                       {
                         "alias": null,
                         "args": null,
-                        "concreteType": "CastCreditWithPerson",
-                        "kind": "LinkedField",
-                        "name": "cast",
-                        "plural": true,
-                        "selections": [
-                          (v7/*: any*/),
-                          {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "character",
-                            "storageKey": null
-                          }
-                        ],
-                        "storageKey": null
-                      },
-                      {
-                        "alias": null,
-                        "args": null,
-                        "concreteType": "CrewCreditWithPerson",
-                        "kind": "LinkedField",
-                        "name": "crew",
-                        "plural": true,
-                        "selections": [
-                          (v7/*: any*/),
-                          {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "job",
-                            "storageKey": null
-                          }
-                        ],
+                        "kind": "ScalarField",
+                        "name": "character",
                         "storageKey": null
                       }
                     ],
-                    "type": "CreditsWithPerson",
-                    "abstractKey": null
+                    "storageKey": null
+                  },
+                  {
+                    "alias": null,
+                    "args": null,
+                    "concreteType": "CrewCreditWithPerson",
+                    "kind": "LinkedField",
+                    "name": "crew",
+                    "plural": true,
+                    "selections": [
+                      (v7/*: any*/),
+                      {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "job",
+                        "storageKey": null
+                      }
+                    ],
+                    "storageKey": null
                   }
                 ],
                 "storageKey": null
@@ -722,12 +715,12 @@ return {
     ]
   },
   "params": {
-    "cacheID": "35614d5f3feec2b43d21b9724c7a9486",
+    "cacheID": "e916e2914e7bc0ff53a5696861949497",
     "id": null,
     "metadata": {},
     "name": "DetailedMovieViewQuery",
     "operationKind": "query",
-    "text": "query DetailedMovieViewQuery(\n  $id: ID!\n) {\n  movies {\n    movie(id: $id) {\n      ...DetailedMovieViewRoot_movie\n      id\n    }\n  }\n}\n\nfragment CastCredit_credit on CastCreditWithPerson {\n  actor: value {\n    ...PersonLinkContainer_person\n    name\n    profilePicture(size: W185)\n    id\n  }\n  character\n}\n\nfragment Cast_credits on CreditsWithPerson {\n  cast {\n    ...CastCredit_credit\n  }\n}\n\nfragment CrewCredit_credit on CrewCreditWithPerson {\n  actor: value {\n    ...PersonLinkContainer_person\n    name\n    profilePicture(size: W185)\n    id\n  }\n  job\n}\n\nfragment Crew_credits on CreditsWithPerson {\n  crew {\n    ...CrewCredit_credit\n  }\n}\n\nfragment DetailedMovieViewRoot_movie on Movie {\n  ...MovieHeader_movie\n  ...MovieStreamingLinks_movie\n  overview\n  credits {\n    __typename\n    ...Cast_credits\n    ...Crew_credits\n  }\n  ...MovieParallaxBackdrop_movie\n  ...SimilarMovieList_movie_42LEEo\n  ...RecommendedMovieList_movie_42LEEo\n}\n\nfragment GenreTag_genre on Genre {\n  name\n}\n\nfragment MovieHeader_movie on Movie {\n  poster(size: W342)\n  title\n  ...MovieRatingCircle_movie\n  ...useMovieStatus_movie\n  ...useMovieReleaseDate_movie\n  runtime\n  tagline\n  genres {\n    ...GenreTag_genre\n  }\n  productionCompanies {\n    name\n  }\n}\n\nfragment MovieLinkContainer_movie on Movie {\n  id\n}\n\nfragment MovieListItem_movie on Movie {\n  ...MovieLinkContainer_movie\n  title\n  poster(size: W154)\n}\n\nfragment MovieParallaxBackdrop_movie on Movie {\n  backdrop(size: Original)\n}\n\nfragment MovieRatingCircle_movie on Movie {\n  rating\n  numberOfRatings\n  status\n}\n\nfragment MovieStreamingLinks_movie on Movie {\n  streamingOptions {\n    provider {\n      __typename\n    }\n    ...StreamingLink_option\n  }\n}\n\nfragment PersonLinkContainer_person on Person {\n  id\n}\n\nfragment RecommendedMovieList_movie_42LEEo on Movie {\n  recommendations(first: 20) {\n    totalCount\n    edges {\n      node {\n        ...MovieListItem_movie\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n  id\n}\n\nfragment SimilarMovieList_movie_42LEEo on Movie {\n  similar(first: 20) {\n    totalCount\n    edges {\n      node {\n        ...MovieListItem_movie\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n  id\n}\n\nfragment StreamingLinkToolTip_option on StreamingOption {\n  provider {\n    name\n  }\n}\n\nfragment StreamingLink_option on StreamingOption {\n  ...StreamingLinkToolTip_option\n  provider {\n    iconURL\n  }\n  bestOffering {\n    links {\n      web\n    }\n    ...useStreamingLinkTitle_offering\n    ...useStreamingLinkPriceDescription_offering\n  }\n}\n\nfragment useMovieReleaseDate_movie on Movie {\n  releaseDate\n}\n\nfragment useMovieStatus_movie on Movie {\n  status\n}\n\nfragment useStreamingLinkPriceDescription_offering on StreamingOptionOffering {\n  type\n  price {\n    amount\n    currency\n  }\n}\n\nfragment useStreamingLinkTitle_offering on StreamingOptionOffering {\n  type\n}\n"
+    "text": "query DetailedMovieViewQuery(\n  $id: ID!\n) {\n  movies {\n    movie(id: $id) {\n      ...DetailedMovieViewRoot_movie\n      id\n    }\n  }\n}\n\nfragment CastCredit_credit on CastCreditWithPerson {\n  actor: value {\n    ...PersonLinkContainer_person\n    name\n    profilePicture(size: W185)\n    id\n  }\n  character\n}\n\nfragment Cast_credits on CastCreditWithPerson {\n  ...CastCredit_credit\n}\n\nfragment CrewCredit_credit on CrewCreditWithPerson {\n  actor: value {\n    ...PersonLinkContainer_person\n    name\n    profilePicture(size: W185)\n    id\n  }\n  job\n}\n\nfragment Crew_credits on CrewCreditWithPerson {\n  ...CrewCredit_credit\n}\n\nfragment DetailedMovieViewRoot_movie on Movie {\n  ...MovieHeader_movie\n  streamingOptions {\n    ...StreamingLinks_links\n  }\n  overview\n  credits {\n    __typename\n    cast {\n      ...Cast_credits\n    }\n    crew {\n      ...Crew_credits\n    }\n  }\n  ...MovieParallaxBackdrop_movie\n  ...SimilarMovieList_movie_42LEEo\n  ...RecommendedMovieList_movie_42LEEo\n}\n\nfragment GenreTag_genre on Genre {\n  name\n}\n\nfragment MovieHeader_movie on Movie {\n  poster(size: W342)\n  title\n  ...MovieRatingCircle_movie\n  ...useMovieStatus_movie\n  ...useMovieReleaseDate_movie\n  runtime\n  tagline\n  genres {\n    ...GenreTag_genre\n  }\n  productionCompanies {\n    name\n  }\n}\n\nfragment MovieLinkContainer_movie on Movie {\n  id\n}\n\nfragment MovieListItem_movie on Movie {\n  ...MovieLinkContainer_movie\n  title\n  poster(size: W154)\n}\n\nfragment MovieParallaxBackdrop_movie on Movie {\n  backdrop(size: Original)\n}\n\nfragment MovieRatingCircle_movie on Movie {\n  rating\n  numberOfRatings\n  status\n}\n\nfragment PersonLinkContainer_person on Person {\n  id\n}\n\nfragment RecommendedMovieList_movie_42LEEo on Movie {\n  recommendations(first: 20) {\n    totalCount\n    edges {\n      node {\n        ...MovieListItem_movie\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n  id\n}\n\nfragment SimilarMovieList_movie_42LEEo on Movie {\n  similar(first: 20) {\n    totalCount\n    edges {\n      node {\n        ...MovieListItem_movie\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n  id\n}\n\nfragment StreamingLinkToolTip_option on StreamingOption {\n  provider {\n    name\n  }\n}\n\nfragment StreamingLink_option on StreamingOption {\n  ...StreamingLinkToolTip_option\n  provider {\n    iconURL\n  }\n  bestOffering {\n    links {\n      web\n    }\n    ...useStreamingLinkTitle_offering\n    ...useStreamingLinkPriceDescription_offering\n  }\n}\n\nfragment StreamingLinks_links on StreamingOption {\n  provider {\n    __typename\n  }\n  ...StreamingLink_option\n}\n\nfragment useMovieReleaseDate_movie on Movie {\n  releaseDate\n}\n\nfragment useMovieStatus_movie on Movie {\n  status\n}\n\nfragment useStreamingLinkPriceDescription_offering on StreamingOptionOffering {\n  type\n  price {\n    amount\n    currency\n  }\n}\n\nfragment useStreamingLinkTitle_offering on StreamingOptionOffering {\n  type\n}\n"
   }
 };
 })();

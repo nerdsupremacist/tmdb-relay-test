@@ -15,10 +15,8 @@ type Props = {
 function Crew(props: Props) {
     const credits = useFragment(
         graphql`
-            fragment Crew_credits on CreditsWithPerson {
-                crew {
-                    ...CrewCredit_credit
-                }
+            fragment Crew_credits on CrewCreditWithPerson @relay(plural: true) {
+                ...CrewCredit_credit
             }
         `,
         props.credits,
@@ -27,7 +25,7 @@ function Crew(props: Props) {
     return (
         <HorizonalScrollview align="start" maxW="100%" padding={2}>
             {
-                credits.crew.map((credit, index) => {
+                credits.map((credit, index) => {
                     return (
                         <CrewCredit credit={credit} key={`crew_credit_${index}`}/>
                     );

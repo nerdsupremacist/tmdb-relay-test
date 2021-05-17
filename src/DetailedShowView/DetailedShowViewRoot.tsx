@@ -9,11 +9,11 @@ import { graphql } from 'babel-plugin-relay/macro';
 import Cast from 'Cast';
 import Crew from 'Crew';
 import HorizonalScrollview from 'HorizonalScrollview';
+import StreamingLinks from 'StreamingLinks';
 import FeaturedEpisodeCard from './FeaturedEpisodeCard';
 import SeasonRow from './SeasonRow';
 import ShowHeader from './ShowHeader';
 import ShowParallaxBackdrop from './ShowParallaxBackdrop';
-import ShowStreamingLinks from './ShowStreamingLinks';
 
 type Props = {
     show: DetailedShowViewRoot_show$key,
@@ -24,7 +24,9 @@ function DetailedShowViewRoot(props: Props) {
         graphql`
             fragment DetailedShowViewRoot_show on TVShow {
                 ...ShowHeader_show
-                ...ShowStreamingLinks_show
+                streamingOptions {
+                    ...StreamingLinks_links
+                }
 
                 overview
                 
@@ -39,8 +41,12 @@ function DetailedShowViewRoot(props: Props) {
                 }
                 
                 credits {
-                    ...Cast_credits
-                    ...Crew_credits
+                    cast {
+                        ...Cast_credits
+                    }
+                    crew {
+                        ...Crew_credits
+                    }
                 }
                 
                 ...ShowParallaxBackdrop_show
@@ -58,7 +64,14 @@ function DetailedShowViewRoot(props: Props) {
             <Container maxW="container.sm" paddingBottom={8} paddingTop={8}>
                 <VStack align="baseline" spacing={4}>
                     <ShowHeader show={show} />
-                    <ShowStreamingLinks show={show} />
+                    {
+
+                    }
+                    {
+                        show.streamingOptions != null && (
+                            <StreamingLinks links={show.streamingOptions} />
+                        )
+                    }
                     <Text>{show.overview}</Text>
                     <HorizonalScrollview
                         align="start"
@@ -102,7 +115,7 @@ function DetailedShowViewRoot(props: Props) {
                     <Text fontSize="xl" fontWeight="bold">
                         Cast
                     </Text>
-                    <Cast credits={show.credits} />
+                    <Cast credits={show.credits.cast} />
                 </VStack>
             </Container>
             <ShowParallaxBackdrop show={show}/>
@@ -122,7 +135,7 @@ function DetailedShowViewRoot(props: Props) {
                     <Text fontSize="xl" fontWeight="bold">
                         Crew
                     </Text>
-                    <Crew credits={show.credits}/>
+                    <Crew credits={show.credits.crew}/>
                 </VStack>
             </Container>
         </div>
