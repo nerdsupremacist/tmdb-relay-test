@@ -53,6 +53,7 @@ function InfiniteScrollview<
         hasNext,
         isLoadingNext,
         loadNext,
+        loadingIndicatorRef,
         ...stackProps
     } = omit(props, 'hasPrevious', 'isLoadingPrevious', 'loadPrevious', 'refetch', 'loadMoreCount', 'disabledLoading');
 
@@ -89,7 +90,7 @@ function InfiniteScrollview<
         onLoadMore: loadMore,
     });
 
-    const loadingIndicatorRef = useMergeRefs(lastItemRef, props.loadingIndicatorRef);
+    const finalLoadingIndicatorRef = useMergeRefs(lastItemRef, loadingIndicatorRef);
 
     const heightRef = useRef<HTMLDivElement | null>(null);
     const clientHeight = heightRef.current?.clientHeight;
@@ -109,7 +110,7 @@ function InfiniteScrollview<
             <HorizonalScrollview ref={heightRef} {...stackProps}>
                 {children}
                 {enabled && (isLoadingNext || hasNext) && (
-                    <Center h={spinnerHeight} ref={loadingIndicatorRef}>
+                    <Center h={spinnerHeight} ref={finalLoadingIndicatorRef}>
                         <Spinner
                             color="blue.500"
                             emptyColor="gray.200"
