@@ -12,9 +12,9 @@ union AnyImage =
   | LogoSizeDetailImage
 
 enum BackdropSize {
+  Original
   W780
   W1280
-  Original
   W300
 }
 
@@ -127,7 +127,7 @@ type CrewCreditWithTVShow implements ICreditWithTVShow {
 scalar Date
 
 type Episode implements Node {
-  airDate: Date!
+  airDate: Date
   credits: EpisodeCreditsWithPerson!
   crew: [CrewCreditWithPerson!]!
   episodeNumber: Int!
@@ -170,13 +170,13 @@ type ExternalIDS {
 }
 
 enum ExternalSource {
-  Tvrage
-  Facebook
   Tvdb
-  Freebase
-  Imdb
-  Twitter
+  Facebook
+  Tvrage
   Instagram
+  Twitter
+  Imdb
+  Freebase
 }
 
 type FromExternalIds {
@@ -186,9 +186,9 @@ type FromExternalIds {
 }
 
 enum Gender {
+  Male
   Female
   UnknownOrNonBinary
-  Male
 }
 
 type Genre {
@@ -224,18 +224,18 @@ interface ICreditsWithPerson {
 
 type Keyword {
   id: Int!
-  movies(after: String, last: Int, before: String, first: Int): MovieConnection!
+  movies(after: String, last: Int, first: Int, before: String): MovieConnection!
   name: String!
 }
 
 enum LogoSize {
-  W300
+  W92
+  W185
   W154
   Original
   W45
   W500
-  W185
-  W92
+  W300
 }
 
 type LogoSizeDetailImage {
@@ -279,25 +279,25 @@ type Movie implements Node {
   productionCountries: [ProductionCountry!]!
   rating: Float!
   recommendations(
-    last: Int
-    before: String
     first: Int
+    before: String
     after: String
+    last: Int
   ): MovieConnection!
   releaseDate: Date
   revenue: Int
   reviews(
+    last: Int
     first: Int
     before: String
-    last: Int
     after: String
   ): ReviewConnection!
   runtime: Int!
   similar(
-    after: String
     first: Int
-    last: Int
     before: String
+    after: String
+    last: Int
   ): MovieConnection!
   spokenLanguages: [SpokenLanguage!]!
   status: Status!
@@ -337,42 +337,42 @@ type MovieOrTVOrPeopleEdge {
 type Movies {
   movie(id: ID!): Movie!
   nowPlaying(
-    last: Int
+    first: Int
     after: String
     before: String
-    first: Int
+    last: Int
   ): MovieConnection!
   popular(
-    after: String
-    last: Int
-    before: String
     first: Int
+    last: Int
+    after: String
+    before: String
   ): MovieConnection!
   search(
     first: Int
-    term: String!
+    last: Int
     after: String
     before: String
-    last: Int
+    term: String!
   ): MovieConnection!
   topRated(
+    first: Int
     last: Int
     after: String
     before: String
-    first: Int
   ): MovieConnection!
   trending(
-    before: String
-    after: String
     timeWindow: TimeWindow! = Day
-    first: Int
+    after: String
     last: Int
+    first: Int
+    before: String
   ): MovieConnection!
   upcoming(
+    first: Int
     last: Int
     after: String
     before: String
-    first: Int
   ): MovieConnection!
 }
 
@@ -399,23 +399,23 @@ type People {
   person(id: ID!): Person!
   popular(
     last: Int
-    before: String
-    after: String
     first: Int
+    after: String
+    before: String
   ): PersonConnection!
   search(
-    first: Int
     after: String
+    term: String!
+    first: Int
     last: Int
     before: String
-    term: String!
   ): PersonConnection!
   trending(
+    first: Int
     last: Int
-    before: String
     timeWindow: TimeWindow! = Day
     after: String
-    first: Int
+    before: String
   ): PersonConnection!
 }
 
@@ -441,10 +441,10 @@ type Person implements Node {
   popularityIndex: Float!
   profilePicture(size: ProfileSize!): URL
   taggedImages(
-    after: String
-    first: Int
-    last: Int
     before: String
+    first: Int
+    after: String
+    last: Int
   ): TaggedImageConnection!
   translations: [TranslationWithTranslatedPersonInfo!]!
 }
@@ -467,13 +467,13 @@ type PersonEdge {
 }
 
 enum PosterSize {
-  W500
   W780
+  W185
   W154
   W92
-  W342
-  W185
   Original
+  W500
+  W342
 }
 
 type PosterSizeDetailImage {
@@ -504,8 +504,8 @@ type ProductionCountry {
 }
 
 enum ProfileSize {
-  H632
   W185
+  H632
   Original
   W45
 }
@@ -531,17 +531,17 @@ type Query {
   ): Node
   people: People!
   search(
-    after: String
-    term: String!
-    before: String
     last: Int
+    before: String
+    term: String!
     first: Int
+    after: String
   ): MovieOrTVOrPeopleConnection!
   trending(
+    before: String
+    after: String
     last: Int
     timeWindow: TimeWindow! = Day
-    after: String
-    before: String
     first: Int
   ): MovieOrTVOrPeopleConnection!
   tv: TV!
@@ -591,19 +591,19 @@ type SpokenLanguage {
 }
 
 enum Status {
-  PostProduction
-  InProduction
   Cancelled
-  Released
   Rumored
+  Released
+  InProduction
   Planned
+  PostProduction
 }
 
 enum StillSize {
-  W92
-  W300
   W185
+  W92
   Original
+  W300
 }
 
 type StillSizeDetailImage {
@@ -620,16 +620,16 @@ type StreamingLinks {
   androidTV: URL
   fireTV: URL
   tvOS: URL
-  web: URL!
+  web: URL
 }
 
 enum StreamingMonetizationType {
-  Ads
-  Free
-  Cinema
   Rent
+  Cinema
   Buy
   Flatrate
+  Ads
+  Free
 }
 
 type StreamingOption {
@@ -655,50 +655,50 @@ type StreamingProvider {
 
 type TV {
   airingToday(
-    first: Int
-    last: Int
     before: String
     after: String
+    first: Int
+    last: Int
   ): TVShowConnection!
   episode(id: ID!): Episode!
   onTheAir(
     first: Int
+    after: String
     last: Int
     before: String
-    after: String
   ): TVShowConnection!
   popular(
-    before: String
-    last: Int
     first: Int
     after: String
+    last: Int
+    before: String
   ): TVShowConnection!
   search(
-    first: Int
-    last: Int
-    before: String
-    term: String!
     after: String
+    last: Int
+    term: String!
+    first: Int
+    before: String
   ): TVShowConnection!
   season(id: ID!): Season!
   show(id: ID!): TVShow!
   topRated(
-    first: Int
     last: Int
     before: String
+    first: Int
     after: String
   ): TVShowConnection!
   trending(
+    first: Int
     after: String
+    before: String
     timeWindow: TimeWindow! = Day
     last: Int
-    first: Int
-    before: String
   ): TVShowConnection!
   upcoming(
     before: String
-    first: Int
     after: String
+    first: Int
     last: Int
   ): TVShowConnection!
 }
@@ -709,6 +709,7 @@ type TVShow implements Node {
   createdBy: [ICreditWithPerson!]!
   credits: ICreditsWithPerson!
   episodeRunTime: [Int!]!
+  episodes: [Episode!]!
   externalIds: ExternalIDS!
   firstAirDate: Date
   genres: [Genre!]!
@@ -737,27 +738,28 @@ type TVShow implements Node {
   productionCompanies: [Network!]!
   rating: Float!
   recommendations(
-    after: String
-    before: String
     last: Int
+    before: String
     first: Int
+    after: String
   ): TVShowConnection!
   reviews(
-    first: Int
     after: String
+    first: Int
     last: Int
     before: String
   ): ReviewConnection!
   season(number: Int!): Season!
   seasons: [Season!]!
   similar(
-    after: String
     before: String
-    last: Int
     first: Int
+    after: String
+    last: Int
   ): TVShowConnection!
   status: String!
   streamingOptions: [StreamingOption!]
+  topRatedEpisode: Episode
   translations: [TranslationWithTranslatedMovieInfo!]!
   type: String!
   videos: [Video!]!
@@ -836,10 +838,10 @@ type Video {
 }
 
 enum VideoResolution {
-  Bluray
-  Theatre
-  Dvd
-  Sd
-  Hd
   UltraHd
+  Sd
+  Dvd
+  Bluray
+  Hd
+  Theatre
 }

@@ -41,7 +41,7 @@ function StreamingLink(props: Props) {
     const title = useStreamingLinkTitle(option.bestOffering);
     const priceDescription = useStreamingLinkPriceDescription(option.bestOffering);
 
-    if (option.provider == null) {
+    if (option.provider == null || option.bestOffering.links.web == null) {
         return null;
     }
 
