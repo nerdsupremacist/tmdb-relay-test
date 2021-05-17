@@ -5,6 +5,14 @@
 import { ReaderFragment } from "relay-runtime";
 import { FragmentRefs } from "relay-runtime";
 export type EpisodeHeader_episode = {
+    readonly previous: {
+        readonly name: string;
+        readonly " $fragmentRefs": FragmentRefs<"EpisodeLinkContainer_episode">;
+    } | null;
+    readonly next: {
+        readonly name: string;
+        readonly " $fragmentRefs": FragmentRefs<"EpisodeLinkContainer_episode">;
+    } | null;
     readonly images: {
         readonly stills: ReadonlyArray<{
             readonly aspectRatio: number;
@@ -39,13 +47,41 @@ var v0 = {
   "kind": "ScalarField",
   "name": "name",
   "storageKey": null
-};
+},
+v1 = [
+  (v0/*: any*/),
+  {
+    "args": null,
+    "kind": "FragmentSpread",
+    "name": "EpisodeLinkContainer_episode"
+  }
+];
 return {
   "argumentDefinitions": [],
   "kind": "Fragment",
   "metadata": null,
   "name": "EpisodeHeader_episode",
   "selections": [
+    {
+      "alias": null,
+      "args": null,
+      "concreteType": "Episode",
+      "kind": "LinkedField",
+      "name": "previous",
+      "plural": false,
+      "selections": (v1/*: any*/),
+      "storageKey": null
+    },
+    {
+      "alias": null,
+      "args": null,
+      "concreteType": "Episode",
+      "kind": "LinkedField",
+      "name": "next",
+      "plural": false,
+      "selections": (v1/*: any*/),
+      "storageKey": null
+    },
     {
       "alias": null,
       "args": null,
@@ -146,5 +182,5 @@ return {
   "abstractKey": null
 };
 })();
-(node as any).hash = 'a823bd5f0b1ab978ece4c02cbf2cea7d';
+(node as any).hash = 'a374a306debf6ffa7030616b3dfc398d';
 export default node;

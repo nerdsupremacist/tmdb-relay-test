@@ -1,9 +1,13 @@
 import type { EpisodeHeader_episode$key } from './__generated__/EpisodeHeader_episode.graphql';
 
 import React from 'react';
+import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 import {
+    Flex,
     HStack,
+    Icon,
     Image,
+    Spacer,
     Text,
     VStack,
     Wrap,
@@ -13,6 +17,7 @@ import {
 import { useFragment } from 'react-relay';
 import { graphql } from 'babel-plugin-relay/macro';
 
+import EpisodeLinkContainer from 'EpisodeLinkContainer';
 import GenreTag from 'GenreTag';
 import HorizonalScrollview from 'HorizonalScrollview';
 import ShowLinkContainer from 'ShowLinkContainer';
@@ -27,6 +32,16 @@ function EpisodeHeader(props: Props) {
     const episode = useFragment(
         graphql`
             fragment EpisodeHeader_episode on Episode {
+                previous {
+                    ...EpisodeLinkContainer_episode
+                    name
+                }
+
+                next {
+                    ...EpisodeLinkContainer_episode
+                    name
+                }
+
                 images {
                     stills {
                         aspectRatio
@@ -65,6 +80,33 @@ function EpisodeHeader(props: Props) {
 
     return (
         <>
+            <Flex w="100%">
+                {
+                    episode.previous != null && (
+                        <EpisodeLinkContainer episode={episode.previous}>
+                            <HStack>
+                                <Icon as={FaArrowLeft}/>
+                                <Text fontSize="sm" fontWeight="semibold">
+                                    {episode.previous.name}
+                                </Text>
+                            </HStack>
+                        </EpisodeLinkContainer>
+                    )
+                }
+                <Spacer />
+                {
+                    episode.next != null && (
+                        <EpisodeLinkContainer episode={episode.next}>
+                            <HStack>
+                                <Text fontSize="sm" fontWeight="semibold">
+                                    {episode.next.name}
+                                </Text>
+                                <Icon as={FaArrowRight}/>
+                            </HStack>
+                        </EpisodeLinkContainer>
+                    )
+                }
+            </Flex>
             <HorizonalScrollview
                 align="start"
                 padding={2}
