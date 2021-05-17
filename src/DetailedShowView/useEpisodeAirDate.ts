@@ -4,7 +4,7 @@ import { useFragment } from 'react-relay';
 import { graphql } from 'babel-plugin-relay/macro';
 
 function useEpisodeAirDate(episode: useEpisodeAirDate_episode$key) {
-    const decoded = useFragment(
+    const { airDate } = useFragment(
         graphql`
             fragment useEpisodeAirDate_episode on Episode {
                 airDate
@@ -13,7 +13,11 @@ function useEpisodeAirDate(episode: useEpisodeAirDate_episode$key) {
         episode,
     );
 
-    const date = new Date(decoded.airDate);
+    if (airDate == null) {
+        return null;
+    }
+
+    const date = new Date(airDate);
     return date.toLocaleDateString(
         undefined,
         {

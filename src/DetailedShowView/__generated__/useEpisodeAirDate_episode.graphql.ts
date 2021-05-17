@@ -5,7 +5,7 @@
 import { ReaderFragment } from "relay-runtime";
 import { FragmentRefs } from "relay-runtime";
 export type useEpisodeAirDate_episode = {
-    readonly airDate: string;
+    readonly airDate: string | null;
     readonly " $refType": "useEpisodeAirDate_episode";
 };
 export type useEpisodeAirDate_episode$data = useEpisodeAirDate_episode;

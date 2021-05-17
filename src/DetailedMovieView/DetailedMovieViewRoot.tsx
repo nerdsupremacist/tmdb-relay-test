@@ -52,6 +52,9 @@ function DetailedMovieViewRoot(props: Props) {
                     <MovieHeader movie={movie} />
                     <MovieStreamingLinks movie={movie} />
                     <Text>{movie.overview}</Text>
+                    <Text fontSize="xl" fontWeight="bold">
+                        Cast
+                    </Text>
                     <Cast credits={movie.credits} />
                 </VStack>
             </Container>
