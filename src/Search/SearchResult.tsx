@@ -88,4 +88,4 @@ function SearchResult(props: Props) {
     );
 }
 
-export default React.forwardRef(SearchResult);
+export default SearchResult;
