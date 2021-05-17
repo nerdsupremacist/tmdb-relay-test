@@ -6,7 +6,7 @@ import { Image, Text, VStack } from '@chakra-ui/react';
 import { useFragment } from 'react-relay';
 import { graphql } from 'babel-plugin-relay/macro';
 
-import ShowLinkContainer from 'ShowLinkContainer/ShowLinkContainer';
+import ShowLinkContainer from 'ShowLinkContainer';
 
 import { POSTER_PLACEHOLDER } from 'utils/constants';
 
