@@ -8,7 +8,7 @@ import { graphql } from 'babel-plugin-relay/macro';
 
 import EpisodeLinkContainer from 'EpisodeLinkContainer';
 
-import useEpisodeAirDate from './useEpisodeAirDate';
+import useEpisodeAirDate from 'useEpisodeAirDate';
 
 import { BACKDROP_PLACEHOLDER } from 'utils/constants';
 
@@ -36,6 +36,14 @@ function FeaturedEpisodeCard(props: Props) {
 
     const still = episode.still ?? BACKDROP_PLACEHOLDER;
     const airDate = useEpisodeAirDate(episode);
+    const formattedAirDate = airDate?.toLocaleDateString(
+        undefined,
+        {
+            day: 'numeric',
+            month: 'short',
+            year: 'numeric',
+        },
+    );
 
     return (
         <EpisodeLinkContainer episode={episode}>
@@ -57,7 +65,7 @@ function FeaturedEpisodeCard(props: Props) {
                             S{episode.seasonNumber} E{episode.episodeNumber}
                         </Text>
                         <Text fontSize="sm" fontWeight="medium">
-                            {airDate}
+                            {formattedAirDate}
                         </Text>
                     </HStack>
                     <Text fontSize="xs" fontWeight="light" noOfLines={4}>

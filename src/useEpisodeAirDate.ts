@@ -17,15 +17,7 @@ function useEpisodeAirDate(episode: useEpisodeAirDate_episode$key) {
         return null;
     }
 
-    const date = new Date(airDate);
-    return date.toLocaleDateString(
-        undefined,
-        {
-            day: 'numeric',
-            month: 'short',
-            year: 'numeric',
-        },
-    );
+    return new Date(airDate);
 }
 
 export default useEpisodeAirDate;
