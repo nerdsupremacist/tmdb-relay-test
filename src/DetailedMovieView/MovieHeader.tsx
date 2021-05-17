@@ -14,7 +14,7 @@ import {
 import { useFragment } from 'react-relay';
 import { graphql } from 'babel-plugin-relay/macro';
 
-import GenreTag from './GenreTag';
+import GenreTag from 'GenreTag';
 import MovieRatingCircle from './MovieRatingCircle';
 
 import useMovieReleaseDate from 'useMovieReleaseDate';
@@ -89,7 +89,7 @@ function MovieHeader(props: Props) {
                                 {movie.runtime} min
                             </Text>
                         }
-                        {movie.productionCompanies.length > 1 && <Text fontSize="md" fontWeight="light">
+                        {movie.productionCompanies.length > 0 && <Text fontSize="md" fontWeight="light">
                             {movie.productionCompanies[0].name}
                         </Text>}
                     </HStack>
