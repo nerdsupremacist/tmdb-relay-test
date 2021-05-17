@@ -7,7 +7,7 @@ import { useFragment } from 'react-relay';
 import { graphql } from 'babel-plugin-relay/macro';
 
 import MovieLinkContainer from 'MovieLinkContainer';
-import ShowLinkContainer from 'ShowLinkContainer/ShowLinkContainer';
+import ShowLinkContainer from 'ShowLinkContainer';
 
 import { POSTER_PLACEHOLDER } from 'utils/constants';
 
