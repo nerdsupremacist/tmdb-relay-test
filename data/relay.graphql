@@ -8,3 +8,8 @@ directive @connection(
 ) on FIELD
 
 directive @inline on FRAGMENT_DEFINITION
+
+directive @relay(
+  plural: Boolean
+  mask: Boolean = true
+) on FRAGMENT_DEFINITION | FRAGMENT_SPREAD
