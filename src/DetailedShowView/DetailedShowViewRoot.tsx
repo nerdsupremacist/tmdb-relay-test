@@ -11,9 +11,11 @@ import Crew from 'Crew';
 import HorizonalScrollview from 'HorizonalScrollview';
 import StreamingLinks from 'StreamingLinks';
 import FeaturedEpisodeCard from './FeaturedEpisodeCard';
+import RecommendedShows from './RecommendedShows';
 import SeasonRow from './SeasonRow';
 import ShowHeader from './ShowHeader';
 import ShowParallaxBackdrop from './ShowParallaxBackdrop';
+import SimilarShows from './SimilarShows';
 
 type Props = {
     show: DetailedShowViewRoot_show$key,
@@ -54,6 +56,9 @@ function DetailedShowViewRoot(props: Props) {
                 seasons {
                     ...SeasonRow_season
                 }
+
+                ...RecommendedShows_show
+                ...SimilarShows_show
             }
         `,
         props.show,
@@ -133,9 +138,19 @@ function DetailedShowViewRoot(props: Props) {
                     }
 
                     <Text fontSize="xl" fontWeight="bold">
+                        Recommended Shows
+                    </Text>
+                    <RecommendedShows show={show}/>
+
+                    <Text fontSize="xl" fontWeight="bold">
                         Crew
                     </Text>
                     <Crew credits={show.credits.crew}/>
+
+                    <Text fontSize="xl" fontWeight="bold">
+                        Similar Shows
+                    </Text>
+                    <SimilarShows show={show}/>
                 </VStack>
             </Container>
         </div>

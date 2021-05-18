@@ -8,6 +8,7 @@ export type ShowHeader_show = {
     readonly name: string;
     readonly poster: string | null;
     readonly episodeRunTime: ReadonlyArray<number>;
+    readonly numberOfSeasons: number;
     readonly genres: ReadonlyArray<{
         readonly " $fragmentRefs": FragmentRefs<"GenreTag_genre">;
     }>;
@@ -63,6 +64,13 @@ return {
     {
       "alias": null,
       "args": null,
+      "kind": "ScalarField",
+      "name": "numberOfSeasons",
+      "storageKey": null
+    },
+    {
+      "alias": null,
+      "args": null,
       "concreteType": "Genre",
       "kind": "LinkedField",
       "name": "genres",
@@ -103,5 +111,5 @@ return {
   "abstractKey": null
 };
 })();
-(node as any).hash = '26df75545030f7c4b2e36c0946b4d7f1';
+(node as any).hash = 'e229779ef01f1d585216c4536bd8533b';
 export default node;

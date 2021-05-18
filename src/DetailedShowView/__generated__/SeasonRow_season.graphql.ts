@@ -6,6 +6,7 @@ import { ReaderFragment } from "relay-runtime";
 import { FragmentRefs } from "relay-runtime";
 export type SeasonRow_season = {
     readonly seasonNumber: number;
+    readonly episodeCount: number;
     readonly episodes: ReadonlyArray<{
         readonly " $fragmentRefs": FragmentRefs<"SimpleEpisodeCard_episode">;
     }>;
@@ -35,6 +36,13 @@ const node: ReaderFragment = {
     {
       "alias": null,
       "args": null,
+      "kind": "ScalarField",
+      "name": "episodeCount",
+      "storageKey": null
+    },
+    {
+      "alias": null,
+      "args": null,
       "concreteType": "Episode",
       "kind": "LinkedField",
       "name": "episodes",
@@ -52,5 +60,5 @@ const node: ReaderFragment = {
   "type": "Season",
   "abstractKey": null
 };
-(node as any).hash = '9037dbbb6fe02d86099b132fca2c44a6';
+(node as any).hash = '4c5b614050ba591453bf4c621747b44f';
 export default node;

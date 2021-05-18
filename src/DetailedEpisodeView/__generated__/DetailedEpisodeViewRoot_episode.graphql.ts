@@ -9,6 +9,10 @@ export type DetailedEpisodeViewRoot_episode = {
         readonly " $fragmentRefs": FragmentRefs<"StreamingLinks_links">;
     }> | null;
     readonly overview: string;
+    readonly show: {
+        readonly name: string;
+        readonly " $fragmentRefs": FragmentRefs<"SimilarShows_show" | "RecommendedShows_show">;
+    };
     readonly credits: {
         readonly guestStars: ReadonlyArray<{
             readonly " $fragmentRefs": FragmentRefs<"Cast_credits">;
@@ -71,6 +75,34 @@ return {
     {
       "alias": null,
       "args": null,
+      "concreteType": "TVShow",
+      "kind": "LinkedField",
+      "name": "show",
+      "plural": false,
+      "selections": [
+        {
+          "alias": null,
+          "args": null,
+          "kind": "ScalarField",
+          "name": "name",
+          "storageKey": null
+        },
+        {
+          "args": null,
+          "kind": "FragmentSpread",
+          "name": "SimilarShows_show"
+        },
+        {
+          "args": null,
+          "kind": "FragmentSpread",
+          "name": "RecommendedShows_show"
+        }
+      ],
+      "storageKey": null
+    },
+    {
+      "alias": null,
+      "args": null,
       "concreteType": "EpisodeCreditsWithPerson",
       "kind": "LinkedField",
       "name": "credits",
@@ -125,5 +157,5 @@ return {
   "abstractKey": null
 };
 })();
-(node as any).hash = 'f1926dd98d21e679f94c134baa6b5c61';
+(node as any).hash = 'a6659d33206bf869034038f572eab165';
 export default node;

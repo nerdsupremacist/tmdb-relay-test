@@ -50,13 +50,13 @@ function FeaturedEpisodeCard(props: Props) {
             <VStack align="start">
                 <Image
                     borderRadius="lg"
-                    h="168px"
-                    maxW="300px"
-                    minW="300px"
+                    h="150px"
+                    maxW="265px"
+                    minW="265px"
                     shadow="xl"
                     src={still}
                 />
-                <VStack align="start" spacing="0px" w="300px">
+                <VStack align="start" spacing="0px" w="265px">
                     <Text fontSize="md" fontWeight="semibold">
                         {episode.name}
                     </Text>

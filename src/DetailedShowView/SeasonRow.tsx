@@ -1,7 +1,7 @@
 import type { SeasonRow_season$key } from './__generated__/SeasonRow_season.graphql';
 
 import React from 'react';
-import { Text } from '@chakra-ui/react';
+import { Flex, Spacer, Text } from '@chakra-ui/react';
 
 import { useFragment } from 'react-relay';
 import { graphql } from 'babel-plugin-relay/macro';
@@ -18,6 +18,7 @@ function SeasonRow(props: Props) {
         graphql`
             fragment SeasonRow_season on Season {
                 seasonNumber
+                episodeCount
                 episodes {
                     ...SimpleEpisodeCard_episode
                 }
@@ -26,11 +27,32 @@ function SeasonRow(props: Props) {
         props.season,
     );
 
+    if (season.episodeCount < 0) {
+        return null;
+    }
+
     return (
         <>
-            <Text fontSize="xl" fontWeight="bold">
-                Season {season.seasonNumber}
-            </Text>
+            <Flex align="center" w="100%">
+                <Text fontSize="xl" fontWeight="bold">
+                    Season {season.seasonNumber}
+                </Text>
+                <Spacer />
+                {
+                    season.episodeCount === 1 && (
+                        <Text fontSize="md" fontWeight="light">
+                            1 Episode
+                        </Text>
+                    )
+                }
+                {
+                    season.episodeCount > 1 && (
+                        <Text fontSize="md" fontWeight="light">
+                            {season.episodeCount} Episodes
+                        </Text>
+                    )
+                }
+            </Flex>
             <HorizonalScrollview
                 align="start"
                 padding={2}

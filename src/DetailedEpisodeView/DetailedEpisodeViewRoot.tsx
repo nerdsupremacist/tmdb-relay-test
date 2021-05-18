@@ -8,6 +8,8 @@ import { graphql } from 'babel-plugin-relay/macro';
 
 import Cast from 'Cast';
 import Crew from 'Crew';
+import RecommendedShows from 'DetailedShowView/RecommendedShows';
+import SimilarShows from 'DetailedShowView/SimilarShows';
 import StreamingLinks from 'StreamingLinks';
 import EpisodeHeader from './EpisodeHeader';
 
@@ -26,6 +28,12 @@ function DetailedEpisodeViewRoot(props: Props) {
                 }
 
                 overview
+
+                show {
+                    name
+                    ...SimilarShows_show
+                    ...RecommendedShows_show
+                }
 
                 credits {
                     guestStars {
@@ -77,6 +85,11 @@ function DetailedEpisodeViewRoot(props: Props) {
                         </>
                     )
                 }
+                
+                <Text fontSize="xl" fontWeight="bold">
+                    Similar to {episode.show.name}
+                </Text>
+                <SimilarShows show={episode.show} />
 
                 {
                     episode.credits.crew.length > 0 && (
@@ -88,6 +101,11 @@ function DetailedEpisodeViewRoot(props: Props) {
                         </>
                     )
                 }
+
+                <Text fontSize="xl" fontWeight="bold">
+                    Recommended
+                </Text>
+                <RecommendedShows show={episode.show} />
             </VStack>
         </Container>
     );

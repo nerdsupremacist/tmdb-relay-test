@@ -32,6 +32,9 @@ function ShowHeader(props: Props) {
                 name
                 poster(size: W342)
                 episodeRunTime
+                
+                numberOfSeasons
+                
                 ...useShowAirDate_show
                 genres {
                     ...GenreTag_genre
@@ -71,19 +74,40 @@ function ShowHeader(props: Props) {
                     </Text>
                     <HStack divider={<Text fontSize="xl" fontWeight="light" padding={1}>·</Text>}>
                         {
-                            airDateYear != null && <Text fontSize="md" fontWeight="light">
-                                {airDateYear}
-                            </Text>
+                            airDateYear != null && (
+                                <Text fontSize="md" fontWeight="light">
+                                    {airDateYear}
+                                </Text>
+                            )
                         }
                         {
-                            episodeRunTime != null && <Text fontSize="md" fontWeight="light">
-                                {episodeRunTime.toFixed(0)} min
-                            </Text>
+                            show.numberOfSeasons === 1 && (
+                                <Text fontSize="md" fontWeight="light">
+                                    1 Season
+                                </Text>
+                            )
+                        }
+
+                        {
+                            show.numberOfSeasons > 1 && (
+                                <Text fontSize="md" fontWeight="light">
+                                    {show.numberOfSeasons} Seasons
+                                </Text>
+                            )
                         }
                         {
-                            show.networks.length > 0 && <Text fontSize="md" fontWeight="light">
-                                {show.networks[0].name}
-                            </Text>
+                            episodeRunTime != null && (
+                                <Text fontSize="md" fontWeight="light">
+                                    {episodeRunTime.toFixed(0)} min
+                                </Text>
+                            )
+                        }
+                        {
+                            show.networks.length > 0 && (
+                                <Text fontSize="md" fontWeight="light">
+                                    {show.networks[0].name}
+                                </Text>
+                            )
                         }
                     </HStack>
                 </VStack>
