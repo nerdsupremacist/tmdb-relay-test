@@ -38,6 +38,7 @@ export interface Props<
     disabledLoading?: true,
     loadMoreCount?: number,
     scrollDirection?: 'horizontal' | 'vertical',
+    marginBeforeLoadingMore?: number,
     children: ReactNode[] | ReactNode | null,
     loadingIndicatorRef?: ForwardedRef<HTMLDivElement>,
 }
@@ -52,10 +53,13 @@ function InfiniteScrollview<
         children,
         hasNext,
         isLoadingNext,
+        marginBeforeLoadingMore,
         loadNext,
         loadingIndicatorRef,
         ...stackProps
     } = omit(props, 'hasPrevious', 'isLoadingPrevious', 'loadPrevious', 'refetch', 'loadMoreCount', 'disabledLoading');
+
+    const rootMargin = marginBeforeLoadingMore ?? 500;
 
     const [error, setError] = useState<Error | null>(null);
     const direction = scrollDirection ?? 'vertical';
@@ -88,6 +92,7 @@ function InfiniteScrollview<
         hasNextPage: hasNext,
         loading: isLoadingNext,
         onLoadMore: loadMore,
+        rootMargin: scrollDirection === 'horizontal' ? `0px ${rootMargin}px 0px 0px` : `0px 0px ${rootMargin}px 0px`,
     });
 
     const finalLoadingIndicatorRef = useMergeRefs(lastItemRef, loadingIndicatorRef);
