@@ -36,7 +36,7 @@ query RecommendedShowsPaginationQuery(
 
 fragment LinkContainer_node on Node {
   __isNode: __typename
-  ...useNodePath_node
+  ...routes_usePathLink_node
 }
 
 fragment RecommendedShows_show_1G22uz on TVShow {
@@ -63,7 +63,12 @@ fragment ShowListItem_show on TVShow {
   poster(size: W154)
 }
 
-fragment useNodePath_node on Node {
+fragment routes_usePathLink_node on Node {
+  __isNode: __typename
+  ...routes_usePathLinks_nodes
+}
+
+fragment routes_usePathLinks_nodes on Node {
   __isNode: __typename
   __typename
   id
@@ -300,12 +305,12 @@ return {
     ]
   },
   "params": {
-    "cacheID": "069f696cde77bf81ab3f5922364f0cc7",
+    "cacheID": "dcca8f747e6f4926116f644615971c0f",
     "id": null,
     "metadata": {},
     "name": "RecommendedShowsPaginationQuery",
     "operationKind": "query",
-    "text": "query RecommendedShowsPaginationQuery(\n  $count: Int! = 20\n  $cursor: String\n  $id: ID!\n) {\n  node(id: $id) {\n    __typename\n    ...RecommendedShows_show_1G22uz\n    id\n  }\n}\n\nfragment LinkContainer_node on Node {\n  __isNode: __typename\n  ...useNodePath_node\n}\n\nfragment RecommendedShows_show_1G22uz on TVShow {\n  recommendations(first: $count, after: $cursor) {\n    edges {\n      node {\n        ...ShowListItem_show\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n  id\n}\n\nfragment ShowListItem_show on TVShow {\n  ...LinkContainer_node\n  name\n  poster(size: W154)\n}\n\nfragment useNodePath_node on Node {\n  __isNode: __typename\n  __typename\n  id\n  ... on Movie {\n    __typename\n  }\n  ... on TVShow {\n    __typename\n  }\n  ... on Episode {\n    __typename\n  }\n  ... on Person {\n    __typename\n  }\n}\n"
+    "text": "query RecommendedShowsPaginationQuery(\n  $count: Int! = 20\n  $cursor: String\n  $id: ID!\n) {\n  node(id: $id) {\n    __typename\n    ...RecommendedShows_show_1G22uz\n    id\n  }\n}\n\nfragment LinkContainer_node on Node {\n  __isNode: __typename\n  ...routes_usePathLink_node\n}\n\nfragment RecommendedShows_show_1G22uz on TVShow {\n  recommendations(first: $count, after: $cursor) {\n    edges {\n      node {\n        ...ShowListItem_show\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n  id\n}\n\nfragment ShowListItem_show on TVShow {\n  ...LinkContainer_node\n  name\n  poster(size: W154)\n}\n\nfragment routes_usePathLink_node on Node {\n  __isNode: __typename\n  ...routes_usePathLinks_nodes\n}\n\nfragment routes_usePathLinks_nodes on Node {\n  __isNode: __typename\n  __typename\n  id\n  ... on Movie {\n    __typename\n  }\n  ... on TVShow {\n    __typename\n  }\n  ... on Episode {\n    __typename\n  }\n  ... on Person {\n    __typename\n  }\n}\n"
   }
 };
 })();

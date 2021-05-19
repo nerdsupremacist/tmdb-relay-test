@@ -1,15 +1,20 @@
 import type {
-    useNodePath_node,
-    useNodePath_node$key,
-} from './__generated__/useNodePath_node.graphql';
+    routes_usePathLink_node$key,
+} from './__generated__/routes_usePathLink_node.graphql';
 import type {
-    useNodePathLinks_nodes$key,
-} from './__generated__/useNodePathLinks_nodes.graphql';
+    routes_usePathLinks_nodes,
+    routes_usePathLinks_nodes$key,
+} from './__generated__/routes_usePathLinks_nodes.graphql';
+
+type ArrayElement<ArrayType extends readonly unknown[]> =
+  ArrayType extends readonly (infer ElementType)[] ? ElementType : never;
+
+type NodeType = ArrayElement<routes_usePathLinks_nodes>['__typename'];
 
 import { useFragment } from 'react-relay';
 import { graphql } from 'babel-plugin-relay/macro';
 
-export function path(type: useNodePath_node['__typename'], id?: string) {
+export function pathLink(type: NodeType, id?: string) {
     let path: string;
     switch (type) {
     case 'Movie':
@@ -32,36 +37,11 @@ export function path(type: useNodePath_node['__typename'], id?: string) {
     return `/${path}/${idOrPlaceholder}`;
 }
 
-export function useNodePath(node: useNodePath_node$key) {
+export function usePathLinks(nodes: routes_usePathLinks_nodes$key) {
     const decoded = useFragment(
         graphql`
-            fragment useNodePath_node on Node {
-                __typename
-                id
-                ... on Movie {
-                    __typename
-                }
-                ... on TVShow {
-                    __typename
-                }
-                ... on Episode {
-                    __typename
-                }
-                ... on Person {
-                    __typename
-                }
-            }
-        `,
-        node,
-    );
-
-    return path(decoded.__typename, decoded.id);
-}
-
-export function useNodePathLinks(nodes: useNodePathLinks_nodes$key) {
-    const decoded = useFragment(
-        graphql`
-            fragment useNodePathLinks_nodes on Node @relay(plural: true) {
+            fragment routes_usePathLinks_nodes on Node
+            @relay(plural: true) {
                 __typename
                 id
                 ... on Movie {
@@ -81,6 +61,18 @@ export function useNodePathLinks(nodes: useNodePathLinks_nodes$key) {
         nodes,
     );
 
-    return decoded.map(node => path(node.__typename, node.id));
+    return decoded.map(node => pathLink(node.__typename, node.id));
 }
 
+export function usePathLink(node: routes_usePathLink_node$key) {
+    const decoded = useFragment(
+        graphql`
+            fragment routes_usePathLink_node on Node {
+                ...routes_usePathLinks_nodes
+            }
+        `,
+        node,
+    );
+
+    return usePathLinks([decoded])[0];
+}

@@ -13,13 +13,13 @@ import DetailedShowView from 'DetailedShowView';
 import Home from 'Home';
 import Navbar from 'Navbar';
 
-import { path } from 'useNodePath';
+import { pathLink } from 'routes';
 
 function App() {
-    const moviePath = path('Movie');
-    const showPath = path('TVShow');
-    const episodePath = path('Episode');
-    const personPath = path('Person');
+    const moviePath = pathLink('Movie');
+    const showPath = pathLink('TVShow');
+    const episodePath = pathLink('Episode');
+    const personPath = pathLink('Person');
 
     return (
         <Router>

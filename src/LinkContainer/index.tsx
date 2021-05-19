@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import { useFragment } from 'react-relay';
 import { graphql } from 'babel-plugin-relay/macro';
 
-import { useNodePath } from 'useNodePath';
+import { usePathLink } from 'routes';
 
 type Props = {
     node: LinkContainer_node$key,
@@ -19,13 +19,13 @@ function LinkContainer(props: Props) {
     const node = useFragment(
         graphql`
             fragment LinkContainer_node on Node {
-                ...useNodePath_node
+                ...routes_usePathLink_node
             }
         `,
         props.node,
     );
 
-    const path = useNodePath(node);
+    const path = usePathLink(node);
     if (path == null) {
         return <>
             {props.children}

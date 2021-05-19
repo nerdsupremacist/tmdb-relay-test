@@ -4,15 +4,15 @@
 
 import { ReaderFragment } from "relay-runtime";
 import { FragmentRefs } from "relay-runtime";
-export type useNodePathLinks_nodes = ReadonlyArray<{
+export type routes_usePathLinks_nodes = ReadonlyArray<{
     readonly __typename: string;
     readonly id: string;
-    readonly " $refType": "useNodePathLinks_nodes";
+    readonly " $refType": "routes_usePathLinks_nodes";
 }>;
-export type useNodePathLinks_nodes$data = useNodePathLinks_nodes;
-export type useNodePathLinks_nodes$key = ReadonlyArray<{
-    readonly " $data"?: useNodePathLinks_nodes$data;
-    readonly " $fragmentRefs": FragmentRefs<"useNodePathLinks_nodes">;
+export type routes_usePathLinks_nodes$data = routes_usePathLinks_nodes;
+export type routes_usePathLinks_nodes$key = ReadonlyArray<{
+    readonly " $data"?: routes_usePathLinks_nodes$data;
+    readonly " $fragmentRefs": FragmentRefs<"routes_usePathLinks_nodes">;
 }>;
 
 
@@ -23,7 +23,7 @@ const node: ReaderFragment = {
   "metadata": {
     "plural": true
   },
-  "name": "useNodePathLinks_nodes",
+  "name": "routes_usePathLinks_nodes",
   "selections": [
     {
       "alias": null,
@@ -43,5 +43,5 @@ const node: ReaderFragment = {
   "type": "Node",
   "abstractKey": "__isNode"
 };
-(node as any).hash = 'eaa231d0cc041406db56932c759f41f2';
+(node as any).hash = '8b7732cfb2b54fc8694729799dac23e9';
 export default node;

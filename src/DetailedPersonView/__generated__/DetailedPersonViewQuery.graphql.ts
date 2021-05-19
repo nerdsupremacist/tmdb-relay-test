@@ -119,7 +119,7 @@ fragment KnownForList_person on Person {
 
 fragment LinkContainer_node on Node {
   __isNode: __typename
-  ...useNodePath_node
+  ...routes_usePathLink_node
 }
 
 fragment MovieListItem_movie on Movie {
@@ -159,11 +159,12 @@ fragment ShowListItem_show on TVShow {
   poster(size: W154)
 }
 
-fragment useIsActor_person on Person {
-  knownForDepartment
+fragment routes_usePathLink_node on Node {
+  __isNode: __typename
+  ...routes_usePathLinks_nodes
 }
 
-fragment useNodePath_node on Node {
+fragment routes_usePathLinks_nodes on Node {
   __isNode: __typename
   __typename
   id
@@ -179,6 +180,10 @@ fragment useNodePath_node on Node {
   ... on Person {
     __typename
   }
+}
+
+fragment useIsActor_person on Person {
+  knownForDepartment
 }
 */
 
@@ -564,12 +569,12 @@ return {
     ]
   },
   "params": {
-    "cacheID": "6abeeb40330764012e0634f20183704a",
+    "cacheID": "46589c200cdbe8762e5b4102325ba6ca",
     "id": null,
     "metadata": {},
     "name": "DetailedPersonViewQuery",
     "operationKind": "query",
-    "text": "query DetailedPersonViewQuery(\n  $id: ID!\n) {\n  people {\n    person(id: $id) {\n      ...DetailedPersonViewRoot_person\n      id\n    }\n  }\n}\n\nfragment AdditionalCredits_person on Person {\n  ...useIsActor_person\n  credits {\n    all {\n      cast {\n        ...CastCreditForPerson_credit\n      }\n      crew {\n        ...CrewCreditForPerson_credit\n      }\n    }\n  }\n}\n\nfragment CastCreditForPerson_credit on CastCreditWithMovieOrTV {\n  character\n  value {\n    __typename\n    ... on Movie {\n      ...LinkContainer_node\n      title\n      poster(size: W185)\n    }\n    ... on TVShow {\n      ...LinkContainer_node\n      name\n      poster(size: W185)\n    }\n    ... on Node {\n      __isNode: __typename\n      id\n    }\n  }\n}\n\nfragment CrewCreditForPerson_credit on CrewCreditWithMovieOrTV {\n  job\n  value {\n    __typename\n    ...LinkContainer_node\n    ... on Movie {\n      title\n      poster(size: W185)\n    }\n    ... on TVShow {\n      name\n      poster(size: W185)\n    }\n    ... on Node {\n      __isNode: __typename\n      id\n    }\n  }\n}\n\nfragment DetailedPersonViewRoot_person on Person {\n  ...PersonHeader_person\n  biography\n  ...KnownForList_person\n  ...AdditionalCredits_person\n}\n\nfragment KnownForList_person on Person {\n  ...useIsActor_person\n  knownFor {\n    __typename\n    ...MovieOrShowResult_result\n    ... on Node {\n      __isNode: __typename\n      id\n    }\n  }\n  credits {\n    all {\n      cast {\n        ...CastCreditForPerson_credit\n      }\n      crew {\n        ...CrewCreditForPerson_credit\n      }\n    }\n  }\n}\n\nfragment LinkContainer_node on Node {\n  __isNode: __typename\n  ...useNodePath_node\n}\n\nfragment MovieListItem_movie on Movie {\n  ...LinkContainer_node\n  title\n  poster(size: W154)\n}\n\nfragment MovieOrShowResult_result on MovieOrTV {\n  __isMovieOrTV: __typename\n  __typename\n  ... on Movie {\n    ...MovieListItem_movie\n  }\n  ... on TVShow {\n    ...ShowListItem_show\n  }\n}\n\nfragment PersonHeader_person on Person {\n  name\n  profilePicture(size: W185)\n  knownForDepartment\n  placeOfBirth\n  homepage\n  externalIds {\n    imdb\n    facebook\n    instagram\n    twitter\n  }\n}\n\nfragment ShowListItem_show on TVShow {\n  ...LinkContainer_node\n  name\n  poster(size: W154)\n}\n\nfragment useIsActor_person on Person {\n  knownForDepartment\n}\n\nfragment useNodePath_node on Node {\n  __isNode: __typename\n  __typename\n  id\n  ... on Movie {\n    __typename\n  }\n  ... on TVShow {\n    __typename\n  }\n  ... on Episode {\n    __typename\n  }\n  ... on Person {\n    __typename\n  }\n}\n"
+    "text": "query DetailedPersonViewQuery(\n  $id: ID!\n) {\n  people {\n    person(id: $id) {\n      ...DetailedPersonViewRoot_person\n      id\n    }\n  }\n}\n\nfragment AdditionalCredits_person on Person {\n  ...useIsActor_person\n  credits {\n    all {\n      cast {\n        ...CastCreditForPerson_credit\n      }\n      crew {\n        ...CrewCreditForPerson_credit\n      }\n    }\n  }\n}\n\nfragment CastCreditForPerson_credit on CastCreditWithMovieOrTV {\n  character\n  value {\n    __typename\n    ... on Movie {\n      ...LinkContainer_node\n      title\n      poster(size: W185)\n    }\n    ... on TVShow {\n      ...LinkContainer_node\n      name\n      poster(size: W185)\n    }\n    ... on Node {\n      __isNode: __typename\n      id\n    }\n  }\n}\n\nfragment CrewCreditForPerson_credit on CrewCreditWithMovieOrTV {\n  job\n  value {\n    __typename\n    ...LinkContainer_node\n    ... on Movie {\n      title\n      poster(size: W185)\n    }\n    ... on TVShow {\n      name\n      poster(size: W185)\n    }\n    ... on Node {\n      __isNode: __typename\n      id\n    }\n  }\n}\n\nfragment DetailedPersonViewRoot_person on Person {\n  ...PersonHeader_person\n  biography\n  ...KnownForList_person\n  ...AdditionalCredits_person\n}\n\nfragment KnownForList_person on Person {\n  ...useIsActor_person\n  knownFor {\n    __typename\n    ...MovieOrShowResult_result\n    ... on Node {\n      __isNode: __typename\n      id\n    }\n  }\n  credits {\n    all {\n      cast {\n        ...CastCreditForPerson_credit\n      }\n      crew {\n        ...CrewCreditForPerson_credit\n      }\n    }\n  }\n}\n\nfragment LinkContainer_node on Node {\n  __isNode: __typename\n  ...routes_usePathLink_node\n}\n\nfragment MovieListItem_movie on Movie {\n  ...LinkContainer_node\n  title\n  poster(size: W154)\n}\n\nfragment MovieOrShowResult_result on MovieOrTV {\n  __isMovieOrTV: __typename\n  __typename\n  ... on Movie {\n    ...MovieListItem_movie\n  }\n  ... on TVShow {\n    ...ShowListItem_show\n  }\n}\n\nfragment PersonHeader_person on Person {\n  name\n  profilePicture(size: W185)\n  knownForDepartment\n  placeOfBirth\n  homepage\n  externalIds {\n    imdb\n    facebook\n    instagram\n    twitter\n  }\n}\n\nfragment ShowListItem_show on TVShow {\n  ...LinkContainer_node\n  name\n  poster(size: W154)\n}\n\nfragment routes_usePathLink_node on Node {\n  __isNode: __typename\n  ...routes_usePathLinks_nodes\n}\n\nfragment routes_usePathLinks_nodes on Node {\n  __isNode: __typename\n  __typename\n  id\n  ... on Movie {\n    __typename\n  }\n  ... on TVShow {\n    __typename\n  }\n  ... on Episode {\n    __typename\n  }\n  ... on Person {\n    __typename\n  }\n}\n\nfragment useIsActor_person on Person {\n  knownForDepartment\n}\n"
   }
 };
 })();

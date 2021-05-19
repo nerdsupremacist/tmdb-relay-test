@@ -28,7 +28,7 @@ query TopRatedMoviesPaginationQuery(
 
 fragment LinkContainer_node on Node {
   __isNode: __typename
-  ...useNodePath_node
+  ...routes_usePathLink_node
 }
 
 fragment MovieListItem_movie on Movie {
@@ -56,7 +56,12 @@ fragment TopRatedMovies_data_1G22uz on Query {
   }
 }
 
-fragment useNodePath_node on Node {
+fragment routes_usePathLink_node on Node {
+  __isNode: __typename
+  ...routes_usePathLinks_nodes
+}
+
+fragment routes_usePathLinks_nodes on Node {
   __isNode: __typename
   __typename
   id
@@ -259,12 +264,12 @@ return {
     ]
   },
   "params": {
-    "cacheID": "20a4ce77c52e8e62721559b06232a9b0",
+    "cacheID": "38092419e73b62a9429f39c7ab2aa1d2",
     "id": null,
     "metadata": {},
     "name": "TopRatedMoviesPaginationQuery",
     "operationKind": "query",
-    "text": "query TopRatedMoviesPaginationQuery(\n  $count: Int! = 20\n  $cursor: String\n) {\n  ...TopRatedMovies_data_1G22uz\n}\n\nfragment LinkContainer_node on Node {\n  __isNode: __typename\n  ...useNodePath_node\n}\n\nfragment MovieListItem_movie on Movie {\n  ...LinkContainer_node\n  title\n  poster(size: W154)\n}\n\nfragment TopRatedMovies_data_1G22uz on Query {\n  movies {\n    topRated(first: $count, after: $cursor) {\n      edges {\n        node {\n          ...MovieListItem_movie\n          id\n          __typename\n        }\n        cursor\n      }\n      pageInfo {\n        endCursor\n        hasNextPage\n      }\n    }\n  }\n}\n\nfragment useNodePath_node on Node {\n  __isNode: __typename\n  __typename\n  id\n  ... on Movie {\n    __typename\n  }\n  ... on TVShow {\n    __typename\n  }\n  ... on Episode {\n    __typename\n  }\n  ... on Person {\n    __typename\n  }\n}\n"
+    "text": "query TopRatedMoviesPaginationQuery(\n  $count: Int! = 20\n  $cursor: String\n) {\n  ...TopRatedMovies_data_1G22uz\n}\n\nfragment LinkContainer_node on Node {\n  __isNode: __typename\n  ...routes_usePathLink_node\n}\n\nfragment MovieListItem_movie on Movie {\n  ...LinkContainer_node\n  title\n  poster(size: W154)\n}\n\nfragment TopRatedMovies_data_1G22uz on Query {\n  movies {\n    topRated(first: $count, after: $cursor) {\n      edges {\n        node {\n          ...MovieListItem_movie\n          id\n          __typename\n        }\n        cursor\n      }\n      pageInfo {\n        endCursor\n        hasNextPage\n      }\n    }\n  }\n}\n\nfragment routes_usePathLink_node on Node {\n  __isNode: __typename\n  ...routes_usePathLinks_nodes\n}\n\nfragment routes_usePathLinks_nodes on Node {\n  __isNode: __typename\n  __typename\n  id\n  ... on Movie {\n    __typename\n  }\n  ... on TVShow {\n    __typename\n  }\n  ... on Episode {\n    __typename\n  }\n  ... on Person {\n    __typename\n  }\n}\n"
   }
 };
 })();

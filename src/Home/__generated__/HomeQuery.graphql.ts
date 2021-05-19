@@ -29,7 +29,7 @@ query HomeQuery {
 
 fragment LinkContainer_node on Node {
   __isNode: __typename
-  ...useNodePath_node
+  ...routes_usePathLink_node
 }
 
 fragment MovieListItem_movie on Movie {
@@ -196,7 +196,12 @@ fragment TrendingShows_data_W6qZg on Query {
   }
 }
 
-fragment useNodePath_node on Node {
+fragment routes_usePathLink_node on Node {
+  __isNode: __typename
+  ...routes_usePathLinks_nodes
+}
+
+fragment routes_usePathLinks_nodes on Node {
   __isNode: __typename
   __typename
   id
@@ -601,12 +606,12 @@ return {
     ]
   },
   "params": {
-    "cacheID": "87203e0a2d5b9eb0a82174f9edcd7731",
+    "cacheID": "3c29bfc6eee340b3827fc6fa7d4049d0",
     "id": null,
     "metadata": {},
     "name": "HomeQuery",
     "operationKind": "query",
-    "text": "query HomeQuery {\n  ...TrendingMovies_data_W6qZg\n  ...TrendingShows_data_W6qZg\n  ...PopularMovies_data_W6qZg\n  ...PopularShows_data_W6qZg\n  ...NowPlayingMovies_data_W6qZg\n  ...ShowsOnTheAir_data_W6qZg\n  ...TopRatedMovies_data_W6qZg\n  ...TopRatedShows_data_W6qZg\n}\n\nfragment LinkContainer_node on Node {\n  __isNode: __typename\n  ...useNodePath_node\n}\n\nfragment MovieListItem_movie on Movie {\n  ...LinkContainer_node\n  title\n  poster(size: W154)\n}\n\nfragment NowPlayingMovies_data_W6qZg on Query {\n  movies {\n    nowPlaying(first: 7) {\n      edges {\n        node {\n          ...MovieListItem_movie\n          id\n          __typename\n        }\n        cursor\n      }\n      pageInfo {\n        endCursor\n        hasNextPage\n      }\n    }\n  }\n}\n\nfragment PopularMovies_data_W6qZg on Query {\n  movies {\n    popular(first: 7) {\n      edges {\n        node {\n          ...MovieListItem_movie\n          id\n          __typename\n        }\n        cursor\n      }\n      pageInfo {\n        endCursor\n        hasNextPage\n      }\n    }\n  }\n}\n\nfragment PopularShows_data_W6qZg on Query {\n  tv {\n    popular(first: 7) {\n      edges {\n        node {\n          ...ShowListItem_show\n          id\n          __typename\n        }\n        cursor\n      }\n      pageInfo {\n        endCursor\n        hasNextPage\n      }\n    }\n  }\n}\n\nfragment ShowListItem_show on TVShow {\n  ...LinkContainer_node\n  name\n  poster(size: W154)\n}\n\nfragment ShowsOnTheAir_data_W6qZg on Query {\n  tv {\n    onTheAir(first: 7) {\n      edges {\n        node {\n          ...ShowListItem_show\n          id\n          __typename\n        }\n        cursor\n      }\n      pageInfo {\n        endCursor\n        hasNextPage\n      }\n    }\n  }\n}\n\nfragment TopRatedMovies_data_W6qZg on Query {\n  movies {\n    topRated(first: 7) {\n      edges {\n        node {\n          ...MovieListItem_movie\n          id\n          __typename\n        }\n        cursor\n      }\n      pageInfo {\n        endCursor\n        hasNextPage\n      }\n    }\n  }\n}\n\nfragment TopRatedShows_data_W6qZg on Query {\n  tv {\n    topRated(first: 7) {\n      edges {\n        node {\n          ...ShowListItem_show\n          id\n          __typename\n        }\n        cursor\n      }\n      pageInfo {\n        endCursor\n        hasNextPage\n      }\n    }\n  }\n}\n\nfragment TrendingMovies_data_W6qZg on Query {\n  movies {\n    trending(first: 7) {\n      edges {\n        node {\n          ...MovieListItem_movie\n          id\n          __typename\n        }\n        cursor\n      }\n      pageInfo {\n        endCursor\n        hasNextPage\n      }\n    }\n  }\n}\n\nfragment TrendingShows_data_W6qZg on Query {\n  tv {\n    trending(first: 7) {\n      edges {\n        node {\n          ...ShowListItem_show\n          id\n          __typename\n        }\n        cursor\n      }\n      pageInfo {\n        endCursor\n        hasNextPage\n      }\n    }\n  }\n}\n\nfragment useNodePath_node on Node {\n  __isNode: __typename\n  __typename\n  id\n  ... on Movie {\n    __typename\n  }\n  ... on TVShow {\n    __typename\n  }\n  ... on Episode {\n    __typename\n  }\n  ... on Person {\n    __typename\n  }\n}\n"
+    "text": "query HomeQuery {\n  ...TrendingMovies_data_W6qZg\n  ...TrendingShows_data_W6qZg\n  ...PopularMovies_data_W6qZg\n  ...PopularShows_data_W6qZg\n  ...NowPlayingMovies_data_W6qZg\n  ...ShowsOnTheAir_data_W6qZg\n  ...TopRatedMovies_data_W6qZg\n  ...TopRatedShows_data_W6qZg\n}\n\nfragment LinkContainer_node on Node {\n  __isNode: __typename\n  ...routes_usePathLink_node\n}\n\nfragment MovieListItem_movie on Movie {\n  ...LinkContainer_node\n  title\n  poster(size: W154)\n}\n\nfragment NowPlayingMovies_data_W6qZg on Query {\n  movies {\n    nowPlaying(first: 7) {\n      edges {\n        node {\n          ...MovieListItem_movie\n          id\n          __typename\n        }\n        cursor\n      }\n      pageInfo {\n        endCursor\n        hasNextPage\n      }\n    }\n  }\n}\n\nfragment PopularMovies_data_W6qZg on Query {\n  movies {\n    popular(first: 7) {\n      edges {\n        node {\n          ...MovieListItem_movie\n          id\n          __typename\n        }\n        cursor\n      }\n      pageInfo {\n        endCursor\n        hasNextPage\n      }\n    }\n  }\n}\n\nfragment PopularShows_data_W6qZg on Query {\n  tv {\n    popular(first: 7) {\n      edges {\n        node {\n          ...ShowListItem_show\n          id\n          __typename\n        }\n        cursor\n      }\n      pageInfo {\n        endCursor\n        hasNextPage\n      }\n    }\n  }\n}\n\nfragment ShowListItem_show on TVShow {\n  ...LinkContainer_node\n  name\n  poster(size: W154)\n}\n\nfragment ShowsOnTheAir_data_W6qZg on Query {\n  tv {\n    onTheAir(first: 7) {\n      edges {\n        node {\n          ...ShowListItem_show\n          id\n          __typename\n        }\n        cursor\n      }\n      pageInfo {\n        endCursor\n        hasNextPage\n      }\n    }\n  }\n}\n\nfragment TopRatedMovies_data_W6qZg on Query {\n  movies {\n    topRated(first: 7) {\n      edges {\n        node {\n          ...MovieListItem_movie\n          id\n          __typename\n        }\n        cursor\n      }\n      pageInfo {\n        endCursor\n        hasNextPage\n      }\n    }\n  }\n}\n\nfragment TopRatedShows_data_W6qZg on Query {\n  tv {\n    topRated(first: 7) {\n      edges {\n        node {\n          ...ShowListItem_show\n          id\n          __typename\n        }\n        cursor\n      }\n      pageInfo {\n        endCursor\n        hasNextPage\n      }\n    }\n  }\n}\n\nfragment TrendingMovies_data_W6qZg on Query {\n  movies {\n    trending(first: 7) {\n      edges {\n        node {\n          ...MovieListItem_movie\n          id\n          __typename\n        }\n        cursor\n      }\n      pageInfo {\n        endCursor\n        hasNextPage\n      }\n    }\n  }\n}\n\nfragment TrendingShows_data_W6qZg on Query {\n  tv {\n    trending(first: 7) {\n      edges {\n        node {\n          ...ShowListItem_show\n          id\n          __typename\n        }\n        cursor\n      }\n      pageInfo {\n        endCursor\n        hasNextPage\n      }\n    }\n  }\n}\n\nfragment routes_usePathLink_node on Node {\n  __isNode: __typename\n  ...routes_usePathLinks_nodes\n}\n\nfragment routes_usePathLinks_nodes on Node {\n  __isNode: __typename\n  __typename\n  id\n  ... on Movie {\n    __typename\n  }\n  ... on TVShow {\n    __typename\n  }\n  ... on Episode {\n    __typename\n  }\n  ... on Person {\n    __typename\n  }\n}\n"
   }
 };
 })();

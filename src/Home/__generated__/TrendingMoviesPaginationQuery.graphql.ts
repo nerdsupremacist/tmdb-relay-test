@@ -28,7 +28,7 @@ query TrendingMoviesPaginationQuery(
 
 fragment LinkContainer_node on Node {
   __isNode: __typename
-  ...useNodePath_node
+  ...routes_usePathLink_node
 }
 
 fragment MovieListItem_movie on Movie {
@@ -56,7 +56,12 @@ fragment TrendingMovies_data_1G22uz on Query {
   }
 }
 
-fragment useNodePath_node on Node {
+fragment routes_usePathLink_node on Node {
+  __isNode: __typename
+  ...routes_usePathLinks_nodes
+}
+
+fragment routes_usePathLinks_nodes on Node {
   __isNode: __typename
   __typename
   id
@@ -259,12 +264,12 @@ return {
     ]
   },
   "params": {
-    "cacheID": "808f8b4e5f383de2f188b9c9f068bb6f",
+    "cacheID": "60902f3ae6f93af10fca0e4be2c8ce73",
     "id": null,
     "metadata": {},
     "name": "TrendingMoviesPaginationQuery",
     "operationKind": "query",
-    "text": "query TrendingMoviesPaginationQuery(\n  $count: Int! = 20\n  $cursor: String\n) {\n  ...TrendingMovies_data_1G22uz\n}\n\nfragment LinkContainer_node on Node {\n  __isNode: __typename\n  ...useNodePath_node\n}\n\nfragment MovieListItem_movie on Movie {\n  ...LinkContainer_node\n  title\n  poster(size: W154)\n}\n\nfragment TrendingMovies_data_1G22uz on Query {\n  movies {\n    trending(first: $count, after: $cursor) {\n      edges {\n        node {\n          ...MovieListItem_movie\n          id\n          __typename\n        }\n        cursor\n      }\n      pageInfo {\n        endCursor\n        hasNextPage\n      }\n    }\n  }\n}\n\nfragment useNodePath_node on Node {\n  __isNode: __typename\n  __typename\n  id\n  ... on Movie {\n    __typename\n  }\n  ... on TVShow {\n    __typename\n  }\n  ... on Episode {\n    __typename\n  }\n  ... on Person {\n    __typename\n  }\n}\n"
+    "text": "query TrendingMoviesPaginationQuery(\n  $count: Int! = 20\n  $cursor: String\n) {\n  ...TrendingMovies_data_1G22uz\n}\n\nfragment LinkContainer_node on Node {\n  __isNode: __typename\n  ...routes_usePathLink_node\n}\n\nfragment MovieListItem_movie on Movie {\n  ...LinkContainer_node\n  title\n  poster(size: W154)\n}\n\nfragment TrendingMovies_data_1G22uz on Query {\n  movies {\n    trending(first: $count, after: $cursor) {\n      edges {\n        node {\n          ...MovieListItem_movie\n          id\n          __typename\n        }\n        cursor\n      }\n      pageInfo {\n        endCursor\n        hasNextPage\n      }\n    }\n  }\n}\n\nfragment routes_usePathLink_node on Node {\n  __isNode: __typename\n  ...routes_usePathLinks_nodes\n}\n\nfragment routes_usePathLinks_nodes on Node {\n  __isNode: __typename\n  __typename\n  id\n  ... on Movie {\n    __typename\n  }\n  ... on TVShow {\n    __typename\n  }\n  ... on Episode {\n    __typename\n  }\n  ... on Person {\n    __typename\n  }\n}\n"
   }
 };
 })();

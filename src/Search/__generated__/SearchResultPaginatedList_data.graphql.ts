@@ -8,7 +8,7 @@ export type SearchResultPaginatedList_data = {
     readonly search: {
         readonly edges: ReadonlyArray<{
             readonly node: {
-                readonly " $fragmentRefs": FragmentRefs<"useNodePathLinks_nodes" | "SearchResult_result">;
+                readonly " $fragmentRefs": FragmentRefs<"routes_usePathLinks_nodes" | "SearchResult_result">;
             } | null;
         } | null> | null;
     };
@@ -109,7 +109,7 @@ return {
                 {
                   "args": null,
                   "kind": "FragmentSpread",
-                  "name": "useNodePathLinks_nodes"
+                  "name": "routes_usePathLinks_nodes"
                 },
                 {
                   "args": null,
@@ -162,5 +162,5 @@ return {
   "abstractKey": null
 };
 })();
-(node as any).hash = '33f765c8dc70906e11b4bbc91ae94da7';
+(node as any).hash = 'edd8525cfa095a621077bef9161787bc';
 export default node;

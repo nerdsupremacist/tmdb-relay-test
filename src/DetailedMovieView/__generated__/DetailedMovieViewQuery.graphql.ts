@@ -87,7 +87,7 @@ fragment GenreTag_genre on Genre {
 
 fragment LinkContainer_node on Node {
   __isNode: __typename
-  ...useNodePath_node
+  ...routes_usePathLink_node
 }
 
 fragment MovieHeader_movie on Movie {
@@ -187,15 +187,12 @@ fragment StreamingLinks_links on StreamingOption {
   ...StreamingLink_option
 }
 
-fragment useMovieReleaseDate_movie on Movie {
-  releaseDate
+fragment routes_usePathLink_node on Node {
+  __isNode: __typename
+  ...routes_usePathLinks_nodes
 }
 
-fragment useMovieStatus_movie on Movie {
-  status
-}
-
-fragment useNodePath_node on Node {
+fragment routes_usePathLinks_nodes on Node {
   __isNode: __typename
   __typename
   id
@@ -211,6 +208,14 @@ fragment useNodePath_node on Node {
   ... on Person {
     __typename
   }
+}
+
+fragment useMovieReleaseDate_movie on Movie {
+  releaseDate
+}
+
+fragment useMovieStatus_movie on Movie {
+  status
 }
 
 fragment useStreamingLinkPriceDescription_offering on StreamingOptionOffering {
@@ -742,12 +747,12 @@ return {
     ]
   },
   "params": {
-    "cacheID": "159272781b273482cc203d72954ddae8",
+    "cacheID": "473ff949bf97940a194b37ba6e4d1ecf",
     "id": null,
     "metadata": {},
     "name": "DetailedMovieViewQuery",
     "operationKind": "query",
-    "text": "query DetailedMovieViewQuery(\n  $id: ID!\n) {\n  movies {\n    movie(id: $id) {\n      ...DetailedMovieViewRoot_movie\n      id\n    }\n  }\n}\n\nfragment CastCredit_credit on CastCreditWithPerson {\n  actor: value {\n    ...LinkContainer_node\n    name\n    profilePicture(size: W185)\n    id\n  }\n  character\n}\n\nfragment Cast_credits on CastCreditWithPerson {\n  ...CastCredit_credit\n}\n\nfragment CrewCredit_credit on CrewCreditWithPerson {\n  actor: value {\n    ...LinkContainer_node\n    name\n    profilePicture(size: W185)\n    id\n  }\n  job\n}\n\nfragment Crew_credits on CrewCreditWithPerson {\n  ...CrewCredit_credit\n}\n\nfragment DetailedMovieViewRoot_movie on Movie {\n  ...MovieHeader_movie\n  streamingOptions {\n    ...StreamingLinks_links\n  }\n  overview\n  credits {\n    __typename\n    cast {\n      ...Cast_credits\n    }\n    crew {\n      ...Crew_credits\n    }\n  }\n  ...MovieParallaxBackdrop_movie\n  ...SimilarMovieList_movie_42LEEo\n  ...RecommendedMovieList_movie_42LEEo\n}\n\nfragment GenreTag_genre on Genre {\n  name\n}\n\nfragment LinkContainer_node on Node {\n  __isNode: __typename\n  ...useNodePath_node\n}\n\nfragment MovieHeader_movie on Movie {\n  poster(size: W342)\n  title\n  ...MovieRatingCircle_movie\n  ...useMovieStatus_movie\n  ...useMovieReleaseDate_movie\n  runtime\n  tagline\n  genres {\n    ...GenreTag_genre\n  }\n  productionCompanies {\n    name\n  }\n}\n\nfragment MovieListItem_movie on Movie {\n  ...LinkContainer_node\n  title\n  poster(size: W154)\n}\n\nfragment MovieParallaxBackdrop_movie on Movie {\n  backdrop(size: Original)\n}\n\nfragment MovieRatingCircle_movie on Movie {\n  rating\n  numberOfRatings\n  status\n}\n\nfragment RecommendedMovieList_movie_42LEEo on Movie {\n  recommendations(first: 20) {\n    totalCount\n    edges {\n      node {\n        ...MovieListItem_movie\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n  id\n}\n\nfragment SimilarMovieList_movie_42LEEo on Movie {\n  similar(first: 20) {\n    totalCount\n    edges {\n      node {\n        ...MovieListItem_movie\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n  id\n}\n\nfragment StreamingLinkToolTip_option on StreamingOption {\n  provider {\n    name\n  }\n}\n\nfragment StreamingLink_option on StreamingOption {\n  ...StreamingLinkToolTip_option\n  provider {\n    iconURL\n  }\n  bestOffering {\n    links {\n      web\n    }\n    ...useStreamingLinkTitle_offering\n    ...useStreamingLinkPriceDescription_offering\n  }\n}\n\nfragment StreamingLinks_links on StreamingOption {\n  provider {\n    __typename\n  }\n  ...StreamingLink_option\n}\n\nfragment useMovieReleaseDate_movie on Movie {\n  releaseDate\n}\n\nfragment useMovieStatus_movie on Movie {\n  status\n}\n\nfragment useNodePath_node on Node {\n  __isNode: __typename\n  __typename\n  id\n  ... on Movie {\n    __typename\n  }\n  ... on TVShow {\n    __typename\n  }\n  ... on Episode {\n    __typename\n  }\n  ... on Person {\n    __typename\n  }\n}\n\nfragment useStreamingLinkPriceDescription_offering on StreamingOptionOffering {\n  type\n  price {\n    amount\n    currency\n  }\n}\n\nfragment useStreamingLinkTitle_offering on StreamingOptionOffering {\n  type\n}\n"
+    "text": "query DetailedMovieViewQuery(\n  $id: ID!\n) {\n  movies {\n    movie(id: $id) {\n      ...DetailedMovieViewRoot_movie\n      id\n    }\n  }\n}\n\nfragment CastCredit_credit on CastCreditWithPerson {\n  actor: value {\n    ...LinkContainer_node\n    name\n    profilePicture(size: W185)\n    id\n  }\n  character\n}\n\nfragment Cast_credits on CastCreditWithPerson {\n  ...CastCredit_credit\n}\n\nfragment CrewCredit_credit on CrewCreditWithPerson {\n  actor: value {\n    ...LinkContainer_node\n    name\n    profilePicture(size: W185)\n    id\n  }\n  job\n}\n\nfragment Crew_credits on CrewCreditWithPerson {\n  ...CrewCredit_credit\n}\n\nfragment DetailedMovieViewRoot_movie on Movie {\n  ...MovieHeader_movie\n  streamingOptions {\n    ...StreamingLinks_links\n  }\n  overview\n  credits {\n    __typename\n    cast {\n      ...Cast_credits\n    }\n    crew {\n      ...Crew_credits\n    }\n  }\n  ...MovieParallaxBackdrop_movie\n  ...SimilarMovieList_movie_42LEEo\n  ...RecommendedMovieList_movie_42LEEo\n}\n\nfragment GenreTag_genre on Genre {\n  name\n}\n\nfragment LinkContainer_node on Node {\n  __isNode: __typename\n  ...routes_usePathLink_node\n}\n\nfragment MovieHeader_movie on Movie {\n  poster(size: W342)\n  title\n  ...MovieRatingCircle_movie\n  ...useMovieStatus_movie\n  ...useMovieReleaseDate_movie\n  runtime\n  tagline\n  genres {\n    ...GenreTag_genre\n  }\n  productionCompanies {\n    name\n  }\n}\n\nfragment MovieListItem_movie on Movie {\n  ...LinkContainer_node\n  title\n  poster(size: W154)\n}\n\nfragment MovieParallaxBackdrop_movie on Movie {\n  backdrop(size: Original)\n}\n\nfragment MovieRatingCircle_movie on Movie {\n  rating\n  numberOfRatings\n  status\n}\n\nfragment RecommendedMovieList_movie_42LEEo on Movie {\n  recommendations(first: 20) {\n    totalCount\n    edges {\n      node {\n        ...MovieListItem_movie\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n  id\n}\n\nfragment SimilarMovieList_movie_42LEEo on Movie {\n  similar(first: 20) {\n    totalCount\n    edges {\n      node {\n        ...MovieListItem_movie\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n  id\n}\n\nfragment StreamingLinkToolTip_option on StreamingOption {\n  provider {\n    name\n  }\n}\n\nfragment StreamingLink_option on StreamingOption {\n  ...StreamingLinkToolTip_option\n  provider {\n    iconURL\n  }\n  bestOffering {\n    links {\n      web\n    }\n    ...useStreamingLinkTitle_offering\n    ...useStreamingLinkPriceDescription_offering\n  }\n}\n\nfragment StreamingLinks_links on StreamingOption {\n  provider {\n    __typename\n  }\n  ...StreamingLink_option\n}\n\nfragment routes_usePathLink_node on Node {\n  __isNode: __typename\n  ...routes_usePathLinks_nodes\n}\n\nfragment routes_usePathLinks_nodes on Node {\n  __isNode: __typename\n  __typename\n  id\n  ... on Movie {\n    __typename\n  }\n  ... on TVShow {\n    __typename\n  }\n  ... on Episode {\n    __typename\n  }\n  ... on Person {\n    __typename\n  }\n}\n\nfragment useMovieReleaseDate_movie on Movie {\n  releaseDate\n}\n\nfragment useMovieStatus_movie on Movie {\n  status\n}\n\nfragment useStreamingLinkPriceDescription_offering on StreamingOptionOffering {\n  type\n  price {\n    amount\n    currency\n  }\n}\n\nfragment useStreamingLinkTitle_offering on StreamingOptionOffering {\n  type\n}\n"
   }
 };
 })();
