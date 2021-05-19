@@ -39,7 +39,9 @@ export function useOnClickOnResults() {
     return context.onClickOnResults ?? noop;
 }
 
-export function useLinks(generateLinks: () => Links, deps: DependencyList) {
+type LinksGenerator = (() => Links) | Links;
+
+export function useLinks(generateLinks: LinksGenerator, deps: DependencyList = []) {
     const { links } = useContext(SearchContext);
 
     useEffect(() => {
@@ -47,7 +49,18 @@ export function useLinks(generateLinks: () => Links, deps: DependencyList) {
             return;
         }
 
-        const newLinks = generateLinks();
+        let newLinks: Links;
+        switch (typeof generateLinks) {
+        case 'object':
+            newLinks = generateLinks;
+            break;
+        case 'function':
+            newLinks = generateLinks();
+            break;
+        default:
+            return;
+        }
+
         switch (typeof links) {
         case 'object':
             links.current = newLinks;

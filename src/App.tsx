@@ -13,13 +13,13 @@ import DetailedShowView from 'DetailedShowView';
 import Home from 'Home';
 import Navbar from 'Navbar';
 
-import { usePath } from 'useNodePath';
+import { path } from 'useNodePath';
 
 function App() {
-    const moviePath = usePath('Movie');
-    const showPath = usePath('TVShow');
-    const episodePath = usePath('Episode');
-    const personPath = usePath('Person');
+    const moviePath = path('Movie');
+    const showPath = path('TVShow');
+    const episodePath = path('Episode');
+    const personPath = path('Person');
 
     return (
         <Router>
@@ -29,7 +29,7 @@ function App() {
                     <Route exact path="/">
                         <Home />
                     </Route>
-                    
+
                     {
                         moviePath != null && (
                             <Route path={moviePath}>

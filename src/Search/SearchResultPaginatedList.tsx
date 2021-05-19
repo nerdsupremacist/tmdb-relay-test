@@ -12,6 +12,8 @@ import InfiniteScrollview from 'InfiniteScrollview';
 import { useLinks, useLoadingIndicatorRef, useSelected } from './SearchContext';
 import SearchResult from './SearchResult';
 
+import { useNodePathLinks } from 'useNodePath';
+
 type Props = {
     data: SearchResultPaginatedList_data$key,
 }
@@ -37,17 +39,8 @@ function SearchResultPaginatedList(props: Props) {
                 ) @connection(key: "SearchResultPaginatedList_data_search") {
                     edges {
                         node {
-                            __typename
+                            ...useNodePathLinks_nodes
                             ...SearchResult_result
-                            ... on Movie {
-                                id
-                            }
-                            ... on Person {
-                                id
-                            }
-                            ... on TVShow {
-                                id
-                            }
                         }
                     }
                 }
@@ -59,20 +52,8 @@ function SearchResultPaginatedList(props: Props) {
     const selected = useSelected();
     const nodes = data.search?.edges?.mapNotNull(edge => edge?.node) ?? [];
 
-    useLinks(() => {
-        return nodes.map(node => {
-            switch (node.__typename) {
-            case 'Movie':
-                return `/movie/${node.id}`;
-            case 'Person':
-                return `/person/${node.id}`;
-            case 'TVShow':
-                return `/show/${node.id}`;
-            default:
-                return null;
-            }
-        });
-    }, [nodes]);
+    const links = useNodePathLinks(nodes);
+    useLinks(links);
 
     const loadingIndicatorRef = useLoadingIndicatorRef();
 
