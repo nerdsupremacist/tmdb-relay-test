@@ -10,7 +10,7 @@ export type FeaturedEpisodeCard_episode = {
     readonly seasonNumber: number;
     readonly episodeNumber: number;
     readonly overview: string;
-    readonly " $fragmentRefs": FragmentRefs<"EpisodeLinkContainer_episode" | "useEpisodeAirDate_episode">;
+    readonly " $fragmentRefs": FragmentRefs<"LinkContainer_node" | "useEpisodeAirDate_episode">;
     readonly " $refType": "FeaturedEpisodeCard_episode";
 };
 export type FeaturedEpisodeCard_episode$data = FeaturedEpisodeCard_episode;
@@ -71,7 +71,7 @@ const node: ReaderFragment = {
     {
       "args": null,
       "kind": "FragmentSpread",
-      "name": "EpisodeLinkContainer_episode"
+      "name": "LinkContainer_node"
     },
     {
       "args": null,
@@ -82,5 +82,5 @@ const node: ReaderFragment = {
   "type": "Episode",
   "abstractKey": null
 };
-(node as any).hash = 'ac8efc8a4ea5f129a3cc2e1d881ef9af';
+(node as any).hash = 'e403b2a6fcd2c8e53ebcc4971226a85a';
 export default node;

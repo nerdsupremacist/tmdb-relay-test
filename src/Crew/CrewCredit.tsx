@@ -6,7 +6,7 @@ import { Avatar, Text, VStack } from '@chakra-ui/react';
 import { useFragment } from 'react-relay';
 import { graphql } from 'babel-plugin-relay/macro';
 
-import PersonLinkContainer from 'PersonLinkContainer';
+import LinkContainer from 'LinkContainer';
 
 type Props = {
     credit: CrewCredit_credit$key,
@@ -17,7 +17,7 @@ function CrewCredit(props: Props) {
         graphql`
             fragment CrewCredit_credit on CrewCreditWithPerson {
                 actor: value {
-                    ...PersonLinkContainer_person
+                    ...LinkContainer_node
                     name
                     profilePicture(size: W185)
                 }
@@ -31,7 +31,7 @@ function CrewCredit(props: Props) {
     const rest = profilePicture != null ? { src: profilePicture } : {};
 
     return (
-        <PersonLinkContainer person={credit.actor}>
+        <LinkContainer node={credit.actor}>
             <VStack w="120px">
                 <Avatar h="100px" name={credit.actor.name} shadow="xl" w="100px" {...rest} />
                 <VStack spacing={0}>
@@ -47,7 +47,7 @@ function CrewCredit(props: Props) {
                     </Text>
                 </VStack>
             </VStack>
-        </PersonLinkContainer>
+        </LinkContainer>
     );
 }
 

@@ -6,7 +6,7 @@ import { HStack, Image, Text, VStack } from '@chakra-ui/react';
 import { useFragment } from 'react-relay';
 import { graphql } from 'babel-plugin-relay/macro';
 
-import EpisodeLinkContainer from 'EpisodeLinkContainer';
+import LinkContainer from 'LinkContainer';
 
 import { BACKDROP_PLACEHOLDER } from 'utils/constants';
 
@@ -18,7 +18,7 @@ function SimpleEpisodeCard(props: Props) {
     const episode = useFragment(
         graphql`
             fragment SimpleEpisodeCard_episode on Episode {
-                ...EpisodeLinkContainer_episode
+                ...LinkContainer_node
                 still(size: W300)
 
                 episodeNumber
@@ -32,7 +32,7 @@ function SimpleEpisodeCard(props: Props) {
     const still = episode.still ?? BACKDROP_PLACEHOLDER;
 
     return (
-        <EpisodeLinkContainer episode={episode}>
+        <LinkContainer node={episode}>
             <VStack align="start">
                 <Image
                     borderRadius="lg"
@@ -56,7 +56,7 @@ function SimpleEpisodeCard(props: Props) {
                     </Text>
                 </VStack>
             </VStack>
-        </EpisodeLinkContainer>
+        </LinkContainer>
     );
 }
 

@@ -26,6 +26,11 @@ query PopularShowsPaginationQuery(
   ...PopularShows_data_1G22uz
 }
 
+fragment LinkContainer_node on Node {
+  __isNode: __typename
+  ...useNodePath_node
+}
+
 fragment PopularShows_data_1G22uz on Query {
   tv {
     popular(first: $count, after: $cursor) {
@@ -45,14 +50,28 @@ fragment PopularShows_data_1G22uz on Query {
   }
 }
 
-fragment ShowLinkContainer_show on TVShow {
-  id
-}
-
 fragment ShowListItem_show on TVShow {
-  ...ShowLinkContainer_show
+  ...LinkContainer_node
   name
   poster(size: W154)
+}
+
+fragment useNodePath_node on Node {
+  __isNode: __typename
+  __typename
+  id
+  ... on Movie {
+    __typename
+  }
+  ... on TVShow {
+    __typename
+  }
+  ... on Episode {
+    __typename
+  }
+  ... on Person {
+    __typename
+  }
 }
 */
 
@@ -150,13 +169,6 @@ return {
                         "alias": null,
                         "args": null,
                         "kind": "ScalarField",
-                        "name": "id",
-                        "storageKey": null
-                      },
-                      {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
                         "name": "name",
                         "storageKey": null
                       },
@@ -177,8 +189,19 @@ return {
                         "alias": null,
                         "args": null,
                         "kind": "ScalarField",
+                        "name": "id",
+                        "storageKey": null
+                      },
+                      {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
                         "name": "__typename",
                         "storageKey": null
+                      },
+                      {
+                        "kind": "TypeDiscriminator",
+                        "abstractKey": "__isNode"
                       }
                     ],
                     "storageKey": null
@@ -236,12 +259,12 @@ return {
     ]
   },
   "params": {
-    "cacheID": "6bfb69cfb648d48b56369423e4d23c4a",
+    "cacheID": "906f1c939c35637cd63a8fbdfd8f2c96",
     "id": null,
     "metadata": {},
     "name": "PopularShowsPaginationQuery",
     "operationKind": "query",
-    "text": "query PopularShowsPaginationQuery(\n  $count: Int! = 20\n  $cursor: String\n) {\n  ...PopularShows_data_1G22uz\n}\n\nfragment PopularShows_data_1G22uz on Query {\n  tv {\n    popular(first: $count, after: $cursor) {\n      edges {\n        node {\n          ...ShowListItem_show\n          id\n          __typename\n        }\n        cursor\n      }\n      pageInfo {\n        endCursor\n        hasNextPage\n      }\n    }\n  }\n}\n\nfragment ShowLinkContainer_show on TVShow {\n  id\n}\n\nfragment ShowListItem_show on TVShow {\n  ...ShowLinkContainer_show\n  name\n  poster(size: W154)\n}\n"
+    "text": "query PopularShowsPaginationQuery(\n  $count: Int! = 20\n  $cursor: String\n) {\n  ...PopularShows_data_1G22uz\n}\n\nfragment LinkContainer_node on Node {\n  __isNode: __typename\n  ...useNodePath_node\n}\n\nfragment PopularShows_data_1G22uz on Query {\n  tv {\n    popular(first: $count, after: $cursor) {\n      edges {\n        node {\n          ...ShowListItem_show\n          id\n          __typename\n        }\n        cursor\n      }\n      pageInfo {\n        endCursor\n        hasNextPage\n      }\n    }\n  }\n}\n\nfragment ShowListItem_show on TVShow {\n  ...LinkContainer_node\n  name\n  poster(size: W154)\n}\n\nfragment useNodePath_node on Node {\n  __isNode: __typename\n  __typename\n  id\n  ... on Movie {\n    __typename\n  }\n  ... on TVShow {\n    __typename\n  }\n  ... on Episode {\n    __typename\n  }\n  ... on Person {\n    __typename\n  }\n}\n"
   }
 };
 })();

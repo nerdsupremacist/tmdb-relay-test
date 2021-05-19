@@ -8,7 +8,7 @@ export type CastCredit_credit = {
     readonly actor: {
         readonly name: string;
         readonly profilePicture: string | null;
-        readonly " $fragmentRefs": FragmentRefs<"PersonLinkContainer_person">;
+        readonly " $fragmentRefs": FragmentRefs<"LinkContainer_node">;
     };
     readonly character: string;
     readonly " $refType": "CastCredit_credit";
@@ -58,7 +58,7 @@ const node: ReaderFragment = {
         {
           "args": null,
           "kind": "FragmentSpread",
-          "name": "PersonLinkContainer_person"
+          "name": "LinkContainer_node"
         }
       ],
       "storageKey": null
@@ -74,5 +74,5 @@ const node: ReaderFragment = {
   "type": "CastCreditWithPerson",
   "abstractKey": null
 };
-(node as any).hash = '344417bc13751e290a3ec750e52a42c7';
+(node as any).hash = '3c773db5eab700e956208a2f2dbd3690';
 export default node;

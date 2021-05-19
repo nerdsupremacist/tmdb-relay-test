@@ -6,7 +6,7 @@ import { HStack, Image, Text, VStack } from '@chakra-ui/react';
 import { useFragment } from 'react-relay';
 import { graphql } from 'babel-plugin-relay/macro';
 
-import EpisodeLinkContainer from 'EpisodeLinkContainer';
+import LinkContainer from 'LinkContainer';
 
 import useEpisodeAirDate from 'useEpisodeAirDate';
 
@@ -20,7 +20,7 @@ function FeaturedEpisodeCard(props: Props) {
     const episode = useFragment(
         graphql`
             fragment FeaturedEpisodeCard_episode on Episode {
-                ...EpisodeLinkContainer_episode
+                ...LinkContainer_node
                 name
                 still(size: W300)
                 
@@ -46,7 +46,7 @@ function FeaturedEpisodeCard(props: Props) {
     );
 
     return (
-        <EpisodeLinkContainer episode={episode}>
+        <LinkContainer node={episode}>
             <VStack align="start">
                 <Image
                     borderRadius="lg"
@@ -73,7 +73,7 @@ function FeaturedEpisodeCard(props: Props) {
                     </Text>
                 </VStack>
             </VStack>
-        </EpisodeLinkContainer>
+        </LinkContainer>
     );
 }
 

@@ -7,11 +7,11 @@ import { FragmentRefs } from "relay-runtime";
 export type EpisodeHeader_episode = {
     readonly previous: {
         readonly name: string;
-        readonly " $fragmentRefs": FragmentRefs<"EpisodeLinkContainer_episode">;
+        readonly " $fragmentRefs": FragmentRefs<"LinkContainer_node">;
     } | null;
     readonly next: {
         readonly name: string;
-        readonly " $fragmentRefs": FragmentRefs<"EpisodeLinkContainer_episode">;
+        readonly " $fragmentRefs": FragmentRefs<"LinkContainer_node">;
     } | null;
     readonly images: {
         readonly stills: ReadonlyArray<{
@@ -27,7 +27,7 @@ export type EpisodeHeader_episode = {
         readonly genres: ReadonlyArray<{
             readonly " $fragmentRefs": FragmentRefs<"GenreTag_genre">;
         }>;
-        readonly " $fragmentRefs": FragmentRefs<"ShowLinkContainer_show">;
+        readonly " $fragmentRefs": FragmentRefs<"LinkContainer_node">;
     };
     readonly " $fragmentRefs": FragmentRefs<"useEpisodeAirDate_episode">;
     readonly " $refType": "EpisodeHeader_episode";
@@ -48,13 +48,14 @@ var v0 = {
   "name": "name",
   "storageKey": null
 },
-v1 = [
+v1 = {
+  "args": null,
+  "kind": "FragmentSpread",
+  "name": "LinkContainer_node"
+},
+v2 = [
   (v0/*: any*/),
-  {
-    "args": null,
-    "kind": "FragmentSpread",
-    "name": "EpisodeLinkContainer_episode"
-  }
+  (v1/*: any*/)
 ];
 return {
   "argumentDefinitions": [],
@@ -69,7 +70,7 @@ return {
       "kind": "LinkedField",
       "name": "previous",
       "plural": false,
-      "selections": (v1/*: any*/),
+      "selections": (v2/*: any*/),
       "storageKey": null
     },
     {
@@ -79,7 +80,7 @@ return {
       "kind": "LinkedField",
       "name": "next",
       "plural": false,
-      "selections": (v1/*: any*/),
+      "selections": (v2/*: any*/),
       "storageKey": null
     },
     {
@@ -164,11 +165,7 @@ return {
           ],
           "storageKey": null
         },
-        {
-          "args": null,
-          "kind": "FragmentSpread",
-          "name": "ShowLinkContainer_show"
-        }
+        (v1/*: any*/)
       ],
       "storageKey": null
     },
@@ -182,5 +179,5 @@ return {
   "abstractKey": null
 };
 })();
-(node as any).hash = 'a374a306debf6ffa7030616b3dfc398d';
+(node as any).hash = '00a85caead672e3503084eae9417af88';
 export default node;

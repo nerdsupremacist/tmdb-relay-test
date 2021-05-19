@@ -7,7 +7,7 @@ import { FragmentRefs } from "relay-runtime";
 export type ShowListItem_show = {
     readonly name: string;
     readonly poster: string | null;
-    readonly " $fragmentRefs": FragmentRefs<"ShowLinkContainer_show">;
+    readonly " $fragmentRefs": FragmentRefs<"LinkContainer_node">;
     readonly " $refType": "ShowListItem_show";
 };
 export type ShowListItem_show$data = ShowListItem_show;
@@ -47,11 +47,11 @@ const node: ReaderFragment = {
     {
       "args": null,
       "kind": "FragmentSpread",
-      "name": "ShowLinkContainer_show"
+      "name": "LinkContainer_node"
     }
   ],
   "type": "TVShow",
   "abstractKey": null
 };
-(node as any).hash = '3e64b093646aa11ee0255627651a0427';
+(node as any).hash = '5278f789ce498d66fc35ad1fa7aacfd9';
 export default node;

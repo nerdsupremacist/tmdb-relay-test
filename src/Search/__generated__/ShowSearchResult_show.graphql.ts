@@ -8,7 +8,7 @@ export type ShowSearchResult_show = {
     readonly name: string;
     readonly overview: string;
     readonly poster: string | null;
-    readonly " $fragmentRefs": FragmentRefs<"ShowLinkContainer_show">;
+    readonly " $fragmentRefs": FragmentRefs<"LinkContainer_node">;
     readonly " $refType": "ShowSearchResult_show";
 };
 export type ShowSearchResult_show$data = ShowSearchResult_show;
@@ -55,11 +55,11 @@ const node: ReaderFragment = {
     {
       "args": null,
       "kind": "FragmentSpread",
-      "name": "ShowLinkContainer_show"
+      "name": "LinkContainer_node"
     }
   ],
   "type": "TVShow",
   "abstractKey": null
 };
-(node as any).hash = 'b4a61946bf1a9a07c36c086d4ae0e196';
+(node as any).hash = '64539c3d0b1da28a19be905d9c6b7d17';
 export default node;

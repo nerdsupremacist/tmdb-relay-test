@@ -13,7 +13,14 @@ import DetailedShowView from 'DetailedShowView';
 import Home from 'Home';
 import Navbar from 'Navbar';
 
+import { usePath } from 'useNodePath';
+
 function App() {
+    const moviePath = usePath('Movie');
+    const showPath = usePath('TVShow');
+    const episodePath = usePath('Episode');
+    const personPath = usePath('Person');
+
     return (
         <Router>
             <div>
@@ -22,18 +29,36 @@ function App() {
                     <Route exact path="/">
                         <Home />
                     </Route>
-                    <Route path="/movie/:id">
-                        <DetailedMovieView />
-                    </Route>
-                    <Route path="/person/:id">
-                        <DetailedPersonView />
-                    </Route>
-                    <Route path="/show/:id">
-                        <DetailedShowView />
-                    </Route>
-                    <Route path="/episode/:id">
-                        <DetailedEpisodeView />
-                    </Route>
+                    
+                    {
+                        moviePath != null && (
+                            <Route path={moviePath}>
+                                <DetailedMovieView />
+                            </Route>
+                        )
+                    }
+                    {
+                        showPath != null && (
+                            <Route path={showPath}>
+                                <DetailedShowView />
+                            </Route>
+                        )
+                    }
+                    {
+                        episodePath != null && (
+                            <Route path={episodePath}>
+                                <DetailedEpisodeView />
+                            </Route>
+                        )
+                    }
+                    {
+                        personPath != null && (
+                            <Route path={personPath}>
+                                <DetailedPersonView />
+                            </Route>
+                        )
+                    }
+                    
                     <Route path="*">
                         <h1>Not found!</h1>
                     </Route>

@@ -7,7 +7,7 @@ import { FragmentRefs } from "relay-runtime";
 export type PersonSearchResult_person = {
     readonly name: string;
     readonly profilePicture: string | null;
-    readonly " $fragmentRefs": FragmentRefs<"PersonLinkContainer_person" | "useKnownForDescription_person">;
+    readonly " $fragmentRefs": FragmentRefs<"LinkContainer_node" | "useKnownForDescription_person">;
     readonly " $refType": "PersonSearchResult_person";
 };
 export type PersonSearchResult_person$data = PersonSearchResult_person;
@@ -47,7 +47,7 @@ const node: ReaderFragment = {
     {
       "args": null,
       "kind": "FragmentSpread",
-      "name": "PersonLinkContainer_person"
+      "name": "LinkContainer_node"
     },
     {
       "args": null,
@@ -58,5 +58,5 @@ const node: ReaderFragment = {
   "type": "Person",
   "abstractKey": null
 };
-(node as any).hash = '0d9ada3010630636d11dc7728569bc9f';
+(node as any).hash = '6cd2695f6375fd5faf44f300198e26c6';
 export default node;

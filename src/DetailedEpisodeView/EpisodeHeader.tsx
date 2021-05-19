@@ -17,10 +17,9 @@ import {
 import { useFragment } from 'react-relay';
 import { graphql } from 'babel-plugin-relay/macro';
 
-import EpisodeLinkContainer from 'EpisodeLinkContainer';
 import GenreTag from 'GenreTag';
 import HorizonalScrollview from 'HorizonalScrollview';
-import ShowLinkContainer from 'ShowLinkContainer';
+import LinkContainer from 'LinkContainer';
 
 import useEpisodeAirDate from 'useEpisodeAirDate';
 
@@ -33,12 +32,12 @@ function EpisodeHeader(props: Props) {
         graphql`
             fragment EpisodeHeader_episode on Episode {
                 previous {
-                    ...EpisodeLinkContainer_episode
+                    ...LinkContainer_node
                     name
                 }
 
                 next {
-                    ...EpisodeLinkContainer_episode
+                    ...LinkContainer_node
                     name
                 }
 
@@ -57,7 +56,7 @@ function EpisodeHeader(props: Props) {
                 ...useEpisodeAirDate_episode
 
                 show {
-                    ...ShowLinkContainer_show
+                    ...LinkContainer_node
                     name
                     genres {
                         ...GenreTag_genre
@@ -83,27 +82,27 @@ function EpisodeHeader(props: Props) {
             <Flex w="100%">
                 {
                     episode.previous != null && (
-                        <EpisodeLinkContainer episode={episode.previous}>
+                        <LinkContainer node={episode.previous}>
                             <HStack>
                                 <Icon as={FaArrowLeft}/>
                                 <Text fontSize="sm" fontWeight="semibold">
                                     {episode.previous.name}
                                 </Text>
                             </HStack>
-                        </EpisodeLinkContainer>
+                        </LinkContainer>
                     )
                 }
                 <Spacer />
                 {
                     episode.next != null && (
-                        <EpisodeLinkContainer episode={episode.next}>
+                        <LinkContainer node={episode.next}>
                             <HStack>
                                 <Text fontSize="sm" fontWeight="semibold">
                                     {episode.next.name}
                                 </Text>
                                 <Icon as={FaArrowRight}/>
                             </HStack>
-                        </EpisodeLinkContainer>
+                        </LinkContainer>
                     )
                 }
             </Flex>
@@ -132,11 +131,11 @@ function EpisodeHeader(props: Props) {
             </HorizonalScrollview>
             <VStack align="baseline" spacing={2}>
                 <VStack align="baseline" spacing={0}>
-                    <ShowLinkContainer show={episode.show}>
+                    <LinkContainer node={episode.show}>
                         <Text fontSize="sm" fontWeight="semibold">
                             {episode.show.name}
                         </Text>
-                    </ShowLinkContainer>
+                    </LinkContainer>
                     <Text fontSize="3xl" fontWeight="bold">
                         {episode.name}
                     </Text>

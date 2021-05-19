@@ -10,12 +10,12 @@ export type CastCreditForPerson_credit = {
         readonly __typename: "Movie";
         readonly title: string;
         readonly poster: string | null;
-        readonly " $fragmentRefs": FragmentRefs<"MovieLinkContainer_movie">;
+        readonly " $fragmentRefs": FragmentRefs<"LinkContainer_node">;
     } | {
         readonly __typename: "TVShow";
         readonly name: string;
         readonly poster: string | null;
-        readonly " $fragmentRefs": FragmentRefs<"ShowLinkContainer_show">;
+        readonly " $fragmentRefs": FragmentRefs<"LinkContainer_node">;
     } | {
         /*This will never be '%other', but we need some
         value in case none of the concrete values match.*/
@@ -44,6 +44,11 @@ var v0 = {
   "kind": "ScalarField",
   "name": "poster",
   "storageKey": "poster(size:\"W185\")"
+},
+v1 = {
+  "args": null,
+  "kind": "FragmentSpread",
+  "name": "LinkContainer_node"
 };
 return {
   "argumentDefinitions": [],
@@ -84,11 +89,7 @@ return {
               "storageKey": null
             },
             (v0/*: any*/),
-            {
-              "args": null,
-              "kind": "FragmentSpread",
-              "name": "MovieLinkContainer_movie"
-            }
+            (v1/*: any*/)
           ],
           "type": "Movie",
           "abstractKey": null
@@ -104,11 +105,7 @@ return {
               "storageKey": null
             },
             (v0/*: any*/),
-            {
-              "args": null,
-              "kind": "FragmentSpread",
-              "name": "ShowLinkContainer_show"
-            }
+            (v1/*: any*/)
           ],
           "type": "TVShow",
           "abstractKey": null
@@ -121,5 +118,5 @@ return {
   "abstractKey": null
 };
 })();
-(node as any).hash = '64eb557ed92209b1034312cc52b339e2';
+(node as any).hash = '12a2c2535b1daa4893f66540fe5c6adb';
 export default node;

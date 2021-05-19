@@ -6,7 +6,7 @@ import { Avatar, HStack, Text, VStack } from '@chakra-ui/react';
 import { useFragment } from 'react-relay';
 import { graphql } from 'babel-plugin-relay/macro';
 
-import PersonLinkContainer from 'PersonLinkContainer';
+import LinkContainer from 'LinkContainer';
 import { useOnClickOnResults } from './SearchContext';
 
 import useKnownForDescription from './useKnownForDescription';
@@ -20,7 +20,7 @@ function PersonSearchResult(props: Props) {
     const person = useFragment(
         graphql`
             fragment PersonSearchResult_person on Person {
-                ...PersonLinkContainer_person
+                ...LinkContainer_node
 
                 name
                 profilePicture(size: W185)
@@ -35,7 +35,7 @@ function PersonSearchResult(props: Props) {
     const knownFor = useKnownForDescription(person);
 
     return (
-        <PersonLinkContainer onClick={onClick} person={person}>
+        <LinkContainer node={person} onClick={onClick}>
             <HStack align="start" spacing="4">
                 <Avatar
                     h="100px"
@@ -55,7 +55,7 @@ function PersonSearchResult(props: Props) {
                     }
                 </VStack>
             </HStack>
-        </PersonLinkContainer>
+        </LinkContainer>
     );
 }
 

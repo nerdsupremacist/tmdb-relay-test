@@ -7,7 +7,7 @@ import { HStack, Image, Text, VStack } from '@chakra-ui/react';
 import { useFragment } from 'react-relay';
 import { graphql } from 'babel-plugin-relay/macro';
 
-import MovieLinkContainer from 'MovieLinkContainer';
+import LinkContainer from 'LinkContainer';
 import { useOnClickOnResults } from './SearchContext';
 
 import { POSTER_PLACEHOLDER } from 'utils/constants';
@@ -21,7 +21,7 @@ function MovieSearchResult(props: Props) {
     const movie = useFragment(
         graphql`
             fragment MovieSearchResult_movie on Movie {
-                ...MovieLinkContainer_movie
+                ...LinkContainer_node
                 title
                 overview
                 poster(size: W185)
@@ -33,7 +33,7 @@ function MovieSearchResult(props: Props) {
     const poster = movie.poster ?? POSTER_PLACEHOLDER;
 
     return (
-        <MovieLinkContainer movie={movie} onClick={onClick}>
+        <LinkContainer node={movie} onClick={onClick}>
             <HStack align="start" spacing={4}>
                 <Image
                     borderRadius="lg"
@@ -56,7 +56,7 @@ function MovieSearchResult(props: Props) {
                     </Text>
                 </VStack>
             </HStack>
-        </MovieLinkContainer>
+        </LinkContainer>
     );
 }
 

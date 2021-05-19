@@ -7,7 +7,7 @@ import { Avatar, Text, VStack } from '@chakra-ui/react';
 import { useFragment } from 'react-relay';
 import { graphql } from 'babel-plugin-relay/macro';
 
-import PersonLinkContainer from 'PersonLinkContainer';
+import LinkContainer from 'LinkContainer';
 
 type Props = {
     credit: CastCredit_credit$key,
@@ -18,7 +18,7 @@ function CastCredit(props: Props) {
         graphql`
             fragment CastCredit_credit on CastCreditWithPerson {
                 actor: value {
-                    ...PersonLinkContainer_person
+                    ...LinkContainer_node
                     name
                     profilePicture(size: W185)
                 }
@@ -32,7 +32,7 @@ function CastCredit(props: Props) {
     const rest = profilePicture != null ? { src: profilePicture } : {};
 
     return (
-        <PersonLinkContainer person={credit.actor}>
+        <LinkContainer node={credit.actor}>
             <VStack w="120px">
                 <Avatar h="100px" name={credit.actor.name} shadow="xl" w="100px" {...rest} />
                 <VStack spacing={0}>
@@ -46,7 +46,7 @@ function CastCredit(props: Props) {
                     <Text fontSize="sm" fontWeight="light" noOfLines={3} textAlign="center">as {credit.character}</Text>
                 </VStack>
             </VStack>
-        </PersonLinkContainer>
+        </LinkContainer>
     );
 }
 

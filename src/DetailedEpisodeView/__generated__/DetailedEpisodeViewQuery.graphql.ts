@@ -35,7 +35,7 @@ query DetailedEpisodeViewQuery(
 
 fragment CastCredit_credit on CastCreditWithPerson {
   actor: value {
-    ...PersonLinkContainer_person
+    ...LinkContainer_node
     name
     profilePicture(size: W185)
     id
@@ -49,7 +49,7 @@ fragment Cast_credits on CastCreditWithPerson {
 
 fragment CrewCredit_credit on CrewCreditWithPerson {
   actor: value {
-    ...PersonLinkContainer_person
+    ...LinkContainer_node
     name
     profilePicture(size: W185)
     id
@@ -88,12 +88,12 @@ fragment DetailedEpisodeViewRoot_episode on Episode {
 
 fragment EpisodeHeader_episode on Episode {
   previous {
-    ...EpisodeLinkContainer_episode
+    ...LinkContainer_node
     name
     id
   }
   next {
-    ...EpisodeLinkContainer_episode
+    ...LinkContainer_node
     name
     id
   }
@@ -108,7 +108,7 @@ fragment EpisodeHeader_episode on Episode {
   episodeNumber
   ...useEpisodeAirDate_episode
   show {
-    ...ShowLinkContainer_show
+    ...LinkContainer_node
     name
     genres {
       ...GenreTag_genre
@@ -117,16 +117,13 @@ fragment EpisodeHeader_episode on Episode {
   }
 }
 
-fragment EpisodeLinkContainer_episode on Episode {
-  id
-}
-
 fragment GenreTag_genre on Genre {
   name
 }
 
-fragment PersonLinkContainer_person on Person {
-  id
+fragment LinkContainer_node on Node {
+  __isNode: __typename
+  ...useNodePath_node
 }
 
 fragment RecommendedShows_show on TVShow {
@@ -147,12 +144,8 @@ fragment RecommendedShows_show on TVShow {
   id
 }
 
-fragment ShowLinkContainer_show on TVShow {
-  id
-}
-
 fragment ShowListItem_show on TVShow {
-  ...ShowLinkContainer_show
+  ...LinkContainer_node
   name
   poster(size: W154)
 }
@@ -206,6 +199,24 @@ fragment useEpisodeAirDate_episode on Episode {
   airDate
 }
 
+fragment useNodePath_node on Node {
+  __isNode: __typename
+  __typename
+  id
+  ... on Movie {
+    __typename
+  }
+  ... on TVShow {
+    __typename
+  }
+  ... on Episode {
+    __typename
+  }
+  ... on Person {
+    __typename
+  }
+}
+
 fragment useStreamingLinkPriceDescription_offering on StreamingOptionOffering {
   type
   price {
@@ -238,35 +249,44 @@ v2 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
-  "name": "id",
+  "name": "name",
   "storageKey": null
 },
 v3 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
-  "name": "name",
+  "name": "id",
   "storageKey": null
 },
-v4 = [
-  (v2/*: any*/),
-  (v3/*: any*/)
-],
-v5 = [
-  {
-    "kind": "Literal",
-    "name": "first",
-    "value": 20
-  }
-],
-v6 = {
+v4 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
   "name": "__typename",
   "storageKey": null
 },
+v5 = {
+  "kind": "InlineFragment",
+  "selections": [
+    (v4/*: any*/)
+  ],
+  "type": "Node",
+  "abstractKey": "__isNode"
+},
+v6 = [
+  (v2/*: any*/),
+  (v3/*: any*/),
+  (v5/*: any*/)
+],
 v7 = [
+  {
+    "kind": "Literal",
+    "name": "first",
+    "value": 20
+  }
+],
+v8 = [
   {
     "alias": null,
     "args": null,
@@ -284,7 +304,6 @@ v7 = [
         "plural": false,
         "selections": [
           (v2/*: any*/),
-          (v3/*: any*/),
           {
             "alias": null,
             "args": [
@@ -298,7 +317,12 @@ v7 = [
             "name": "poster",
             "storageKey": "poster(size:\"W154\")"
           },
-          (v6/*: any*/)
+          (v3/*: any*/),
+          (v4/*: any*/),
+          {
+            "kind": "TypeDiscriminator",
+            "abstractKey": "__isNode"
+          }
         ],
         "storageKey": null
       },
@@ -338,7 +362,7 @@ v7 = [
     "storageKey": null
   }
 ],
-v8 = {
+v9 = {
   "alias": "actor",
   "args": null,
   "concreteType": "Person",
@@ -347,7 +371,6 @@ v8 = {
   "plural": false,
   "selections": [
     (v2/*: any*/),
-    (v3/*: any*/),
     {
       "alias": null,
       "args": [
@@ -360,12 +383,14 @@ v8 = {
       "kind": "ScalarField",
       "name": "profilePicture",
       "storageKey": "profilePicture(size:\"W185\")"
-    }
+    },
+    (v3/*: any*/),
+    (v5/*: any*/)
   ],
   "storageKey": null
 },
-v9 = [
-  (v8/*: any*/),
+v10 = [
+  (v9/*: any*/),
   {
     "alias": null,
     "args": null,
@@ -441,7 +466,7 @@ return {
                 "kind": "LinkedField",
                 "name": "previous",
                 "plural": false,
-                "selections": (v4/*: any*/),
+                "selections": (v6/*: any*/),
                 "storageKey": null
               },
               {
@@ -451,7 +476,7 @@ return {
                 "kind": "LinkedField",
                 "name": "next",
                 "plural": false,
-                "selections": (v4/*: any*/),
+                "selections": (v6/*: any*/),
                 "storageKey": null
               },
               {
@@ -496,7 +521,7 @@ return {
                 ],
                 "storageKey": null
               },
-              (v3/*: any*/),
+              (v2/*: any*/),
               {
                 "alias": null,
                 "args": null,
@@ -527,7 +552,6 @@ return {
                 "plural": false,
                 "selections": [
                   (v2/*: any*/),
-                  (v3/*: any*/),
                   {
                     "alias": null,
                     "args": null,
@@ -536,23 +560,24 @@ return {
                     "name": "genres",
                     "plural": true,
                     "selections": [
-                      (v3/*: any*/)
+                      (v2/*: any*/)
                     ],
                     "storageKey": null
                   },
+                  (v3/*: any*/),
                   {
                     "alias": null,
-                    "args": (v5/*: any*/),
+                    "args": (v7/*: any*/),
                     "concreteType": "TVShowConnection",
                     "kind": "LinkedField",
                     "name": "similar",
                     "plural": false,
-                    "selections": (v7/*: any*/),
+                    "selections": (v8/*: any*/),
                     "storageKey": "similar(first:20)"
                   },
                   {
                     "alias": null,
-                    "args": (v5/*: any*/),
+                    "args": (v7/*: any*/),
                     "filters": null,
                     "handle": "connection",
                     "key": "SimilarShows_show_similar",
@@ -561,23 +586,24 @@ return {
                   },
                   {
                     "alias": null,
-                    "args": (v5/*: any*/),
+                    "args": (v7/*: any*/),
                     "concreteType": "TVShowConnection",
                     "kind": "LinkedField",
                     "name": "recommendations",
                     "plural": false,
-                    "selections": (v7/*: any*/),
+                    "selections": (v8/*: any*/),
                     "storageKey": "recommendations(first:20)"
                   },
                   {
                     "alias": null,
-                    "args": (v5/*: any*/),
+                    "args": (v7/*: any*/),
                     "filters": null,
                     "handle": "connection",
                     "key": "RecommendedShows_show_recommendations",
                     "kind": "LinkedHandle",
                     "name": "recommendations"
-                  }
+                  },
+                  (v5/*: any*/)
                 ],
                 "storageKey": null
               },
@@ -597,8 +623,8 @@ return {
                     "name": "provider",
                     "plural": false,
                     "selections": [
-                      (v6/*: any*/),
-                      (v3/*: any*/),
+                      (v4/*: any*/),
+                      (v2/*: any*/),
                       {
                         "alias": null,
                         "args": null,
@@ -695,7 +721,7 @@ return {
                     "kind": "LinkedField",
                     "name": "guestStars",
                     "plural": true,
-                    "selections": (v9/*: any*/),
+                    "selections": (v10/*: any*/),
                     "storageKey": null
                   },
                   {
@@ -705,7 +731,7 @@ return {
                     "kind": "LinkedField",
                     "name": "cast",
                     "plural": true,
-                    "selections": (v9/*: any*/),
+                    "selections": (v10/*: any*/),
                     "storageKey": null
                   },
                   {
@@ -716,7 +742,7 @@ return {
                     "name": "crew",
                     "plural": true,
                     "selections": [
-                      (v8/*: any*/),
+                      (v9/*: any*/),
                       {
                         "alias": null,
                         "args": null,
@@ -730,7 +756,7 @@ return {
                 ],
                 "storageKey": null
               },
-              (v2/*: any*/)
+              (v3/*: any*/)
             ],
             "storageKey": null
           }
@@ -740,12 +766,12 @@ return {
     ]
   },
   "params": {
-    "cacheID": "f96518f522dc8cc8d514032880013fa2",
+    "cacheID": "d1295d4479abfc72a402ed2c476fa9ff",
     "id": null,
     "metadata": {},
     "name": "DetailedEpisodeViewQuery",
     "operationKind": "query",
-    "text": "query DetailedEpisodeViewQuery(\n  $id: ID!\n) {\n  tv {\n    episode(id: $id) {\n      ...DetailedEpisodeViewRoot_episode\n      id\n    }\n  }\n}\n\nfragment CastCredit_credit on CastCreditWithPerson {\n  actor: value {\n    ...PersonLinkContainer_person\n    name\n    profilePicture(size: W185)\n    id\n  }\n  character\n}\n\nfragment Cast_credits on CastCreditWithPerson {\n  ...CastCredit_credit\n}\n\nfragment CrewCredit_credit on CrewCreditWithPerson {\n  actor: value {\n    ...PersonLinkContainer_person\n    name\n    profilePicture(size: W185)\n    id\n  }\n  job\n}\n\nfragment Crew_credits on CrewCreditWithPerson {\n  ...CrewCredit_credit\n}\n\nfragment DetailedEpisodeViewRoot_episode on Episode {\n  ...EpisodeHeader_episode\n  streamingOptions {\n    ...StreamingLinks_links\n  }\n  overview\n  show {\n    name\n    ...SimilarShows_show\n    ...RecommendedShows_show\n    id\n  }\n  credits {\n    guestStars {\n      ...Cast_credits\n    }\n    cast {\n      ...Cast_credits\n    }\n    crew {\n      ...Crew_credits\n    }\n  }\n}\n\nfragment EpisodeHeader_episode on Episode {\n  previous {\n    ...EpisodeLinkContainer_episode\n    name\n    id\n  }\n  next {\n    ...EpisodeLinkContainer_episode\n    name\n    id\n  }\n  images {\n    stills {\n      aspectRatio\n      url: image(size: Original)\n    }\n  }\n  name\n  seasonNumber\n  episodeNumber\n  ...useEpisodeAirDate_episode\n  show {\n    ...ShowLinkContainer_show\n    name\n    genres {\n      ...GenreTag_genre\n    }\n    id\n  }\n}\n\nfragment EpisodeLinkContainer_episode on Episode {\n  id\n}\n\nfragment GenreTag_genre on Genre {\n  name\n}\n\nfragment PersonLinkContainer_person on Person {\n  id\n}\n\nfragment RecommendedShows_show on TVShow {\n  recommendations(first: 20) {\n    edges {\n      node {\n        ...ShowListItem_show\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n  id\n}\n\nfragment ShowLinkContainer_show on TVShow {\n  id\n}\n\nfragment ShowListItem_show on TVShow {\n  ...ShowLinkContainer_show\n  name\n  poster(size: W154)\n}\n\nfragment SimilarShows_show on TVShow {\n  similar(first: 20) {\n    edges {\n      node {\n        ...ShowListItem_show\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n  id\n}\n\nfragment StreamingLinkToolTip_option on StreamingOption {\n  provider {\n    name\n  }\n}\n\nfragment StreamingLink_option on StreamingOption {\n  ...StreamingLinkToolTip_option\n  provider {\n    iconURL\n  }\n  bestOffering {\n    links {\n      web\n    }\n    ...useStreamingLinkTitle_offering\n    ...useStreamingLinkPriceDescription_offering\n  }\n}\n\nfragment StreamingLinks_links on StreamingOption {\n  provider {\n    __typename\n  }\n  ...StreamingLink_option\n}\n\nfragment useEpisodeAirDate_episode on Episode {\n  airDate\n}\n\nfragment useStreamingLinkPriceDescription_offering on StreamingOptionOffering {\n  type\n  price {\n    amount\n    currency\n  }\n}\n\nfragment useStreamingLinkTitle_offering on StreamingOptionOffering {\n  type\n}\n"
+    "text": "query DetailedEpisodeViewQuery(\n  $id: ID!\n) {\n  tv {\n    episode(id: $id) {\n      ...DetailedEpisodeViewRoot_episode\n      id\n    }\n  }\n}\n\nfragment CastCredit_credit on CastCreditWithPerson {\n  actor: value {\n    ...LinkContainer_node\n    name\n    profilePicture(size: W185)\n    id\n  }\n  character\n}\n\nfragment Cast_credits on CastCreditWithPerson {\n  ...CastCredit_credit\n}\n\nfragment CrewCredit_credit on CrewCreditWithPerson {\n  actor: value {\n    ...LinkContainer_node\n    name\n    profilePicture(size: W185)\n    id\n  }\n  job\n}\n\nfragment Crew_credits on CrewCreditWithPerson {\n  ...CrewCredit_credit\n}\n\nfragment DetailedEpisodeViewRoot_episode on Episode {\n  ...EpisodeHeader_episode\n  streamingOptions {\n    ...StreamingLinks_links\n  }\n  overview\n  show {\n    name\n    ...SimilarShows_show\n    ...RecommendedShows_show\n    id\n  }\n  credits {\n    guestStars {\n      ...Cast_credits\n    }\n    cast {\n      ...Cast_credits\n    }\n    crew {\n      ...Crew_credits\n    }\n  }\n}\n\nfragment EpisodeHeader_episode on Episode {\n  previous {\n    ...LinkContainer_node\n    name\n    id\n  }\n  next {\n    ...LinkContainer_node\n    name\n    id\n  }\n  images {\n    stills {\n      aspectRatio\n      url: image(size: Original)\n    }\n  }\n  name\n  seasonNumber\n  episodeNumber\n  ...useEpisodeAirDate_episode\n  show {\n    ...LinkContainer_node\n    name\n    genres {\n      ...GenreTag_genre\n    }\n    id\n  }\n}\n\nfragment GenreTag_genre on Genre {\n  name\n}\n\nfragment LinkContainer_node on Node {\n  __isNode: __typename\n  ...useNodePath_node\n}\n\nfragment RecommendedShows_show on TVShow {\n  recommendations(first: 20) {\n    edges {\n      node {\n        ...ShowListItem_show\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n  id\n}\n\nfragment ShowListItem_show on TVShow {\n  ...LinkContainer_node\n  name\n  poster(size: W154)\n}\n\nfragment SimilarShows_show on TVShow {\n  similar(first: 20) {\n    edges {\n      node {\n        ...ShowListItem_show\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n  id\n}\n\nfragment StreamingLinkToolTip_option on StreamingOption {\n  provider {\n    name\n  }\n}\n\nfragment StreamingLink_option on StreamingOption {\n  ...StreamingLinkToolTip_option\n  provider {\n    iconURL\n  }\n  bestOffering {\n    links {\n      web\n    }\n    ...useStreamingLinkTitle_offering\n    ...useStreamingLinkPriceDescription_offering\n  }\n}\n\nfragment StreamingLinks_links on StreamingOption {\n  provider {\n    __typename\n  }\n  ...StreamingLink_option\n}\n\nfragment useEpisodeAirDate_episode on Episode {\n  airDate\n}\n\nfragment useNodePath_node on Node {\n  __isNode: __typename\n  __typename\n  id\n  ... on Movie {\n    __typename\n  }\n  ... on TVShow {\n    __typename\n  }\n  ... on Episode {\n    __typename\n  }\n  ... on Person {\n    __typename\n  }\n}\n\nfragment useStreamingLinkPriceDescription_offering on StreamingOptionOffering {\n  type\n  price {\n    amount\n    currency\n  }\n}\n\nfragment useStreamingLinkTitle_offering on StreamingOptionOffering {\n  type\n}\n"
   }
 };
 })();

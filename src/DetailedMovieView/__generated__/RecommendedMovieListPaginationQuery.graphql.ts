@@ -34,12 +34,13 @@ query RecommendedMovieListPaginationQuery(
   }
 }
 
-fragment MovieLinkContainer_movie on Movie {
-  id
+fragment LinkContainer_node on Node {
+  __isNode: __typename
+  ...useNodePath_node
 }
 
 fragment MovieListItem_movie on Movie {
-  ...MovieLinkContainer_movie
+  ...LinkContainer_node
   title
   poster(size: W154)
 }
@@ -61,6 +62,24 @@ fragment RecommendedMovieList_movie_1G22uz on Movie {
     }
   }
   id
+}
+
+fragment useNodePath_node on Node {
+  __isNode: __typename
+  __typename
+  id
+  ... on Movie {
+    __typename
+  }
+  ... on TVShow {
+    __typename
+  }
+  ... on Episode {
+    __typename
+  }
+  ... on Person {
+    __typename
+  }
 }
 */
 
@@ -203,7 +222,6 @@ return {
                         "name": "node",
                         "plural": false,
                         "selections": [
-                          (v3/*: any*/),
                           {
                             "alias": null,
                             "args": null,
@@ -224,7 +242,12 @@ return {
                             "name": "poster",
                             "storageKey": "poster(size:\"W154\")"
                           },
-                          (v2/*: any*/)
+                          (v3/*: any*/),
+                          (v2/*: any*/),
+                          {
+                            "kind": "TypeDiscriminator",
+                            "abstractKey": "__isNode"
+                          }
                         ],
                         "storageKey": null
                       },
@@ -285,12 +308,12 @@ return {
     ]
   },
   "params": {
-    "cacheID": "96563fa813bae4d77cd3b0e759e0cd7b",
+    "cacheID": "4a8e1cce0c5692bc2a086d4a5128ad0e",
     "id": null,
     "metadata": {},
     "name": "RecommendedMovieListPaginationQuery",
     "operationKind": "query",
-    "text": "query RecommendedMovieListPaginationQuery(\n  $count: Int! = 20\n  $cursor: String\n  $id: ID!\n) {\n  node(id: $id) {\n    __typename\n    ...RecommendedMovieList_movie_1G22uz\n    id\n  }\n}\n\nfragment MovieLinkContainer_movie on Movie {\n  id\n}\n\nfragment MovieListItem_movie on Movie {\n  ...MovieLinkContainer_movie\n  title\n  poster(size: W154)\n}\n\nfragment RecommendedMovieList_movie_1G22uz on Movie {\n  recommendations(first: $count, after: $cursor) {\n    totalCount\n    edges {\n      node {\n        ...MovieListItem_movie\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n  id\n}\n"
+    "text": "query RecommendedMovieListPaginationQuery(\n  $count: Int! = 20\n  $cursor: String\n  $id: ID!\n) {\n  node(id: $id) {\n    __typename\n    ...RecommendedMovieList_movie_1G22uz\n    id\n  }\n}\n\nfragment LinkContainer_node on Node {\n  __isNode: __typename\n  ...useNodePath_node\n}\n\nfragment MovieListItem_movie on Movie {\n  ...LinkContainer_node\n  title\n  poster(size: W154)\n}\n\nfragment RecommendedMovieList_movie_1G22uz on Movie {\n  recommendations(first: $count, after: $cursor) {\n    totalCount\n    edges {\n      node {\n        ...MovieListItem_movie\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n  id\n}\n\nfragment useNodePath_node on Node {\n  __isNode: __typename\n  __typename\n  id\n  ... on Movie {\n    __typename\n  }\n  ... on TVShow {\n    __typename\n  }\n  ... on Episode {\n    __typename\n  }\n  ... on Person {\n    __typename\n  }\n}\n"
   }
 };
 })();

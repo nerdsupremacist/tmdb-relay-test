@@ -6,8 +6,7 @@ import { Image, Text, VStack } from '@chakra-ui/react';
 import { useFragment } from 'react-relay';
 import { graphql } from 'babel-plugin-relay/macro';
 
-import MovieLinkContainer from 'MovieLinkContainer';
-import ShowLinkContainer from 'ShowLinkContainer';
+import LinkContainer from 'LinkContainer';
 
 import { POSTER_PLACEHOLDER } from 'utils/constants';
 
@@ -23,12 +22,12 @@ function CastCreditForPerson(props: Props) {
                 value {
                     __typename
                     ... on Movie {
-                        ...MovieLinkContainer_movie
+                        ...LinkContainer_node
                         title
                         poster(size: W185)
                     }
                     ... on TVShow {
-                        ...ShowLinkContainer_show
+                        ...LinkContainer_node
                         name
                         poster(size: W185)
                     }
@@ -42,7 +41,7 @@ function CastCreditForPerson(props: Props) {
     case 'Movie': {
         const poster = credit.value.poster ?? POSTER_PLACEHOLDER;
         return (
-            <MovieLinkContainer movie={credit.value}>
+            <LinkContainer node={credit.value}>
                 <VStack>
                     <Image borderRadius="lg" h="220px" maxW="150px" minW="150px" shadow="xl" src={poster}/>
                     <VStack spacing={0}>
@@ -63,13 +62,13 @@ function CastCreditForPerson(props: Props) {
                         </Text>
                     </VStack>
                 </VStack>
-            </MovieLinkContainer>
+            </LinkContainer>
         );
     }
     case 'TVShow': {
         const poster = credit.value.poster ?? POSTER_PLACEHOLDER;
         return (
-            <ShowLinkContainer show={credit.value}>
+            <LinkContainer node={credit.value}>
                 <VStack>
                     <Image borderRadius="lg" h="220px" maxW="150px" minW="150px" shadow="xl" src={poster}/>
                     <VStack spacing={0}>
@@ -90,7 +89,7 @@ function CastCreditForPerson(props: Props) {
                         </Text>
                     </VStack>
                 </VStack>
-            </ShowLinkContainer>
+            </LinkContainer>
         );
     }
     default:

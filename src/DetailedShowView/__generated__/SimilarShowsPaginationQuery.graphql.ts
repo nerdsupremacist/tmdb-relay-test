@@ -34,12 +34,13 @@ query SimilarShowsPaginationQuery(
   }
 }
 
-fragment ShowLinkContainer_show on TVShow {
-  id
+fragment LinkContainer_node on Node {
+  __isNode: __typename
+  ...useNodePath_node
 }
 
 fragment ShowListItem_show on TVShow {
-  ...ShowLinkContainer_show
+  ...LinkContainer_node
   name
   poster(size: W154)
 }
@@ -60,6 +61,24 @@ fragment SimilarShows_show_1G22uz on TVShow {
     }
   }
   id
+}
+
+fragment useNodePath_node on Node {
+  __isNode: __typename
+  __typename
+  id
+  ... on Movie {
+    __typename
+  }
+  ... on TVShow {
+    __typename
+  }
+  ... on Episode {
+    __typename
+  }
+  ... on Person {
+    __typename
+  }
 }
 */
 
@@ -195,7 +214,6 @@ return {
                         "name": "node",
                         "plural": false,
                         "selections": [
-                          (v3/*: any*/),
                           {
                             "alias": null,
                             "args": null,
@@ -216,7 +234,12 @@ return {
                             "name": "poster",
                             "storageKey": "poster(size:\"W154\")"
                           },
-                          (v2/*: any*/)
+                          (v3/*: any*/),
+                          (v2/*: any*/),
+                          {
+                            "kind": "TypeDiscriminator",
+                            "abstractKey": "__isNode"
+                          }
                         ],
                         "storageKey": null
                       },
@@ -277,12 +300,12 @@ return {
     ]
   },
   "params": {
-    "cacheID": "52ba96b41f7305973fbede1160f90cf3",
+    "cacheID": "6392969fa296d3193666e3bd9e6d095f",
     "id": null,
     "metadata": {},
     "name": "SimilarShowsPaginationQuery",
     "operationKind": "query",
-    "text": "query SimilarShowsPaginationQuery(\n  $count: Int! = 20\n  $cursor: String\n  $id: ID!\n) {\n  node(id: $id) {\n    __typename\n    ...SimilarShows_show_1G22uz\n    id\n  }\n}\n\nfragment ShowLinkContainer_show on TVShow {\n  id\n}\n\nfragment ShowListItem_show on TVShow {\n  ...ShowLinkContainer_show\n  name\n  poster(size: W154)\n}\n\nfragment SimilarShows_show_1G22uz on TVShow {\n  similar(first: $count, after: $cursor) {\n    edges {\n      node {\n        ...ShowListItem_show\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n  id\n}\n"
+    "text": "query SimilarShowsPaginationQuery(\n  $count: Int! = 20\n  $cursor: String\n  $id: ID!\n) {\n  node(id: $id) {\n    __typename\n    ...SimilarShows_show_1G22uz\n    id\n  }\n}\n\nfragment LinkContainer_node on Node {\n  __isNode: __typename\n  ...useNodePath_node\n}\n\nfragment ShowListItem_show on TVShow {\n  ...LinkContainer_node\n  name\n  poster(size: W154)\n}\n\nfragment SimilarShows_show_1G22uz on TVShow {\n  similar(first: $count, after: $cursor) {\n    edges {\n      node {\n        ...ShowListItem_show\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n  id\n}\n\nfragment useNodePath_node on Node {\n  __isNode: __typename\n  __typename\n  id\n  ... on Movie {\n    __typename\n  }\n  ... on TVShow {\n    __typename\n  }\n  ... on Episode {\n    __typename\n  }\n  ... on Person {\n    __typename\n  }\n}\n"
   }
 };
 })();

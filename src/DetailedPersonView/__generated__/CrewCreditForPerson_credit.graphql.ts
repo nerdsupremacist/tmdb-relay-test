@@ -7,19 +7,11 @@ import { FragmentRefs } from "relay-runtime";
 export type CrewCreditForPerson_credit = {
     readonly job: string;
     readonly value: {
-        readonly __typename: "Movie";
-        readonly title: string;
-        readonly poster: string | null;
-        readonly " $fragmentRefs": FragmentRefs<"MovieLinkContainer_movie">;
-    } | {
-        readonly __typename: "TVShow";
-        readonly name: string;
-        readonly poster: string | null;
-        readonly " $fragmentRefs": FragmentRefs<"ShowLinkContainer_show">;
-    } | {
-        /*This will never be '%other', but we need some
-        value in case none of the concrete values match.*/
-        readonly __typename: "%other";
+        readonly __typename: string;
+        readonly title?: string;
+        readonly poster?: string | null;
+        readonly name?: string;
+        readonly " $fragmentRefs": FragmentRefs<"LinkContainer_node">;
     };
     readonly " $refType": "CrewCreditForPerson_credit";
 };
@@ -74,6 +66,11 @@ return {
           "storageKey": null
         },
         {
+          "args": null,
+          "kind": "FragmentSpread",
+          "name": "LinkContainer_node"
+        },
+        {
           "kind": "InlineFragment",
           "selections": [
             {
@@ -83,12 +80,7 @@ return {
               "name": "title",
               "storageKey": null
             },
-            (v0/*: any*/),
-            {
-              "args": null,
-              "kind": "FragmentSpread",
-              "name": "MovieLinkContainer_movie"
-            }
+            (v0/*: any*/)
           ],
           "type": "Movie",
           "abstractKey": null
@@ -103,12 +95,7 @@ return {
               "name": "name",
               "storageKey": null
             },
-            (v0/*: any*/),
-            {
-              "args": null,
-              "kind": "FragmentSpread",
-              "name": "ShowLinkContainer_show"
-            }
+            (v0/*: any*/)
           ],
           "type": "TVShow",
           "abstractKey": null
@@ -121,5 +108,5 @@ return {
   "abstractKey": null
 };
 })();
-(node as any).hash = 'e2ff50379216b329363c821d784d8a0e';
+(node as any).hash = '224d54060ca761346d4938b8a51b52ee';
 export default node;

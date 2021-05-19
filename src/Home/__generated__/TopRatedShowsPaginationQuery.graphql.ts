@@ -26,12 +26,13 @@ query TopRatedShowsPaginationQuery(
   ...TopRatedShows_data_1G22uz
 }
 
-fragment ShowLinkContainer_show on TVShow {
-  id
+fragment LinkContainer_node on Node {
+  __isNode: __typename
+  ...useNodePath_node
 }
 
 fragment ShowListItem_show on TVShow {
-  ...ShowLinkContainer_show
+  ...LinkContainer_node
   name
   poster(size: W154)
 }
@@ -52,6 +53,24 @@ fragment TopRatedShows_data_1G22uz on Query {
         hasNextPage
       }
     }
+  }
+}
+
+fragment useNodePath_node on Node {
+  __isNode: __typename
+  __typename
+  id
+  ... on Movie {
+    __typename
+  }
+  ... on TVShow {
+    __typename
+  }
+  ... on Episode {
+    __typename
+  }
+  ... on Person {
+    __typename
   }
 }
 */
@@ -150,13 +169,6 @@ return {
                         "alias": null,
                         "args": null,
                         "kind": "ScalarField",
-                        "name": "id",
-                        "storageKey": null
-                      },
-                      {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
                         "name": "name",
                         "storageKey": null
                       },
@@ -177,8 +189,19 @@ return {
                         "alias": null,
                         "args": null,
                         "kind": "ScalarField",
+                        "name": "id",
+                        "storageKey": null
+                      },
+                      {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
                         "name": "__typename",
                         "storageKey": null
+                      },
+                      {
+                        "kind": "TypeDiscriminator",
+                        "abstractKey": "__isNode"
                       }
                     ],
                     "storageKey": null
@@ -236,12 +259,12 @@ return {
     ]
   },
   "params": {
-    "cacheID": "20277cceed3cefe0667e1dc96a7068bd",
+    "cacheID": "171bd1168f8a44886d01b095e13a71d5",
     "id": null,
     "metadata": {},
     "name": "TopRatedShowsPaginationQuery",
     "operationKind": "query",
-    "text": "query TopRatedShowsPaginationQuery(\n  $count: Int! = 20\n  $cursor: String\n) {\n  ...TopRatedShows_data_1G22uz\n}\n\nfragment ShowLinkContainer_show on TVShow {\n  id\n}\n\nfragment ShowListItem_show on TVShow {\n  ...ShowLinkContainer_show\n  name\n  poster(size: W154)\n}\n\nfragment TopRatedShows_data_1G22uz on Query {\n  tv {\n    topRated(first: $count, after: $cursor) {\n      edges {\n        node {\n          ...ShowListItem_show\n          id\n          __typename\n        }\n        cursor\n      }\n      pageInfo {\n        endCursor\n        hasNextPage\n      }\n    }\n  }\n}\n"
+    "text": "query TopRatedShowsPaginationQuery(\n  $count: Int! = 20\n  $cursor: String\n) {\n  ...TopRatedShows_data_1G22uz\n}\n\nfragment LinkContainer_node on Node {\n  __isNode: __typename\n  ...useNodePath_node\n}\n\nfragment ShowListItem_show on TVShow {\n  ...LinkContainer_node\n  name\n  poster(size: W154)\n}\n\nfragment TopRatedShows_data_1G22uz on Query {\n  tv {\n    topRated(first: $count, after: $cursor) {\n      edges {\n        node {\n          ...ShowListItem_show\n          id\n          __typename\n        }\n        cursor\n      }\n      pageInfo {\n        endCursor\n        hasNextPage\n      }\n    }\n  }\n}\n\nfragment useNodePath_node on Node {\n  __isNode: __typename\n  __typename\n  id\n  ... on Movie {\n    __typename\n  }\n  ... on TVShow {\n    __typename\n  }\n  ... on Episode {\n    __typename\n  }\n  ... on Person {\n    __typename\n  }\n}\n"
   }
 };
 })();

@@ -8,7 +8,7 @@ export type MovieSearchResult_movie = {
     readonly title: string;
     readonly overview: string;
     readonly poster: string | null;
-    readonly " $fragmentRefs": FragmentRefs<"MovieLinkContainer_movie">;
+    readonly " $fragmentRefs": FragmentRefs<"LinkContainer_node">;
     readonly " $refType": "MovieSearchResult_movie";
 };
 export type MovieSearchResult_movie$data = MovieSearchResult_movie;
@@ -55,11 +55,11 @@ const node: ReaderFragment = {
     {
       "args": null,
       "kind": "FragmentSpread",
-      "name": "MovieLinkContainer_movie"
+      "name": "LinkContainer_node"
     }
   ],
   "type": "Movie",
   "abstractKey": null
 };
-(node as any).hash = '420868899ff55c7514a904a5dcd1b338';
+(node as any).hash = '6cf451fe39980b241bf3929c60c1e0ef';
 export default node;

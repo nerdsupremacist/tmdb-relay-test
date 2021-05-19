@@ -6,7 +6,7 @@ import { HStack, Image, Text, VStack } from '@chakra-ui/react';
 import { useFragment } from 'react-relay';
 import { graphql } from 'babel-plugin-relay/macro';
 
-import ShowLinkContainer from 'ShowLinkContainer';
+import LinkContainer from 'LinkContainer';
 import { useOnClickOnResults } from './SearchContext';
 
 import { POSTER_PLACEHOLDER } from 'utils/constants';
@@ -20,7 +20,7 @@ function ShowSearchResult(props: Props) {
     const show = useFragment(
         graphql`
             fragment ShowSearchResult_show on TVShow {
-                ...ShowLinkContainer_show
+                ...LinkContainer_node
                 name
                 overview
                 poster(size: W185)
@@ -32,7 +32,7 @@ function ShowSearchResult(props: Props) {
     const poster = show.poster ?? POSTER_PLACEHOLDER;
 
     return (
-        <ShowLinkContainer onClick={onClick} show={show}>
+        <LinkContainer node={show} onClick={onClick}>
             <HStack align="start" spacing={4}>
                 <Image
                     borderRadius="lg"
@@ -55,7 +55,7 @@ function ShowSearchResult(props: Props) {
                     </Text>
                 </VStack>
             </HStack>
-        </ShowLinkContainer>
+        </LinkContainer>
     );
 }
 

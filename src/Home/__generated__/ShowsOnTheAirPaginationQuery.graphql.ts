@@ -26,12 +26,13 @@ query ShowsOnTheAirPaginationQuery(
   ...ShowsOnTheAir_data_1G22uz
 }
 
-fragment ShowLinkContainer_show on TVShow {
-  id
+fragment LinkContainer_node on Node {
+  __isNode: __typename
+  ...useNodePath_node
 }
 
 fragment ShowListItem_show on TVShow {
-  ...ShowLinkContainer_show
+  ...LinkContainer_node
   name
   poster(size: W154)
 }
@@ -52,6 +53,24 @@ fragment ShowsOnTheAir_data_1G22uz on Query {
         hasNextPage
       }
     }
+  }
+}
+
+fragment useNodePath_node on Node {
+  __isNode: __typename
+  __typename
+  id
+  ... on Movie {
+    __typename
+  }
+  ... on TVShow {
+    __typename
+  }
+  ... on Episode {
+    __typename
+  }
+  ... on Person {
+    __typename
   }
 }
 */
@@ -150,13 +169,6 @@ return {
                         "alias": null,
                         "args": null,
                         "kind": "ScalarField",
-                        "name": "id",
-                        "storageKey": null
-                      },
-                      {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
                         "name": "name",
                         "storageKey": null
                       },
@@ -177,8 +189,19 @@ return {
                         "alias": null,
                         "args": null,
                         "kind": "ScalarField",
+                        "name": "id",
+                        "storageKey": null
+                      },
+                      {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
                         "name": "__typename",
                         "storageKey": null
+                      },
+                      {
+                        "kind": "TypeDiscriminator",
+                        "abstractKey": "__isNode"
                       }
                     ],
                     "storageKey": null
@@ -236,12 +259,12 @@ return {
     ]
   },
   "params": {
-    "cacheID": "ed30b7ca1d0023b3db41377286eeb675",
+    "cacheID": "92a3d6ce7544dc646b0d0a94145ffe9d",
     "id": null,
     "metadata": {},
     "name": "ShowsOnTheAirPaginationQuery",
     "operationKind": "query",
-    "text": "query ShowsOnTheAirPaginationQuery(\n  $count: Int! = 20\n  $cursor: String\n) {\n  ...ShowsOnTheAir_data_1G22uz\n}\n\nfragment ShowLinkContainer_show on TVShow {\n  id\n}\n\nfragment ShowListItem_show on TVShow {\n  ...ShowLinkContainer_show\n  name\n  poster(size: W154)\n}\n\nfragment ShowsOnTheAir_data_1G22uz on Query {\n  tv {\n    onTheAir(first: $count, after: $cursor) {\n      edges {\n        node {\n          ...ShowListItem_show\n          id\n          __typename\n        }\n        cursor\n      }\n      pageInfo {\n        endCursor\n        hasNextPage\n      }\n    }\n  }\n}\n"
+    "text": "query ShowsOnTheAirPaginationQuery(\n  $count: Int! = 20\n  $cursor: String\n) {\n  ...ShowsOnTheAir_data_1G22uz\n}\n\nfragment LinkContainer_node on Node {\n  __isNode: __typename\n  ...useNodePath_node\n}\n\nfragment ShowListItem_show on TVShow {\n  ...LinkContainer_node\n  name\n  poster(size: W154)\n}\n\nfragment ShowsOnTheAir_data_1G22uz on Query {\n  tv {\n    onTheAir(first: $count, after: $cursor) {\n      edges {\n        node {\n          ...ShowListItem_show\n          id\n          __typename\n        }\n        cursor\n      }\n      pageInfo {\n        endCursor\n        hasNextPage\n      }\n    }\n  }\n}\n\nfragment useNodePath_node on Node {\n  __isNode: __typename\n  __typename\n  id\n  ... on Movie {\n    __typename\n  }\n  ... on TVShow {\n    __typename\n  }\n  ... on Episode {\n    __typename\n  }\n  ... on Person {\n    __typename\n  }\n}\n"
   }
 };
 })();
