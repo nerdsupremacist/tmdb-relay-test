@@ -65,18 +65,6 @@ fragment routes_usePathLinks_nodes on Node {
   __isNode: __typename
   __typename
   id
-  ... on Movie {
-    __typename
-  }
-  ... on TVShow {
-    __typename
-  }
-  ... on Episode {
-    __typename
-  }
-  ... on Person {
-    __typename
-  }
 }
 */
 
@@ -264,12 +252,12 @@ return {
     ]
   },
   "params": {
-    "cacheID": "a28721759982d9916c124833a21d25e3",
+    "cacheID": "aa27c5e012a102d362d594dcbc9e5b42",
     "id": null,
     "metadata": {},
     "name": "TrendingShowsPaginationQuery",
     "operationKind": "query",
-    "text": "query TrendingShowsPaginationQuery(\n  $count: Int! = 20\n  $cursor: String\n) {\n  ...TrendingShows_data_1G22uz\n}\n\nfragment LinkContainer_node on Node {\n  __isNode: __typename\n  ...routes_usePathLink_node\n}\n\nfragment ShowListItem_show on TVShow {\n  ...LinkContainer_node\n  name\n  poster(size: W154)\n}\n\nfragment TrendingShows_data_1G22uz on Query {\n  tv {\n    trending(first: $count, after: $cursor) {\n      edges {\n        node {\n          ...ShowListItem_show\n          id\n          __typename\n        }\n        cursor\n      }\n      pageInfo {\n        endCursor\n        hasNextPage\n      }\n    }\n  }\n}\n\nfragment routes_usePathLink_node on Node {\n  __isNode: __typename\n  ...routes_usePathLinks_nodes\n}\n\nfragment routes_usePathLinks_nodes on Node {\n  __isNode: __typename\n  __typename\n  id\n  ... on Movie {\n    __typename\n  }\n  ... on TVShow {\n    __typename\n  }\n  ... on Episode {\n    __typename\n  }\n  ... on Person {\n    __typename\n  }\n}\n"
+    "text": "query TrendingShowsPaginationQuery(\n  $count: Int! = 20\n  $cursor: String\n) {\n  ...TrendingShows_data_1G22uz\n}\n\nfragment LinkContainer_node on Node {\n  __isNode: __typename\n  ...routes_usePathLink_node\n}\n\nfragment ShowListItem_show on TVShow {\n  ...LinkContainer_node\n  name\n  poster(size: W154)\n}\n\nfragment TrendingShows_data_1G22uz on Query {\n  tv {\n    trending(first: $count, after: $cursor) {\n      edges {\n        node {\n          ...ShowListItem_show\n          id\n          __typename\n        }\n        cursor\n      }\n      pageInfo {\n        endCursor\n        hasNextPage\n      }\n    }\n  }\n}\n\nfragment routes_usePathLink_node on Node {\n  __isNode: __typename\n  ...routes_usePathLinks_nodes\n}\n\nfragment routes_usePathLinks_nodes on Node {\n  __isNode: __typename\n  __typename\n  id\n}\n"
   }
 };
 })();

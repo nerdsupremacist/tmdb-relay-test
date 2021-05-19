@@ -2,17 +2,20 @@ import type {
     routes_usePathLink_node$key,
 } from './__generated__/routes_usePathLink_node.graphql';
 import type {
-    routes_usePathLinks_nodes,
     routes_usePathLinks_nodes$key,
 } from './__generated__/routes_usePathLinks_nodes.graphql';
 
-type ArrayElement<ArrayType extends readonly unknown[]> =
-  ArrayType extends readonly (infer ElementType)[] ? ElementType : never;
-
-type NodeType = ArrayElement<routes_usePathLinks_nodes>['__typename'];
-
 import { useFragment } from 'react-relay';
 import { graphql } from 'babel-plugin-relay/macro';
+
+const nodeTypes = <const> ['Movie', 'TVShow', 'Episode', 'Person'];
+type NodeType = typeof nodeTypes[number];
+
+const nodeTypesAsStrings = nodeTypes.map(type => type as string);
+
+function isNodeType(value: string): value is NodeType {
+    return nodeTypesAsStrings.includes(value);
+}
 
 export function pathLink(type: NodeType, id?: string) {
     let path: string;
@@ -29,8 +32,6 @@ export function pathLink(type: NodeType, id?: string) {
     case 'Person':
         path = 'person';
         break;
-    default:
-        return null;
     }
 
     const idOrPlaceholder = id ?? ':id';
@@ -44,24 +45,18 @@ export function usePathLinks(nodes: routes_usePathLinks_nodes$key) {
             @relay(plural: true) {
                 __typename
                 id
-                ... on Movie {
-                    __typename
-                }
-                ... on TVShow {
-                    __typename
-                }
-                ... on Episode {
-                    __typename
-                }
-                ... on Person {
-                    __typename
-                }
             }
         `,
         nodes,
     );
 
-    return decoded.map(node => pathLink(node.__typename, node.id));
+    return decoded.map(node => {
+        if (isNodeType(node.__typename)) {
+            return pathLink(node.__typename, node.id);
+        }
+
+        return null;
+    });
 }
 
 export function usePathLink(node: routes_usePathLink_node$key) {

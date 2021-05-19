@@ -65,18 +65,6 @@ fragment routes_usePathLinks_nodes on Node {
   __isNode: __typename
   __typename
   id
-  ... on Movie {
-    __typename
-  }
-  ... on TVShow {
-    __typename
-  }
-  ... on Episode {
-    __typename
-  }
-  ... on Person {
-    __typename
-  }
 }
 */
 
@@ -264,12 +252,12 @@ return {
     ]
   },
   "params": {
-    "cacheID": "02ed1ca0dfc22049f4d382dcc8dfef1b",
+    "cacheID": "c14241b1eb5ed13f94d54785974947db",
     "id": null,
     "metadata": {},
     "name": "PopularShowsPaginationQuery",
     "operationKind": "query",
-    "text": "query PopularShowsPaginationQuery(\n  $count: Int! = 20\n  $cursor: String\n) {\n  ...PopularShows_data_1G22uz\n}\n\nfragment LinkContainer_node on Node {\n  __isNode: __typename\n  ...routes_usePathLink_node\n}\n\nfragment PopularShows_data_1G22uz on Query {\n  tv {\n    popular(first: $count, after: $cursor) {\n      edges {\n        node {\n          ...ShowListItem_show\n          id\n          __typename\n        }\n        cursor\n      }\n      pageInfo {\n        endCursor\n        hasNextPage\n      }\n    }\n  }\n}\n\nfragment ShowListItem_show on TVShow {\n  ...LinkContainer_node\n  name\n  poster(size: W154)\n}\n\nfragment routes_usePathLink_node on Node {\n  __isNode: __typename\n  ...routes_usePathLinks_nodes\n}\n\nfragment routes_usePathLinks_nodes on Node {\n  __isNode: __typename\n  __typename\n  id\n  ... on Movie {\n    __typename\n  }\n  ... on TVShow {\n    __typename\n  }\n  ... on Episode {\n    __typename\n  }\n  ... on Person {\n    __typename\n  }\n}\n"
+    "text": "query PopularShowsPaginationQuery(\n  $count: Int! = 20\n  $cursor: String\n) {\n  ...PopularShows_data_1G22uz\n}\n\nfragment LinkContainer_node on Node {\n  __isNode: __typename\n  ...routes_usePathLink_node\n}\n\nfragment PopularShows_data_1G22uz on Query {\n  tv {\n    popular(first: $count, after: $cursor) {\n      edges {\n        node {\n          ...ShowListItem_show\n          id\n          __typename\n        }\n        cursor\n      }\n      pageInfo {\n        endCursor\n        hasNextPage\n      }\n    }\n  }\n}\n\nfragment ShowListItem_show on TVShow {\n  ...LinkContainer_node\n  name\n  poster(size: W154)\n}\n\nfragment routes_usePathLink_node on Node {\n  __isNode: __typename\n  ...routes_usePathLinks_nodes\n}\n\nfragment routes_usePathLinks_nodes on Node {\n  __isNode: __typename\n  __typename\n  id\n}\n"
   }
 };
 })();

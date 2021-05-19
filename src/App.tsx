@@ -30,34 +30,21 @@ function App() {
                         <Home />
                     </Route>
 
-                    {
-                        moviePath != null && (
-                            <Route path={moviePath}>
-                                <DetailedMovieView />
-                            </Route>
-                        )
-                    }
-                    {
-                        showPath != null && (
-                            <Route path={showPath}>
-                                <DetailedShowView />
-                            </Route>
-                        )
-                    }
-                    {
-                        episodePath != null && (
-                            <Route path={episodePath}>
-                                <DetailedEpisodeView />
-                            </Route>
-                        )
-                    }
-                    {
-                        personPath != null && (
-                            <Route path={personPath}>
-                                <DetailedPersonView />
-                            </Route>
-                        )
-                    }
+                    <Route path={moviePath}>
+                        <DetailedMovieView />
+                    </Route>
+                    
+                    <Route path={showPath}>
+                        <DetailedShowView />
+                    </Route>
+                    
+                    <Route path={episodePath}>
+                        <DetailedEpisodeView />
+                    </Route>
+
+                    <Route path={personPath}>
+                        <DetailedPersonView />
+                    </Route>
                     
                     <Route path="*">
                         <h1>Not found!</h1>

@@ -65,18 +65,6 @@ fragment routes_usePathLinks_nodes on Node {
   __isNode: __typename
   __typename
   id
-  ... on Movie {
-    __typename
-  }
-  ... on TVShow {
-    __typename
-  }
-  ... on Episode {
-    __typename
-  }
-  ... on Person {
-    __typename
-  }
 }
 */
 
@@ -264,12 +252,12 @@ return {
     ]
   },
   "params": {
-    "cacheID": "ef344d520c1cf29e91c7c3c255fc2a35",
+    "cacheID": "fdd98a72b186f1a924974f281310c01a",
     "id": null,
     "metadata": {},
     "name": "NowPlayingMoviesPaginationQuery",
     "operationKind": "query",
-    "text": "query NowPlayingMoviesPaginationQuery(\n  $count: Int! = 20\n  $cursor: String\n) {\n  ...NowPlayingMovies_data_1G22uz\n}\n\nfragment LinkContainer_node on Node {\n  __isNode: __typename\n  ...routes_usePathLink_node\n}\n\nfragment MovieListItem_movie on Movie {\n  ...LinkContainer_node\n  title\n  poster(size: W154)\n}\n\nfragment NowPlayingMovies_data_1G22uz on Query {\n  movies {\n    nowPlaying(first: $count, after: $cursor) {\n      edges {\n        node {\n          ...MovieListItem_movie\n          id\n          __typename\n        }\n        cursor\n      }\n      pageInfo {\n        endCursor\n        hasNextPage\n      }\n    }\n  }\n}\n\nfragment routes_usePathLink_node on Node {\n  __isNode: __typename\n  ...routes_usePathLinks_nodes\n}\n\nfragment routes_usePathLinks_nodes on Node {\n  __isNode: __typename\n  __typename\n  id\n  ... on Movie {\n    __typename\n  }\n  ... on TVShow {\n    __typename\n  }\n  ... on Episode {\n    __typename\n  }\n  ... on Person {\n    __typename\n  }\n}\n"
+    "text": "query NowPlayingMoviesPaginationQuery(\n  $count: Int! = 20\n  $cursor: String\n) {\n  ...NowPlayingMovies_data_1G22uz\n}\n\nfragment LinkContainer_node on Node {\n  __isNode: __typename\n  ...routes_usePathLink_node\n}\n\nfragment MovieListItem_movie on Movie {\n  ...LinkContainer_node\n  title\n  poster(size: W154)\n}\n\nfragment NowPlayingMovies_data_1G22uz on Query {\n  movies {\n    nowPlaying(first: $count, after: $cursor) {\n      edges {\n        node {\n          ...MovieListItem_movie\n          id\n          __typename\n        }\n        cursor\n      }\n      pageInfo {\n        endCursor\n        hasNextPage\n      }\n    }\n  }\n}\n\nfragment routes_usePathLink_node on Node {\n  __isNode: __typename\n  ...routes_usePathLinks_nodes\n}\n\nfragment routes_usePathLinks_nodes on Node {\n  __isNode: __typename\n  __typename\n  id\n}\n"
   }
 };
 })();
