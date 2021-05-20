@@ -35,18 +35,18 @@ function SeasonRow(props: Props) {
         <>
             <Flex align="center" w="100%">
                 <Text fontSize="xl" fontWeight="bold">
-                    Season {season.seasonNumber}
+                    {season.seasonNumber > 0 ? `Season ${season.seasonNumber}` : 'Extras'}
                 </Text>
                 <Spacer />
                 {
-                    season.episodeCount === 1 && (
+                    season.episodeCount === 1 && season.seasonNumber > 0 && (
                         <Text fontSize="md" fontWeight="light">
                             1 Episode
                         </Text>
                     )
                 }
                 {
-                    season.episodeCount > 1 && (
+                    season.episodeCount > 1 && season.seasonNumber > 0 && (
                         <Text fontSize="md" fontWeight="light">
                             {season.episodeCount} Episodes
                         </Text>
