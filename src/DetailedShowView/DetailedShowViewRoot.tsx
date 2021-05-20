@@ -10,6 +10,7 @@ import Cast from 'Cast';
 import Crew from 'Crew';
 import HorizonalScrollview from 'HorizonalScrollview';
 import StreamingLinks from 'StreamingLinks';
+import Videos from 'Videos';
 import FeaturedEpisodeCard from './FeaturedEpisodeCard';
 import RecommendedShows from './RecommendedShows';
 import SeasonRow from './SeasonRow';
@@ -59,6 +60,10 @@ function DetailedShowViewRoot(props: Props) {
 
                 ...RecommendedShows_show
                 ...SimilarShows_show
+
+                videos {
+                    ...Videos_videos
+                }
             }
         `,
         props.show,
@@ -141,6 +146,17 @@ function DetailedShowViewRoot(props: Props) {
                         Recommended Shows
                     </Text>
                     <RecommendedShows show={show}/>
+
+                    {
+                        show.videos.length > 0 && (
+                            <>
+                                <Text fontSize="xl" fontWeight="bold">
+                                    Videos
+                                </Text>
+                                <Videos videos={show.videos} />
+                            </>
+                        )
+                    }
 
                     <Text fontSize="xl" fontWeight="bold">
                         Crew

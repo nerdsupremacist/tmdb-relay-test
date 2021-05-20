@@ -29,6 +29,9 @@ export type DetailedShowViewRoot_show = {
     readonly seasons: ReadonlyArray<{
         readonly " $fragmentRefs": FragmentRefs<"SeasonRow_season">;
     }>;
+    readonly videos: ReadonlyArray<{
+        readonly " $fragmentRefs": FragmentRefs<"Videos_videos">;
+    }>;
     readonly " $fragmentRefs": FragmentRefs<"ShowHeader_show" | "ShowParallaxBackdrop_show" | "RecommendedShows_show" | "SimilarShows_show">;
     readonly " $refType": "DetailedShowViewRoot_show";
 };
@@ -167,6 +170,22 @@ return {
       "storageKey": null
     },
     {
+      "alias": null,
+      "args": null,
+      "concreteType": "Video",
+      "kind": "LinkedField",
+      "name": "videos",
+      "plural": true,
+      "selections": [
+        {
+          "args": null,
+          "kind": "FragmentSpread",
+          "name": "Videos_videos"
+        }
+      ],
+      "storageKey": null
+    },
+    {
       "args": null,
       "kind": "FragmentSpread",
       "name": "ShowHeader_show"
@@ -191,5 +210,5 @@ return {
   "abstractKey": null
 };
 })();
-(node as any).hash = '2c5d165f6949799380261d9c92d0ef8c';
+(node as any).hash = 'dd52dc082e1d5ee12277da113318f16f';
 export default node;
