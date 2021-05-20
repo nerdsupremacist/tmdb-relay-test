@@ -14,6 +14,7 @@ import { graphql } from 'babel-plugin-relay/macro';
 import Cast from 'Cast';
 import Crew from 'Crew';
 import StreamingLinks from 'StreamingLinks';
+import Videos from 'Videos';
 import MovieHeader from './MovieHeader';
 import MovieParallaxBackdrop from './MovieParallaxBackdrop';
 import RecommendedMovieList from './RecommendedMovieList';
@@ -41,6 +42,10 @@ function DetailedMovieViewRoot(props: Props) {
                     crew {
                         ...Crew_credits
                     }
+                }
+
+                videos {
+                    ...Videos_videos
                 }
 
                 ...MovieParallaxBackdrop_movie
@@ -71,6 +76,11 @@ function DetailedMovieViewRoot(props: Props) {
             <MovieParallaxBackdrop movie={movie} />
             <Container maxW="container.md" paddingBottom={8} paddingTop={8}>
                 <VStack align="baseline" spacing={4}>
+                    <Text fontSize="xl" fontWeight="bold">
+                        Videos
+                    </Text>
+                    <Videos videos={movie.videos} />
+
                     <RecommendedMovieList movie={movie} />
                     
                     <Text fontSize="xl" fontWeight="bold">

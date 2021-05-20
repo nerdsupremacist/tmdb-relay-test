@@ -17,6 +17,9 @@ export type DetailedMovieViewRoot_movie = {
             readonly " $fragmentRefs": FragmentRefs<"Crew_credits">;
         }>;
     };
+    readonly videos: ReadonlyArray<{
+        readonly " $fragmentRefs": FragmentRefs<"Videos_videos">;
+    }>;
     readonly " $fragmentRefs": FragmentRefs<"MovieHeader_movie" | "MovieParallaxBackdrop_movie" | "SimilarMovieList_movie" | "RecommendedMovieList_movie">;
     readonly " $refType": "DetailedMovieViewRoot_movie";
 };
@@ -109,6 +112,22 @@ return {
       "storageKey": null
     },
     {
+      "alias": null,
+      "args": null,
+      "concreteType": "Video",
+      "kind": "LinkedField",
+      "name": "videos",
+      "plural": true,
+      "selections": [
+        {
+          "args": null,
+          "kind": "FragmentSpread",
+          "name": "Videos_videos"
+        }
+      ],
+      "storageKey": null
+    },
+    {
       "args": null,
       "kind": "FragmentSpread",
       "name": "MovieHeader_movie"
@@ -133,5 +152,5 @@ return {
   "abstractKey": null
 };
 })();
-(node as any).hash = '6aa735ddf59d5008dde3c9a304714dda';
+(node as any).hash = 'a2a7e5f9a36eca27eacfefa9a06f3743';
 export default node;

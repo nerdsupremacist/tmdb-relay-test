@@ -27,6 +27,7 @@
     "react-relay": "^11.0.2",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
+    "react-youtube": "^7.13.1",
     "relay-config": "^11.0.2",
     "relay-runtime": "^11.0.2",
     "scroll-into-view-if-needed": "^2.2.28",
