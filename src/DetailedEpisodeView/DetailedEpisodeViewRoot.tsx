@@ -11,6 +11,7 @@ import Crew from 'Crew';
 import RecommendedShows from 'DetailedShowView/RecommendedShows';
 import SimilarShows from 'DetailedShowView/SimilarShows';
 import StreamingLinks from 'StreamingLinks';
+import Videos from 'Videos';
 import EpisodeHeader from './EpisodeHeader';
 
 type Props = {
@@ -45,6 +46,10 @@ function DetailedEpisodeViewRoot(props: Props) {
                     crew {
                         ...Crew_credits
                     }
+                }
+
+                videos {
+                    ...Videos_videos
                 }
             }
         `,
@@ -85,6 +90,17 @@ function DetailedEpisodeViewRoot(props: Props) {
                         </>
                     )
                 }
+
+                {
+                    episode.videos.length > 0 && (
+                        <>
+                            <Text fontSize="xl" fontWeight="bold">
+                                    Videos
+                            </Text>
+                            <Videos videos={episode.videos} />
+                        </>
+                    )
+                }
                 
                 <Text fontSize="xl" fontWeight="bold">
                     Similar to {episode.show.name}
@@ -103,7 +119,7 @@ function DetailedEpisodeViewRoot(props: Props) {
                 }
 
                 <Text fontSize="xl" fontWeight="bold">
-                    Recommended
+                    Recommended based on {episode.show.name}
                 </Text>
                 <RecommendedShows show={episode.show} />
             </VStack>

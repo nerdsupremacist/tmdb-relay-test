@@ -24,6 +24,9 @@ export type DetailedEpisodeViewRoot_episode = {
             readonly " $fragmentRefs": FragmentRefs<"Crew_credits">;
         }>;
     };
+    readonly videos: ReadonlyArray<{
+        readonly " $fragmentRefs": FragmentRefs<"Videos_videos">;
+    }>;
     readonly " $fragmentRefs": FragmentRefs<"EpisodeHeader_episode">;
     readonly " $refType": "DetailedEpisodeViewRoot_episode";
 };
@@ -148,6 +151,22 @@ return {
       "storageKey": null
     },
     {
+      "alias": null,
+      "args": null,
+      "concreteType": "Video",
+      "kind": "LinkedField",
+      "name": "videos",
+      "plural": true,
+      "selections": [
+        {
+          "args": null,
+          "kind": "FragmentSpread",
+          "name": "Videos_videos"
+        }
+      ],
+      "storageKey": null
+    },
+    {
       "args": null,
       "kind": "FragmentSpread",
       "name": "EpisodeHeader_episode"
@@ -157,5 +176,5 @@ return {
   "abstractKey": null
 };
 })();
-(node as any).hash = 'a6659d33206bf869034038f572eab165';
+(node as any).hash = '29afad4c07dceec391c95e09c76a56d7';
 export default node;
