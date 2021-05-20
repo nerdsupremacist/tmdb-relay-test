@@ -122,10 +122,16 @@ function DetailedShowViewRoot(props: Props) {
                             )
                         }
                     </HorizonalScrollview>
-                    <Text fontSize="xl" fontWeight="bold">
-                        Cast
-                    </Text>
-                    <Cast credits={show.credits.cast} />
+                    {
+                        show.credits.cast.length > 0 && (
+                            <>
+                                <Text fontSize="xl" fontWeight="bold">
+                                    Cast
+                                </Text>
+                                <Cast credits={show.credits.cast} />
+                            </>
+                        )
+                    }
                 </VStack>
             </Container>
             <ShowParallaxBackdrop show={show}/>
