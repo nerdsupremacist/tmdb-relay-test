@@ -23,7 +23,7 @@ function Crew(props: Props) {
     );
     
     return (
-        <HorizonalScrollview align="start" maxW="100%" padding={2}>
+        <HorizonalScrollview align="start" maxW="100%" minW="100%" padding={2}>
             {
                 credits.map((credit, index) => {
                     return (
