@@ -32,7 +32,7 @@ function getRect<T extends HTMLElement>(element: T | null): RectResult {
     };
 }
 
-export function useRect<T extends HTMLElement>(
+function useRect<T extends HTMLElement>(
 ): [ForwardedRef<T>, RectResult] {
     const ref = useRef<T>(null);
 
@@ -65,3 +65,5 @@ export function useRect<T extends HTMLElement>(
 
     return [ref, rect];
 }
+
+export default useRect;

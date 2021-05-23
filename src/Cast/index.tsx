@@ -23,7 +23,7 @@ function Cast(props: Props) {
     );
 
     return (
-        <HorizonalScrollview align="start" maxW="100%" padding={2}>
+        <HorizonalScrollview align="start" maxW="100%" minW="100%" padding={2}>
             {
                 credits.map((credit, index) => {
                     return <CastCredit credit={credit} key={`cast_credit_${index}`} />;

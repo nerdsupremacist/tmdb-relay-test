@@ -4,7 +4,7 @@ import type { ForwardedRef, ReactNode } from 'react';
 import React, { forwardRef, useRef, useState } from 'react';
 import { Box, Flex, HStack, Spacer, useColorModeValue, useMergeRefs } from '@chakra-ui/react';
 
-import { useRect } from './useRect';
+import useRect from 'useRect';
 
 interface Props extends Omit<
     Omit<
