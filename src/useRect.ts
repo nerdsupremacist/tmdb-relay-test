@@ -1,4 +1,6 @@
-import { ForwardedRef, useCallback, useLayoutEffect, useRef, useState } from 'react';
+import type { ForwardedRef } from 'react';
+
+import { useCallback, useLayoutEffect, useRef, useState } from 'react';
 
 type RectResult = {
     height: number,
