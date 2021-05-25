@@ -49,7 +49,7 @@ function RecommendedMovieList(props: Props) {
         return null;
     }
 
-    const movies = data.recommendations.edges?.mapNotNull(edge => edge?.node) ?? [];
+    const movies = data.recommendations.edges?.compactMap(edge => edge?.node) ?? [];
 
     return (
         <>

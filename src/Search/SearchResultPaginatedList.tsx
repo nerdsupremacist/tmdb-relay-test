@@ -50,7 +50,7 @@ function SearchResultPaginatedList(props: Props) {
     );
 
     const selected = useSelected();
-    const nodes = data.search?.edges?.mapNotNull(edge => edge?.node) ?? [];
+    const nodes = data.search?.edges?.compactMap(edge => edge?.node) ?? [];
 
     const links = usePathLinks(nodes);
     useLinks(links);

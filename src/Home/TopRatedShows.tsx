@@ -40,7 +40,7 @@ function TopRatedShows(props: Props) {
         props.data,
     );
 
-    const nodes = data.tv.topRated.edges?.mapNotNull(edge => edge?.node) ?? [];
+    const nodes = data.tv.topRated.edges?.compactMap(edge => edge?.node) ?? [];
 
     return (
         <InfiniteScrollview

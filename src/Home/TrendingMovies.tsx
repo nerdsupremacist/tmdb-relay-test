@@ -39,7 +39,7 @@ function TrendingMovies(props: Props) {
         props.data,
     );
 
-    const movies = data.movies.trending.edges?.mapNotNull(edge => edge?.node) ?? [];
+    const movies = data.movies.trending.edges?.compactMap(edge => edge?.node) ?? [];
 
     return (
         <InfiniteScrollview

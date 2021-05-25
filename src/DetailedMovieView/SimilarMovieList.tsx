@@ -43,7 +43,7 @@ function SimilarMovieList(props: Props) {
         return null;
     }
 
-    const movies = data.similar.edges?.mapNotNull(edge => edge?.node) ?? [];
+    const movies = data.similar.edges?.compactMap(edge => edge?.node) ?? [];
 
     return (
         <>

@@ -181,7 +181,7 @@
 			"        props.$2",
 			"    );",
 			"",
-			"    const nodes = data.$3.edges?.mapNotNull(edge => edge?.node) ?? []",
+			"    const nodes = data.$3.edges?.compactMap(edge => edge?.node) ?? []",
 			"",
 			"    return (",
 			"        <InfiniteScrollview {...connection}>",

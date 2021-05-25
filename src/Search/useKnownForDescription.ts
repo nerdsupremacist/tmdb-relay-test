@@ -21,7 +21,7 @@ function useKnownForDescription(person: useKnownForDescription_person$key) {
         person,
     );
 
-    const names = decoded.knownFor.mapNotNull(item => {
+    const names = decoded.knownFor.compactMap(item => {
         switch (item.__typename) {
         case 'Movie':
             return item.title;

@@ -38,7 +38,7 @@ function SimilarShows(props: Props) {
         props.show,
     );
 
-    const nodes = data.similar.edges?.mapNotNull(edge => edge?.node) ?? [];
+    const nodes = data.similar.edges?.compactMap(edge => edge?.node) ?? [];
 
     return (
         <InfiniteScrollview

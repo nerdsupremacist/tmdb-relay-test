@@ -40,7 +40,7 @@ function ShowsOnTheAir(props: Props) {
         props.data,
     );
 
-    const nodes = data.tv.onTheAir.edges?.mapNotNull(edge => edge?.node) ?? [];
+    const nodes = data.tv.onTheAir.edges?.compactMap(edge => edge?.node) ?? [];
 
     return (
         <InfiniteScrollview

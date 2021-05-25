@@ -39,7 +39,7 @@ function TopRatedMovies(props: Props) {
         props.data,
     );
 
-    const movies = data.movies.topRated.edges?.mapNotNull(edge => edge?.node) ?? [];
+    const movies = data.movies.topRated.edges?.compactMap(edge => edge?.node) ?? [];
 
     return (
         <InfiniteScrollview

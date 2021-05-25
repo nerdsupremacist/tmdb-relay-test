@@ -2,11 +2,11 @@ import type { Rect } from './types';
 
 declare global {
     interface Array<T> {
-        mapNotNull<O>(transform: (element: T) => O | null | undefined): Array<O>;
+        compactMap<O>(transform: (element: T) => O | null | undefined): Array<O>;
     }
 
     interface ReadonlyArray<T> {
-        mapNotNull<O>(transform: (element: T) => O | null | undefined): Array<O>;
+        compactMap<O>(transform: (element: T) => O | null | undefined): Array<O>;
     }
 
     interface HTMLElement {
@@ -24,7 +24,7 @@ HTMLElement.prototype.getRect = function<T extends HTMLElement>(this: T): Rect {
     };
 };
 
-Array.prototype.mapNotNull = function<T, O>(this: T[], transform: (element: T) => O | null | undefined): O[] {
+Array.prototype.compactMap = function<T, O>(this: T[], transform: (element: T) => O | null | undefined): O[] {
     return this.map(transform).filter((x): x is O => x != null);
 };
 

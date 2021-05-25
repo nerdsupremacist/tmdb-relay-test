@@ -40,7 +40,7 @@ function TrendingShows(props: Props) {
         props.data,
     );
 
-    const nodes = data.tv.trending.edges?.mapNotNull(edge => edge?.node) ?? [];
+    const nodes = data.tv.trending.edges?.compactMap(edge => edge?.node) ?? [];
 
     return (
         <InfiniteScrollview

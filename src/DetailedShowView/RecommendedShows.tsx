@@ -41,7 +41,7 @@ function RecommendedShows(props: Props) {
         props.show,
     );
 
-    const nodes = data.recommendations.edges?.mapNotNull(edge => edge?.node) ?? [];
+    const nodes = data.recommendations.edges?.compactMap(edge => edge?.node) ?? [];
 
     return (
         <InfiniteScrollview

@@ -40,7 +40,7 @@ function PopularMovies(props: Props) {
         props.data,
     );
 
-    const nodes = data.movies.popular.edges?.mapNotNull(edge => edge?.node) ?? [];
+    const nodes = data.movies.popular.edges?.compactMap(edge => edge?.node) ?? [];
 
     return (
         <InfiniteScrollview

@@ -41,7 +41,7 @@ function NowPlayingMovies(props: Props) {
         props.data,
     );
 
-    const nodes = data.movies.nowPlaying.edges?.mapNotNull(edge => edge?.node) ?? [];
+    const nodes = data.movies.nowPlaying.edges?.compactMap(edge => edge?.node) ?? [];
 
     return (
         <InfiniteScrollview

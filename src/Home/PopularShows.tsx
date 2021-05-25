@@ -40,7 +40,7 @@ function PopularShows(props: Props) {
         props.data,
     );
 
-    const nodes = data.tv.popular.edges?.mapNotNull(edge => edge?.node) ?? [];
+    const nodes = data.tv.popular.edges?.compactMap(edge => edge?.node) ?? [];
 
     return (
         <InfiniteScrollview
