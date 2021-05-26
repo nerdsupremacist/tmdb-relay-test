@@ -37,6 +37,8 @@ jobs:
           cp -a build release/build
           cp Procfile release/Procfile
           cp .buildpacks release/.buildpacks
+       - name: Add known host file
+         run: echo "78.47.176.210 ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBNgbL1ikZ0maqh9bNW7tRCdPyAfh+SiAvE/cYqBsPCsqV4+k3sHg3iASi5ywriNqZ5IMKa7gfhBudVPxb/fqjdw=" > ./known_hosts
        - name: Push to Dokku
          uses: s0/git-publish-subdir-action@develop
          env:
@@ -44,4 +46,5 @@ jobs:
           REPO: dokku@78.47.176.210:tmdb-react
           BRANCH: master
           FOLDER: release
+          KNOWN_HOSTS_FILE: known_hosts
           SKIP_EMPTY_COMMITS: true
