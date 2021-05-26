@@ -71,7 +71,7 @@ jobs:
          run: |
           mkdir release
           cp -a build release/build
-          cp Procfile release/Procfile
+          cp static.json release/static.json
           cp .buildpacks release/.buildpacks
        - name: Add known host file
          run: echo "78.47.176.210 ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBNgbL1ikZ0maqh9bNW7tRCdPyAfh+SiAvE/cYqBsPCsqV4+k3sHg3iASi5ywriNqZ5IMKa7gfhBudVPxb/fqjdw=" > ./known_hosts
