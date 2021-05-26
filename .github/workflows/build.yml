@@ -19,12 +19,22 @@ jobs:
        - uses: actions/setup-node@v2
          with:
            node-version: '14'
-       - run: npm install
-       - run: npm run build
-       - name: Deploy
+       - name: Install Dependencies
+         run: npm install
+       - name: Build for Production
+         run: npm run build
+       - name: Prepare Release Folder
+         run: |
+          mkdir release
+          cp -a build release/build
+          cp -a .github release/.github
+          cp Procfile release/Procfile
+          cp .buildpacks release/.buildpacks
+       - name: Push to Release
          uses: s0/git-publish-subdir-action@develop
          env:
           REPO: self
           BRANCH: release
-          FOLDER: build
+          FOLDER: release
+          SKIP_EMPTY_COMMITS: true
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
