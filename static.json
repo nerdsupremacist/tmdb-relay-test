@@ -1,0 +1,11 @@
+{
+    "root": "build/",
+    "clean_urls": true,
+    "routes": {
+        "/static/*": "static/",
+        "/robots.txt": "robots.txt",
+        "/manifest.json": "manifest.json",
+        "/asset-manifest.json": "asset-manifest.json",
+        "/**": "index.html"
+    }
+}
