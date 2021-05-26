@@ -84,3 +84,4 @@ jobs:
           FOLDER: release
           KNOWN_HOSTS_FILE: known_hosts
           SKIP_EMPTY_COMMITS: true
+          SQUASH_HISTORY: true
