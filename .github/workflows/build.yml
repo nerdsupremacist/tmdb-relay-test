@@ -23,18 +23,25 @@ jobs:
          run: npm install
        - name: Build for Production
          run: npm run build
-       - name: Prepare Release Folder
-         run: |
-          mkdir release
-          cp -a build release/build
-          cp -a .github release/.github
-          cp Procfile release/Procfile
-          cp .buildpacks release/.buildpacks
-       - name: Push to Release
+       - name: Push to Release Branch
          uses: s0/git-publish-subdir-action@develop
          env:
           REPO: self
           BRANCH: release
-          FOLDER: release
+          FOLDER: build
           SKIP_EMPTY_COMMITS: true
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+       - name: Prepare Release Folder
+         run: |
+          mkdir release
+          cp -a build release/build
+          cp Procfile release/Procfile
+          cp .buildpacks release/.buildpacks
+       - name: Push to Dokku
+         uses: s0/git-publish-subdir-action@develop
+         env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          REPO: dokku@78.47.176.210:tmdb-react
+          BRANCH: master
+          FOLDER: release
+          SKIP_EMPTY_COMMITS: true
