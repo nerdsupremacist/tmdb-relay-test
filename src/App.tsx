@@ -1,10 +1,12 @@
 
 import React from 'react';
+import useMetaTags from 'react-metatags-hook';
 import {
     BrowserRouter as Router,
     Route,
     Switch,
 } from 'react-router-dom';
+import { useColorModeValue } from '@chakra-ui/color-mode';
 
 import DetailedEpisodeView from 'DetailedEpisodeView';
 import DetailedMovieView from 'DetailedMovieView';
@@ -16,6 +18,17 @@ import Navbar from 'Navbar';
 import { pathLink } from 'routes';
 
 function App() {
+    const themeColorName = useColorModeValue('white', 'gray.800');
+    const themeColor = `var(--chakra-colors-${themeColorName})`;
+    useMetaTags({
+        metas: [
+            {
+                content: themeColor,
+                name: 'theme-color',
+            },
+        ],
+    }, [themeColor]);
+
     const moviePath = pathLink('Movie');
     const showPath = pathLink('TVShow');
     const episodePath = pathLink('Episode');
