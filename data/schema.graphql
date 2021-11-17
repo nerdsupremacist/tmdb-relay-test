@@ -13,9 +13,9 @@ union AnyImage =
 
 enum BackdropSize {
   W300
-  Original
   W780
   W1280
+  Original
 }
 
 type BackdropSizeDetailImage {
@@ -126,12 +126,12 @@ type CrewCreditWithTVShow implements ICreditWithTVShow {
 
 scalar Date
 
-type Episode implements Node {
+type Episode implements IStreamable & Node {
   airDate: Date
   credits: EpisodeCreditsWithPerson!
   crew: [CrewCreditWithPerson!]!
   episodeNumber: Int!
-  externalIds: ExternalIDS!
+  externalIds: IExternalIDS!
   guestStars: [CastCreditWithPerson!]!
 
   # The id of the object
@@ -142,11 +142,15 @@ type Episode implements Node {
   overview: String!
   previous: Episode
   productionCode: String!
+  searchStreamingOptions(
+    countries: [ID!]
+    providers: [ID!]!
+  ): [StreamingResultForProvideer!]!
   season: Season!
   seasonNumber: Int!
   show: TVShow!
   still(size: StillSize!): URL
-  streamingOptions: [StreamingOption!]
+  streamingOptions(country: ID): [StreamingOption!]
   translations: [TranslationWithTranslatedMovieInfo!]!
   videos: [Video!]!
   voteAverage: Float!
@@ -164,7 +168,7 @@ type EpisodeImages {
   stills: [StillSizeDetailImage!]!
 }
 
-type ExternalIDS {
+type ExternalIDS implements IExternalIDS {
   facebook: String
   imdb: String
   instagram: String
@@ -172,13 +176,13 @@ type ExternalIDS {
 }
 
 enum ExternalSource {
-  Freebase
-  Facebook
-  Tvrage
   Twitter
+  Facebook
+  Instagram
+  Tvrage
   Tvdb
   Imdb
-  Instagram
+  Freebase
 }
 
 type FromExternalIds {
@@ -187,15 +191,42 @@ type FromExternalIds {
   tv: [TVShow!]!
 }
 
-enum Gender {
-  UnknownOrNonBinary
-  Female
-  Male
+type FullExternalIDS implements IExternalIDS {
+  facebook: String
+  imdb: String
+  instagram: String
+  tmdb: Int!
+  twitter: String
 }
 
-type Genre {
-  id: Int!
+enum Gender {
+  Male
+  Female
+  UnknownOrNonBinary
+}
+
+type Genre implements Node {
+  # The id of the object
+  id: ID!
+  movies: NestedMovies!
   name: String!
+  tv: NestedTV!
+}
+
+type GenreConnection {
+  edges: [GenreEdge]
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type GenreEdge {
+  cursor: String!
+  node: Genre
+}
+
+type Genres {
+  all(first: Int, before: String, after: String, last: Int): GenreConnection!
+  genre(id: ID!): Genre!
 }
 
 interface ICreditWithMovie {
@@ -224,20 +255,37 @@ interface ICreditsWithPerson {
   id: Int!
 }
 
-type Keyword {
-  id: Int!
-  movies(before: String, first: Int, after: String, last: Int): MovieConnection!
+interface IExternalIDS {
+  facebook: String
+  imdb: String
+  instagram: String
+  twitter: String
+}
+
+interface IStreamable {
+  searchStreamingOptions(
+    providers: [ID!]!
+    countries: [ID!]
+  ): [StreamingResultForProvideer!]!
+  streamingOptions(country: ID): [StreamingOption!]
+}
+
+type Keyword implements Node {
+  # The id of the object
+  id: ID!
+  movies: NestedMovies!
   name: String!
+  tv: NestedTV!
 }
 
 enum LogoSize {
-  W154
-  W185
-  W45
   W92
-  W500
-  Original
   W300
+  W500
+  W154
+  W45
+  W185
+  Original
 }
 
 type LogoSizeDetailImage {
@@ -255,12 +303,12 @@ type MediaImages {
   posters: [PosterSizeDetailImage!]!
 }
 
-type Movie implements Node {
+type Movie implements IStreamable & Node {
   alternativeTitles: [AlternativeTitle!]!
   backdrop(size: BackdropSize!): URL
   budget: Int
   credits: ICreditsWithPerson!
-  externalIds: ExternalIDS!
+  externalIds: FullExternalIDS!
   genres: [Genre!]!
   homepage: URL
 
@@ -282,28 +330,32 @@ type Movie implements Node {
   rating: Float!
   recommendations(
     last: Int
-    first: Int
-    after: String
     before: String
+    after: String
+    first: Int
   ): MovieConnection!
   releaseDate: Date
   revenue: Int
   reviews(
     last: Int
     before: String
-    after: String
     first: Int
+    after: String
   ): ReviewConnection!
   runtime: Int!
+  searchStreamingOptions(
+    providers: [ID!]!
+    countries: [ID!]
+  ): [StreamingResultForProvideer!]!
   similar(
     before: String
-    after: String
     first: Int
     last: Int
+    after: String
   ): MovieConnection!
   spokenLanguages: [SpokenLanguage!]!
   status: Status!
-  streamingOptions: [StreamingOption!]
+  streamingOptions(country: ID): [StreamingOption!]
   tagline: String!
   title: String!
   translations: [TranslationWithTranslatedMovieInfo!]!
@@ -346,43 +398,89 @@ type Movies {
   ): MovieConnection!
   popular(
     before: String
-    last: Int
     first: Int
     after: String
+    last: Int
   ): MovieConnection!
+  productionCompany(id: ID!): ProductionCompany!
   search(
-    after: String
     before: String
+    after: String
+    last: Int
     term: String!
+    first: Int
+  ): MovieConnection!
+  topRated(
+    before: String
+    after: String
+    last: Int
+    first: Int
+  ): MovieConnection!
+  trending(
+    timeWindow: TimeWindow! = Day
+    before: String
+    after: String
+    last: Int
+    first: Int
+  ): MovieConnection!
+  upcoming(
+    after: String
+    first: Int
+    last: Int
+    before: String
+  ): MovieConnection!
+}
+
+type NestedMovies {
+  latest(after: String, last: Int, first: Int, before: String): MovieConnection!
+  popular(
+    before: String
+    after: String
     first: Int
     last: Int
   ): MovieConnection!
   topRated(
-    before: String
+    after: String
     last: Int
     first: Int
-    after: String
-  ): MovieConnection!
-  trending(
-    last: Int
-    first: Int
-    after: String
     before: String
-    timeWindow: TimeWindow! = Day
-  ): MovieConnection!
-  upcoming(
-    before: String
-    last: Int
-    first: Int
-    after: String
   ): MovieConnection!
 }
 
-type Network {
-  id: Int!
+type NestedTV {
+  latest(
+    last: Int
+    first: Int
+    after: String
+    before: String
+  ): TVShowConnection!
+  onTheAir(
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): TVShowConnection!
+  popular(
+    last: Int
+    first: Int
+    after: String
+    before: String
+  ): TVShowConnection!
+  topRated(
+    last: Int
+    first: Int
+    after: String
+    before: String
+  ): TVShowConnection!
+}
+
+type Network implements Node {
+  # The id of the object
+  id: ID!
   logo(size: LogoSize!): URL
   name: String!
   originCountry: String!
+  tv: NestedTV!
 }
 
 interface Node {
@@ -400,24 +498,24 @@ type PageInfo {
 type People {
   person(id: ID!): Person!
   popular(
-    last: Int
     first: Int
-    after: String
+    last: Int
     before: String
+    after: String
   ): PersonConnection!
   search(
     last: Int
     term: String!
-    first: Int
     before: String
     after: String
+    first: Int
   ): PersonConnection!
   trending(
-    last: Int
-    first: Int
-    before: String
     timeWindow: TimeWindow! = Day
     after: String
+    first: Int
+    before: String
+    last: Int
   ): PersonConnection!
 }
 
@@ -427,7 +525,7 @@ type Person implements Node {
   birthday: Date
   credits: PersonCredits!
   deathday: Date
-  externalIds: ExternalIDS!
+  externalIds: FullExternalIDS!
   gender: Gender!
   homepage: URL
 
@@ -443,10 +541,10 @@ type Person implements Node {
   popularityIndex: Float!
   profilePicture(size: ProfileSize!): URL
   taggedImages(
-    before: String
-    after: String
-    last: Int
     first: Int
+    last: Int
+    after: String
+    before: String
   ): TaggedImageConnection!
   translations: [TranslationWithTranslatedPersonInfo!]!
 }
@@ -469,13 +567,13 @@ type PersonEdge {
 }
 
 enum PosterSize {
-  W154
-  W780
-  W92
-  W342
   Original
+  W92
   W185
+  W780
+  W342
   W500
+  W154
 }
 
 type PosterSizeDetailImage {
@@ -493,11 +591,14 @@ type Price {
   currency: String!
 }
 
-type ProductionCompany {
-  id: Int!
+type ProductionCompany implements Node {
+  # The id of the object
+  id: ID!
   logo(size: LogoSize!): URL
+  movies: NestedMovies!
   name: String!
   originCountry: String!
+  tv: NestedTV!
 }
 
 type ProductionCountry {
@@ -506,10 +607,10 @@ type ProductionCountry {
 }
 
 enum ProfileSize {
-  Original
+  W185
   H632
   W45
-  W185
+  Original
 }
 
 type ProfileSizeDetailImage {
@@ -523,7 +624,8 @@ type ProfileSizeDetailImage {
 }
 
 type Query {
-  find(source: ExternalSource!, externalId: String!): FromExternalIds!
+  find(externalId: String!, source: ExternalSource!): FromExternalIds!
+  genres: Genres!
   movies: Movies!
 
   # Fetches an object given its ID
@@ -533,18 +635,19 @@ type Query {
   ): Node
   people: People!
   search(
-    before: String
     after: String
     term: String!
     last: Int
-    first: Int
-  ): MovieOrTVOrPeopleConnection!
-  trending(
-    last: Int
-    timeWindow: TimeWindow! = Day
     before: String
     first: Int
+  ): MovieOrTVOrPeopleConnection!
+  streaming: Streaming!
+  trending(
+    timeWindow: TimeWindow! = Day
     after: String
+    last: Int
+    before: String
+    first: Int
   ): MovieOrTVOrPeopleConnection!
   tv: TV!
 }
@@ -567,13 +670,13 @@ type ReviewEdge {
   node: Review
 }
 
-type Season implements Node {
+type Season implements IStreamable & Node {
   airDate: Date
   credits: ICreditsWithPerson!
   episode(number: Int!): Episode!
   episodeCount: Int!
   episodes: [Episode!]!
-  externalIds: ExternalIDS!
+  externalIds: IExternalIDS!
 
   # The id of the object
   id: ID!
@@ -581,9 +684,13 @@ type Season implements Node {
   name: String!
   overview: String
   poster(size: PosterSize!): URL
+  searchStreamingOptions(
+    providers: [ID!]!
+    countries: [ID!]
+  ): [StreamingResultForProvideer!]!
   seasonNumber: Int!
   show: TVShow!
-  streamingOptions: [StreamingOption!]
+  streamingOptions(country: ID): [StreamingOption!]
   videos: [Video!]!
 }
 
@@ -594,18 +701,18 @@ type SpokenLanguage {
 
 enum Status {
   Released
+  Planned
   InProduction
   Rumored
-  Planned
   Cancelled
   PostProduction
 }
 
 enum StillSize {
-  W185
   Original
-  W300
+  W185
   W92
+  W300
 }
 
 type StillSizeDetailImage {
@@ -613,10 +720,37 @@ type StillSizeDetailImage {
   height: Int!
   image(size: StillSize!): URL!
   iso639_1: String
-  url: URL!
   voteAverage: Float!
   voteCount: Int!
   width: Int!
+}
+
+type Streamable implements IStreamable {
+  searchStreamingOptions(
+    providers: [ID!]!
+    countries: [ID!]
+  ): [StreamingResultForProvideer!]!
+  streamingOptions(country: ID): [StreamingOption!]
+}
+
+type Streaming {
+  countries: [StreamingCountry!]!
+  myCountry: StreamingCountry
+  providers(country: ID): [StreamingProvider!]!
+}
+
+type StreamingCountry implements Node {
+  emoji: String!
+
+  # The id of the object
+  id: ID!
+  iso3166_2: String!
+  name: String!
+}
+
+type StreamingCountryOption {
+  country: StreamingCountry!
+  option: StreamingOption!
 }
 
 type StreamingLinks {
@@ -627,10 +761,10 @@ type StreamingLinks {
 }
 
 enum StreamingMonetizationType {
-  Cinema
-  Free
   Buy
+  Cinema
   Flatrate
+  Free
   Ads
   Rent
 }
@@ -638,7 +772,7 @@ enum StreamingMonetizationType {
 type StreamingOption {
   bestOffering: StreamingOptionOffering!
   offerings: [StreamingOptionOffering!]!
-  provider: StreamingProvider
+  provider(country: ID): StreamingProvider
 }
 
 type StreamingOptionOffering {
@@ -648,72 +782,81 @@ type StreamingOptionOffering {
   type: StreamingMonetizationType!
 }
 
-type StreamingProvider {
+type StreamingProvider implements Node {
   iconURL: URL!
-  id: Int!
+
+  # The id of the object
+  id: ID!
   monetizationTypes: [StreamingMonetizationType!]!
   name: String!
   slug: String!
 }
 
+type StreamingResultForProvideer {
+  bestOption: StreamingCountryOption!
+  options: [StreamingCountryOption!]!
+  provider(country: ID): StreamingProvider
+}
+
 type TV {
   airingToday(
-    last: Int
-    first: Int
     after: String
+    last: Int
     before: String
+    first: Int
   ): TVShowConnection!
   episode(id: ID!): Episode!
+  network(id: ID!): Network!
   onTheAir(
-    last: Int
-    first: Int
-    after: String
     before: String
+    last: Int
+    after: String
+    first: Int
   ): TVShowConnection!
   popular(
-    first: Int
-    before: String
-    last: Int
     after: String
+    before: String
+    first: Int
+    last: Int
   ): TVShowConnection!
   search(
     after: String
     before: String
     term: String!
-    last: Int
     first: Int
+    last: Int
   ): TVShowConnection!
   season(id: ID!): Season!
   show(id: ID!): TVShow!
   topRated(
+    after: String
     last: Int
     first: Int
-    after: String
     before: String
   ): TVShowConnection!
   trending(
+    before: String
     last: Int
     timeWindow: TimeWindow! = Day
-    after: String
-    before: String
     first: Int
+    after: String
   ): TVShowConnection!
   upcoming(
-    before: String
-    after: String
     first: Int
     last: Int
+    after: String
+    before: String
   ): TVShowConnection!
 }
 
-type TVShow implements Node {
+type TVShow implements IStreamable & Node {
   alternativeTitles: [AlternativeTitle!]!
   backdrop(size: BackdropSize!): URL
   createdBy: [ICreditWithPerson!]!
   credits: ICreditsWithPerson!
   episodeRunTime: [Int!]!
   episodes: [Episode!]!
-  externalIds: ExternalIDS!
+  externalIds: FullExternalIDS!
   firstAirDate: Date
   genres: [Genre!]!
   homepage: URL
@@ -742,26 +885,30 @@ type TVShow implements Node {
   rating: Float!
   recommendations(
     last: Int
-    after: String
-    first: Int
     before: String
+    first: Int
+    after: String
   ): TVShowConnection!
   reviews(
-    last: Int
     before: String
-    after: String
     first: Int
+    after: String
+    last: Int
   ): ReviewConnection!
+  searchStreamingOptions(
+    countries: [ID!]
+    providers: [ID!]!
+  ): [StreamingResultForProvideer!]!
   season(number: Int!): Season!
   seasons: [Season!]!
   similar(
+    first: Int
     after: String
     last: Int
     before: String
-    first: Int
   ): TVShowConnection!
   status: String!
-  streamingOptions: [StreamingOption!]
+  streamingOptions(country: ID): [StreamingOption!]
   topRatedEpisode: Episode
   translations: [TranslationWithTranslatedMovieInfo!]!
   type: String!
@@ -796,8 +943,8 @@ type TaggedImageEdge {
 }
 
 enum TimeWindow {
-  Day
   Week
+  Day
 }
 
 type TranslatedMovieInfo {
@@ -841,10 +988,10 @@ type Video {
 }
 
 enum VideoResolution {
+  Sd
+  Bluray
+  UltraHd
+  Theatre
   Hd
   Dvd
-  Theatre
-  UltraHd
-  Bluray
-  Sd
 }
