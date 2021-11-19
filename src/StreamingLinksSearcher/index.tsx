@@ -1,4 +1,5 @@
 import React from 'react';
+import { VStack } from '@chakra-ui/react';
 import { ModalBody } from '@chakra-ui/modal';
 
 import StreamingLinkFormDataProvider from './StreamingLinkFormDataProvider';
@@ -13,8 +14,10 @@ function StreamingLinksSearcher(props: Props) {
     return (
         <ModalBody h="600">
             <StreamingLinkFormDataProvider>
-                <StreamingLinkSearcherForm />
-                <StreamingLinkSearchResults id={props.id} />
+                <VStack padding="4vh" w="100%">
+                    <StreamingLinkSearcherForm />
+                    <StreamingLinkSearchResults id={props.id} />
+                </VStack>
             </StreamingLinkFormDataProvider>
         </ModalBody>
     );

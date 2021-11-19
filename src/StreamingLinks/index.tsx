@@ -69,6 +69,7 @@ function StreamingLinks(props: Props) {
                                     borderWidth="1px"
                                     h="50"
                                     minW="50"
+                                    shadow="xl"
                                     w="50"
                                 >
                                     <Center>

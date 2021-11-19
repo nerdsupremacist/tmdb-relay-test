@@ -27,19 +27,22 @@ function StreamingLinkSearcherForm() {
     }, [providerOptions]);
 
     return (
-        <VStack padding="4vh" w="100%">
+        <VStack w="100%">
             <Text fontSize="2xl" fontWeight="bold">
                 Search for Streams
             </Text>
             <Text align="start" fontSize="sm" fontWeight="light" w="100%">
                 Find the best way to watch what you want to watch!
             </Text>
-            <Text align="start" fontSize="md" fontWeight="semibold" w="100%">
+
+            <VStack spacing={0} w="100%">
+                <Text align="start" fontSize="md" fontWeight="semibold" w="100%">
                 Streaming Services
-            </Text>
-            <Text align="start" fontSize="sm" fontWeight="light" w="100%">
-                Select the Streaming Services you have access to
-            </Text>
+                </Text>
+                <Text align="start" fontSize="sm" fontWeight="light" w="100%">
+                Select the Streaming Services you have access to.
+                </Text>
+            </VStack>
             <MultiSelect
                 onChange={value => {
                     setSelectedProviders(value as (string[]));
@@ -48,12 +51,14 @@ function StreamingLinkSearcherForm() {
                 placeholder="Netflix, Disney Plus, Apple TV Plus"
                 value={selectedProviders}
             />
-            <Text align="start" fontSize="md" fontWeight="semibold" w="100%">
-                Countries
-            </Text>
-            <Text align="start" fontSize="sm" fontWeight="light" w="100%">
-                Select the countries in which you would like to watch.
-            </Text>
+            <VStack spacing={0} w="100%">
+                <Text align="start" fontSize="md" fontWeight="semibold" w="100%">
+                    Countries
+                </Text>
+                <Text align="start" fontSize="sm" fontWeight="light" w="100%">
+                    Select the countries in which you would like to watch.
+                </Text>
+            </VStack>
             <MultiSelect
                 onChange={value => {
                     setSelectedCountries(value as (string[]));
@@ -63,7 +68,8 @@ function StreamingLinkSearcherForm() {
                 value={selectedCountries}
             />
             <Text align="end" fontSize="sm" fontWeight="light" w="100%">
-                If you have access to a VPN Service, you can enter multiple countries.
+                If you are able to spoof your location (i.e. with a VPN Service),
+                feel free enter as many countries as you like.
             </Text>
         </VStack>
     );

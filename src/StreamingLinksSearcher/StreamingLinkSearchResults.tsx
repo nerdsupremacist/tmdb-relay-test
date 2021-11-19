@@ -6,7 +6,7 @@ import type { ErrorBoundary } from 'react-error-boundary';
 import StreamingLinkSearchResultsQuery from './__generated__/StreamingLinkSearchResultsQuery.graphql';
 
 import React, { useEffect, useRef } from 'react';
-import { Link, Text, VStack, Wrap, WrapItem } from '@chakra-ui/react';
+import { Divider, Link, Text, VStack, Wrap, WrapItem } from '@chakra-ui/react';
 
 import { PreloadedQuery, usePreloadedQuery, useQueryLoader } from 'react-relay';
 import { graphql } from 'babel-plugin-relay/macro';
@@ -63,8 +63,9 @@ function StreamingLinkSearchResults(props: LoadedProps) {
     }
 
     return (
-        <VStack align="start" padding="4vh" w="100%">
-            <Text fontSize="2xl" fontWeight="bold">Streaming Links</Text>
+        <VStack align="start" w="100%">
+            <Divider />
+            <Text fontSize="2xl" fontWeight="bold">Links</Text>
             <Wrap spacing={2} >
                 {
                     options.map((option, index) => {
