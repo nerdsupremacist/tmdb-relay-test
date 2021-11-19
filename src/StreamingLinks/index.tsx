@@ -55,7 +55,12 @@ function StreamingLinks(props: Props) {
                         })
                     }
                     <Tooltip bg="gray.300" color="black" hasArrow label="Find the right place to watch it">
-                        <Link onClick={onOpen}>
+                        <Link
+                            onClick={onOpen}
+                            style={{
+                                textDecoration: 'none',
+                            }}
+                        >
                             <VStack align="center" spacing="0">
                                 <Box
                                     alignContent="center"
