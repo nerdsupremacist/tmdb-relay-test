@@ -3,6 +3,7 @@
 // @ts-nocheck
 
 import { ReaderFragment } from "relay-runtime";
+
 import { FragmentRefs } from "relay-runtime";
 export type KnownForList_person = {
     readonly knownFor: ReadonlyArray<{
@@ -23,7 +24,7 @@ export type KnownForList_person = {
 };
 export type KnownForList_person$data = KnownForList_person;
 export type KnownForList_person$key = {
-    readonly " $data"?: KnownForList_person$data;
+    readonly " $data"?: KnownForList_person$data | undefined;
     readonly " $fragmentRefs": FragmentRefs<"KnownForList_person">;
 };
 

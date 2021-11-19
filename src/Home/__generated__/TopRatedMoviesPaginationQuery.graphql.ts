@@ -3,10 +3,11 @@
 // @ts-nocheck
 
 import { ConcreteRequest } from "relay-runtime";
+
 import { FragmentRefs } from "relay-runtime";
 export type TopRatedMoviesPaginationQueryVariables = {
     count: number;
-    cursor?: string | null;
+    cursor?: string | null | undefined;
 };
 export type TopRatedMoviesPaginationQueryResponse = {
     readonly " $fragmentRefs": FragmentRefs<"TopRatedMovies_data">;

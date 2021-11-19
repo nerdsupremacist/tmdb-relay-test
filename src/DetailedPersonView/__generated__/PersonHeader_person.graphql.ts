@@ -3,6 +3,7 @@
 // @ts-nocheck
 
 import { ReaderFragment } from "relay-runtime";
+
 import { FragmentRefs } from "relay-runtime";
 export type PersonHeader_person = {
     readonly name: string;
@@ -20,7 +21,7 @@ export type PersonHeader_person = {
 };
 export type PersonHeader_person$data = PersonHeader_person;
 export type PersonHeader_person$key = {
-    readonly " $data"?: PersonHeader_person$data;
+    readonly " $data"?: PersonHeader_person$data | undefined;
     readonly " $fragmentRefs": FragmentRefs<"PersonHeader_person">;
 };
 
@@ -76,7 +77,7 @@ const node: ReaderFragment = {
     {
       "alias": null,
       "args": null,
-      "concreteType": "ExternalIDS",
+      "concreteType": "FullExternalIDS",
       "kind": "LinkedField",
       "name": "externalIds",
       "plural": false,

@@ -3,6 +3,7 @@
 // @ts-nocheck
 
 import { ReaderFragment } from "relay-runtime";
+
 import { FragmentRefs } from "relay-runtime";
 export type SeasonRow_season = {
     readonly seasonNumber: number;
@@ -14,7 +15,7 @@ export type SeasonRow_season = {
 };
 export type SeasonRow_season$data = SeasonRow_season;
 export type SeasonRow_season$key = {
-    readonly " $data"?: SeasonRow_season$data;
+    readonly " $data"?: SeasonRow_season$data | undefined;
     readonly " $fragmentRefs": FragmentRefs<"SeasonRow_season">;
 };
 

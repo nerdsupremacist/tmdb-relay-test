@@ -3,6 +3,7 @@
 // @ts-nocheck
 
 import { ReaderFragment } from "relay-runtime";
+
 import { FragmentRefs } from "relay-runtime";
 export type Status = "Cancelled" | "InProduction" | "Planned" | "PostProduction" | "Released" | "Rumored" | "%future added value";
 export type MovieRatingCircle_movie = {
@@ -13,7 +14,7 @@ export type MovieRatingCircle_movie = {
 };
 export type MovieRatingCircle_movie$data = MovieRatingCircle_movie;
 export type MovieRatingCircle_movie$key = {
-    readonly " $data"?: MovieRatingCircle_movie$data;
+    readonly " $data"?: MovieRatingCircle_movie$data | undefined;
     readonly " $fragmentRefs": FragmentRefs<"MovieRatingCircle_movie">;
 };
 

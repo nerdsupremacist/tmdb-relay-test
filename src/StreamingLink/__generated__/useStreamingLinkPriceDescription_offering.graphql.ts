@@ -3,6 +3,7 @@
 // @ts-nocheck
 
 import { ReaderFragment } from "relay-runtime";
+
 import { FragmentRefs } from "relay-runtime";
 export type StreamingMonetizationType = "Ads" | "Buy" | "Cinema" | "Flatrate" | "Free" | "Rent" | "%future added value";
 export type useStreamingLinkPriceDescription_offering = {
@@ -15,7 +16,7 @@ export type useStreamingLinkPriceDescription_offering = {
 };
 export type useStreamingLinkPriceDescription_offering$data = useStreamingLinkPriceDescription_offering;
 export type useStreamingLinkPriceDescription_offering$key = {
-    readonly " $data"?: useStreamingLinkPriceDescription_offering$data;
+    readonly " $data"?: useStreamingLinkPriceDescription_offering$data | undefined;
     readonly " $fragmentRefs": FragmentRefs<"useStreamingLinkPriceDescription_offering">;
 };
 

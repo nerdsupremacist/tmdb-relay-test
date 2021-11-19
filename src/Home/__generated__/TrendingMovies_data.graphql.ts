@@ -3,6 +3,7 @@
 // @ts-nocheck
 
 import { ReaderFragment } from "relay-runtime";
+import TrendingMoviesPaginationQuery from "./TrendingMoviesPaginationQuery.graphql";
 import { FragmentRefs } from "relay-runtime";
 export type TrendingMovies_data = {
     readonly movies: {
@@ -18,7 +19,7 @@ export type TrendingMovies_data = {
 };
 export type TrendingMovies_data$data = TrendingMovies_data;
 export type TrendingMovies_data$key = {
-    readonly " $data"?: TrendingMovies_data$data;
+    readonly " $data"?: TrendingMovies_data$data | undefined;
     readonly " $fragmentRefs": FragmentRefs<"TrendingMovies_data">;
 };
 
@@ -62,7 +63,7 @@ return {
         "path": (v0/*: any*/)
       },
       "fragmentPathInResult": [],
-      "operation": require('./TrendingMoviesPaginationQuery.graphql.ts')
+      "operation": TrendingMoviesPaginationQuery
     }
   },
   "name": "TrendingMovies_data",

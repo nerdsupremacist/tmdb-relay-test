@@ -3,6 +3,7 @@
 // @ts-nocheck
 
 import { ReaderFragment } from "relay-runtime";
+
 import { FragmentRefs } from "relay-runtime";
 export type StreamingLinkToolTip_option = {
     readonly provider: {
@@ -12,7 +13,7 @@ export type StreamingLinkToolTip_option = {
 };
 export type StreamingLinkToolTip_option$data = StreamingLinkToolTip_option;
 export type StreamingLinkToolTip_option$key = {
-    readonly " $data"?: StreamingLinkToolTip_option$data;
+    readonly " $data"?: StreamingLinkToolTip_option$data | undefined;
     readonly " $fragmentRefs": FragmentRefs<"StreamingLinkToolTip_option">;
 };
 

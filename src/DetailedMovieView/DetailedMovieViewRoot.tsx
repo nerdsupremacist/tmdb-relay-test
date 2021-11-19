@@ -27,7 +27,8 @@ type Props = {
 function DetailedMovieViewRoot(props: Props) {
     const movie = useFragment(
         graphql`
-            fragment DetailedMovieViewRoot_movie on Movie {    
+            fragment DetailedMovieViewRoot_movie on Movie {   
+                id 
                 ...MovieHeader_movie
                 streamingOptions {
                     ...StreamingLinks_links
@@ -63,7 +64,7 @@ function DetailedMovieViewRoot(props: Props) {
                     <MovieHeader movie={movie} />
                     {
                         movie.streamingOptions != null && (
-                            <StreamingLinks links={movie.streamingOptions} />
+                            <StreamingLinks id={movie.id} links={movie.streamingOptions} />
                         )
                     }
                     <Text>{movie.overview}</Text>

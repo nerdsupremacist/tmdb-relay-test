@@ -3,6 +3,7 @@
 // @ts-nocheck
 
 import { ReaderFragment } from "relay-runtime";
+
 import { FragmentRefs } from "relay-runtime";
 export type routes_usePathLink_node = {
     readonly " $fragmentRefs": FragmentRefs<"routes_usePathLinks_nodes">;
@@ -10,7 +11,7 @@ export type routes_usePathLink_node = {
 };
 export type routes_usePathLink_node$data = routes_usePathLink_node;
 export type routes_usePathLink_node$key = {
-    readonly " $data"?: routes_usePathLink_node$data;
+    readonly " $data"?: routes_usePathLink_node$data | undefined;
     readonly " $fragmentRefs": FragmentRefs<"routes_usePathLink_node">;
 };
 

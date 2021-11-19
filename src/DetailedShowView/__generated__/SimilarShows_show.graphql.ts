@@ -3,6 +3,7 @@
 // @ts-nocheck
 
 import { ReaderFragment } from "relay-runtime";
+import SimilarShowsPaginationQuery from "./SimilarShowsPaginationQuery.graphql";
 import { FragmentRefs } from "relay-runtime";
 export type SimilarShows_show = {
     readonly similar: {
@@ -17,7 +18,7 @@ export type SimilarShows_show = {
 };
 export type SimilarShows_show$data = SimilarShows_show;
 export type SimilarShows_show$key = {
-    readonly " $data"?: SimilarShows_show$data;
+    readonly " $data"?: SimilarShows_show$data | undefined;
     readonly " $fragmentRefs": FragmentRefs<"SimilarShows_show">;
 };
 
@@ -62,7 +63,7 @@ return {
       "fragmentPathInResult": [
         "node"
       ],
-      "operation": require('./SimilarShowsPaginationQuery.graphql.ts'),
+      "operation": SimilarShowsPaginationQuery,
       "identifierField": "id"
     }
   },

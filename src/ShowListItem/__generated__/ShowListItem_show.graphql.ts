@@ -3,6 +3,7 @@
 // @ts-nocheck
 
 import { ReaderFragment } from "relay-runtime";
+
 import { FragmentRefs } from "relay-runtime";
 export type ShowListItem_show = {
     readonly name: string;
@@ -12,7 +13,7 @@ export type ShowListItem_show = {
 };
 export type ShowListItem_show$data = ShowListItem_show;
 export type ShowListItem_show$key = {
-    readonly " $data"?: ShowListItem_show$data;
+    readonly " $data"?: ShowListItem_show$data | undefined;
     readonly " $fragmentRefs": FragmentRefs<"ShowListItem_show">;
 };
 

@@ -26,6 +26,7 @@ function DetailedShowViewRoot(props: Props) {
     const show = useFragment(
         graphql`
             fragment DetailedShowViewRoot_show on TVShow {
+                id
                 ...ShowHeader_show
                 streamingOptions {
                     ...StreamingLinks_links
@@ -79,7 +80,7 @@ function DetailedShowViewRoot(props: Props) {
                     }
                     {
                         show.streamingOptions != null && (
-                            <StreamingLinks links={show.streamingOptions} />
+                            <StreamingLinks id={show.id} links={show.streamingOptions} />
                         )
                     }
                     <Text>{show.overview}</Text>

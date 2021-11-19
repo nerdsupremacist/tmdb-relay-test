@@ -3,6 +3,7 @@
 // @ts-nocheck
 
 import { ReaderFragment } from "relay-runtime";
+import SearchResultPaginatedListPaginationQuery from "./SearchResultPaginatedListPaginationQuery.graphql";
 import { FragmentRefs } from "relay-runtime";
 export type SearchResultPaginatedList_data = {
     readonly search: {
@@ -16,7 +17,7 @@ export type SearchResultPaginatedList_data = {
 };
 export type SearchResultPaginatedList_data$data = SearchResultPaginatedList_data;
 export type SearchResultPaginatedList_data$key = {
-    readonly " $data"?: SearchResultPaginatedList_data$data;
+    readonly " $data"?: SearchResultPaginatedList_data$data | undefined;
     readonly " $fragmentRefs": FragmentRefs<"SearchResultPaginatedList_data">;
 };
 
@@ -64,7 +65,7 @@ return {
         "path": (v0/*: any*/)
       },
       "fragmentPathInResult": [],
-      "operation": require('./SearchResultPaginatedListPaginationQuery.graphql.ts')
+      "operation": SearchResultPaginatedListPaginationQuery
     }
   },
   "name": "SearchResultPaginatedList_data",

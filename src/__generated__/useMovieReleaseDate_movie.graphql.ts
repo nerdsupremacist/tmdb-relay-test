@@ -3,6 +3,7 @@
 // @ts-nocheck
 
 import { ReaderFragment } from "relay-runtime";
+
 import { FragmentRefs } from "relay-runtime";
 export type useMovieReleaseDate_movie = {
     readonly releaseDate: string | null;
@@ -10,7 +11,7 @@ export type useMovieReleaseDate_movie = {
 };
 export type useMovieReleaseDate_movie$data = useMovieReleaseDate_movie;
 export type useMovieReleaseDate_movie$key = {
-    readonly " $data"?: useMovieReleaseDate_movie$data;
+    readonly " $data"?: useMovieReleaseDate_movie$data | undefined;
     readonly " $fragmentRefs": FragmentRefs<"useMovieReleaseDate_movie">;
 };
 

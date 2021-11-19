@@ -3,6 +3,7 @@
 // @ts-nocheck
 
 import { ReaderFragment } from "relay-runtime";
+
 import { FragmentRefs } from "relay-runtime";
 export type Cast_credits = ReadonlyArray<{
     readonly " $fragmentRefs": FragmentRefs<"CastCredit_credit">;
@@ -10,7 +11,7 @@ export type Cast_credits = ReadonlyArray<{
 }>;
 export type Cast_credits$data = Cast_credits;
 export type Cast_credits$key = ReadonlyArray<{
-    readonly " $data"?: Cast_credits$data;
+    readonly " $data"?: Cast_credits$data | undefined;
     readonly " $fragmentRefs": FragmentRefs<"Cast_credits">;
 }>;
 

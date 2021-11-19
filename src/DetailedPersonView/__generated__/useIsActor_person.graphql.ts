@@ -3,6 +3,7 @@
 // @ts-nocheck
 
 import { ReaderFragment } from "relay-runtime";
+
 import { FragmentRefs } from "relay-runtime";
 export type useIsActor_person = {
     readonly knownForDepartment: string;
@@ -10,7 +11,7 @@ export type useIsActor_person = {
 };
 export type useIsActor_person$data = useIsActor_person;
 export type useIsActor_person$key = {
-    readonly " $data"?: useIsActor_person$data;
+    readonly " $data"?: useIsActor_person$data | undefined;
     readonly " $fragmentRefs": FragmentRefs<"useIsActor_person">;
 };
 

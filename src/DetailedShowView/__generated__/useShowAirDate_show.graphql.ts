@@ -3,6 +3,7 @@
 // @ts-nocheck
 
 import { ReaderFragment } from "relay-runtime";
+
 import { FragmentRefs } from "relay-runtime";
 export type useShowAirDate_show = {
     readonly firstAirDate: string | null;
@@ -10,7 +11,7 @@ export type useShowAirDate_show = {
 };
 export type useShowAirDate_show$data = useShowAirDate_show;
 export type useShowAirDate_show$key = {
-    readonly " $data"?: useShowAirDate_show$data;
+    readonly " $data"?: useShowAirDate_show$data | undefined;
     readonly " $fragmentRefs": FragmentRefs<"useShowAirDate_show">;
 };
 

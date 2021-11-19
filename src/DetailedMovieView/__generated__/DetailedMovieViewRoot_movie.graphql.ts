@@ -3,8 +3,10 @@
 // @ts-nocheck
 
 import { ReaderFragment } from "relay-runtime";
+
 import { FragmentRefs } from "relay-runtime";
 export type DetailedMovieViewRoot_movie = {
+    readonly id: string;
     readonly streamingOptions: ReadonlyArray<{
         readonly " $fragmentRefs": FragmentRefs<"StreamingLinks_links">;
     }> | null;
@@ -25,7 +27,7 @@ export type DetailedMovieViewRoot_movie = {
 };
 export type DetailedMovieViewRoot_movie$data = DetailedMovieViewRoot_movie;
 export type DetailedMovieViewRoot_movie$key = {
-    readonly " $data"?: DetailedMovieViewRoot_movie$data;
+    readonly " $data"?: DetailedMovieViewRoot_movie$data | undefined;
     readonly " $fragmentRefs": FragmentRefs<"DetailedMovieViewRoot_movie">;
 };
 
@@ -45,6 +47,13 @@ return {
   "metadata": null,
   "name": "DetailedMovieViewRoot_movie",
   "selections": [
+    {
+      "alias": null,
+      "args": null,
+      "kind": "ScalarField",
+      "name": "id",
+      "storageKey": null
+    },
     {
       "alias": null,
       "args": null,
@@ -152,5 +161,5 @@ return {
   "abstractKey": null
 };
 })();
-(node as any).hash = 'a2a7e5f9a36eca27eacfefa9a06f3743';
+(node as any).hash = '86ee52720ff744c3c5f14196212bf052';
 export default node;

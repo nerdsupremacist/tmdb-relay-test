@@ -3,10 +3,11 @@
 // @ts-nocheck
 
 import { ConcreteRequest } from "relay-runtime";
+
 import { FragmentRefs } from "relay-runtime";
 export type NowPlayingMoviesPaginationQueryVariables = {
     count: number;
-    cursor?: string | null;
+    cursor?: string | null | undefined;
 };
 export type NowPlayingMoviesPaginationQueryResponse = {
     readonly " $fragmentRefs": FragmentRefs<"NowPlayingMovies_data">;

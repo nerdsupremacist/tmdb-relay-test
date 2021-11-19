@@ -3,6 +3,7 @@
 // @ts-nocheck
 
 import { ReaderFragment } from "relay-runtime";
+
 import { FragmentRefs } from "relay-runtime";
 export type Videos_videos = ReadonlyArray<{
     readonly " $fragmentRefs": FragmentRefs<"VideoCard_video">;
@@ -10,7 +11,7 @@ export type Videos_videos = ReadonlyArray<{
 }>;
 export type Videos_videos$data = Videos_videos;
 export type Videos_videos$key = ReadonlyArray<{
-    readonly " $data"?: Videos_videos$data;
+    readonly " $data"?: Videos_videos$data | undefined;
     readonly " $fragmentRefs": FragmentRefs<"Videos_videos">;
 }>;
 

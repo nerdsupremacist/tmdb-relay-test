@@ -3,6 +3,7 @@
 // @ts-nocheck
 
 import { ReaderFragment } from "relay-runtime";
+
 import { FragmentRefs } from "relay-runtime";
 export type EpisodeHeader_episode = {
     readonly previous: {
@@ -34,7 +35,7 @@ export type EpisodeHeader_episode = {
 };
 export type EpisodeHeader_episode$data = EpisodeHeader_episode;
 export type EpisodeHeader_episode$key = {
-    readonly " $data"?: EpisodeHeader_episode$data;
+    readonly " $data"?: EpisodeHeader_episode$data | undefined;
     readonly " $fragmentRefs": FragmentRefs<"EpisodeHeader_episode">;
 };
 

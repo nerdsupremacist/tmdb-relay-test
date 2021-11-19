@@ -3,6 +3,7 @@
 // @ts-nocheck
 
 import { ReaderFragment } from "relay-runtime";
+
 import { FragmentRefs } from "relay-runtime";
 export type Status = "Cancelled" | "InProduction" | "Planned" | "PostProduction" | "Released" | "Rumored" | "%future added value";
 export type useMovieStatus_movie = {
@@ -11,7 +12,7 @@ export type useMovieStatus_movie = {
 };
 export type useMovieStatus_movie$data = useMovieStatus_movie;
 export type useMovieStatus_movie$key = {
-    readonly " $data"?: useMovieStatus_movie$data;
+    readonly " $data"?: useMovieStatus_movie$data | undefined;
     readonly " $fragmentRefs": FragmentRefs<"useMovieStatus_movie">;
 };
 

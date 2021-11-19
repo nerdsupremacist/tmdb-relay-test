@@ -3,6 +3,7 @@
 // @ts-nocheck
 
 import { ReaderFragment } from "relay-runtime";
+
 import { FragmentRefs } from "relay-runtime";
 export type ShowParallaxBackdrop_show = {
     readonly backdrop: string | null;
@@ -10,7 +11,7 @@ export type ShowParallaxBackdrop_show = {
 };
 export type ShowParallaxBackdrop_show$data = ShowParallaxBackdrop_show;
 export type ShowParallaxBackdrop_show$key = {
-    readonly " $data"?: ShowParallaxBackdrop_show$data;
+    readonly " $data"?: ShowParallaxBackdrop_show$data | undefined;
     readonly " $fragmentRefs": FragmentRefs<"ShowParallaxBackdrop_show">;
 };
 

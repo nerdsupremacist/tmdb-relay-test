@@ -3,6 +3,7 @@
 // @ts-nocheck
 
 import { ReaderFragment } from "relay-runtime";
+import NowPlayingMoviesPaginationQuery from "./NowPlayingMoviesPaginationQuery.graphql";
 import { FragmentRefs } from "relay-runtime";
 export type NowPlayingMovies_data = {
     readonly movies: {
@@ -18,7 +19,7 @@ export type NowPlayingMovies_data = {
 };
 export type NowPlayingMovies_data$data = NowPlayingMovies_data;
 export type NowPlayingMovies_data$key = {
-    readonly " $data"?: NowPlayingMovies_data$data;
+    readonly " $data"?: NowPlayingMovies_data$data | undefined;
     readonly " $fragmentRefs": FragmentRefs<"NowPlayingMovies_data">;
 };
 
@@ -62,7 +63,7 @@ return {
         "path": (v0/*: any*/)
       },
       "fragmentPathInResult": [],
-      "operation": require('./NowPlayingMoviesPaginationQuery.graphql.ts')
+      "operation": NowPlayingMoviesPaginationQuery
     }
   },
   "name": "NowPlayingMovies_data",

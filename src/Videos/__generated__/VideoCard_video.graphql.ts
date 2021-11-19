@@ -3,6 +3,7 @@
 // @ts-nocheck
 
 import { ReaderFragment } from "relay-runtime";
+
 import { FragmentRefs } from "relay-runtime";
 export type VideoCard_video = {
     readonly thumbnail: string | null;
@@ -14,7 +15,7 @@ export type VideoCard_video = {
 };
 export type VideoCard_video$data = VideoCard_video;
 export type VideoCard_video$key = {
-    readonly " $data"?: VideoCard_video$data;
+    readonly " $data"?: VideoCard_video$data | undefined;
     readonly " $fragmentRefs": FragmentRefs<"VideoCard_video">;
 };
 

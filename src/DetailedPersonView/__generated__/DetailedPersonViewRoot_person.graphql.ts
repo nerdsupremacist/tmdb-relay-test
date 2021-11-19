@@ -3,6 +3,7 @@
 // @ts-nocheck
 
 import { ReaderFragment } from "relay-runtime";
+
 import { FragmentRefs } from "relay-runtime";
 export type DetailedPersonViewRoot_person = {
     readonly biography: string;
@@ -11,7 +12,7 @@ export type DetailedPersonViewRoot_person = {
 };
 export type DetailedPersonViewRoot_person$data = DetailedPersonViewRoot_person;
 export type DetailedPersonViewRoot_person$key = {
-    readonly " $data"?: DetailedPersonViewRoot_person$data;
+    readonly " $data"?: DetailedPersonViewRoot_person$data | undefined;
     readonly " $fragmentRefs": FragmentRefs<"DetailedPersonViewRoot_person">;
 };
 

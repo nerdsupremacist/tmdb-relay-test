@@ -3,6 +3,7 @@
 // @ts-nocheck
 
 import { ReaderFragment } from "relay-runtime";
+
 import { FragmentRefs } from "relay-runtime";
 export type StreamingLinks_links = ReadonlyArray<{
     readonly provider: {
@@ -13,7 +14,7 @@ export type StreamingLinks_links = ReadonlyArray<{
 }>;
 export type StreamingLinks_links$data = StreamingLinks_links;
 export type StreamingLinks_links$key = ReadonlyArray<{
-    readonly " $data"?: StreamingLinks_links$data;
+    readonly " $data"?: StreamingLinks_links$data | undefined;
     readonly " $fragmentRefs": FragmentRefs<"StreamingLinks_links">;
 }>;
 

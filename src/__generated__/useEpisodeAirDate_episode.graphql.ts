@@ -3,6 +3,7 @@
 // @ts-nocheck
 
 import { ReaderFragment } from "relay-runtime";
+
 import { FragmentRefs } from "relay-runtime";
 export type useEpisodeAirDate_episode = {
     readonly airDate: string | null;
@@ -10,7 +11,7 @@ export type useEpisodeAirDate_episode = {
 };
 export type useEpisodeAirDate_episode$data = useEpisodeAirDate_episode;
 export type useEpisodeAirDate_episode$key = {
-    readonly " $data"?: useEpisodeAirDate_episode$data;
+    readonly " $data"?: useEpisodeAirDate_episode$data | undefined;
     readonly " $fragmentRefs": FragmentRefs<"useEpisodeAirDate_episode">;
 };
 

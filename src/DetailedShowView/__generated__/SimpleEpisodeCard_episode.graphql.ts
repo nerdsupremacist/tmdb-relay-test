@@ -3,6 +3,7 @@
 // @ts-nocheck
 
 import { ReaderFragment } from "relay-runtime";
+
 import { FragmentRefs } from "relay-runtime";
 export type SimpleEpisodeCard_episode = {
     readonly still: string | null;
@@ -14,7 +15,7 @@ export type SimpleEpisodeCard_episode = {
 };
 export type SimpleEpisodeCard_episode$data = SimpleEpisodeCard_episode;
 export type SimpleEpisodeCard_episode$key = {
-    readonly " $data"?: SimpleEpisodeCard_episode$data;
+    readonly " $data"?: SimpleEpisodeCard_episode$data | undefined;
     readonly " $fragmentRefs": FragmentRefs<"SimpleEpisodeCard_episode">;
 };
 

@@ -3,6 +3,7 @@
 // @ts-nocheck
 
 import { ReaderFragment } from "relay-runtime";
+import TopRatedMoviesPaginationQuery from "./TopRatedMoviesPaginationQuery.graphql";
 import { FragmentRefs } from "relay-runtime";
 export type TopRatedMovies_data = {
     readonly movies: {
@@ -18,7 +19,7 @@ export type TopRatedMovies_data = {
 };
 export type TopRatedMovies_data$data = TopRatedMovies_data;
 export type TopRatedMovies_data$key = {
-    readonly " $data"?: TopRatedMovies_data$data;
+    readonly " $data"?: TopRatedMovies_data$data | undefined;
     readonly " $fragmentRefs": FragmentRefs<"TopRatedMovies_data">;
 };
 
@@ -62,7 +63,7 @@ return {
         "path": (v0/*: any*/)
       },
       "fragmentPathInResult": [],
-      "operation": require('./TopRatedMoviesPaginationQuery.graphql.ts')
+      "operation": TopRatedMoviesPaginationQuery
     }
   },
   "name": "TopRatedMovies_data",

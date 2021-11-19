@@ -3,6 +3,7 @@
 // @ts-nocheck
 
 import { ReaderFragment } from "relay-runtime";
+
 import { FragmentRefs } from "relay-runtime";
 export type MovieParallaxBackdrop_movie = {
     readonly backdrop: string | null;
@@ -10,7 +11,7 @@ export type MovieParallaxBackdrop_movie = {
 };
 export type MovieParallaxBackdrop_movie$data = MovieParallaxBackdrop_movie;
 export type MovieParallaxBackdrop_movie$key = {
-    readonly " $data"?: MovieParallaxBackdrop_movie$data;
+    readonly " $data"?: MovieParallaxBackdrop_movie$data | undefined;
     readonly " $fragmentRefs": FragmentRefs<"MovieParallaxBackdrop_movie">;
 };
 

@@ -3,6 +3,7 @@
 // @ts-nocheck
 
 import { ConcreteRequest } from "relay-runtime";
+
 import { FragmentRefs } from "relay-runtime";
 export type DetailedShowViewQueryVariables = {
     id: string;
@@ -62,6 +63,7 @@ fragment Crew_credits on CrewCreditWithPerson {
 }
 
 fragment DetailedShowViewRoot_show on TVShow {
+  id
   ...ShowHeader_show
   streamingOptions {
     ...StreamingLinks_links
@@ -155,9 +157,11 @@ fragment ShowHeader_show on TVShow {
   ...useShowAirDate_show
   genres {
     ...GenreTag_genre
+    id
   }
   networks {
     name
+    id
   }
 }
 
@@ -206,6 +210,7 @@ fragment SimpleEpisodeCard_episode on Episode {
 fragment StreamingLinkToolTip_option on StreamingOption {
   provider {
     name
+    id
   }
 }
 
@@ -213,6 +218,7 @@ fragment StreamingLink_option on StreamingOption {
   ...StreamingLinkToolTip_option
   provider {
     iconURL
+    id
   }
   bestOffering {
     links {
@@ -226,6 +232,7 @@ fragment StreamingLink_option on StreamingOption {
 fragment StreamingLinks_links on StreamingOption {
   provider {
     __typename
+    id
   }
   ...StreamingLink_option
 }
@@ -293,34 +300,42 @@ v2 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
+  "name": "id",
+  "storageKey": null
+},
+v3 = {
+  "alias": null,
+  "args": null,
+  "kind": "ScalarField",
   "name": "name",
   "storageKey": null
 },
-v3 = [
+v4 = [
+  (v3/*: any*/),
   (v2/*: any*/)
 ],
-v4 = {
+v5 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
   "name": "__typename",
   "storageKey": null
 },
-v5 = {
+v6 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
   "name": "type",
   "storageKey": null
 },
-v6 = {
+v7 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
   "name": "overview",
   "storageKey": null
 },
-v7 = {
+v8 = {
   "alias": null,
   "args": [
     {
@@ -333,40 +348,33 @@ v7 = {
   "name": "still",
   "storageKey": "still(size:\"W300\")"
 },
-v8 = {
+v9 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
   "name": "seasonNumber",
   "storageKey": null
 },
-v9 = {
+v10 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
   "name": "episodeNumber",
   "storageKey": null
 },
-v10 = {
-  "alias": null,
-  "args": null,
-  "kind": "ScalarField",
-  "name": "id",
-  "storageKey": null
-},
 v11 = {
   "kind": "InlineFragment",
   "selections": [
-    (v4/*: any*/)
+    (v5/*: any*/)
   ],
   "type": "Node",
   "abstractKey": "__isNode"
 },
 v12 = [
-  (v2/*: any*/),
-  (v7/*: any*/),
+  (v3/*: any*/),
   (v8/*: any*/),
   (v9/*: any*/),
+  (v10/*: any*/),
   {
     "alias": null,
     "args": null,
@@ -374,8 +382,8 @@ v12 = [
     "name": "airDate",
     "storageKey": null
   },
-  (v6/*: any*/),
-  (v10/*: any*/),
+  (v7/*: any*/),
+  (v2/*: any*/),
   (v11/*: any*/)
 ],
 v13 = {
@@ -386,7 +394,7 @@ v13 = {
   "name": "value",
   "plural": false,
   "selections": [
-    (v2/*: any*/),
+    (v3/*: any*/),
     {
       "alias": null,
       "args": [
@@ -400,7 +408,7 @@ v13 = {
       "name": "profilePicture",
       "storageKey": "profilePicture(size:\"W185\")"
     },
-    (v10/*: any*/),
+    (v2/*: any*/),
     (v11/*: any*/)
   ],
   "storageKey": null
@@ -429,7 +437,7 @@ v15 = [
         "name": "node",
         "plural": false,
         "selections": [
-          (v2/*: any*/),
+          (v3/*: any*/),
           {
             "alias": null,
             "args": [
@@ -443,8 +451,8 @@ v15 = [
             "name": "poster",
             "storageKey": "poster(size:\"W154\")"
           },
-          (v10/*: any*/),
-          (v4/*: any*/),
+          (v2/*: any*/),
+          (v5/*: any*/),
           {
             "kind": "TypeDiscriminator",
             "abstractKey": "__isNode"
@@ -548,6 +556,7 @@ return {
             "name": "show",
             "plural": false,
             "selections": [
+              (v2/*: any*/),
               {
                 "alias": null,
                 "args": null,
@@ -569,7 +578,7 @@ return {
                 "name": "numberOfRatings",
                 "storageKey": null
               },
-              (v2/*: any*/),
+              (v3/*: any*/),
               {
                 "alias": null,
                 "args": [
@@ -611,7 +620,7 @@ return {
                 "kind": "LinkedField",
                 "name": "genres",
                 "plural": true,
-                "selections": (v3/*: any*/),
+                "selections": (v4/*: any*/),
                 "storageKey": null
               },
               {
@@ -621,7 +630,7 @@ return {
                 "kind": "LinkedField",
                 "name": "networks",
                 "plural": true,
-                "selections": (v3/*: any*/),
+                "selections": (v4/*: any*/),
                 "storageKey": null
               },
               {
@@ -640,8 +649,9 @@ return {
                     "name": "provider",
                     "plural": false,
                     "selections": [
-                      (v4/*: any*/),
+                      (v5/*: any*/),
                       (v2/*: any*/),
+                      (v3/*: any*/),
                       {
                         "alias": null,
                         "args": null,
@@ -678,7 +688,7 @@ return {
                         ],
                         "storageKey": null
                       },
-                      (v5/*: any*/),
+                      (v6/*: any*/),
                       {
                         "alias": null,
                         "args": null,
@@ -710,7 +720,7 @@ return {
                 ],
                 "storageKey": null
               },
-              (v6/*: any*/),
+              (v7/*: any*/),
               {
                 "alias": null,
                 "args": null,
@@ -749,7 +759,7 @@ return {
                 "name": "credits",
                 "plural": false,
                 "selections": [
-                  (v4/*: any*/),
+                  (v5/*: any*/),
                   {
                     "alias": null,
                     "args": null,
@@ -812,7 +822,7 @@ return {
                 "name": "seasons",
                 "plural": true,
                 "selections": [
-                  (v8/*: any*/),
+                  (v9/*: any*/),
                   {
                     "alias": null,
                     "args": null,
@@ -828,16 +838,16 @@ return {
                     "name": "episodes",
                     "plural": true,
                     "selections": [
-                      (v7/*: any*/),
-                      (v9/*: any*/),
-                      (v2/*: any*/),
-                      (v6/*: any*/),
+                      (v8/*: any*/),
                       (v10/*: any*/),
+                      (v3/*: any*/),
+                      (v7/*: any*/),
+                      (v2/*: any*/),
                       (v11/*: any*/)
                     ],
                     "storageKey": null
                   },
-                  (v10/*: any*/)
+                  (v2/*: any*/)
                 ],
                 "storageKey": null
               },
@@ -860,7 +870,6 @@ return {
                 "kind": "LinkedHandle",
                 "name": "recommendations"
               },
-              (v10/*: any*/),
               {
                 "alias": null,
                 "args": (v14/*: any*/),
@@ -895,8 +904,8 @@ return {
                     "name": "thumbnail",
                     "storageKey": null
                   },
-                  (v2/*: any*/),
-                  (v5/*: any*/),
+                  (v3/*: any*/),
+                  (v6/*: any*/),
                   {
                     "alias": null,
                     "args": null,
@@ -923,12 +932,12 @@ return {
     ]
   },
   "params": {
-    "cacheID": "4698bc65b028771632a1769949a1aae0",
+    "cacheID": "d78a7f7c3878b5a8d24fd6a88f41691f",
     "id": null,
     "metadata": {},
     "name": "DetailedShowViewQuery",
     "operationKind": "query",
-    "text": "query DetailedShowViewQuery(\n  $id: ID!\n) {\n  tv {\n    show(id: $id) {\n      ...DetailedShowViewRoot_show\n      id\n    }\n  }\n}\n\nfragment CastCredit_credit on CastCreditWithPerson {\n  actor: value {\n    ...LinkContainer_node\n    name\n    profilePicture(size: W185)\n    id\n  }\n  character\n}\n\nfragment Cast_credits on CastCreditWithPerson {\n  ...CastCredit_credit\n}\n\nfragment CrewCredit_credit on CrewCreditWithPerson {\n  actor: value {\n    ...LinkContainer_node\n    name\n    profilePicture(size: W185)\n    id\n  }\n  job\n}\n\nfragment Crew_credits on CrewCreditWithPerson {\n  ...CrewCredit_credit\n}\n\nfragment DetailedShowViewRoot_show on TVShow {\n  ...ShowHeader_show\n  streamingOptions {\n    ...StreamingLinks_links\n  }\n  overview\n  lastEpisodeToAir {\n    ...FeaturedEpisodeCard_episode\n    id\n  }\n  nextEpisodeToAir {\n    ...FeaturedEpisodeCard_episode\n    id\n  }\n  topRatedEpisode {\n    ...FeaturedEpisodeCard_episode\n    id\n  }\n  credits {\n    __typename\n    cast {\n      ...Cast_credits\n    }\n    crew {\n      ...Crew_credits\n    }\n  }\n  ...ShowParallaxBackdrop_show\n  seasons {\n    ...SeasonRow_season\n    id\n  }\n  ...RecommendedShows_show\n  ...SimilarShows_show\n  videos {\n    ...Videos_videos\n  }\n}\n\nfragment FeaturedEpisodeCard_episode on Episode {\n  ...LinkContainer_node\n  name\n  still(size: W300)\n  seasonNumber\n  episodeNumber\n  ...useEpisodeAirDate_episode\n  overview\n}\n\nfragment GenreTag_genre on Genre {\n  name\n}\n\nfragment LinkContainer_node on Node {\n  __isNode: __typename\n  ...routes_usePathLink_node\n}\n\nfragment RecommendedShows_show on TVShow {\n  recommendations(first: 20) {\n    edges {\n      node {\n        ...ShowListItem_show\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n  id\n}\n\nfragment SeasonRow_season on Season {\n  seasonNumber\n  episodeCount\n  episodes {\n    ...SimpleEpisodeCard_episode\n    id\n  }\n}\n\nfragment ShowHeader_show on TVShow {\n  ...ShowRatingCircle_show\n  name\n  poster(size: W342)\n  episodeRunTime\n  numberOfSeasons\n  ...useShowAirDate_show\n  genres {\n    ...GenreTag_genre\n  }\n  networks {\n    name\n  }\n}\n\nfragment ShowListItem_show on TVShow {\n  ...LinkContainer_node\n  name\n  poster(size: W154)\n}\n\nfragment ShowParallaxBackdrop_show on TVShow {\n  backdrop(size: Original)\n}\n\nfragment ShowRatingCircle_show on TVShow {\n  status\n  rating\n  numberOfRatings\n}\n\nfragment SimilarShows_show on TVShow {\n  similar(first: 20) {\n    edges {\n      node {\n        ...ShowListItem_show\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n  id\n}\n\nfragment SimpleEpisodeCard_episode on Episode {\n  ...LinkContainer_node\n  still(size: W300)\n  episodeNumber\n  name\n  overview\n}\n\nfragment StreamingLinkToolTip_option on StreamingOption {\n  provider {\n    name\n  }\n}\n\nfragment StreamingLink_option on StreamingOption {\n  ...StreamingLinkToolTip_option\n  provider {\n    iconURL\n  }\n  bestOffering {\n    links {\n      web\n    }\n    ...useStreamingLinkTitle_offering\n    ...useStreamingLinkPriceDescription_offering\n  }\n}\n\nfragment StreamingLinks_links on StreamingOption {\n  provider {\n    __typename\n  }\n  ...StreamingLink_option\n}\n\nfragment VideoCard_video on Video {\n  thumbnail\n  name\n  type\n  site\n  key\n}\n\nfragment Videos_videos on Video {\n  ...VideoCard_video\n}\n\nfragment routes_usePathLink_node on Node {\n  __isNode: __typename\n  ...routes_usePathLinks_nodes\n}\n\nfragment routes_usePathLinks_nodes on Node {\n  __isNode: __typename\n  __typename\n  id\n}\n\nfragment useEpisodeAirDate_episode on Episode {\n  airDate\n}\n\nfragment useShowAirDate_show on TVShow {\n  firstAirDate\n}\n\nfragment useStreamingLinkPriceDescription_offering on StreamingOptionOffering {\n  type\n  price {\n    amount\n    currency\n  }\n}\n\nfragment useStreamingLinkTitle_offering on StreamingOptionOffering {\n  type\n}\n"
+    "text": "query DetailedShowViewQuery(\n  $id: ID!\n) {\n  tv {\n    show(id: $id) {\n      ...DetailedShowViewRoot_show\n      id\n    }\n  }\n}\n\nfragment CastCredit_credit on CastCreditWithPerson {\n  actor: value {\n    ...LinkContainer_node\n    name\n    profilePicture(size: W185)\n    id\n  }\n  character\n}\n\nfragment Cast_credits on CastCreditWithPerson {\n  ...CastCredit_credit\n}\n\nfragment CrewCredit_credit on CrewCreditWithPerson {\n  actor: value {\n    ...LinkContainer_node\n    name\n    profilePicture(size: W185)\n    id\n  }\n  job\n}\n\nfragment Crew_credits on CrewCreditWithPerson {\n  ...CrewCredit_credit\n}\n\nfragment DetailedShowViewRoot_show on TVShow {\n  id\n  ...ShowHeader_show\n  streamingOptions {\n    ...StreamingLinks_links\n  }\n  overview\n  lastEpisodeToAir {\n    ...FeaturedEpisodeCard_episode\n    id\n  }\n  nextEpisodeToAir {\n    ...FeaturedEpisodeCard_episode\n    id\n  }\n  topRatedEpisode {\n    ...FeaturedEpisodeCard_episode\n    id\n  }\n  credits {\n    __typename\n    cast {\n      ...Cast_credits\n    }\n    crew {\n      ...Crew_credits\n    }\n  }\n  ...ShowParallaxBackdrop_show\n  seasons {\n    ...SeasonRow_season\n    id\n  }\n  ...RecommendedShows_show\n  ...SimilarShows_show\n  videos {\n    ...Videos_videos\n  }\n}\n\nfragment FeaturedEpisodeCard_episode on Episode {\n  ...LinkContainer_node\n  name\n  still(size: W300)\n  seasonNumber\n  episodeNumber\n  ...useEpisodeAirDate_episode\n  overview\n}\n\nfragment GenreTag_genre on Genre {\n  name\n}\n\nfragment LinkContainer_node on Node {\n  __isNode: __typename\n  ...routes_usePathLink_node\n}\n\nfragment RecommendedShows_show on TVShow {\n  recommendations(first: 20) {\n    edges {\n      node {\n        ...ShowListItem_show\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n  id\n}\n\nfragment SeasonRow_season on Season {\n  seasonNumber\n  episodeCount\n  episodes {\n    ...SimpleEpisodeCard_episode\n    id\n  }\n}\n\nfragment ShowHeader_show on TVShow {\n  ...ShowRatingCircle_show\n  name\n  poster(size: W342)\n  episodeRunTime\n  numberOfSeasons\n  ...useShowAirDate_show\n  genres {\n    ...GenreTag_genre\n    id\n  }\n  networks {\n    name\n    id\n  }\n}\n\nfragment ShowListItem_show on TVShow {\n  ...LinkContainer_node\n  name\n  poster(size: W154)\n}\n\nfragment ShowParallaxBackdrop_show on TVShow {\n  backdrop(size: Original)\n}\n\nfragment ShowRatingCircle_show on TVShow {\n  status\n  rating\n  numberOfRatings\n}\n\nfragment SimilarShows_show on TVShow {\n  similar(first: 20) {\n    edges {\n      node {\n        ...ShowListItem_show\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n  id\n}\n\nfragment SimpleEpisodeCard_episode on Episode {\n  ...LinkContainer_node\n  still(size: W300)\n  episodeNumber\n  name\n  overview\n}\n\nfragment StreamingLinkToolTip_option on StreamingOption {\n  provider {\n    name\n    id\n  }\n}\n\nfragment StreamingLink_option on StreamingOption {\n  ...StreamingLinkToolTip_option\n  provider {\n    iconURL\n    id\n  }\n  bestOffering {\n    links {\n      web\n    }\n    ...useStreamingLinkTitle_offering\n    ...useStreamingLinkPriceDescription_offering\n  }\n}\n\nfragment StreamingLinks_links on StreamingOption {\n  provider {\n    __typename\n    id\n  }\n  ...StreamingLink_option\n}\n\nfragment VideoCard_video on Video {\n  thumbnail\n  name\n  type\n  site\n  key\n}\n\nfragment Videos_videos on Video {\n  ...VideoCard_video\n}\n\nfragment routes_usePathLink_node on Node {\n  __isNode: __typename\n  ...routes_usePathLinks_nodes\n}\n\nfragment routes_usePathLinks_nodes on Node {\n  __isNode: __typename\n  __typename\n  id\n}\n\nfragment useEpisodeAirDate_episode on Episode {\n  airDate\n}\n\nfragment useShowAirDate_show on TVShow {\n  firstAirDate\n}\n\nfragment useStreamingLinkPriceDescription_offering on StreamingOptionOffering {\n  type\n  price {\n    amount\n    currency\n  }\n}\n\nfragment useStreamingLinkTitle_offering on StreamingOptionOffering {\n  type\n}\n"
   }
 };
 })();

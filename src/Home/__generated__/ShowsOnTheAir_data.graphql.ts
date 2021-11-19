@@ -3,6 +3,7 @@
 // @ts-nocheck
 
 import { ReaderFragment } from "relay-runtime";
+import ShowsOnTheAirPaginationQuery from "./ShowsOnTheAirPaginationQuery.graphql";
 import { FragmentRefs } from "relay-runtime";
 export type ShowsOnTheAir_data = {
     readonly tv: {
@@ -18,7 +19,7 @@ export type ShowsOnTheAir_data = {
 };
 export type ShowsOnTheAir_data$data = ShowsOnTheAir_data;
 export type ShowsOnTheAir_data$key = {
-    readonly " $data"?: ShowsOnTheAir_data$data;
+    readonly " $data"?: ShowsOnTheAir_data$data | undefined;
     readonly " $fragmentRefs": FragmentRefs<"ShowsOnTheAir_data">;
 };
 
@@ -62,7 +63,7 @@ return {
         "path": (v0/*: any*/)
       },
       "fragmentPathInResult": [],
-      "operation": require('./ShowsOnTheAirPaginationQuery.graphql.ts')
+      "operation": ShowsOnTheAirPaginationQuery
     }
   },
   "name": "ShowsOnTheAir_data",

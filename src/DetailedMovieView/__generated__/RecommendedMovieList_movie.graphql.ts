@@ -3,6 +3,7 @@
 // @ts-nocheck
 
 import { ReaderFragment } from "relay-runtime";
+import RecommendedMovieListPaginationQuery from "./RecommendedMovieListPaginationQuery.graphql";
 import { FragmentRefs } from "relay-runtime";
 export type RecommendedMovieList_movie = {
     readonly recommendations: {
@@ -18,7 +19,7 @@ export type RecommendedMovieList_movie = {
 };
 export type RecommendedMovieList_movie$data = RecommendedMovieList_movie;
 export type RecommendedMovieList_movie$key = {
-    readonly " $data"?: RecommendedMovieList_movie$data;
+    readonly " $data"?: RecommendedMovieList_movie$data | undefined;
     readonly " $fragmentRefs": FragmentRefs<"RecommendedMovieList_movie">;
 };
 
@@ -63,7 +64,7 @@ return {
       "fragmentPathInResult": [
         "node"
       ],
-      "operation": require('./RecommendedMovieListPaginationQuery.graphql.ts'),
+      "operation": RecommendedMovieListPaginationQuery,
       "identifierField": "id"
     }
   },

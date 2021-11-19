@@ -3,8 +3,10 @@
 // @ts-nocheck
 
 import { ReaderFragment } from "relay-runtime";
+
 import { FragmentRefs } from "relay-runtime";
 export type DetailedEpisodeViewRoot_episode = {
+    readonly id: string;
     readonly streamingOptions: ReadonlyArray<{
         readonly " $fragmentRefs": FragmentRefs<"StreamingLinks_links">;
     }> | null;
@@ -32,7 +34,7 @@ export type DetailedEpisodeViewRoot_episode = {
 };
 export type DetailedEpisodeViewRoot_episode$data = DetailedEpisodeViewRoot_episode;
 export type DetailedEpisodeViewRoot_episode$key = {
-    readonly " $data"?: DetailedEpisodeViewRoot_episode$data;
+    readonly " $data"?: DetailedEpisodeViewRoot_episode$data | undefined;
     readonly " $fragmentRefs": FragmentRefs<"DetailedEpisodeViewRoot_episode">;
 };
 
@@ -52,6 +54,13 @@ return {
   "metadata": null,
   "name": "DetailedEpisodeViewRoot_episode",
   "selections": [
+    {
+      "alias": null,
+      "args": null,
+      "kind": "ScalarField",
+      "name": "id",
+      "storageKey": null
+    },
     {
       "alias": null,
       "args": null,
@@ -176,5 +185,5 @@ return {
   "abstractKey": null
 };
 })();
-(node as any).hash = '29afad4c07dceec391c95e09c76a56d7';
+(node as any).hash = 'da9d9b52a7c8db34d454484ea1c3b5dc';
 export default node;

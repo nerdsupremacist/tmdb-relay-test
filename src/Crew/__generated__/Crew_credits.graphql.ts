@@ -3,6 +3,7 @@
 // @ts-nocheck
 
 import { ReaderFragment } from "relay-runtime";
+
 import { FragmentRefs } from "relay-runtime";
 export type Crew_credits = ReadonlyArray<{
     readonly " $fragmentRefs": FragmentRefs<"CrewCredit_credit">;
@@ -10,7 +11,7 @@ export type Crew_credits = ReadonlyArray<{
 }>;
 export type Crew_credits$data = Crew_credits;
 export type Crew_credits$key = ReadonlyArray<{
-    readonly " $data"?: Crew_credits$data;
+    readonly " $data"?: Crew_credits$data | undefined;
     readonly " $fragmentRefs": FragmentRefs<"Crew_credits">;
 }>;
 

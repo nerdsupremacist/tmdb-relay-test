@@ -22,6 +22,7 @@ function DetailedEpisodeViewRoot(props: Props) {
     const episode = useFragment(
         graphql`
             fragment DetailedEpisodeViewRoot_episode on Episode {
+                id
                 ...EpisodeHeader_episode
                 
                 streamingOptions {
@@ -62,7 +63,7 @@ function DetailedEpisodeViewRoot(props: Props) {
                 <EpisodeHeader episode={episode} />
                 {
                     episode.streamingOptions != null && (
-                        <StreamingLinks links={episode.streamingOptions} />
+                        <StreamingLinks id={episode.id} links={episode.streamingOptions} />
                     )
                 }
                 <Text>

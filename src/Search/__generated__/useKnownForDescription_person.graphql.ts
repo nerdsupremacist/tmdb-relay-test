@@ -3,6 +3,7 @@
 // @ts-nocheck
 
 import { ReaderFragment } from "relay-runtime";
+
 import { FragmentRefs } from "relay-runtime";
 export type useKnownForDescription_person = {
     readonly knownFor: ReadonlyArray<{
@@ -20,7 +21,7 @@ export type useKnownForDescription_person = {
 };
 export type useKnownForDescription_person$data = useKnownForDescription_person;
 export type useKnownForDescription_person$key = {
-    readonly " $data"?: useKnownForDescription_person$data;
+    readonly " $data"?: useKnownForDescription_person$data | undefined;
     readonly " $fragmentRefs": FragmentRefs<"useKnownForDescription_person">;
 };
 

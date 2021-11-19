@@ -3,6 +3,7 @@
 // @ts-nocheck
 
 import { ConcreteRequest } from "relay-runtime";
+
 import { FragmentRefs } from "relay-runtime";
 export type DetailedPersonViewQueryVariables = {
     id: string;
@@ -345,7 +346,7 @@ return {
               {
                 "alias": null,
                 "args": null,
-                "concreteType": "ExternalIDS",
+                "concreteType": "FullExternalIDS",
                 "kind": "LinkedField",
                 "name": "externalIds",
                 "plural": false,

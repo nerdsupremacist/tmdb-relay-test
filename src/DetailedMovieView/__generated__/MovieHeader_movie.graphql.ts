@@ -3,6 +3,7 @@
 // @ts-nocheck
 
 import { ReaderFragment } from "relay-runtime";
+
 import { FragmentRefs } from "relay-runtime";
 export type MovieHeader_movie = {
     readonly poster: string | null;
@@ -20,7 +21,7 @@ export type MovieHeader_movie = {
 };
 export type MovieHeader_movie$data = MovieHeader_movie;
 export type MovieHeader_movie$key = {
-    readonly " $data"?: MovieHeader_movie$data;
+    readonly " $data"?: MovieHeader_movie$data | undefined;
     readonly " $fragmentRefs": FragmentRefs<"MovieHeader_movie">;
 };
 

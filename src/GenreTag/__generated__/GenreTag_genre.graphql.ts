@@ -3,6 +3,7 @@
 // @ts-nocheck
 
 import { ReaderFragment } from "relay-runtime";
+
 import { FragmentRefs } from "relay-runtime";
 export type GenreTag_genre = {
     readonly name: string;
@@ -10,7 +11,7 @@ export type GenreTag_genre = {
 };
 export type GenreTag_genre$data = GenreTag_genre;
 export type GenreTag_genre$key = {
-    readonly " $data"?: GenreTag_genre$data;
+    readonly " $data"?: GenreTag_genre$data | undefined;
     readonly " $fragmentRefs": FragmentRefs<"GenreTag_genre">;
 };
 

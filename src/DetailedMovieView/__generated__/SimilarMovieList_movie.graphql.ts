@@ -3,6 +3,7 @@
 // @ts-nocheck
 
 import { ReaderFragment } from "relay-runtime";
+import SimilarMovieListPaginationQuery from "./SimilarMovieListPaginationQuery.graphql";
 import { FragmentRefs } from "relay-runtime";
 export type SimilarMovieList_movie = {
     readonly similar: {
@@ -18,7 +19,7 @@ export type SimilarMovieList_movie = {
 };
 export type SimilarMovieList_movie$data = SimilarMovieList_movie;
 export type SimilarMovieList_movie$key = {
-    readonly " $data"?: SimilarMovieList_movie$data;
+    readonly " $data"?: SimilarMovieList_movie$data | undefined;
     readonly " $fragmentRefs": FragmentRefs<"SimilarMovieList_movie">;
 };
 
@@ -63,7 +64,7 @@ return {
       "fragmentPathInResult": [
         "node"
       ],
-      "operation": require('./SimilarMovieListPaginationQuery.graphql.ts'),
+      "operation": SimilarMovieListPaginationQuery,
       "identifierField": "id"
     }
   },

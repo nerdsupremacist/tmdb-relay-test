@@ -3,10 +3,11 @@
 // @ts-nocheck
 
 import { ConcreteRequest } from "relay-runtime";
+
 import { FragmentRefs } from "relay-runtime";
 export type TrendingShowsPaginationQueryVariables = {
     count: number;
-    cursor?: string | null;
+    cursor?: string | null | undefined;
 };
 export type TrendingShowsPaginationQueryResponse = {
     readonly " $fragmentRefs": FragmentRefs<"TrendingShows_data">;

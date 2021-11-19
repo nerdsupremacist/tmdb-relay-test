@@ -3,6 +3,7 @@
 // @ts-nocheck
 
 import { ReaderFragment } from "relay-runtime";
+import TrendingShowsPaginationQuery from "./TrendingShowsPaginationQuery.graphql";
 import { FragmentRefs } from "relay-runtime";
 export type TrendingShows_data = {
     readonly tv: {
@@ -18,7 +19,7 @@ export type TrendingShows_data = {
 };
 export type TrendingShows_data$data = TrendingShows_data;
 export type TrendingShows_data$key = {
-    readonly " $data"?: TrendingShows_data$data;
+    readonly " $data"?: TrendingShows_data$data | undefined;
     readonly " $fragmentRefs": FragmentRefs<"TrendingShows_data">;
 };
 
@@ -62,7 +63,7 @@ return {
         "path": (v0/*: any*/)
       },
       "fragmentPathInResult": [],
-      "operation": require('./TrendingShowsPaginationQuery.graphql.ts')
+      "operation": TrendingShowsPaginationQuery
     }
   },
   "name": "TrendingShows_data",

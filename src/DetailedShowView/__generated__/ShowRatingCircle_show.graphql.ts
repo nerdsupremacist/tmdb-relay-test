@@ -3,6 +3,7 @@
 // @ts-nocheck
 
 import { ReaderFragment } from "relay-runtime";
+
 import { FragmentRefs } from "relay-runtime";
 export type ShowRatingCircle_show = {
     readonly status: string;
@@ -12,7 +13,7 @@ export type ShowRatingCircle_show = {
 };
 export type ShowRatingCircle_show$data = ShowRatingCircle_show;
 export type ShowRatingCircle_show$key = {
-    readonly " $data"?: ShowRatingCircle_show$data;
+    readonly " $data"?: ShowRatingCircle_show$data | undefined;
     readonly " $fragmentRefs": FragmentRefs<"ShowRatingCircle_show">;
 };
 

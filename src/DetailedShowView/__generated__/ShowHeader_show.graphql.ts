@@ -3,6 +3,7 @@
 // @ts-nocheck
 
 import { ReaderFragment } from "relay-runtime";
+
 import { FragmentRefs } from "relay-runtime";
 export type ShowHeader_show = {
     readonly name: string;
@@ -20,7 +21,7 @@ export type ShowHeader_show = {
 };
 export type ShowHeader_show$data = ShowHeader_show;
 export type ShowHeader_show$key = {
-    readonly " $data"?: ShowHeader_show$data;
+    readonly " $data"?: ShowHeader_show$data | undefined;
     readonly " $fragmentRefs": FragmentRefs<"ShowHeader_show">;
 };
 

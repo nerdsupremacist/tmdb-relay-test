@@ -3,21 +3,22 @@
 // @ts-nocheck
 
 import { ReaderFragment } from "relay-runtime";
+
 import { FragmentRefs } from "relay-runtime";
 export type CrewCreditForPerson_credit = {
     readonly job: string;
     readonly value: {
         readonly __typename: string;
-        readonly title?: string;
-        readonly poster?: string | null;
-        readonly name?: string;
+        readonly title?: string | undefined;
+        readonly poster?: string | null | undefined;
+        readonly name?: string | undefined;
         readonly " $fragmentRefs": FragmentRefs<"LinkContainer_node">;
     };
     readonly " $refType": "CrewCreditForPerson_credit";
 };
 export type CrewCreditForPerson_credit$data = CrewCreditForPerson_credit;
 export type CrewCreditForPerson_credit$key = {
-    readonly " $data"?: CrewCreditForPerson_credit$data;
+    readonly " $data"?: CrewCreditForPerson_credit$data | undefined;
     readonly " $fragmentRefs": FragmentRefs<"CrewCreditForPerson_credit">;
 };
 
