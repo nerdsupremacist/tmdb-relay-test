@@ -54,7 +54,7 @@ function StreamingLinkFormDataProvider(props: LoadedProps) {
             query StreamingLinkFormDataProviderQuery {
                 streaming {
                     myCountry {
-                        id
+                        name
                     }
                     countries {
                         name
@@ -82,7 +82,7 @@ function StreamingLinkFormDataProvider(props: LoadedProps) {
     }, [data.streaming.providers]);
 
     const defaultCountrySelection = useMemo(
-        () => [data.streaming.myCountry?.id].compactMap(country => country),
+        () => [data.streaming.myCountry?.name].compactMap(country => country),
         [data.streaming.myCountry],
     );
 
